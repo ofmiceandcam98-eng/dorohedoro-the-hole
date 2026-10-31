@@ -20,7 +20,8 @@ import net.minecraft.world.level.biome.Climate;
 public final class CityPlan {
     /** Nominal distance between neighbouring arterials. */
     public static final int LINE_PITCH = 120;
-    private static final int LINE_JITTER = 12;
+    private static final int LINE_JITTER = 32;
+    private static final int START_LINE_JITTER = 12;
 
     /** Top block of the road surface. Players walk at {@link #GROUND_Y}. */
     public static final int STREET_Y = 64;
@@ -66,11 +67,13 @@ public final class CityPlan {
 
     private Line line(long salt, int index) {
         long hash = CityHash.of(seed, salt, index);
-        int jitter = CityHash.range(hash, LINE_JITTER * 2 + 1) - LINE_JITTER;
+        // Lines -1 and 0 frame the starting quarter, which must keep its size and stay walkable on every seed.
+        boolean startLine = index == -1 || index == 0;
+        int reach = startLine ? START_LINE_JITTER : LINE_JITTER;
+        int jitter = CityHash.range(hash, reach * 2 + 1) - reach;
         int center = index * LINE_PITCH + LINE_PITCH / 2 + jitter;
-        // Lines -1 and 0 frame the starting quarter, which must stay walkable on every seed.
         Line.Kind kind = KIND_ROLLS[CityHash.range(hash >>> 16, KIND_ROLLS.length)];
-        if ((index == -1 || index == 0) && kind == Line.Kind.CANAL) {
+        if (startLine && kind == Line.Kind.CANAL) {
             kind = Line.Kind.TRAM;
         }
         int halfWidth = switch (kind) {

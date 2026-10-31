@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "dorohedoro:scrap_metal"
+    },
+    {
+      "item": "dorohedoro:scrap_metal"
+    },
+    {
+      "item": "dorohedoro:scrap_metal"
+    },
+    {
+      "item": "dorohedoro:scrap_metal"
+    },
+    {
+      "item": "dorohedoro:scrap_metal"
+    },
+    {
+      "item": "dorohedoro:scrap_metal"
+    },
+    {
+      "item": "dorohedoro:scrap_metal"
+    },
+    {
+      "item": "dorohedoro:scrap_metal"
+    },
+    {
+      "item": "dorohedoro:scrap_metal"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:iron_ingot"
+  }
+}

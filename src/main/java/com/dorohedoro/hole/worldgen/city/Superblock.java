@@ -78,7 +78,7 @@ public record Superblock(int i, int j, Rect area, List<Lot> lots) {
     private static void split(CityPlan plan, Rect rect, District district, int depth, RandomSource random, List<Lot> lots) {
         int minLot = district == District.INDUSTRIAL ? 16 : 11;
         int maxLot = switch (district) {
-            case INDUSTRIAL -> 44;
+            case INDUSTRIAL, OUTSKIRTS -> 44;
             case DERELICT, GRAVEYARD -> 34;
             default -> 26;
         };

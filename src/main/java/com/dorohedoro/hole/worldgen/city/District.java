@@ -13,9 +13,16 @@ public enum District {
     INDUSTRIAL,
     WATERFRONT,
     DERELICT,
-    GRAVEYARD;
+    GRAVEYARD,
+    OUTSKIRTS;
 
     public static final int CELL_SIZE = 128;
+
+    /**
+     * The climate noise is tuned for continents. Sampling it at a higher frequency brings districts down to
+     * neighbourhood size, so walking a few blocks changes the character of the city.
+     */
+    private static final int MIX_SCALE = 7;
 
     public static int cellOf(int block) {
         return Math.floorDiv(block, CELL_SIZE);
@@ -31,9 +38,14 @@ public enum District {
         if (cellX >= -1 && cellX <= 0 && cellZ >= -1 && cellZ <= 0) {
             return MARKET;
         }
-        DensityFunction.SinglePointContext center =
-                new DensityFunction.SinglePointContext(cellX * CELL_SIZE + CELL_SIZE / 2, 0, cellZ * CELL_SIZE + CELL_SIZE / 2);
-        return classify(sampler.temperature().compute(center), sampler.humidity().compute(center));
+        int centerX = cellX * CELL_SIZE + CELL_SIZE / 2;
+        int centerZ = cellZ * CELL_SIZE + CELL_SIZE / 2;
+        // The unscaled noise picks out broad zones where the city thins into scrubland and yards.
+        if (Math.abs(sampler.temperature().compute(new DensityFunction.SinglePointContext(centerX, 0, centerZ))) > 0.42) {
+            return OUTSKIRTS;
+        }
+        DensityFunction.SinglePointContext mixed = new DensityFunction.SinglePointContext(centerX * MIX_SCALE, 0, centerZ * MIX_SCALE);
+        return classify(sampler.temperature().compute(mixed), sampler.humidity().compute(mixed));
     }
 
     static District classify(double temperature, double humidity) {

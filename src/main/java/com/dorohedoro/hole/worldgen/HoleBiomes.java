@@ -15,6 +15,7 @@ public final class HoleBiomes {
     public static final ResourceKey<Biome> WATERFRONT = key("hole_waterfront");
     public static final ResourceKey<Biome> DERELICT = key("hole_derelict");
     public static final ResourceKey<Biome> GRAVEYARD = key("hole_graveyard");
+    public static final ResourceKey<Biome> OUTSKIRTS = key("hole_outskirts");
     public static final ResourceKey<Biome> UNDERCITY = key("hole_undercity");
 
     private HoleBiomes() {}
@@ -27,6 +28,7 @@ public final class HoleBiomes {
             case WATERFRONT -> WATERFRONT;
             case DERELICT -> DERELICT;
             case GRAVEYARD -> GRAVEYARD;
+            case OUTSKIRTS -> OUTSKIRTS;
         };
     }
 

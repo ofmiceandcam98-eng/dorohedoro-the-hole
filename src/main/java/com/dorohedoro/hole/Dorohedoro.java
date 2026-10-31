@@ -1,5 +1,7 @@
 package com.dorohedoro.hole;
 
+import com.dorohedoro.hole.registry.ModBlocks;
+import com.dorohedoro.hole.registry.ModItems;
 import com.dorohedoro.hole.registry.ModWorldgen;
 import com.mojang.logging.LogUtils;
 import net.neoforged.bus.api.IEventBus;
@@ -14,6 +16,8 @@ public final class Dorohedoro {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public Dorohedoro(IEventBus modBus, ModContainer container) {
+        ModBlocks.register(modBus);
+        ModItems.register(modBus);
         ModWorldgen.register(modBus);
     }
 }

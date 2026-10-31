@@ -6,6 +6,11 @@
   "biome.dorohedoro.hole_waterfront": "Hole Canalside",
   "biome.dorohedoro.hole_derelict": "Hole Wastes",
   "biome.dorohedoro.hole_graveyard": "Hole Burial Ground",
+  "biome.dorohedoro.hole_outskirts": "Hole Outskirts",
   "biome.dorohedoro.hole_undercity": "Undercity",
+  "block.dorohedoro.industrial_debris": "Industrial Debris",
+  "block.dorohedoro.rusted_plating": "Rusted Plating",
+  "item.dorohedoro.scrap_metal": "Scrap Metal",
+  "itemGroup.dorohedoro.hole": "The Hole",
   "dorohedoro.world.not_hole": "This world was not created as the Hole, so it has been left unchanged. Create a new world to enter the city."
 }

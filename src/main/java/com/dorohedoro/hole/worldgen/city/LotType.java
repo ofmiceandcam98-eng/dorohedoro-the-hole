@@ -19,6 +19,7 @@ public enum LotType {
     PARK(false),
     JUNKYARD(false),
     RUBBLE(false),
+    VACANT(false),
     CEMETERY(false),
     HOSPITAL(true),
     DEPARTMENT_STORE(true),

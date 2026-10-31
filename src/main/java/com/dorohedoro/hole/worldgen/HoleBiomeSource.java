@@ -29,6 +29,7 @@ public final class HoleBiomeSource extends BiomeSource {
             RegistryOps.retrieveElement(HoleBiomes.WATERFRONT),
             RegistryOps.retrieveElement(HoleBiomes.DERELICT),
             RegistryOps.retrieveElement(HoleBiomes.GRAVEYARD),
+            RegistryOps.retrieveElement(HoleBiomes.OUTSKIRTS),
             RegistryOps.retrieveElement(HoleBiomes.UNDERCITY),
             RegistryOps.retrieveElement(Biomes.LUSH_CAVES),
             RegistryOps.retrieveElement(Biomes.DRIPSTONE_CAVES),
@@ -41,13 +42,14 @@ public final class HoleBiomeSource extends BiomeSource {
     private final Holder<Biome> waterfront;
     private final Holder<Biome> derelict;
     private final Holder<Biome> graveyard;
+    private final Holder<Biome> outskirts;
     private final Holder<Biome> undercity;
     private final Holder<Biome> lushCaves;
     private final Holder<Biome> dripstoneCaves;
     private final Holder<Biome> deepDark;
 
     private HoleBiomeSource(Holder<Biome> residential, Holder<Biome> market, Holder<Biome> industrial, Holder<Biome> waterfront,
-                            Holder<Biome> derelict, Holder<Biome> graveyard, Holder<Biome> undercity, Holder<Biome> lushCaves,
+                            Holder<Biome> derelict, Holder<Biome> graveyard, Holder<Biome> outskirts, Holder<Biome> undercity, Holder<Biome> lushCaves,
                             Holder<Biome> dripstoneCaves, Holder<Biome> deepDark) {
         this.residential = residential;
         this.market = market;
@@ -55,6 +57,7 @@ public final class HoleBiomeSource extends BiomeSource {
         this.waterfront = waterfront;
         this.derelict = derelict;
         this.graveyard = graveyard;
+        this.outskirts = outskirts;
         this.undercity = undercity;
         this.lushCaves = lushCaves;
         this.dripstoneCaves = dripstoneCaves;
@@ -68,7 +71,7 @@ public final class HoleBiomeSource extends BiomeSource {
 
     @Override
     protected Stream<Holder<Biome>> collectPossibleBiomes() {
-        return Stream.of(residential, market, industrial, waterfront, derelict, graveyard, undercity, lushCaves, dripstoneCaves, deepDark);
+        return Stream.of(residential, market, industrial, waterfront, derelict, graveyard, outskirts, undercity, lushCaves, dripstoneCaves, deepDark);
     }
 
     @Override
@@ -86,6 +89,7 @@ public final class HoleBiomeSource extends BiomeSource {
             case WATERFRONT -> waterfront;
             case DERELICT -> derelict;
             case GRAVEYARD -> graveyard;
+            case OUTSKIRTS -> outskirts;
         };
     }
 

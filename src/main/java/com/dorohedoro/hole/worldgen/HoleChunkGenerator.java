@@ -2,6 +2,7 @@ package com.dorohedoro.hole.worldgen;
 
 import com.dorohedoro.hole.worldgen.city.CityPainter;
 import com.dorohedoro.hole.worldgen.city.CityPlan;
+import com.dorohedoro.hole.worldgen.city.CityPopulator;
 import com.dorohedoro.hole.worldgen.city.CitySettings;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -17,7 +18,6 @@ import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.NoiseBasedChunkGenerator;
 import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
 import net.minecraft.world.level.levelgen.RandomState;
-import net.minecraft.world.level.levelgen.blending.Blender;
 
 /**
  * The Overworld generator. Vanilla noise supplies the underground (caves, aquifers, ore veins, bedrock, deepslate), and
@@ -74,8 +74,9 @@ public final class HoleChunkGenerator extends NoiseBasedChunkGenerator {
                              StructureManager structureManager, ChunkAccess chunk, GenerationStep.Carving step) {
     }
 
-    /** Exposed so tests can run the city painter over a chunk without a surrounding world region. */
-    public void paintCity(long seed, RandomState random, ChunkAccess chunk, Blender ignored) {
-        CityPainter.paint(plan(seed, random), chunk);
+    @Override
+    public void spawnOriginalMobs(WorldGenRegion region) {
+        super.spawnOriginalMobs(region);
+        CityPopulator.populate(region, plan(region.getSeed(), region.getLevel().getChunkSource().randomState()));
     }
 }

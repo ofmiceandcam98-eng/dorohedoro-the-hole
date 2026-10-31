@@ -9,12 +9,13 @@ final class LotChooser {
     static LotType choose(CityPlan plan, District district, Rect rect, RandomSource random) {
         float roll = random.nextFloat();
         if (random.nextFloat() > plan.settings.density()) {
-            return roll < 0.5F ? LotType.RUBBLE : LotType.JUNKYARD;
+            return roll < 0.4F ? LotType.RUBBLE : roll < 0.75F ? LotType.VACANT : LotType.JUNKYARD;
         }
         boolean large = rect.width() >= 20 && rect.depth() >= 20;
         return switch (district) {
             case RESIDENTIAL -> {
-                if (roll < 0.04F) yield LotType.NURSERY;
+                if (roll < 0.02F) yield LotType.NURSERY;
+                if (roll < 0.05F) yield LotType.VACANT;
                 if (roll < 0.08F) yield LotType.GREENHOUSE;
                 if (roll < 0.11F) yield LotType.LIVESTOCK_PEN;
                 if (roll < 0.15F) yield LotType.CLINIC;
@@ -44,16 +45,27 @@ final class LotChooser {
                 yield LotType.JUNKYARD;
             }
             case DERELICT -> {
-                if (roll < 0.28F) yield LotType.RUBBLE;
-                if (roll < 0.46F) yield LotType.JUNKYARD;
-                if (roll < 0.62F) yield LotType.PARK;
-                if (roll < 0.76F) yield LotType.NURSERY;
-                if (roll < 0.86F) yield LotType.LIVESTOCK_PEN;
+                if (roll < 0.26F) yield LotType.RUBBLE;
+                if (roll < 0.44F) yield LotType.JUNKYARD;
+                if (roll < 0.62F) yield LotType.VACANT;
+                if (roll < 0.72F) yield LotType.PARK;
+                if (roll < 0.80F) yield LotType.NURSERY;
+                if (roll < 0.88F) yield LotType.LIVESTOCK_PEN;
                 yield LotType.TENEMENT;
             }
             case GRAVEYARD -> {
                 if (roll < 0.70F) yield LotType.CEMETERY;
                 if (roll < 0.85F) yield LotType.PARK;
+                yield LotType.TENEMENT;
+            }
+            case OUTSKIRTS -> {
+                if (roll < 0.34F) yield LotType.VACANT;
+                if (roll < 0.52F) yield LotType.RUBBLE;
+                if (roll < 0.64F) yield LotType.JUNKYARD;
+                if (roll < 0.74F) yield LotType.LIVESTOCK_PEN;
+                if (roll < 0.82F) yield LotType.GREENHOUSE;
+                if (roll < 0.88F) yield LotType.PARK;
+                if (roll < 0.93F) yield LotType.WAREHOUSE;
                 yield LotType.TENEMENT;
             }
         };
