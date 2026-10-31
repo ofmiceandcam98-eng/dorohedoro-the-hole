@@ -32,7 +32,7 @@ Evidence is in `docs/TEST_RESULTS.md` and `docs/evidence/`. All of this ran on a
 | Claim | Result |
 | --- | --- |
 | Project builds | `gradlew build`, `compileJava` and `runData` pass |
-| 10-seed world validation | Before the district fix, 8 of 10 seeds passed all 26 checks. **See `docs/evidence/qa-summary.txt` for the rerun with the fix** |
+| 10-seed world validation | **All 10 seeds pass all 26 checks** at commit `ca5eb9b` |
 | New world's `minecraft:overworld` uses `HoleChunkGenerator` | Passed on every seed |
 | Spawn on the plaza at 0, 65, 0, standable, open sky | Passed on every seed |
 | No vanilla surface biome near spawn | Passed on all 10 seeds |
@@ -41,7 +41,7 @@ Evidence is in `docs/TEST_RESULTS.md` and `docs/evidence/`. All of this ran on a
 | All vanilla ores plus water, lava, clay, sand, gravel, dirt and sugar cane in a generated region | Passed |
 | No flowing water from y=46 to y=66 | Passed |
 | No ore or replaceable rock at street level or above | Passed |
-| City layer identical when chunks generate in opposite order | Seeds 1, 42 and 8675309: 625 of 625 chunks. The earlier 624 was a bug in the test hash, now fixed |
+| City layer identical when chunks generate in opposite order | Seeds 1 and 555: 625 of 625 chunks. **Seed 8675309 is intermittent, see Known defects** |
 | Generation speed | About 33 to 57 ms per chunk on this machine, by wall clock on a blocking load. Not a tick-time measurement |
 
 ### Implemented but NOT verified
@@ -60,7 +60,7 @@ Do not describe these as working yet.
 
 ### Known defects and gaps
 
-- Fix applied, confirm from the rerun: outskirts are now kept 768 blocks from spawn, because two seeds had no district variety near spawn.
+- **Open bug, cause unknown:** on seed 8675309, 1 to 2 of 625 chunks intermittently differ at y≥64 between runs, in 3 of 5 comparisons. The differing blocks have never been captured. Read the plan in `docs/TEST_RESULTS.md` under Determinism before relying on strict order independence.
 - The street layout is still fairly regular despite 32-block jitter. The owner explicitly said to avoid repetitive grids. Next idea: merge some superblocks or terminate some lines at T-junctions.
 - Buildings have no basements, and there are no elevated walkways, power lines, or pipe bridges. Reference art for the Hole is far denser.
 - `Tower.pipes` is a single chain. Facades are simple.
@@ -129,7 +129,7 @@ The core idea: **the city is a pure function of seed and coordinates.**
 
 ## What to do next, in order
 
-1. Read `docs/evidence/qa-summary.txt` to confirm the district fix passed on all seeds.
+1. If the owner has launched the client, read their feedback first. It outranks everything below.
 2. **Launch the client.** Add an automatic path that opens `CreateWorldScreen`, creates a default world, takes screenshots with `Screenshot.grab`, and quits, or use `--quickPlaySingleplayer`. Confirm the world really renders as the Hole. This is the largest unverified risk.
 3. Add GameTests. Purity of the plan, recipes, loot tables, door and bed placement.
 4. **Phase 3.** Apply the draft in `docs/handoff/phase3-draft/`. See below.

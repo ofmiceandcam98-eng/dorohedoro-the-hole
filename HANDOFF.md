@@ -32,7 +32,7 @@ Evidence is in `docs/TEST_RESULTS.md` and `docs/evidence/`. All of this ran on a
 | Claim | Result |
 | --- | --- |
 | Project builds | `gradlew build`, `compileJava` and `runData` pass |
-| 10-seed world validation | Before the district fix, 8 of 10 seeds passed all 26 checks. **See `docs/evidence/qa-summary.txt` for the rerun with the fix** |
+| 10-seed world validation | **All 10 seeds pass all 26 checks** at commit `ca5eb9b` |
 | New world's `minecraft:overworld` uses `HoleChunkGenerator` | Passed on every seed |
 | Spawn on the plaza at 0, 65, 0, standable, open sky | Passed on every seed |
 | No vanilla surface biome near spawn | Passed on all 10 seeds |
@@ -41,7 +41,7 @@ Evidence is in `docs/TEST_RESULTS.md` and `docs/evidence/`. All of this ran on a
 | All vanilla ores plus water, lava, clay, sand, gravel, dirt and sugar cane in a generated region | Passed |
 | No flowing water from y=46 to y=66 | Passed |
 | No ore or replaceable rock at street level or above | Passed |
-| City layer identical when chunks generate in opposite order | Seeds 1, 42 and 8675309: 625 of 625 chunks. The earlier 624 was a bug in the test hash, now fixed |
+| City layer identical when chunks generate in opposite order | Seeds 1 and 555: 625 of 625 chunks. **Seed 8675309 is intermittent, see Known defects** |
 | Generation speed | About 33 to 57 ms per chunk on this machine, by wall clock on a blocking load. Not a tick-time measurement |
 
 ### Implemented but NOT verified
@@ -60,7 +60,7 @@ Do not describe these as working yet.
 
 ### Known defects and gaps
 
-- Fix applied, confirm from the rerun: outskirts are now kept 768 blocks from spawn, because two seeds had no district variety near spawn.
+- **Open bug, cause unknown:** on seed 8675309, 1 to 2 of 625 chunks intermittently differ at y≥64 between runs, in 3 of 5 comparisons. The differing blocks have never been captured. Read the plan in `docs/TEST_RESULTS.md` under Determinism before relying on strict order independence.
 - The street layout is still fairly regular despite 32-block jitter. The owner explicitly said to avoid repetitive grids. Next idea: merge some superblocks or terminate some lines at T-junctions.
 - Buildings have no basements, and there are no elevated walkways, power lines, or pipe bridges. Reference art for the Hole is far denser.
 - `Tower.pipes` is a single chain. Facades are simple.
@@ -129,7 +129,7 @@ The core idea: **the city is a pure function of seed and coordinates.**
 
 ## What to do next, in order
 
-1. Read `docs/evidence/qa-summary.txt` to confirm the district fix passed on all seeds.
+1. If the owner has launched the client, read their feedback first. It outranks everything below.
 2. **Launch the client.** Add an automatic path that opens `CreateWorldScreen`, creates a default world, takes screenshots with `Screenshot.grab`, and quits, or use `--quickPlaySingleplayer`. Confirm the world really renders as the Hole. This is the largest unverified risk.
 3. Add GameTests. Purity of the plan, recipes, loot tables, door and bed placement.
 4. **Phase 3.** Apply the draft in `docs/handoff/phase3-draft/`. See below.
@@ -409,7 +409,11 @@ Command: `bash tools/qa-world.sh <seed> <radius> <order>`. Each run is a real de
 
 Result: **8 of 10 seeds passed all 26 checks. 2 of 10 failed one check.** Raw output is in `docs/evidence/qa-summary.txt`.
 
-**Fix applied, rerun pending at the time of writing:** seeds -987654321 and 555 failed `multiple_districts` with only `[MARKET, OUTSKIRTS]` in range. `District.ofCell` now keeps outskirts at least 6 cells (768 blocks) from the origin. See `docs/evidence/qa-summary.txt` for the rerun. If that file does not show all seeds passing, this is not yet confirmed.
+That table is the run before the district fix. Seeds -987654321 and 555 failed `multiple_districts` with only `[MARKET, OUTSKIRTS]` in range. `District.ofCell` now keeps outskirts at least 6 cells (768 blocks) from the origin.
+
+### 10-seed rerun with the district fix, commit `ca5eb9b`
+
+**All 10 seeds passed all 26 checks, 0 failures.** Seeds 2, 3, 42, 777, 1234567, -987654321, 20261030, 555 and 8675309 ran in the batch. Seed 1 failed to start because a concurrent `gradlew build` corrupted its compile, then passed when rerun alone (0 failures, 34.3 ms per chunk). ms per chunk ranged from 34.3 to 42.1. Raw output: `docs/evidence/qa-summary.txt`.
 
 On every one of the 10 seeds, all other checks passed, including spawn, street reachability, building entry, resources, fluid leaks and ore in the city.
 
@@ -431,7 +435,22 @@ Same seed, chunks requested in opposite orders, per-chunk block-state hashes com
 | Full city, seed 42, radius 12 | **625 of 625 identical** | 75 of 625 identical |
 | Full city, seed 8675309, radius 12 | **624 of 625 identical** | 19 of 625 identical |
 
-**Resolved false alarm, seed 8675309:** the 624 of 625 result came from the test, not the world. The mismatch moved between runs, which pointed at the measurement. `HoleQa.hash` still counted whether sections below the cutoff were all air, so one vanilla cave vine in an empty cavern section changed the city hash. With that fixed, seed 8675309 gives **625 of 625 identical**, and direct block comparison of chunks -3,12, -2,12 and 1,2 found 0 differences at y≥64. Evidence: `docs/evidence/hash-fix-test.txt`. Earlier city-layer numbers in the table used the flawed hash, which can only have overstated differences.
+With the district fix and the corrected hash:
+
+| Run | City layer (y≥64) |
+| --- | --- |
+| Seed 1 | 625 of 625 identical |
+| Seed 555 | 625 of 625 identical |
+| Seed 8675309, batch | **623 of 625 identical**, chunks -3,12 and -2,12 |
+| Seed 8675309, immediate rerun | 625 of 625 identical |
+
+**Open bug, cause unknown: intermittent mismatch on seed 8675309.** It has appeared in 3 of 5 comparisons on this seed, on chunks 1,2, then -3,12 and -2,12, then -3,12 and -2,12 again. Same seed and same code sometimes match fully, so this is not simply forward versus reverse order. Every direct block dump so far landed on a run that matched, so **the differing blocks have never been seen**.
+
+One real defect was found and fixed along the way: `HoleQa.hash` counted whether sections below the cutoff were all air, so a cave vine in an empty cavern section changed the city hash. That fix did not end the mismatch.
+
+What is known: seeds 1, 42 and 555 have not shown it, though they had only 1 to 2 comparisons each. The flagged result does not fail any gameplay check.
+
+Next step: make `HoleQa` write a per-column hash of y≥64 for every chunk on each run, so a bad run can be diffed afterwards without needing to predict which chunk to dump. Then loop seed 8675309 until it fires. Likely suspects to check first: something ticking or post-processing before the hash is taken, entities acting on blocks, and thread timing in chunk promotion. These are untested guesses.
 
 Bug found by this test: vanilla ore features replaced `tuff` in road surfaces, putting `deepslate_coal_ore` in the streets. Fixed by removing every feature-replaceable block from city palettes. QA now enforces this.
 
@@ -6039,6 +6058,53 @@ chunk 1_2 y>=64 diffs: 0  below: 938  by section: {"16":80,"32":358,"-48":490,"-
 
 ```
 seed=1 order=forward: NO REPORT (gradle exit 1). See runs/qa/1/forward/gradle.log
+seed=2 order=forward failures=0 chunks=625 ms/chunk=39.0
+seed=3 order=forward failures=0 chunks=625 ms/chunk=41.0
+seed=42 order=forward failures=0 chunks=625 ms/chunk=39.0
+seed=777 order=forward failures=0 chunks=625 ms/chunk=34.6
+seed=1234567 order=forward failures=0 chunks=625 ms/chunk=42.1
+seed=-987654321 order=forward failures=0 chunks=625 ms/chunk=38.0
+seed=20261030 order=forward failures=0 chunks=625 ms/chunk=34.9
+seed=555 order=forward failures=0 chunks=625 ms/chunk=40.1
+seed=8675309 order=forward failures=0 chunks=625 ms/chunk=40.4
+seed=1 order=reverse failures=0 chunks=625 ms/chunk=28.0
+determinism seed 1:
+node:fs:621
+    return binding.readFileUtf8(path, stringToFlags(options.flag));
+                   ^
+
+Error: ENOENT: no such file or directory, open 'C:\Users\Cam\AppData\Roaming\Claude\scratch-workspaces\a36eb96d-3909-46f6-982f-7b783bf47175\887069e9-f201-4312-af35-fb1bbf2c5ff8\scratch-2026-10-31-e4fa2b\runs\qa\1\forward\qa\report-forward.json'
+    at readFileSync (node:fs:621:20)
+    at file:///C:/Users/Cam/AppData/Roaming/Claude/scratch-workspaces/a36eb96d-3909-46f6-982f-7b783bf47175/887069e9-f201-4312-af35-fb1bbf2c5ff8/scratch-2026-10-31-e4fa2b/tools/qa-compare.mjs:4:60
+    at Array.map (<anonymous>)
+    at file:///C:/Users/Cam/AppData/Roaming/Claude/scratch-workspaces/a36eb96d-3909-46f6-982f-7b783bf47175/887069e9-f201-4312-af35-fb1bbf2c5ff8/scratch-2026-10-31-e4fa2b/tools/qa-compare.mjs:4:38
+    at ModuleJob.run (node:internal/modules/esm/module_job:569:25)
+    at async node:internal/modules/esm/loader:650:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\Cam\\AppData\\Roaming\\Claude\\scratch-workspaces\\a36eb96d-3909-46f6-982f-7b783bf47175\\887069e9-f201-4312-af35-fb1bbf2c5ff8\\scratch-2026-10-31-e4fa2b\\runs\\qa\\1\\forward\\qa\\report-forward.json'
+}
+
+Node.js v26.8.1
+seed=555 order=reverse failures=0 chunks=625 ms/chunk=27.9
+determinism seed 555:
+chunk_hashes: 625/625 identical
+chunk_hashes_full: 38/625 identical, differing e.g. -12,-12 -12,-11 -12,-10 -12,-9 -12,-8 -12,-7
+seed=8675309 order=reverse failures=0 chunks=625 ms/chunk=27.4
+determinism seed 8675309:
+chunk_hashes: 623/625 identical, differing e.g. -3,12 -2,12
+chunk_hashes_full: 20/625 identical, differing e.g. -12,-12 -12,-11 -12,-10 -12,-9 -12,-8 -12,-7
+BATCH_DONE
+
+--- seed 1 rerun alone, after the batch ---
+seed=1 order=forward failures=0 chunks=625 ms/chunk=34.3
+chunk_hashes: 625/625 identical
+chunk_hashes_full: 75/625 identical, differing e.g. -12,-12 -12,-10 -12,-9 -12,-8 -12,-6 -12,-5
+
+--- seed 8675309 rerun with chunk dumps ---
+chunk_hashes: 625/625 identical
 ```
 
 ## FILE: docs/INSTALL_FOR_FRIENDS.md
