@@ -71,6 +71,18 @@ neoForge {
             systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
         }
 
+        // Headless world validation on a real dedicated server. Driven by tools/qa-world.sh.
+        qaServer {
+            server()
+            gameDirectory = project.file(project.findProperty('qa_dir') ?: 'runs/qa/manual')
+            programArgument '--nogui'
+            systemProperty 'dorohedoro.qa', 'true'
+            systemProperty 'dorohedoro.qa.radius', project.findProperty('qa_radius') ?: '16'
+            systemProperty 'dorohedoro.qa.order', project.findProperty('qa_order') ?: 'forward'
+            systemProperty 'dorohedoro.qa.dump', project.findProperty('qa_dump') ?: ''
+            systemProperty 'java.awt.headless', 'true'
+        }
+
         // This run config launches GameTestServer and runs all registered gametests, then exits.
         // By default, the server will crash when no gametests are provided.
         // The gametest system is also enabled by default for other run configs under the /test command.

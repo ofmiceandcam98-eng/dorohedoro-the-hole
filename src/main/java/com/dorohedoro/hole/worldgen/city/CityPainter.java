@@ -35,9 +35,11 @@ public final class CityPainter {
     private static final int SHAFT_BOTTOM = GALLERY_LEVELS[GALLERY_LEVELS.length - 1];
     private static final int KIOSK_RADIUS = 3;
 
-    private static final Mix ROAD = Mix.of(Blocks.GRAY_CONCRETE, 9, Blocks.CYAN_TERRACOTTA, 2, Blocks.TUFF, 2, Blocks.ANDESITE, 1, Blocks.COBBLED_DEEPSLATE, 1);
-    private static final Mix LOCAL_ROAD = Mix.of(Blocks.COBBLED_DEEPSLATE, 4, Blocks.TUFF, 3, Blocks.GRAVEL, 1, Blocks.GRAY_CONCRETE, 3, Blocks.PACKED_MUD, 2);
-    private static final Mix SIDEWALK = Mix.of(Blocks.POLISHED_ANDESITE, 6, Blocks.ANDESITE, 3, Blocks.STONE_BRICKS, 2, Blocks.CRACKED_STONE_BRICKS, 1);
+    // Nothing at street level or above may use stone, tuff, deepslate, andesite, granite or diorite. Vanilla ore and
+    // rock features replace those blocks up to the build limit, and they would punch ore into the roads and buildings.
+    private static final Mix ROAD = Mix.of(Blocks.GRAY_CONCRETE, 9, Blocks.CYAN_TERRACOTTA, 2, Blocks.POLISHED_TUFF, 2, Blocks.POLISHED_ANDESITE, 1, Blocks.COBBLED_DEEPSLATE, 1);
+    private static final Mix LOCAL_ROAD = Mix.of(Blocks.COBBLED_DEEPSLATE, 4, Blocks.POLISHED_TUFF, 3, Blocks.GRAY_CONCRETE, 3, Blocks.PACKED_MUD, 2);
+    private static final Mix SIDEWALK = Mix.of(Blocks.POLISHED_ANDESITE, 8, Blocks.STONE_BRICKS, 2, Blocks.CRACKED_STONE_BRICKS, 1);
     private static final Mix QUAY = Mix.of(Blocks.STONE_BRICKS, 5, Blocks.CRACKED_STONE_BRICKS, 2, Blocks.MOSSY_STONE_BRICKS, 2);
     private static final Mix ROAD_BED = Mix.of(Blocks.GRAVEL, 4, Blocks.DIRT, 4, Blocks.COARSE_DIRT, 2, Blocks.COBBLESTONE, 1, Blocks.SAND, 1);
     private static final Mix DEEP_FILL = Mix.of(Blocks.DIRT, 5, Blocks.GRAVEL, 4, Blocks.STONE, 5, Blocks.CLAY, 1, Blocks.SAND, 1);
