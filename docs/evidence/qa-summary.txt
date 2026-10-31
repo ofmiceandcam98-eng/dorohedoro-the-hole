@@ -1,0 +1,11 @@
+seed=1 order=forward failures=0 chunks=625 ms/chunk=33.3
+seed=2 order=forward failures=0 chunks=625 ms/chunk=42.2
+seed=3 order=forward failures=0 chunks=625 ms/chunk=41.6
+seed=42 order=forward failures=0 chunks=625 ms/chunk=47.7
+seed=777 order=forward failures=0 chunks=625 ms/chunk=32.9
+seed=1234567 order=forward failures=0 chunks=625 ms/chunk=57.2
+seed=-987654321 order=forward failures=1 chunks=625 ms/chunk=42.6
+  FAIL multiple_districts: [MARKET, OUTSKIRTS]
+seed=20261030 order=forward failures=0 chunks=625 ms/chunk=32.2
+seed=555 order=forward failures=1 chunks=625 ms/chunk=44.3
+  FAIL multiple_districts: [MARKET, OUTSKIRTS]

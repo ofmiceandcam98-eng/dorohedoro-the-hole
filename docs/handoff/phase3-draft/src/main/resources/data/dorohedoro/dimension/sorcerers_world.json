@@ -1,0 +1,8 @@
+{
+  "type": "dorohedoro:sorcerers_world",
+  "generator": {
+    "type": "minecraft:noise",
+    "biome_source": { "type": "dorohedoro:sorcerer_lands" },
+    "settings": "dorohedoro:sorcerers_world"
+  }
+}

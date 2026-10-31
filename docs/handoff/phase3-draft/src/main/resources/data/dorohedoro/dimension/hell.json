@@ -1,0 +1,8 @@
+{
+  "type": "dorohedoro:hell",
+  "generator": {
+    "type": "minecraft:noise",
+    "biome_source": { "type": "dorohedoro:hell_realms" },
+    "settings": "dorohedoro:hell"
+  }
+}
