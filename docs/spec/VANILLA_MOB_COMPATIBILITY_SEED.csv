@@ -1,0 +1,81 @@
+candidate_registry_id,group,proposed_spawn_and_drop_policy,source_status,test_status
+minecraft:villager,Urban citizens & animals,Hole: urban trader/farm/rooftop/garden or equivalent controlled supply,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:wandering_trader,Urban citizens & animals,Hole: urban trader/farm/rooftop/garden or equivalent controlled supply,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:iron_golem,Urban citizens & animals,Hole: urban trader/farm/rooftop/garden or equivalent controlled supply,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:cat,Urban citizens & animals,Hole: urban trader/farm/rooftop/garden or equivalent controlled supply,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:wolf,Urban citizens & animals,Hole: urban trader/farm/rooftop/garden or equivalent controlled supply,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:horse,Urban citizens & animals,Hole: urban trader/farm/rooftop/garden or equivalent controlled supply,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:donkey,Urban citizens & animals,Hole: urban trader/farm/rooftop/garden or equivalent controlled supply,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:mule,Urban citizens & animals,Hole: urban trader/farm/rooftop/garden or equivalent controlled supply,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:llama,Urban citizens & animals,Hole: urban trader/farm/rooftop/garden or equivalent controlled supply,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:trader_llama,Urban citizens & animals,Hole: urban trader/farm/rooftop/garden or equivalent controlled supply,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:camel,Urban citizens & animals,Hole: urban trader/farm/rooftop/garden or equivalent controlled supply,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:chicken,Urban citizens & animals,Hole: urban trader/farm/rooftop/garden or equivalent controlled supply,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:cow,Urban citizens & animals,Hole: urban trader/farm/rooftop/garden or equivalent controlled supply,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:pig,Urban citizens & animals,Hole: urban trader/farm/rooftop/garden or equivalent controlled supply,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:sheep,Urban citizens & animals,Hole: urban trader/farm/rooftop/garden or equivalent controlled supply,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:rabbit,Urban citizens & animals,Hole: urban trader/farm/rooftop/garden or equivalent controlled supply,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:bee,Urban citizens & animals,Hole: urban trader/farm/rooftop/garden or equivalent controlled supply,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:frog,Urban citizens & animals,Hole: urban trader/farm/rooftop/garden or equivalent controlled supply,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:tadpole,Urban citizens & animals,Hole: urban trader/farm/rooftop/garden or equivalent controlled supply,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:parrot,Urban citizens & animals,Hole: urban trader/farm/rooftop/garden or equivalent controlled supply,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:fox,Urban citizens & animals,Hole: urban trader/farm/rooftop/garden or equivalent controlled supply,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:goat,Urban citizens & animals,Hole: urban trader/farm/rooftop/garden or equivalent controlled supply,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:armadillo,Urban citizens & animals,Hole: urban trader/farm/rooftop/garden or equivalent controlled supply,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:sniffer,Urban citizens & animals,Hole: urban trader/farm/rooftop/garden or equivalent controlled supply,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:mooshroom,Urban citizens & animals,Hole: urban trader/farm/rooftop/garden or equivalent controlled supply,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:panda,Urban citizens & animals,Hole: urban trader/farm/rooftop/garden or equivalent controlled supply,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:ocelot,Urban citizens & animals,Hole: urban trader/farm/rooftop/garden or equivalent controlled supply,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:polar_bear,Urban citizens & animals,Hole: urban trader/farm/rooftop/garden or equivalent controlled supply,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:turtle,Urban citizens & animals,Hole: urban trader/farm/rooftop/garden or equivalent controlled supply,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:axolotl,Urban citizens & animals,Hole: urban trader/farm/rooftop/garden or equivalent controlled supply,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:zombie,Selected urban hostiles,Hole: conditional district/night/event spawn; verify drops and no destructive loopholes,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:husk,Selected urban hostiles,Hole: conditional district/night/event spawn; verify drops and no destructive loopholes,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:drowned,Selected urban hostiles,Hole: conditional district/night/event spawn; verify drops and no destructive loopholes,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:zombie_villager,Selected urban hostiles,Hole: conditional district/night/event spawn; verify drops and no destructive loopholes,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:skeleton,Selected urban hostiles,Hole: conditional district/night/event spawn; verify drops and no destructive loopholes,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:stray,Selected urban hostiles,Hole: conditional district/night/event spawn; verify drops and no destructive loopholes,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:bogged,Selected urban hostiles,Hole: conditional district/night/event spawn; verify drops and no destructive loopholes,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:spider,Selected urban hostiles,Hole: conditional district/night/event spawn; verify drops and no destructive loopholes,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:cave_spider,Selected urban hostiles,Hole: conditional district/night/event spawn; verify drops and no destructive loopholes,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:silverfish,Selected urban hostiles,Hole: conditional district/night/event spawn; verify drops and no destructive loopholes,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:slime,Selected urban hostiles,Hole: conditional district/night/event spawn; verify drops and no destructive loopholes,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:creeper,Selected urban hostiles,Hole: conditional district/night/event spawn; verify drops and no destructive loopholes,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:witch,Selected urban hostiles,Hole: conditional district/night/event spawn; verify drops and no destructive loopholes,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:pillager,Selected urban hostiles,Hole: conditional district/night/event spawn; verify drops and no destructive loopholes,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:vindicator,Selected urban hostiles,Hole: conditional district/night/event spawn; verify drops and no destructive loopholes,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:evoker,Selected urban hostiles,Hole: conditional district/night/event spawn; verify drops and no destructive loopholes,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:ravager,Selected urban hostiles,Hole: conditional district/night/event spawn; verify drops and no destructive loopholes,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:vex,Selected urban hostiles,Hole: conditional district/night/event spawn; verify drops and no destructive loopholes,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:phantom,Selected urban hostiles,Hole: conditional district/night/event spawn; verify drops and no destructive loopholes,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:endermite,Selected urban hostiles,Hole: conditional district/night/event spawn; verify drops and no destructive loopholes,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:enderman,Selected urban hostiles,Hole: conditional district/night/event spawn; verify drops and no destructive loopholes,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:warden,Selected urban hostiles,Hole: conditional district/night/event spawn; verify drops and no destructive loopholes,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:breeze,Selected urban hostiles,Hole: conditional district/night/event spawn; verify drops and no destructive loopholes,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:bat,Water and caves,Hole waterways/basements or relevant vanilla dimension; verify drops,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:squid,Water and caves,Hole waterways/basements or relevant vanilla dimension; verify drops,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:glow_squid,Water and caves,Hole waterways/basements or relevant vanilla dimension; verify drops,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:cod,Water and caves,Hole waterways/basements or relevant vanilla dimension; verify drops,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:salmon,Water and caves,Hole waterways/basements or relevant vanilla dimension; verify drops,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:pufferfish,Water and caves,Hole waterways/basements or relevant vanilla dimension; verify drops,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:tropical_fish,Water and caves,Hole waterways/basements or relevant vanilla dimension; verify drops,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:dolphin,Water and caves,Hole waterways/basements or relevant vanilla dimension; verify drops,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:guardian,Water and caves,Hole waterways/basements or relevant vanilla dimension; verify drops,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:elder_guardian,Water and caves,Hole waterways/basements or relevant vanilla dimension; verify drops,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:blaze,Nether & End progression,Keep in vanilla dimension or source equivalent; verify boss and resource progression,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:ghast,Nether & End progression,Keep in vanilla dimension or source equivalent; verify boss and resource progression,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:hoglin,Nether & End progression,Keep in vanilla dimension or source equivalent; verify boss and resource progression,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:zoglin,Nether & End progression,Keep in vanilla dimension or source equivalent; verify boss and resource progression,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:piglin,Nether & End progression,Keep in vanilla dimension or source equivalent; verify boss and resource progression,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:piglin_brute,Nether & End progression,Keep in vanilla dimension or source equivalent; verify boss and resource progression,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:zombified_piglin,Nether & End progression,Keep in vanilla dimension or source equivalent; verify boss and resource progression,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:strider,Nether & End progression,Keep in vanilla dimension or source equivalent; verify boss and resource progression,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:magma_cube,Nether & End progression,Keep in vanilla dimension or source equivalent; verify boss and resource progression,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:wither_skeleton,Nether & End progression,Keep in vanilla dimension or source equivalent; verify boss and resource progression,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:shulker,Nether & End progression,Keep in vanilla dimension or source equivalent; verify boss and resource progression,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:ender_dragon,Nether & End progression,Keep in vanilla dimension or source equivalent; verify boss and resource progression,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:wither,Nether & End progression,Keep in vanilla dimension or source equivalent; verify boss and resource progression,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:snow_golem,Nether & End progression,Keep in vanilla dimension or source equivalent; verify boss and resource progression,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:skeleton_horse,Nether & End progression,Keep in vanilla dimension or source equivalent; verify boss and resource progression,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:zombie_horse,Nether & End progression,Keep in vanilla dimension or source equivalent; verify boss and resource progression,VERIFY AGAINST 1.21.1 REGISTRY,TODO
+minecraft:allay,Nether & End progression,Keep in vanilla dimension or source equivalent; verify boss and resource progression,VERIFY AGAINST 1.21.1 REGISTRY,TODO

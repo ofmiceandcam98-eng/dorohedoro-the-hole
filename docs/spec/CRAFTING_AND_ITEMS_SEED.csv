@@ -1,0 +1,26 @@
+item_id,sample_inputs_NOT_CANON,station,functional_requirement
+combat_knife,"iron ingot,stick,leather",crafting table,melee weapon; iron repair
+twin_knives,"combat knife x2,leather",smithing/combine station,two-handed or dual wield with safe offhand
+shin_hammer,"iron blocks,stick,rare loot",industrial forge,heavy melee; boss and quest loot alternative
+pipe_wrench,"iron ingots,sticks",crafting table,melee + machinery interactions
+rusted_pipe,"scrap metal,stick",crafting table,low tier weapon
+industrial_hatchet,"iron ingots,sticks",crafting table,melee / wood harvesting
+rain_cloak,"leather,wool,honeycomb",crafting table,Hole rain protection
+respirator,"leather,glass,charcoal",crafting table,pollution defense
+mask_blank,"leather,paper,dye,iron nugget",mask bench,base for unique masks
+mushroom_mask,"mask blank,mushrooms,rare dye",mask bench,En aesthetic; no innate magic granted
+heart_mask,"mask blank,red dye,metal",mask bench,Shin aesthetic; no innate magic granted
+smoke_flask,"glass bottles,iron,copper,leather",crafting table,single smoke type; exact finite charge
+smoke_canister,"smoke flask,iron,rare reagent",smoke refinery,advanced store/trade magic
+smoke_detector,"copper,redstone,glass",crafting table,detect smoke residues
+sorcerer_door_anchor,"obsidian,smoke flask,rare drop",door bench,requires first transport acquisition path
+black_powder_packet,faction vendor/raid loot,non-craftable early,boost with severe drawbacks
+reagent_jar,"glass bottle,clay,cork substitute",crafting table,recipe component
+scrap_metal,salvage rusty industrial blocks,salvage/loot/smelting,basic urban resource
+frying_pan,"iron ingots,stick",crafting table,gyoza cooking station interaction
+gyoza,wheat/vegetables/meat/water,cooking station,"food, hunger/saturation"
+mushroom_stew_special,"mushrooms,bowl,spices",cooking station,special food and minor buff
+medical_bandage,"wool,string,herbs",crafting table,heal modestly not as Noi
+smoke_suppressant,rare medicinal ingredients,medical station,magic debuff remedy
+quest_contract,"paper,ink",quest station,server signature and rewards
+devil_training_armor,late game ritual materials,rare progression station,postgame gating

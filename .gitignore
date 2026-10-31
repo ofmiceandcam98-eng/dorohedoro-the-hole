@@ -38,3 +38,9 @@ run/
 **/src/generated/**/.cache/
 repo/
 !**/src/**/repo/
+
+### Project ###
+runs/
+*.log
+hs_err_pid*.log
+replay_pid*.log

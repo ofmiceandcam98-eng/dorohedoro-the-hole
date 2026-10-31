@@ -1,0 +1,57 @@
+asset_id,group,expected_formats,reference_or_license_note,status
+hole_street_variants,World structures,structure NBT + palettes + loot,Reference needed; create from scratch; confirm licensed,UNCREATED
+hole_apartment_variants,World structures,structure NBT + palettes + loot,Reference needed; create from scratch; confirm licensed,UNCREATED
+hole_factory,World structures,structure NBT + palettes + loot,Reference needed; create from scratch; confirm licensed,UNCREATED
+hole_sewer_network,World structures,structure NBT + palettes + loot,Reference needed; create from scratch; confirm licensed,UNCREATED
+hole_hospital,World structures,structure NBT + palettes + loot,Reference needed; create from scratch; confirm licensed,UNCREATED
+hungry_bug,World structures,structure NBT + palettes + loot,Reference needed; create from scratch; confirm licensed,UNCREATED
+hole_cemetery,World structures,structure NBT + palettes + loot,Reference needed; create from scratch; confirm licensed,UNCREATED
+lake_of_refuse,World structures,structure NBT + palettes + loot,Reference needed; create from scratch; confirm licensed,UNCREATED
+sorcerer_market,World structures,structure NBT + palettes + loot,Reference needed; create from scratch; confirm licensed,UNCREATED
+en_mansion,World structures,structure NBT + palettes + loot,Reference needed; create from scratch; confirm licensed,UNCREATED
+sorcerer_door_variants,World structures,structure NBT + palettes + loot,Reference needed; create from scratch; confirm licensed,UNCREATED
+cross_eyes_hideout,World structures,structure NBT + palettes + loot,Reference needed; create from scratch; confirm licensed,UNCREATED
+caiman,Characters,bbmodel + animated geo JSON + texture PNG,Reference needed; create from scratch; confirm licensed,UNCREATED
+nikaido,Characters,bbmodel + animated geo JSON + texture PNG,Reference needed; create from scratch; confirm licensed,UNCREATED
+en,Characters,bbmodel + animated geo JSON + texture PNG,Reference needed; create from scratch; confirm licensed,UNCREATED
+shin,Characters,bbmodel + animated geo JSON + texture PNG,Reference needed; create from scratch; confirm licensed,UNCREATED
+noi,Characters,bbmodel + animated geo JSON + texture PNG,Reference needed; create from scratch; confirm licensed,UNCREATED
+ebisu,Characters,bbmodel + animated geo JSON + texture PNG,Reference needed; create from scratch; confirm licensed,UNCREATED
+fujita,Characters,bbmodel + animated geo JSON + texture PNG,Reference needed; create from scratch; confirm licensed,UNCREATED
+risu,Characters,bbmodel + animated geo JSON + texture PNG,Reference needed; create from scratch; confirm licensed,UNCREATED
+kikurage,Characters,bbmodel + animated geo JSON + texture PNG,Reference needed; create from scratch; confirm licensed,UNCREATED
+chota,Characters,bbmodel + animated geo JSON + texture PNG,Reference needed; create from scratch; confirm licensed,UNCREATED
+turkey,Characters,bbmodel + animated geo JSON + texture PNG,Reference needed; create from scratch; confirm licensed,UNCREATED
+shou,Characters,bbmodel + animated geo JSON + texture PNG,Reference needed; create from scratch; confirm licensed,UNCREATED
+asu,Characters,bbmodel + animated geo JSON + texture PNG,Reference needed; create from scratch; confirm licensed,UNCREATED
+kasukabe,Characters,bbmodel + animated geo JSON + texture PNG,Reference needed; create from scratch; confirm licensed,UNCREATED
+johnson,Characters,bbmodel + animated geo JSON + texture PNG,Reference needed; create from scratch; confirm licensed,UNCREATED
+lesser_roach,Enemies,bbmodel + animated geo JSON + texture PNG,Reference needed; create from scratch; confirm licensed,UNCREATED
+mutated_human,Enemies,bbmodel + animated geo JSON + texture PNG,Reference needed; create from scratch; confirm licensed,UNCREATED
+mushroom_thrall,Enemies,bbmodel + animated geo JSON + texture PNG,Reference needed; create from scratch; confirm licensed,UNCREATED
+rogue_sorcerer,Enemies,bbmodel + animated geo JSON + texture PNG,Reference needed; create from scratch; confirm licensed,UNCREATED
+living_dead_event_zombie,Enemies,bbmodel + animated geo JSON + texture PNG,Reference needed; create from scratch; confirm licensed,UNCREATED
+cross_eyes_fighter,Enemies,bbmodel + animated geo JSON + texture PNG,Reference needed; create from scratch; confirm licensed,UNCREATED
+en_family_enforcer,Enemies,bbmodel + animated geo JSON + texture PNG,Reference needed; create from scratch; confirm licensed,UNCREATED
+combat_knife,Items/blocks,item/block model JSON + texture PNG,Reference needed; create from scratch; confirm licensed,UNCREATED
+twin_knives,Items/blocks,item/block model JSON + texture PNG,Reference needed; create from scratch; confirm licensed,UNCREATED
+heart_hammer,Items/blocks,item/block model JSON + texture PNG,Reference needed; create from scratch; confirm licensed,UNCREATED
+smoke_flask,Items/blocks,item/block model JSON + texture PNG,Reference needed; create from scratch; confirm licensed,UNCREATED
+smoke_refinery,Items/blocks,item/block model JSON + texture PNG,Reference needed; create from scratch; confirm licensed,UNCREATED
+magic_door_anchor,Items/blocks,item/block model JSON + texture PNG,Reference needed; create from scratch; confirm licensed,UNCREATED
+mask_bench,Items/blocks,item/block model JSON + texture PNG,Reference needed; create from scratch; confirm licensed,UNCREATED
+industrial_debris,Items/blocks,item/block model JSON + texture PNG,Reference needed; create from scratch; confirm licensed,UNCREATED
+gyoza,Items/blocks,item/block model JSON + texture PNG,Reference needed; create from scratch; confirm licensed,UNCREATED
+rain_cloak,Items/blocks,item/block model JSON + texture PNG,Reference needed; create from scratch; confirm licensed,UNCREATED
+black_powder_packet,Items/blocks,item/block model JSON + texture PNG,Reference needed; create from scratch; confirm licensed,UNCREATED
+smoke_black,Effects/UI,UI texture PNG / animation + UI component,Reference needed; create from scratch; confirm licensed,UNCREATED
+smoke_white_kikurage,Effects/UI,UI texture PNG / animation + UI component,Reference needed; create from scratch; confirm licensed,UNCREATED
+en_mushroom_impact,Effects/UI,UI texture PNG / animation + UI component,Reference needed; create from scratch; confirm licensed,UNCREATED
+healing_effect,Effects/UI,UI texture PNG / animation + UI component,Reference needed; create from scratch; confirm licensed,UNCREATED
+sever_effect,Effects/UI,UI texture PNG / animation + UI component,Reference needed; create from scratch; confirm licensed,UNCREATED
+portal_transition,Effects/UI,UI texture PNG / animation + UI component,Reference needed; create from scratch; confirm licensed,UNCREATED
+origin_select,Effects/UI,UI texture PNG / animation + UI component,Reference needed; create from scratch; confirm licensed,UNCREATED
+smoke_meter,Effects/UI,UI texture PNG / animation + UI component,Reference needed; create from scratch; confirm licensed,UNCREATED
+spell_radial_menu,Effects/UI,UI texture PNG / animation + UI component,Reference needed; create from scratch; confirm licensed,UNCREATED
+reputation_screen,Effects/UI,UI texture PNG / animation + UI component,Reference needed; create from scratch; confirm licensed,UNCREATED
+quest_tracker,Effects/UI,UI texture PNG / animation + UI component,Reference needed; create from scratch; confirm licensed,UNCREATED

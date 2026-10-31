@@ -1,0 +1,59 @@
+spell_id,innate_type,associated_character,lore_status,move_label_status,proposed_ui_name,actual_required_mechanical_effect,initial_smoke_cost_PROPOSAL,initial_cooldown_ticks_PROPOSAL,validation,notes
+mushroom_01,mushroom,En,canon,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Mushroom Puff,directional smoke; temporary slowness and fungal marking,12,80,Needs in-game server test,Design baseline; balance later
+mushroom_02,mushroom,En,canon,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Fungal Conversion,reversible entity transformation with stable UUID/inventory,28,240,Needs in-game server test,Design baseline; balance later
+mushroom_03,mushroom,En,canon,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Mushroom Barricade,temporary limited blocks respecting claims,22,220,Needs in-game server test,Design baseline; balance later
+mushroom_04,mushroom,En,canon,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Spore Thrall,spawn capped allied mushroom minion,40,500,Needs in-game server test,Design baseline; balance later
+mushroom_05,mushroom,En,canon,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Fungal Catastrophe,telegraphed arena-only area conversion,80,1200,Needs in-game server test,Design baseline; balance later
+healing_01,healing,Noi,canon,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Healing Touch,single allied health restore,12,50,Needs in-game server test,Design baseline; balance later
+healing_02,healing,Noi,canon,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Restorative Smoke,heal over time,20,160,Needs in-game server test,Design baseline; balance later
+healing_03,healing,Noi,canon,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Trauma Cleanse,remove selected magic debuffs,25,280,Needs in-game server test,Design baseline; balance later
+healing_04,healing,Noi,canon,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Group Restoration,heal damaged allies in cone,38,360,Needs in-game server test,Design baseline; balance later
+healing_05,healing,Noi,canon,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Emergency Restoration,high-cost critical heal with restrictions,60,900,Needs in-game server test,Design baseline; balance later
+dismemberment_01,dismemberment,Shin,canon,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Severing Strike,melee attack and transient disable status,14,80,Needs in-game server test,Design baseline; balance later
+dismemberment_02,dismemberment,Shin,canon,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Cutting Wave,short cone cut attack,22,180,Needs in-game server test,Design baseline; balance later
+dismemberment_03,dismemberment,Shin,canon,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Precision Disruption,short-target disable; boss partial resistance,30,300,Needs in-game server test,Design baseline; balance later
+dismemberment_04,dismemberment,Shin,canon,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Reassembly,remove own reversible limb effect,12,160,Needs in-game server test,Design baseline; balance later
+reptile_01,reptile,Ebisu,canon,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Reptile Mark,temporary transformation effects and debuffs,18,140,Needs in-game server test,Design baseline; balance later
+reptile_02,reptile,Ebisu,canon,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Claw Frenzy,enhanced attack while transformed,22,200,Needs in-game server test,Design baseline; balance later
+reptile_03,reptile,Ebisu,canon,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Reptilian Mobility,short leap and movement boost,15,120,Needs in-game server test,Design baseline; balance later
+reptile_04,reptile,Ebisu,canon,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Unstable Rampage,powerful form with drawback,55,900,Needs in-game server test,Design baseline; balance later
+destruction_01,destruction,Fujita,canon,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Smoke Bullet,ranged low-damage projectile,10,32,Needs in-game server test,Design baseline; balance later
+destruction_02,destruction,Fujita,canon,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Burst Shot,short projectile burst,22,120,Needs in-game server test,Design baseline; balance later
+destruction_03,destruction,Fujita,canon,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Piercing Smoke,charged targeted damage,35,250,Needs in-game server test,Design baseline; balance later
+time_01,time,Nikaido,canon-rare,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Temporal Slip,short safe blink,25,250,Needs in-game server test,Design baseline; balance later
+time_02,time,Nikaido,canon-rare,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Local Slow,bounded entity slow; never world tick manipulation,35,400,Needs in-game server test,Design baseline; balance later
+time_03,time,Nikaido,canon-rare,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Personal Rewind,position and health snapshot only; no inventory rewind,60,1600,Needs in-game server test,Design baseline; balance later
+time_04,time,Nikaido,canon-rare,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Temporal Lock,brief CC and boss resistance,50,700,Needs in-game server test,Design baseline; balance later
+curse_01,curse,Risu,canon-exception,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Vengeance Mark,story/ritual mark only; not standard spam cast,0,0,Needs in-game server test,Design baseline; balance later
+curse_02,curse,Risu,canon-exception,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Curse Manifestation,exceptional death-linked quest/encounter process,0,0,Needs in-game server test,Design baseline; balance later
+curse_03,curse,Risu,canon-exception,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Curse Resolution,complete vengeance encounter safely,0,0,Needs in-game server test,Design baseline; balance later
+revival_01,revival,Kikurage,canon-rare,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,White Smoke Revival,NPC or permitted companion revival with consumed reagent,70,2400,Needs in-game server test,Design baseline; balance later
+revival_02,revival,Kikurage,canon-rare,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Downed Rescue,restore valid incapacitated ally without inventory cloning,65,1600,Needs in-game server test,Design baseline; balance later
+dispelling_01,dispelling,Chota,canon-ritual,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Ritual Unbinding,lengthy multi-ingredient ritual clears tagged transformation,45,1200,Needs in-game server test,Design baseline; balance later
+dispelling_02,dispelling,Chota,canon-ritual,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Counterspell Preparation,prepare ritual ingredients and target,10,160,Needs in-game server test,Design baseline; balance later
+teleportation_01,teleportation,Asu/Kawajiri,canon,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Short Blink,safe ray target teleport,25,250,Needs in-game server test,Design baseline; balance later
+teleportation_02,teleportation,Asu/Kawajiri,canon,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Recall Marker,return to bound safe location,50,1000,Needs in-game server test,Design baseline; balance later
+teleportation_03,teleportation,Asu/Kawajiri,canon,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Door Rescue,limited multi-entity portal service with permission,75,1800,Needs in-game server test,Design baseline; balance later
+invisibility_01,invisibility,Shou,canon,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Smoke Veil,stealth against AI with counters,24,300,Needs in-game server test,Design baseline; balance later
+invisibility_02,invisibility,Shou,canon,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Silent Step,reduced aggro for bounded time,20,400,Needs in-game server test,Design baseline; balance later
+invisibility_03,invisibility,Shou,canon,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Reveal Break,remove own veil on attack,0,0,Needs in-game server test,Design baseline; balance later
+living_doll_01,living_doll,Turkey,canon,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Cook Tracking Doll,ritual item creates target-looking tracker NPC,40,1200,Needs in-game server test,Design baseline; balance later
+living_doll_02,living_doll,Turkey,canon,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Target Clue,doll indicates coarse target direction if privacy permits,12,300,Needs in-game server test,Design baseline; balance later
+living_doll_03,living_doll,Turkey,canon,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Doll Dismissal,remove doll and cleanup AI,0,0,Needs in-game server test,Design baseline; balance later
+protection_01,protection,Natsuki,canon,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Protective Bubble,finite HP shield,30,400,Needs in-game server test,Design baseline; balance later
+protection_02,protection,Natsuki,canon,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Protective Hold,maintained allied field with upkeep cost,22,200,Needs in-game server test,Design baseline; balance later
+protection_03,protection,Natsuki,canon,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Barrier Burst,bubble breaks with defensive knockback,20,400,Needs in-game server test,Design baseline; balance later
+meat_pie_01,meat_pie,Fukuyama,canon,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Pie Transformation,temporary target debuff/visual morph; no item cloning,40,540,Needs in-game server test,Design baseline; balance later
+meat_pie_02,meat_pie,Fukuyama,canon,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Pie Reversion,undo reversible effect,0,0,Needs in-game server test,Design baseline; balance later
+explosive_01,explosive,Baku,source-check,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Smoke Detonation,bounded blast respecting claims,22,180,Needs in-game server test,Design baseline; balance later
+explosive_02,explosive,Baku,source-check,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Delayed Charge,telegraphed temporary explosion marker,32,300,Needs in-game server test,Design baseline; balance later
+tranquilizer_01,tranquilizer,Yaku,source-check,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Soporific Smoke,short range slowness and tiredness,20,170,Needs in-game server test,Design baseline; balance later
+tranquilizer_02,tranquilizer,Yaku,source-check,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Sleep Haze,limited AoE CC with PvP caps,35,450,Needs in-game server test,Design baseline; balance later
+revitalization_01,revitalization,Haru,source-check,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Revitalizing Aura,temporary restoration buff pending canon verification,25,300,Needs in-game server test,Design baseline; balance later
+revitalization_02,revitalization,Haru,source-check,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Recovery Ritual,limited recovery service after verification,35,540,Needs in-game server test,Design baseline; balance later
+surgery_time_01,surgery_time,Doctor Omori,source-check,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Surgical Acceleration,hospital treatment process only,40,800,Needs in-game server test,Design baseline; balance later
+surgery_time_02,surgery_time,Doctor Omori,source-check,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Smoke Vein Treatment,quest-based condition repair after verification,45,900,Needs in-game server test,Design baseline; balance later
+face_transformation_01,face_transformation,Acupuncturist,source-check,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Face Reshaping,temporary consent-gated appearance disguise,20,360,Needs in-game server test,Design baseline; balance later
+face_transformation_02,face_transformation,Acupuncturist,source-check,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Remove Disguise,safe reveal and persistence reset,0,0,Needs in-game server test,Design baseline; balance later
+metamorphosis_01,metamorphosis,Impersonator sorcerers,source-check,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Temporary Mimicry,disguise with no inventories or abilities copied,28,420,Needs in-game server test,Design baseline; balance later
+metamorphosis_02,metamorphosis,Impersonator sorcerers,source-check,ORIGINAL GAMEPLAY MOVE; POWER FROM LORE,Disguise Detection,detection checks for NPCs and devices,20,200,Needs in-game server test,Design baseline; balance later

@@ -38,8 +38,13 @@ base {
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
 neoForge {
-    // Specify the version of NeoForge to use.
-    version = project.neo_version
+    enable {
+        // Specify the version of NeoForge to use.
+        version = project.neo_version
+        // Full decompilation needs roughly 6 GB of free commit, which the dev machine does not reliably have.
+        // Set disable_recompilation=false in gradle.properties to get browsable patched sources.
+        disableRecompilation = project.disable_recompilation.toBoolean()
+    }
 
     parchment {
         mappingsVersion = project.parchment_mappings_version
