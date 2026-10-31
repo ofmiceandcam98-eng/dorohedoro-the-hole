@@ -1,0 +1,11 @@
+{
+  "values": [
+    "dorohedoro:hole_residential",
+    "dorohedoro:hole_market",
+    "dorohedoro:hole_industrial",
+    "dorohedoro:hole_waterfront",
+    "dorohedoro:hole_derelict",
+    "dorohedoro:hole_graveyard",
+    "dorohedoro:hole_undercity"
+  ]
+}

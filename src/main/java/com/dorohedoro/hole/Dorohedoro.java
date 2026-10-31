@@ -1,5 +1,6 @@
 package com.dorohedoro.hole;
 
+import com.dorohedoro.hole.registry.ModWorldgen;
 import com.mojang.logging.LogUtils;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -13,6 +14,6 @@ public final class Dorohedoro {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public Dorohedoro(IEventBus modBus, ModContainer container) {
-        LOGGER.info("Dorohedoro: The Hole loading");
+        ModWorldgen.register(modBus);
     }
 }

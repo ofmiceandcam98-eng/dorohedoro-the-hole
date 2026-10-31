@@ -1,3 +1,11 @@
 {
-  "mod.dorohedoro.name": "Dorohedoro: The Hole"
+  "mod.dorohedoro.name": "Dorohedoro: The Hole",
+  "biome.dorohedoro.hole_residential": "Hole Tenements",
+  "biome.dorohedoro.hole_market": "Hole Market Quarter",
+  "biome.dorohedoro.hole_industrial": "Hole Foundries",
+  "biome.dorohedoro.hole_waterfront": "Hole Canalside",
+  "biome.dorohedoro.hole_derelict": "Hole Wastes",
+  "biome.dorohedoro.hole_graveyard": "Hole Burial Ground",
+  "biome.dorohedoro.hole_undercity": "Undercity",
+  "dorohedoro.world.not_hole": "This world was not created as the Hole, so it has been left unchanged. Create a new world to enter the city."
 }
