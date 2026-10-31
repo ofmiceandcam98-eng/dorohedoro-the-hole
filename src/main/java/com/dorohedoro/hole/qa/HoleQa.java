@@ -162,6 +162,11 @@ public final class HoleQa {
             for (int index = 0; index < sections.length; index++) {
                 LevelChunkSection section = sections[index];
                 int baseY = chunk.getSectionYFromSectionIndex(index) << 4;
+                // A section wholly below the cutoff must not count at all, not even as "empty": one vanilla cave vine
+                // landing in a cavern section would otherwise change the city hash.
+                if (baseY + 15 < bottom) {
+                    continue;
+                }
                 if (section.hasOnlyAir()) {
                     hash = hash * 31 + 7;
                     continue;

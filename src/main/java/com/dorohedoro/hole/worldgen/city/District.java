@@ -24,6 +24,9 @@ public enum District {
      */
     private static final int MIX_SCALE = 7;
 
+    /** Cells kept free of outskirts around the origin, so every seed starts in a varied, built-up city. */
+    private static final int OUTSKIRTS_CLEAR_CELLS = 6;
+
     public static int cellOf(int block) {
         return Math.floorDiv(block, CELL_SIZE);
     }
@@ -41,7 +44,8 @@ public enum District {
         int centerX = cellX * CELL_SIZE + CELL_SIZE / 2;
         int centerZ = cellZ * CELL_SIZE + CELL_SIZE / 2;
         // The unscaled noise picks out broad zones where the city thins into scrubland and yards.
-        if (Math.abs(sampler.temperature().compute(new DensityFunction.SinglePointContext(centerX, 0, centerZ))) > 0.42) {
+        boolean nearStart = Math.max(Math.abs(cellX), Math.abs(cellZ)) <= OUTSKIRTS_CLEAR_CELLS;
+        if (!nearStart && Math.abs(sampler.temperature().compute(new DensityFunction.SinglePointContext(centerX, 0, centerZ))) > 0.42) {
             return OUTSKIRTS;
         }
         DensityFunction.SinglePointContext mixed = new DensityFunction.SinglePointContext(centerX * MIX_SCALE, 0, centerZ * MIX_SCALE);

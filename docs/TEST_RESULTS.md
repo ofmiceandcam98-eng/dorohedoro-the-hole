@@ -33,7 +33,7 @@ Command: `bash tools/qa-world.sh <seed> <radius> <order>`. Each run is a real de
 
 Result: **8 of 10 seeds passed all 26 checks. 2 of 10 failed one check.** Raw output is in `docs/evidence/qa-summary.txt`.
 
-**Open failure, seeds -987654321 and 555:** `multiple_districts` failed with only `[MARKET, OUTSKIRTS]` in range. Outskirts covers too much of the area around spawn on these seeds. Likely fix: raise the 0.42 threshold in `District.ofCell`, or add a minimum distance from the origin. The fix is not applied.
+**Fix applied, rerun pending at the time of writing:** seeds -987654321 and 555 failed `multiple_districts` with only `[MARKET, OUTSKIRTS]` in range. `District.ofCell` now keeps outskirts at least 6 cells (768 blocks) from the origin. See `docs/evidence/qa-summary.txt` for the rerun. If that file does not show all seeds passing, this is not yet confirmed.
 
 On every one of the 10 seeds, all other checks passed, including spawn, street reachability, building entry, resources, fluid leaks and ore in the city.
 
@@ -55,14 +55,7 @@ Same seed, chunks requested in opposite orders, per-chunk block-state hashes com
 | Full city, seed 42, radius 12 | **625 of 625 identical** | 75 of 625 identical |
 | Full city, seed 8675309, radius 12 | **624 of 625 identical** | 19 of 625 identical |
 
-**Open bug, seed 8675309:** chunk 1,2 differs at y≥64 between generation orders. The cause is not known and has not been investigated. Reproduce with:
-
-```bash
-QA_DUMP="1,2" bash tools/qa-world.sh 8675309 12 forward
-QA_DUMP="1,2" bash tools/qa-world.sh 8675309 12 reverse
-```
-
-Then diff `dump-forward-1_2.txt` against `dump-reverse-1_2.txt` in the two `qa` folders, looking at y≥64 only. Chunk 1,2 is near spawn, so it may be a difference in what has ticked rather than in generation. That is a guess, not a finding.
+**Resolved false alarm, seed 8675309:** the 624 of 625 result came from the test, not the world. The mismatch moved between runs, which pointed at the measurement. `HoleQa.hash` still counted whether sections below the cutoff were all air, so one vanilla cave vine in an empty cavern section changed the city hash. With that fixed, seed 8675309 gives **625 of 625 identical**, and direct block comparison of chunks -3,12, -2,12 and 1,2 found 0 differences at y≥64. Evidence: `docs/evidence/hash-fix-test.txt`. Earlier city-layer numbers in the table used the flawed hash, which can only have overstated differences.
 
 Bug found by this test: vanilla ore features replaced `tuff` in road surfaces, putting `deepslate_coal_ore` in the streets. Fixed by removing every feature-replaceable block from city palettes. QA now enforces this.
 

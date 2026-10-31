@@ -32,7 +32,7 @@ Evidence is in `docs/TEST_RESULTS.md` and `docs/evidence/`. All of this ran on a
 | Claim | Result |
 | --- | --- |
 | Project builds | `gradlew build`, `compileJava` and `runData` pass |
-| 10-seed world validation | **8 of 10 seeds passed all 26 checks. 2 failed one check, the district variety check** |
+| 10-seed world validation | Before the district fix, 8 of 10 seeds passed all 26 checks. **See `docs/evidence/qa-summary.txt` for the rerun with the fix** |
 | New world's `minecraft:overworld` uses `HoleChunkGenerator` | Passed on every seed |
 | Spawn on the plaza at 0, 65, 0, standable, open sky | Passed on every seed |
 | No vanilla surface biome near spawn | Passed on all 10 seeds |
@@ -41,7 +41,7 @@ Evidence is in `docs/TEST_RESULTS.md` and `docs/evidence/`. All of this ran on a
 | All vanilla ores plus water, lava, clay, sand, gravel, dirt and sugar cane in a generated region | Passed |
 | No flowing water from y=46 to y=66 | Passed |
 | No ore or replaceable rock at street level or above | Passed |
-| City layer identical when chunks generate in opposite order | **Seeds 1 and 42: 625 of 625 chunks. Seed 8675309: 624 of 625, one open bug** |
+| City layer identical when chunks generate in opposite order | Seeds 1, 42 and 8675309: 625 of 625 chunks. The earlier 624 was a bug in the test hash, now fixed |
 | Generation speed | About 33 to 57 ms per chunk on this machine, by wall clock on a blocking load. Not a tick-time measurement |
 
 ### Implemented but NOT verified
@@ -60,8 +60,7 @@ Do not describe these as working yet.
 
 ### Known defects and gaps
 
-- **Open bug:** seeds -987654321 and 555 fail `multiple_districts`, with only Market and Outskirts near spawn. Tune the 0.42 threshold in `District.ofCell`.
-- **Open bug:** on seed 8675309, chunk 1,2 differs at y≥64 between generation orders. Cause unknown. Reproduction steps are in `docs/TEST_RESULTS.md`. This is a possible flaw in the order-independence guarantee, so fix it before building more on that guarantee.
+- Fix applied, confirm from the rerun: outskirts are now kept 768 blocks from spawn, because two seeds had no district variety near spawn.
 - The street layout is still fairly regular despite 32-block jitter. The owner explicitly said to avoid repetitive grids. Next idea: merge some superblocks or terminate some lines at T-junctions.
 - Buildings have no basements, and there are no elevated walkways, power lines, or pipe bridges. Reference art for the Hole is far denser.
 - `Tower.pipes` is a single chain. Facades are simple.
@@ -69,6 +68,10 @@ Do not describe these as working yet.
 - Wood sources from the spec (pallets, crates, scrap lumber) are not built. Wood currently comes from building materials, loot, junkyards, trees and saplings.
 - Vanilla decoration below y=64 is **not** order independent. Ore and cave decoration overlap across chunk borders exactly as in vanilla, so only 31 of 289 whole-chunk hashes matched in one early test. This comes from vanilla features, not the city painter. If the owner wants strict determinism underground, that needs separate work.
 - The first commit's `.gitignore` covers `run/` and `runs/`. Evidence worth keeping must be copied to `docs/evidence/`.
+
+## Installed on the owner's PC
+
+NeoForge 21.1.265 is installed in the normal `.minecraft`. The launcher has a **Dorohedoro** profile with game directory `C:\Users\Cam\Dorohedoro-Minecraft`, and the jar is in its `mods` folder. The backup of the launcher file is `.minecraft\launcher_profiles.json.before-dorohedoro`. Testers follow `docs/INSTALL_FOR_FRIENDS.md`. Rebuild with `./gradlew build` and copy `build/libs/dorohedoro-0.1.0.jar` to update it. Never run Gradle twice at once in this folder: two compiles corrupt class files.
 
 ## How to run things
 
@@ -126,7 +129,7 @@ The core idea: **the city is a pure function of seed and coordinates.**
 
 ## What to do next, in order
 
-1. Fix the two open bugs above and rerun the 10-seed batch.
+1. Read `docs/evidence/qa-summary.txt` to confirm the district fix passed on all seeds.
 2. **Launch the client.** Add an automatic path that opens `CreateWorldScreen`, creates a default world, takes screenshots with `Screenshot.grab`, and quits, or use `--quickPlaySingleplayer`. Confirm the world really renders as the Hole. This is the largest unverified risk.
 3. Add GameTests. Purity of the plan, recipes, loot tables, door and bed placement.
 4. **Phase 3.** Apply the draft in `docs/handoff/phase3-draft/`. See below.

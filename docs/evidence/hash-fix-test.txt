@@ -1,0 +1,22 @@
+seed=8675309 order=forward failures=0 chunks=625 ms/chunk=36.7
+seed=8675309 order=reverse failures=0 chunks=625 ms/chunk=25.9
+chunk_hashes: 625/625 identical
+chunk_hashes_full: 18/625 identical, differing e.g. -12,-12 -12,-11 -12,-10 -12,-9 -12,-8 -12,-7
+compare_exit=0
+chunk -3_12 y>=64 diffs: 0  below: 1694  by section: {"0":419,"16":300,"32":407,"48":67,"-64":1,"-48":10,"-32":315,"-16":175}
+    150 minecraft:clay -> minecraft:deepslate[axis=y]
+    144 minecraft:stone -> minecraft:clay
+    137 minecraft:andesite -> minecraft:granite
+    118 minecraft:moss_block -> minecraft:deepslate[axis=y]
+chunk -2_12 y>=64 diffs: 0  below: 602  by section: {"0":47,"16":303,"32":161,"48":46,"-48":11,"-16":34}
+    159 minecraft:granite -> minecraft:andesite
+    101 minecraft:andesite -> minecraft:granite
+    59 minecraft:diorite -> minecraft:andesite
+    35 minecraft:stone -> minecraft:coal_ore
+chunk 1_2 y>=64 diffs: 0  below: 938  by section: {"16":80,"32":358,"-48":490,"-16":10}
+    191 minecraft:clay -> minecraft:deepslate[axis=y]
+    86 minecraft:air -> minecraft:cave_vines_plant[berries=false]
+    82 minecraft:cave_vines_plant[berries=false] -> minecraft:air
+    76 minecraft:deepslate[axis=y] -> minecraft:cave_air
+
+[exited with code 0]

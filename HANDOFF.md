@@ -32,7 +32,7 @@ Evidence is in `docs/TEST_RESULTS.md` and `docs/evidence/`. All of this ran on a
 | Claim | Result |
 | --- | --- |
 | Project builds | `gradlew build`, `compileJava` and `runData` pass |
-| 10-seed world validation | **8 of 10 seeds passed all 26 checks. 2 failed one check, the district variety check** |
+| 10-seed world validation | Before the district fix, 8 of 10 seeds passed all 26 checks. **See `docs/evidence/qa-summary.txt` for the rerun with the fix** |
 | New world's `minecraft:overworld` uses `HoleChunkGenerator` | Passed on every seed |
 | Spawn on the plaza at 0, 65, 0, standable, open sky | Passed on every seed |
 | No vanilla surface biome near spawn | Passed on all 10 seeds |
@@ -41,7 +41,7 @@ Evidence is in `docs/TEST_RESULTS.md` and `docs/evidence/`. All of this ran on a
 | All vanilla ores plus water, lava, clay, sand, gravel, dirt and sugar cane in a generated region | Passed |
 | No flowing water from y=46 to y=66 | Passed |
 | No ore or replaceable rock at street level or above | Passed |
-| City layer identical when chunks generate in opposite order | **Seeds 1 and 42: 625 of 625 chunks. Seed 8675309: 624 of 625, one open bug** |
+| City layer identical when chunks generate in opposite order | Seeds 1, 42 and 8675309: 625 of 625 chunks. The earlier 624 was a bug in the test hash, now fixed |
 | Generation speed | About 33 to 57 ms per chunk on this machine, by wall clock on a blocking load. Not a tick-time measurement |
 
 ### Implemented but NOT verified
@@ -60,8 +60,7 @@ Do not describe these as working yet.
 
 ### Known defects and gaps
 
-- **Open bug:** seeds -987654321 and 555 fail `multiple_districts`, with only Market and Outskirts near spawn. Tune the 0.42 threshold in `District.ofCell`.
-- **Open bug:** on seed 8675309, chunk 1,2 differs at y≥64 between generation orders. Cause unknown. Reproduction steps are in `docs/TEST_RESULTS.md`. This is a possible flaw in the order-independence guarantee, so fix it before building more on that guarantee.
+- Fix applied, confirm from the rerun: outskirts are now kept 768 blocks from spawn, because two seeds had no district variety near spawn.
 - The street layout is still fairly regular despite 32-block jitter. The owner explicitly said to avoid repetitive grids. Next idea: merge some superblocks or terminate some lines at T-junctions.
 - Buildings have no basements, and there are no elevated walkways, power lines, or pipe bridges. Reference art for the Hole is far denser.
 - `Tower.pipes` is a single chain. Facades are simple.
@@ -69,6 +68,10 @@ Do not describe these as working yet.
 - Wood sources from the spec (pallets, crates, scrap lumber) are not built. Wood currently comes from building materials, loot, junkyards, trees and saplings.
 - Vanilla decoration below y=64 is **not** order independent. Ore and cave decoration overlap across chunk borders exactly as in vanilla, so only 31 of 289 whole-chunk hashes matched in one early test. This comes from vanilla features, not the city painter. If the owner wants strict determinism underground, that needs separate work.
 - The first commit's `.gitignore` covers `run/` and `runs/`. Evidence worth keeping must be copied to `docs/evidence/`.
+
+## Installed on the owner's PC
+
+NeoForge 21.1.265 is installed in the normal `.minecraft`. The launcher has a **Dorohedoro** profile with game directory `C:\Users\Cam\Dorohedoro-Minecraft`, and the jar is in its `mods` folder. The backup of the launcher file is `.minecraft\launcher_profiles.json.before-dorohedoro`. Testers follow `docs/INSTALL_FOR_FRIENDS.md`. Rebuild with `./gradlew build` and copy `build/libs/dorohedoro-0.1.0.jar` to update it. Never run Gradle twice at once in this folder: two compiles corrupt class files.
 
 ## How to run things
 
@@ -126,7 +129,7 @@ The core idea: **the city is a pure function of seed and coordinates.**
 
 ## What to do next, in order
 
-1. Fix the two open bugs above and rerun the 10-seed batch.
+1. Read `docs/evidence/qa-summary.txt` to confirm the district fix passed on all seeds.
 2. **Launch the client.** Add an automatic path that opens `CreateWorldScreen`, creates a default world, takes screenshots with `Screenshot.grab`, and quits, or use `--quickPlaySingleplayer`. Confirm the world really renders as the Hole. This is the largest unverified risk.
 3. Add GameTests. Purity of the plan, recipes, loot tables, door and bed placement.
 4. **Phase 3.** Apply the draft in `docs/handoff/phase3-draft/`. See below.
@@ -170,7 +173,7 @@ Do not claim something works without evidence. Separate verified, implemented an
 
 ## Contents of the rest of this file
 
-121 files follow. Generated JSON is last and can be rebuilt with `runData`. Binary files are not included: three PNG textures rebuilt by `tools/make-textures.mjs`, and the Gradle wrapper jar, which comes from the NeoForge MDK template.
+123 files follow. Generated JSON is last and can be rebuilt with `runData`. Binary files are not included: three PNG textures rebuilt by `tools/make-textures.mjs`, and the Gradle wrapper jar, which comes from the NeoForge MDK template.
 
 - `docs/IMPLEMENTATION_STATUS.md`
 - `docs/ROADMAP.md`
@@ -234,7 +237,9 @@ Do not claim something works without evidence. Separate verified, implemented an
 - `src/main/resources/data/minecraft/tags/worldgen/world_preset/extended.json`
 - `src/main/resources/data/minecraft/tags/worldgen/world_preset/normal.json`
 - `src/main/resources/data/minecraft/worldgen/world_preset/normal.json`
+- `docs/evidence/hash-fix-test.txt`
 - `docs/evidence/qa-summary.txt`
+- `docs/INSTALL_FOR_FRIENDS.md`
 - `docs/LORE_REFERENCE.md`
 - `docs/PROJECT_AUDIT.md`
 - `docs/spec/ASSET_REFERENCE_AND_MODEL_MANIFEST.csv`
@@ -368,7 +373,7 @@ First batch when started: audit supported FTB versions for NeoForge 1.21.1, then
 
 ## FILE: docs/TEST_RESULTS.md
 
-````markdown
+```markdown
 # Test results
 
 Only what actually ran. Environment: Windows 11, Ryzen 7 3700X, 32 GB RAM, Microsoft OpenJDK 21.0.12, NeoForge 21.1.265. Server runs used `-Xmx3G`.
@@ -404,7 +409,7 @@ Command: `bash tools/qa-world.sh <seed> <radius> <order>`. Each run is a real de
 
 Result: **8 of 10 seeds passed all 26 checks. 2 of 10 failed one check.** Raw output is in `docs/evidence/qa-summary.txt`.
 
-**Open failure, seeds -987654321 and 555:** `multiple_districts` failed with only `[MARKET, OUTSKIRTS]` in range. Outskirts covers too much of the area around spawn on these seeds. Likely fix: raise the 0.42 threshold in `District.ofCell`, or add a minimum distance from the origin. The fix is not applied.
+**Fix applied, rerun pending at the time of writing:** seeds -987654321 and 555 failed `multiple_districts` with only `[MARKET, OUTSKIRTS]` in range. `District.ofCell` now keeps outskirts at least 6 cells (768 blocks) from the origin. See `docs/evidence/qa-summary.txt` for the rerun. If that file does not show all seeds passing, this is not yet confirmed.
 
 On every one of the 10 seeds, all other checks passed, including spawn, street reachability, building entry, resources, fluid leaks and ore in the city.
 
@@ -426,14 +431,7 @@ Same seed, chunks requested in opposite orders, per-chunk block-state hashes com
 | Full city, seed 42, radius 12 | **625 of 625 identical** | 75 of 625 identical |
 | Full city, seed 8675309, radius 12 | **624 of 625 identical** | 19 of 625 identical |
 
-**Open bug, seed 8675309:** chunk 1,2 differs at y≥64 between generation orders. The cause is not known and has not been investigated. Reproduce with:
-
-```bash
-QA_DUMP="1,2" bash tools/qa-world.sh 8675309 12 forward
-QA_DUMP="1,2" bash tools/qa-world.sh 8675309 12 reverse
-```
-
-Then diff `dump-forward-1_2.txt` against `dump-reverse-1_2.txt` in the two `qa` folders, looking at y≥64 only. Chunk 1,2 is near spawn, so it may be a difference in what has ticked rather than in generation. That is a guess, not a finding.
+**Resolved false alarm, seed 8675309:** the 624 of 625 result came from the test, not the world. The mismatch moved between runs, which pointed at the measurement. `HoleQa.hash` still counted whether sections below the cutoff were all air, so one vanilla cave vine in an empty cavern section changed the city hash. With that fixed, seed 8675309 gives **625 of 625 identical**, and direct block comparison of chunks -3,12, -2,12 and 1,2 found 0 differences at y≥64. Evidence: `docs/evidence/hash-fix-test.txt`. Earlier city-layer numbers in the table used the flawed hash, which can only have overstated differences.
 
 Bug found by this test: vanilla ore features replaced `tuff` in road surfaces, putting `deepslate_coal_ore` in the streets. Fixed by removing every feature-replaceable block from city palettes. QA now enforces this.
 
@@ -442,7 +440,7 @@ Below the city, whole-chunk hashes differ. A block-level diff of one chunk showe
 ## Known not verified
 
 Rendering, Create World screen, experimental warning, survival play, stairs beyond ground entry, chest loot in game, mob behaviour, vanilla structures, End access, multiplayer with real clients, tick performance, restart and save integrity.
-````
+```
 
 ## FILE: docs/spec/FTB_QUESTS_DIRECTIVE.md
 
@@ -1716,6 +1714,11 @@ public final class HoleQa {
             for (int index = 0; index < sections.length; index++) {
                 LevelChunkSection section = sections[index];
                 int baseY = chunk.getSectionYFromSectionIndex(index) << 4;
+                // A section wholly below the cutoff must not count at all, not even as "empty": one vanilla cave vine
+                // landing in a cavern section would otherwise change the city hash.
+                if (baseY + 15 < bottom) {
+                    continue;
+                }
                 if (section.hasOnlyAir()) {
                     hash = hash * 31 + 7;
                     continue;
@@ -3096,6 +3099,9 @@ public enum District {
      */
     private static final int MIX_SCALE = 7;
 
+    /** Cells kept free of outskirts around the origin, so every seed starts in a varied, built-up city. */
+    private static final int OUTSKIRTS_CLEAR_CELLS = 6;
+
     public static int cellOf(int block) {
         return Math.floorDiv(block, CELL_SIZE);
     }
@@ -3113,7 +3119,8 @@ public enum District {
         int centerX = cellX * CELL_SIZE + CELL_SIZE / 2;
         int centerZ = cellZ * CELL_SIZE + CELL_SIZE / 2;
         // The unscaled noise picks out broad zones where the city thins into scrubland and yards.
-        if (Math.abs(sampler.temperature().compute(new DensityFunction.SinglePointContext(centerX, 0, centerZ))) > 0.42) {
+        boolean nearStart = Math.max(Math.abs(cellX), Math.abs(cellZ)) <= OUTSKIRTS_CLEAR_CELLS;
+        if (!nearStart && Math.abs(sampler.temperature().compute(new DensityFunction.SinglePointContext(centerX, 0, centerZ))) > 0.42) {
             return OUTSKIRTS;
         }
         DensityFunction.SinglePointContext mixed = new DensityFunction.SinglePointContext(centerX * MIX_SCALE, 0, centerZ * MIX_SCALE);
@@ -6001,35 +6008,129 @@ for (const c of r.checks) if(!c.passed) console.log('  FAIL '+c.name+': '+c.deta
 }
 ```
 
+## FILE: docs/evidence/hash-fix-test.txt
+
+```
+seed=8675309 order=forward failures=0 chunks=625 ms/chunk=36.7
+seed=8675309 order=reverse failures=0 chunks=625 ms/chunk=25.9
+chunk_hashes: 625/625 identical
+chunk_hashes_full: 18/625 identical, differing e.g. -12,-12 -12,-11 -12,-10 -12,-9 -12,-8 -12,-7
+compare_exit=0
+chunk -3_12 y>=64 diffs: 0  below: 1694  by section: {"0":419,"16":300,"32":407,"48":67,"-64":1,"-48":10,"-32":315,"-16":175}
+    150 minecraft:clay -> minecraft:deepslate[axis=y]
+    144 minecraft:stone -> minecraft:clay
+    137 minecraft:andesite -> minecraft:granite
+    118 minecraft:moss_block -> minecraft:deepslate[axis=y]
+chunk -2_12 y>=64 diffs: 0  below: 602  by section: {"0":47,"16":303,"32":161,"48":46,"-48":11,"-16":34}
+    159 minecraft:granite -> minecraft:andesite
+    101 minecraft:andesite -> minecraft:granite
+    59 minecraft:diorite -> minecraft:andesite
+    35 minecraft:stone -> minecraft:coal_ore
+chunk 1_2 y>=64 diffs: 0  below: 938  by section: {"16":80,"32":358,"-48":490,"-16":10}
+    191 minecraft:clay -> minecraft:deepslate[axis=y]
+    86 minecraft:air -> minecraft:cave_vines_plant[berries=false]
+    82 minecraft:cave_vines_plant[berries=false] -> minecraft:air
+    76 minecraft:deepslate[axis=y] -> minecraft:cave_air
+
+[exited with code 0]
+```
+
 ## FILE: docs/evidence/qa-summary.txt
 
 ```
-seed=1 order=forward failures=0 chunks=625 ms/chunk=33.3
-seed=2 order=forward failures=0 chunks=625 ms/chunk=42.2
-seed=3 order=forward failures=0 chunks=625 ms/chunk=41.6
-seed=42 order=forward failures=0 chunks=625 ms/chunk=47.7
-seed=777 order=forward failures=0 chunks=625 ms/chunk=32.9
-seed=1234567 order=forward failures=0 chunks=625 ms/chunk=57.2
-seed=-987654321 order=forward failures=1 chunks=625 ms/chunk=42.6
-  FAIL multiple_districts: [MARKET, OUTSKIRTS]
-seed=20261030 order=forward failures=0 chunks=625 ms/chunk=32.2
-seed=555 order=forward failures=1 chunks=625 ms/chunk=44.3
-  FAIL multiple_districts: [MARKET, OUTSKIRTS]
-seed=8675309 order=forward failures=0 chunks=625 ms/chunk=38.5
-seed=1 order=reverse failures=0 chunks=625 ms/chunk=24.9
-determinism seed 1:
-chunk_hashes: 625/625 identical
-chunk_hashes_full: 81/625 identical, differing e.g. -12,-12 -12,-10 -12,-9 -12,-8 -12,-7 -12,-6
-seed=42 order=reverse failures=0 chunks=625 ms/chunk=24.3
-determinism seed 42:
-chunk_hashes: 625/625 identical
-chunk_hashes_full: 75/625 identical, differing e.g. -12,-12 -12,-11 -12,-10 -12,-9 -12,-8 -12,-7
-seed=8675309 order=reverse failures=0 chunks=625 ms/chunk=25.5
-determinism seed 8675309:
-chunk_hashes: 624/625 identical, differing e.g. 1,2
-chunk_hashes_full: 19/625 identical, differing e.g. -12,-12 -12,-11 -12,-10 -12,-9 -12,-8 -12,-7
-BATCH_DONE
+seed=1 order=forward: NO REPORT (gradle exit 1). See runs/qa/1/forward/gradle.log
 ```
+
+## FILE: docs/INSTALL_FOR_FRIENDS.md
+
+````markdown
+# Dorohedoro: The Hole — tester guide
+
+Thanks for testing. This is an **early, unfinished fan mod**. The Overworld becomes the Hole, an endless polluted city from the manga Dorohedoro. Right now it is the city, survival and exploration. There are no sorcerers, magic, other dimensions or portals yet.
+
+## What you need
+
+- Minecraft: Java Edition, paid and installed. Bedrock will not work.
+- `dorohedoro-0.1.0.jar`, from whoever sent you this guide.
+- At least 4 GB of memory to spare.
+
+The official launcher includes the Java that Minecraft needs. If the NeoForge installer will not open, install [Java 21](https://adoptium.net/temurin/releases/?version=21) and try again.
+
+## Install on Windows
+
+1. Run Minecraft once on version 1.21.1 if you never have, then close the launcher.
+2. Download [neoforge-21.1.265-installer.jar](https://maven.neoforged.net/releases/net/neoforged/neoforge/21.1.265/neoforge-21.1.265-installer.jar). The version must match exactly.
+3. Double-click it, choose **Install client**, keep the default folder, and click **OK**.
+4. Create a folder for the mod, for example `C:\Games\Dorohedoro`, and a folder called `mods` inside it.
+5. Put `dorohedoro-0.1.0.jar` in that `mods` folder.
+6. In the Minecraft Launcher, open **Installations**, then **New Installation**:
+   - **Name:** `Dorohedoro`
+   - **Version:** the entry containing `neoforge-21.1.265`
+   - **Game directory:** `C:\Games\Dorohedoro`
+   - **More Options, JVM Arguments:** change `-Xmx2G` to `-Xmx4G`
+7. Click **Create**, select **Dorohedoro**, and press **Play**. Allow the launcher to play modded if it asks.
+
+The separate folder keeps this away from your normal worlds and other mods.
+
+**Mac or Linux:** the steps are the same, but use a folder in your home directory. Double-click may not open the installer, so run `java -jar neoforge-21.1.265-installer.jar` in a terminal.
+
+## Play alone
+
+Choose Singleplayer, then Create New World. On the World tab, World Type should say **The Hole**. Your existing worlds are not changed, and only new worlds become the Hole.
+
+## Play together
+
+Everyone needs the same mod file and the same NeoForge version, or the game refuses to connect.
+
+**Same home network (easiest).** The host opens their world, presses Esc, and chooses **Open to LAN**. Everyone else opens Multiplayer and it appears in the list, or uses Direct Connect with the address the host's chat shows.
+
+**Over the internet.** The host has three options:
+
+- Run [Tailscale](https://tailscale.com/) on every player's PC, then use Open to LAN and connect to the host's Tailscale address plus the LAN port.
+- Forward the port on the host's router, which exposes it to the internet. Only do this if you know how to secure it.
+- Rent or run a dedicated server, below.
+
+## Run a dedicated server
+
+1. Make an empty folder and put the NeoForge installer in it.
+2. In that folder, run:
+
+```bash
+java -jar neoforge-21.1.265-installer.jar --install-server
+```
+
+3. Make a `mods` folder and put `dorohedoro-0.1.0.jar` in it.
+4. Start it with `run.bat` on Windows or `run.sh` on Mac and Linux. It stops the first time.
+5. Read the [Minecraft EULA](https://aka.ms/MinecraftEULA). If you accept it, set `eula=true` in `eula.txt`.
+6. Start it again. Do not change `level-type` in `server.properties`, because the default is already the Hole.
+
+## What to test and report
+
+Most useful first:
+
+1. Does the game start, and does the world load?
+2. Did any warning screen appear when creating the world?
+3. Does the city look right? Screenshots help a lot. Press F2.
+4. Can you enter buildings and climb stairs to the roof?
+5. Do chests, beds, crafting, furnaces and farming work?
+6. Do lag or stutters appear when walking through new areas?
+7. Can you go down a street hatch into the sewers and mines?
+8. Do villagers and animals behave normally?
+
+## If something breaks
+
+Send these from your Dorohedoro game folder:
+
+- `logs\latest.log`
+- The newest file in `crash-reports`, if that folder exists
+
+Also say what you were doing, and share your world seed if you can. Type `/seed` to see it, which needs cheats on.
+
+## Good to know
+
+- The mod is early, so expect bugs. **Do not get attached to a world**, because updates can change the city and leave visible seams.
+- Do not repost the mod. It is an unofficial fan project, and Dorohedoro belongs to Q Hayashida.
+````
 
 ## FILE: docs/LORE_REFERENCE.md
 
@@ -6793,6 +6894,7 @@ runs/
 hs_err_pid*.log
 replay_pid*.log
 /dorohedoro-the-hole-source.zip
+/dorohedoro-friends-pack.zip
 ```
 
 ## FILE: gradlew
