@@ -32,15 +32,16 @@ Evidence is in `docs/TEST_RESULTS.md` and `docs/evidence/`. All of this ran on a
 | Claim | Result |
 | --- | --- |
 | Project builds | `gradlew build`, `compileJava` and `runData` pass |
+| 10-seed world validation | **8 of 10 seeds passed all 26 checks. 2 failed one check, the district variety check** |
 | New world's `minecraft:overworld` uses `HoleChunkGenerator` | Passed on every seed |
 | Spawn on the plaza at 0, 65, 0, standable, open sky | Passed on every seed |
-| No vanilla surface biome near spawn | Passed on every seed |
-| Streets all reachable on foot from spawn | 100% in every run so far |
-| Enclosed buildings enterable on foot | 100% in every run so far |
+| No vanilla surface biome near spawn | Passed on all 10 seeds |
+| Streets all reachable on foot from spawn | Passed on all 10 seeds |
+| Enclosed buildings enterable on foot | Passed on all 10 seeds |
 | All vanilla ores plus water, lava, clay, sand, gravel, dirt and sugar cane in a generated region | Passed |
 | No flowing water from y=46 to y=66 | Passed |
 | No ore or replaceable rock at street level or above | Passed |
-| City layer identical when chunks generate in opposite order | **See TEST_RESULTS.** The first pass was on the early shell-only city. The rerun on the full city is in the batch |
+| City layer identical when chunks generate in opposite order | **Seeds 1 and 42: 625 of 625 chunks. Seed 8675309: 624 of 625, one open bug** |
 | Generation speed | About 33 to 57 ms per chunk on this machine, by wall clock on a blocking load. Not a tick-time measurement |
 
 ### Implemented but NOT verified
@@ -59,6 +60,8 @@ Do not describe these as working yet.
 
 ### Known defects and gaps
 
+- **Open bug:** seeds -987654321 and 555 fail `multiple_districts`, with only Market and Outskirts near spawn. Tune the 0.42 threshold in `District.ofCell`.
+- **Open bug:** on seed 8675309, chunk 1,2 differs at y≥64 between generation orders. Cause unknown. Reproduction steps are in `docs/TEST_RESULTS.md`. This is a possible flaw in the order-independence guarantee, so fix it before building more on that guarantee.
 - The street layout is still fairly regular despite 32-block jitter. The owner explicitly said to avoid repetitive grids. Next idea: merge some superblocks or terminate some lines at T-junctions.
 - Buildings have no basements, and there are no elevated walkways, power lines, or pipe bridges. Reference art for the Hole is far denser.
 - `Tower.pipes` is a single chain. Facades are simple.
@@ -123,7 +126,7 @@ The core idea: **the city is a pure function of seed and coordinates.**
 
 ## What to do next, in order
 
-1. Check `runs/qa/summary.txt` or `docs/TEST_RESULTS.md` for the final batch.
+1. Fix the two open bugs above and rerun the 10-seed batch.
 2. **Launch the client.** Add an automatic path that opens `CreateWorldScreen`, creates a default world, takes screenshots with `Screenshot.grab`, and quits, or use `--quickPlaySingleplayer`. Confirm the world really renders as the Hole. This is the largest unverified risk.
 3. Add GameTests. Purity of the plan, recipes, loot tables, door and bed placement.
 4. **Phase 3.** Apply the draft in `docs/handoff/phase3-draft/`. See below.
@@ -365,7 +368,7 @@ First batch when started: audit supported FTB versions for NeoForge 1.21.1, then
 
 ## FILE: docs/TEST_RESULTS.md
 
-```markdown
+````markdown
 # Test results
 
 Only what actually ran. Environment: Windows 11, Ryzen 7 3700X, 32 GB RAM, Microsoft OpenJDK 21.0.12, NeoForge 21.1.265. Server runs used `-Xmx3G`.
@@ -384,7 +387,7 @@ Not run: `runClient`, `runGameTestServer`, plain interactive `runServer`. No Gam
 
 Command: `bash tools/qa-world.sh <seed> <radius> <order>`. Each run is a real dedicated server creating a brand-new world. It has 26 checks: generator class, spawn position, standing room, open sky, surface biomes, street reachability, enclosed lots enterable, at least 3 districts, 15 resource presence checks, flowing water near the surface, ore in the city, and replaceable rock in the city.
 
-### 10-seed batch at radius 12 (625 chunks), commit `79f3198`
+### 10-seed batch at radius 12 (625 chunks), code at commit `79f3198`
 
 | Seed | Failures | ms per chunk |
 | --- | --- | --- |
@@ -396,10 +399,14 @@ Command: `bash tools/qa-world.sh <seed> <radius> <order>`. Each run is a real de
 | 1234567 | 0 | 57.2 |
 | -987654321 | **1** | 42.6 |
 | 20261030 | 0 | 32.2 |
+| 555 | **1** | 44.3 |
+| 8675309 | 0 | 38.5 |
 
-Seeds 555 and 8675309 and the opposite-order runs for seeds 1, 42 and 8675309 were still running when this was written. See `docs/evidence/qa-summary.txt` for the latest, and treat anything missing there as not done.
+Result: **8 of 10 seeds passed all 26 checks. 2 of 10 failed one check.** Raw output is in `docs/evidence/qa-summary.txt`.
 
-**Open failure, seed -987654321:** `multiple_districts` failed with only `[MARKET, OUTSKIRTS]` in range. Outskirts covers too much of the area around spawn on this seed. Likely fix: raise the 0.42 threshold in `District.ofCell`, or add a minimum distance from the origin. The fix is not applied.
+**Open failure, seeds -987654321 and 555:** `multiple_districts` failed with only `[MARKET, OUTSKIRTS]` in range. Outskirts covers too much of the area around spawn on these seeds. Likely fix: raise the 0.42 threshold in `District.ofCell`, or add a minimum distance from the origin. The fix is not applied.
+
+On every one of the 10 seeds, all other checks passed, including spawn, street reachability, building entry, resources, fluid leaks and ore in the city.
 
 ms per chunk is wall-clock time for blocking loads on the main thread. It is not tick time, and no vanilla baseline has been measured.
 
@@ -414,9 +421,19 @@ Same seed, chunks requested in opposite orders, per-chunk block-state hashes com
 | Test | City layer (y≥64) | Whole chunk |
 | --- | --- | --- |
 | Seed 12345, radius 8, shell-only city, before the ore fix | 284 of 289 identical | |
-| Same, after the fix | **289 of 289 identical** | 31 of 289 identical |
+| Same, after the fix | 289 of 289 identical | 31 of 289 identical |
+| Full city, seed 1, radius 12 | **625 of 625 identical** | 81 of 625 identical |
+| Full city, seed 42, radius 12 | **625 of 625 identical** | 75 of 625 identical |
+| Full city, seed 8675309, radius 12 | **624 of 625 identical** | 19 of 625 identical |
 
-That pass was on the early city without real buildings. The rerun on the full city is the opposite-order part of the batch above.
+**Open bug, seed 8675309:** chunk 1,2 differs at y≥64 between generation orders. The cause is not known and has not been investigated. Reproduce with:
+
+```bash
+QA_DUMP="1,2" bash tools/qa-world.sh 8675309 12 forward
+QA_DUMP="1,2" bash tools/qa-world.sh 8675309 12 reverse
+```
+
+Then diff `dump-forward-1_2.txt` against `dump-reverse-1_2.txt` in the two `qa` folders, looking at y≥64 only. Chunk 1,2 is near spawn, so it may be a difference in what has ticked rather than in generation. That is a guess, not a finding.
 
 Bug found by this test: vanilla ore features replaced `tuff` in road surfaces, putting `deepslate_coal_ore` in the streets. Fixed by removing every feature-replaceable block from city palettes. QA now enforces this.
 
@@ -425,7 +442,7 @@ Below the city, whole-chunk hashes differ. A block-level diff of one chunk showe
 ## Known not verified
 
 Rendering, Create World screen, experimental warning, survival play, stairs beyond ground entry, chest loot in game, mob behaviour, vanilla structures, End access, multiplayer with real clients, tick performance, restart and save integrity.
-```
+````
 
 ## FILE: docs/spec/FTB_QUESTS_DIRECTIVE.md
 
@@ -5998,6 +6015,20 @@ seed=-987654321 order=forward failures=1 chunks=625 ms/chunk=42.6
 seed=20261030 order=forward failures=0 chunks=625 ms/chunk=32.2
 seed=555 order=forward failures=1 chunks=625 ms/chunk=44.3
   FAIL multiple_districts: [MARKET, OUTSKIRTS]
+seed=8675309 order=forward failures=0 chunks=625 ms/chunk=38.5
+seed=1 order=reverse failures=0 chunks=625 ms/chunk=24.9
+determinism seed 1:
+chunk_hashes: 625/625 identical
+chunk_hashes_full: 81/625 identical, differing e.g. -12,-12 -12,-10 -12,-9 -12,-8 -12,-7 -12,-6
+seed=42 order=reverse failures=0 chunks=625 ms/chunk=24.3
+determinism seed 42:
+chunk_hashes: 625/625 identical
+chunk_hashes_full: 75/625 identical, differing e.g. -12,-12 -12,-11 -12,-10 -12,-9 -12,-8 -12,-7
+seed=8675309 order=reverse failures=0 chunks=625 ms/chunk=25.5
+determinism seed 8675309:
+chunk_hashes: 624/625 identical, differing e.g. 1,2
+chunk_hashes_full: 19/625 identical, differing e.g. -12,-12 -12,-11 -12,-10 -12,-9 -12,-8 -12,-7
+BATCH_DONE
 ```
 
 ## FILE: docs/LORE_REFERENCE.md
@@ -6761,6 +6792,7 @@ runs/
 *.log
 hs_err_pid*.log
 replay_pid*.log
+/dorohedoro-the-hole-source.zip
 ```
 
 ## FILE: gradlew

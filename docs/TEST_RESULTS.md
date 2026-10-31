@@ -16,7 +16,7 @@ Not run: `runClient`, `runGameTestServer`, plain interactive `runServer`. No Gam
 
 Command: `bash tools/qa-world.sh <seed> <radius> <order>`. Each run is a real dedicated server creating a brand-new world. It has 26 checks: generator class, spawn position, standing room, open sky, surface biomes, street reachability, enclosed lots enterable, at least 3 districts, 15 resource presence checks, flowing water near the surface, ore in the city, and replaceable rock in the city.
 
-### 10-seed batch at radius 12 (625 chunks), commit `79f3198`
+### 10-seed batch at radius 12 (625 chunks), code at commit `79f3198`
 
 | Seed | Failures | ms per chunk |
 | --- | --- | --- |
@@ -28,10 +28,14 @@ Command: `bash tools/qa-world.sh <seed> <radius> <order>`. Each run is a real de
 | 1234567 | 0 | 57.2 |
 | -987654321 | **1** | 42.6 |
 | 20261030 | 0 | 32.2 |
+| 555 | **1** | 44.3 |
+| 8675309 | 0 | 38.5 |
 
-Seeds 555 and 8675309 and the opposite-order runs for seeds 1, 42 and 8675309 were still running when this was written. See `docs/evidence/qa-summary.txt` for the latest, and treat anything missing there as not done.
+Result: **8 of 10 seeds passed all 26 checks. 2 of 10 failed one check.** Raw output is in `docs/evidence/qa-summary.txt`.
 
-**Open failure, seed -987654321:** `multiple_districts` failed with only `[MARKET, OUTSKIRTS]` in range. Outskirts covers too much of the area around spawn on this seed. Likely fix: raise the 0.42 threshold in `District.ofCell`, or add a minimum distance from the origin. The fix is not applied.
+**Open failure, seeds -987654321 and 555:** `multiple_districts` failed with only `[MARKET, OUTSKIRTS]` in range. Outskirts covers too much of the area around spawn on these seeds. Likely fix: raise the 0.42 threshold in `District.ofCell`, or add a minimum distance from the origin. The fix is not applied.
+
+On every one of the 10 seeds, all other checks passed, including spawn, street reachability, building entry, resources, fluid leaks and ore in the city.
 
 ms per chunk is wall-clock time for blocking loads on the main thread. It is not tick time, and no vanilla baseline has been measured.
 
@@ -46,9 +50,19 @@ Same seed, chunks requested in opposite orders, per-chunk block-state hashes com
 | Test | City layer (y≥64) | Whole chunk |
 | --- | --- | --- |
 | Seed 12345, radius 8, shell-only city, before the ore fix | 284 of 289 identical | |
-| Same, after the fix | **289 of 289 identical** | 31 of 289 identical |
+| Same, after the fix | 289 of 289 identical | 31 of 289 identical |
+| Full city, seed 1, radius 12 | **625 of 625 identical** | 81 of 625 identical |
+| Full city, seed 42, radius 12 | **625 of 625 identical** | 75 of 625 identical |
+| Full city, seed 8675309, radius 12 | **624 of 625 identical** | 19 of 625 identical |
 
-That pass was on the early city without real buildings. The rerun on the full city is the opposite-order part of the batch above.
+**Open bug, seed 8675309:** chunk 1,2 differs at y≥64 between generation orders. The cause is not known and has not been investigated. Reproduce with:
+
+```bash
+QA_DUMP="1,2" bash tools/qa-world.sh 8675309 12 forward
+QA_DUMP="1,2" bash tools/qa-world.sh 8675309 12 reverse
+```
+
+Then diff `dump-forward-1_2.txt` against `dump-reverse-1_2.txt` in the two `qa` folders, looking at y≥64 only. Chunk 1,2 is near spawn, so it may be a difference in what has ticked rather than in generation. That is a guess, not a finding.
 
 Bug found by this test: vanilla ore features replaced `tuff` in road surfaces, putting `deepslate_coal_ore` in the streets. Fixed by removing every feature-replaceable block from city palettes. QA now enforces this.
 
