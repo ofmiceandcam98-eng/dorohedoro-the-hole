@@ -35,20 +35,138 @@ import net.minecraft.world.level.storage.loot.LootTable;
 public final class Canvas {
     private final ChunkAccess chunk;
     private final long seed;
+    private final boolean terrainRelief;
+    private final int worldDetailVersion;
+    private Integer fixedLotHeight;
+    private final byte[] columnHeights = new byte[256];
     private final BlockPos.MutableBlockPos cursor = new BlockPos.MutableBlockPos();
     public final int minX;
     public final int minZ;
     public final int maxX;
     public final int maxZ;
 
-    public Canvas(ChunkAccess chunk, long seed) {
+    public Canvas(ChunkAccess chunk, long seed, boolean terrainRelief) {
+        this(chunk, seed, terrainRelief, 0);
+    }
+
+    public Canvas(ChunkAccess chunk, long seed, boolean terrainRelief, boolean worldDetail) {
+        this(chunk, seed, terrainRelief, worldDetail ? 1 : 0);
+    }
+
+    public Canvas(ChunkAccess chunk, long seed, boolean terrainRelief, int worldDetailVersion) {
         this.chunk = chunk;
         this.seed = seed;
+        this.terrainRelief = terrainRelief;
+        this.worldDetailVersion = worldDetailVersion;
         ChunkPos pos = chunk.getPos();
         this.minX = pos.getMinBlockX();
         this.minZ = pos.getMinBlockZ();
         this.maxX = pos.getMaxBlockX();
         this.maxZ = pos.getMaxBlockZ();
+        // Most city blocks write dozens of blocks in each (x,z) column.
+        // Cache relief once per chunk instead of performing four coordinate hashes per placement.
+        for (int x = minX; x <= maxX; x++) {
+            for (int z = minZ; z <= maxZ; z++) {
+                columnHeights[(x - minX) + ((z - minZ) << 4)] =
+                        (byte) (terrainRelief ? CityElevation.offset(seed, x, z) : 0);
+            }
+        }
+    }
+
+    /** Per-lot planar foundation: prevents slopes from cutting across rooms, stairs and doors. */
+    public void beginLot(Rect lot) {
+        fixedLotHeight = terrainRelief ? CityElevation.offset(seed, lot.centerX(), lot.centerZ()) : 0;
+    }
+
+    public void endLot() {
+        fixedLotHeight = null;
+    }
+
+    public boolean hasWorldDetail() {
+        return worldDetailVersion > 0;
+    }
+
+    /** New geometry is saved per world; existing Pass 12 worlds retain byte-for-byte old detail. */
+    public boolean hasArchitectureVariation() {
+        return worldDetailVersion >= 2;
+    }
+
+    /** Versioned non-grid streets and multivolume building shells; existing saves keep their layouts. */
+    public boolean hasIrregularCity() {
+        return worldDetailVersion >= 3;
+    }
+
+
+    /** Version 4 introduces varied indoor partitions, without changing older saves. */
+    public boolean hasInteriorVariety() {
+        return worldDetailVersion >= 4;
+    }
+
+    /** Tree scarcity is versioned so existing worlds keep their vegetation and chunk boundaries. */
+    public boolean hasSparseHoleTrees() {
+        return worldDetailVersion >= 5;
+    }
+
+    public boolean hasColdDistricts() {
+        return worldDetailVersion >= 6;
+    }
+
+    /** Version 7 strengthens district readability with signature lots and stronger material cues. */
+    public boolean hasDistrictIdentity() {
+        return worldDetailVersion >= 7;
+    }
+
+    /** Version 8 applies original concrete/brick/plaster architecture and coherent street/lot materials. */
+    public boolean hasLoreArchitecture() {
+        return worldDetailVersion >= 8;
+    }
+
+    /** Naturalized rivers within protected municipal waterways on fresh saves. */
+    public boolean hasRiverMorphology() { return worldDetailVersion >= 11; }
+
+    /** Source-only Pass 25: seeded neighborhood fabric; no fixed city blueprint. */
+    public boolean hasUrbanFabric() { return worldDetailVersion >= 12; }
+
+    /** Pass 25 housing: compact homes, differentiated residential facades and layered lights. */
+    public boolean hasHousing25() { return worldDetailVersion >= 14; }
+    public boolean hasResidential26() { return worldDetailVersion >= 15; }
+    /** Pass 28: mixed Cavern Lamp / vanilla lantern / torch placement and room furnishing. */
+    public boolean hasAtmosphere28() { return worldDetailVersion >= 16; }
+    /** Pass 29: small-home roof shapes, facade details and additional domestic use. */
+    public boolean hasHousing29() { return worldDetailVersion >= 17; }
+    /** Pass31: fixes residential wall fixtures without changing v0-v17 saved worlds. */
+    public boolean hasHousingLighting31() { return worldDetailVersion >= 18; }
+
+    /** Richer interior furnishing in new-world profiles only. */
+    /** New high-detail furniture palette; no retroactive edits in pre-24 world profiles. */
+    public boolean hasPass24Interiors() {
+        return worldDetailVersion >= 10;
+    }
+
+    public boolean hasExpandedFurniture() {
+        return worldDetailVersion >= 9;
+    }
+
+    public long seed() {
+        return seed;
+    }
+
+    public boolean hasTerrainRelief() {
+        return terrainRelief;
+    }
+
+    public int heightOffset(int x, int z) {
+        if (fixedLotHeight != null) return fixedLotHeight;
+        // A caller may query another column when a lot crosses chunk edges.
+        // Cache access is valid only for the 16x16 columns of this chunk;
+        // elsewhere recompute the same deterministic relief without indexing
+        // the local cache. All actual world writes remain chunk-clipped.
+        if (!contains(x, z)) return terrainRelief ? CityElevation.offset(seed, x, z) : 0;
+        return columnHeights[(x - minX) + ((z - minZ) << 4)];
+    }
+
+    private int worldY(int x, int y, int z) {
+        return y + heightOffset(x, z);
     }
 
     public boolean contains(int x, int z) {
@@ -67,9 +185,10 @@ public final class Canvas {
         if (!contains(x, z)) {
             return;
         }
-        chunk.setBlockState(cursor.set(x, y, z), state, false);
+        int adjustedY = worldY(x, y, z);
+        chunk.setBlockState(cursor.set(x, adjustedY, z), state, false);
         if (state.hasBlockEntity()) {
-            CompoundTag tag = positioned(x, y, z);
+            CompoundTag tag = positioned(x, adjustedY, z);
             tag.putString("id", "DUMMY");
             chunk.setBlockEntityNbt(tag);
         }
@@ -85,8 +204,16 @@ public final class Canvas {
         }
     }
 
+    /**
+     * Read only from this chunk. Neighbor chunks may not have generated yet,
+     * so outside reads are deliberately reported as void air rather than
+     * querying an absent neighbor or indexing the local height cache.
+     * Callers making placement decisions about neighbor support must still
+     * use contains() for every queried column.
+     */
     public BlockState get(int x, int y, int z) {
-        return chunk.getBlockState(cursor.set(x, y, z));
+        if (!contains(x, z)) return Blocks.VOID_AIR.defaultBlockState();
+        return chunk.getBlockState(cursor.set(x, worldY(x, y, z), z));
     }
 
     public void fill(int x0, int y0, int z0, int x1, int y1, int z1, BlockState state) {
@@ -214,6 +341,29 @@ public final class Canvas {
         set(x, y, z, block.defaultBlockState().setValue(HorizontalDirectionalBlock.FACING, facing));
     }
 
+    /** Preconfigured vanilla spawner, with a fixed custom-mob entity id and vanilla NBT schema. */
+    public void spawner(int x, int y, int z, String entityId) {
+        if (!contains(x, z)) return;
+        int adjustedY = worldY(x, y, z);
+        chunk.setBlockState(cursor.set(x, adjustedY, z), Blocks.SPAWNER.defaultBlockState(), false);
+        CompoundTag tag = positioned(x, adjustedY, z);
+        tag.putString("id", "minecraft:mob_spawner");
+        CompoundTag spawnData = new CompoundTag();
+        CompoundTag entity = new CompoundTag();
+        entity.putString("id", entityId);
+        spawnData.put("entity", entity);
+        tag.put("SpawnData", spawnData);
+        tag.putShort("MinSpawnDelay", (short) 240);
+        tag.putShort("MaxSpawnDelay", (short) 600);
+        boolean ambient = entityId.endsWith("scrap_rat") || entityId.endsWith("glow_moth")
+                || entityId.endsWith("rust_eater_beetle");
+        tag.putShort("SpawnCount", (short) (ambient ? 1 : 2));
+        tag.putShort("MaxNearbyEntities", (short) (ambient ? 3 : 5));
+        tag.putShort("RequiredPlayerRange", (short) 14);
+        tag.putShort("SpawnRange", (short) 3);
+        chunk.setBlockEntityNbt(tag);
+    }
+
     /** A chest that rolls {@code table} when a player first opens it. */
     public void chest(int x, int y, int z, Direction facing, String table) {
         container(x, y, z, Blocks.CHEST.defaultBlockState().setValue(ChestBlock.FACING, facing), "minecraft:chest", table);
@@ -227,8 +377,9 @@ public final class Canvas {
         if (!contains(x, z)) {
             return;
         }
-        chunk.setBlockState(cursor.set(x, y, z), state, false);
-        CompoundTag tag = positioned(x, y, z);
+        int adjustedY = worldY(x, y, z);
+        chunk.setBlockState(cursor.set(x, adjustedY, z), state, false);
+        CompoundTag tag = positioned(x, adjustedY, z);
         tag.putString("id", id);
         ResourceKey<LootTable> key = ResourceKey.create(Registries.LOOT_TABLE,
                 ResourceLocation.fromNamespaceAndPath(Dorohedoro.MOD_ID, "chests/" + table));
@@ -242,7 +393,8 @@ public final class Canvas {
         if (!contains(x, z)) {
             return;
         }
-        chunk.setBlockState(cursor.set(x, y, z), wallSign.defaultBlockState().setValue(WallSignBlock.FACING, facing), false);
+        int adjustedY = worldY(x, y, z);
+        chunk.setBlockState(cursor.set(x, adjustedY, z), wallSign.defaultBlockState().setValue(WallSignBlock.FACING, facing), false);
         ListTag messages = new ListTag();
         for (int i = 0; i < 4; i++) {
             String line = i < lines.length ? lines[i] : "";
@@ -252,7 +404,7 @@ public final class Canvas {
         side.put("messages", messages);
         side.putString("color", "black");
         side.putBoolean("has_glowing_text", false);
-        CompoundTag tag = positioned(x, y, z);
+        CompoundTag tag = positioned(x, adjustedY, z);
         tag.putString("id", "minecraft:sign");
         tag.put("front_text", side);
         tag.putBoolean("is_waxed", true);

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "dorohedoro:lime_powder"
+    },
+    {
+      "item": "dorohedoro:lime_powder"
+    },
+    {
+      "item": "minecraft:stone_bricks"
+    },
+    {
+      "item": "minecraft:stone_bricks"
+    },
+    {
+      "item": "minecraft:gravel"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "id": "dorohedoro:sewer_brickwork"
+  }
+}

@@ -24,7 +24,14 @@ public enum LotType {
     HOSPITAL(true),
     DEPARTMENT_STORE(true),
     RESEARCH_MANOR(true),
-    LAKE_OF_REFUSE(false);
+    LAKE_OF_REFUSE(false),
+    COMMUNAL_COURT(false),
+    BAZAAR(false),
+    MACHINE_YARD(false),
+    CANAL_DEPOT(false),
+    RUIN_COURT(false),
+    BURIAL_GROUND(false),
+    FRINGE_YARD(false);
 
     /** Whether the lot holds an enclosed structure with an interior. */
     public final boolean enclosed;

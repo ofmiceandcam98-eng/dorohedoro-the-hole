@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_sucker": {
+      "conditions": {
+        "items": [
+          {
+            "items": "dorohedoro:leech_sucker"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "dorohedoro:slime_from_leech"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_sucker"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "dorohedoro:slime_from_leech"
+    ]
+  }
+}

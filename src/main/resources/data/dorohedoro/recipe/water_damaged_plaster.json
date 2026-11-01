@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "minecraft:light_gray_terracotta"
+    },
+    {
+      "item": "minecraft:light_gray_terracotta"
+    },
+    {
+      "item": "minecraft:light_gray_terracotta"
+    },
+    {
+      "item": "minecraft:light_gray_terracotta"
+    },
+    {
+      "item": "minecraft:clay_ball"
+    }
+  ],
+  "result": {
+    "id": "dorohedoro:water_damaged_plaster",
+    "count": 4
+  }
+}

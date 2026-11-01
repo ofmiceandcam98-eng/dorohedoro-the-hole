@@ -198,3 +198,8 @@ idea {
         downloadJavadoc = true
     }
 }
+
+// Files in src/main/resources win over generated copies of the same path.
+tasks.named('processResources', ProcessResources) {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}

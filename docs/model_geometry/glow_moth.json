@@ -1,0 +1,5202 @@
+{
+  "mob": "glow_moth",
+  "class": "GlowMoth",
+  "texture_size": [
+    512,
+    256
+  ],
+  "groups": {
+    "body": [
+      {
+        "name": "abdomen",
+        "xyz": [
+          -1.7,
+          -2.3,
+          -1
+        ],
+        "dim": [
+          3.4,
+          4.5,
+          10
+        ],
+        "material": "moth_green",
+        "uv": [
+          2,
+          2
+        ]
+      },
+      {
+        "name": "abdomen_ridge_0",
+        "xyz": [
+          -1.9,
+          -2.5,
+          1
+        ],
+        "dim": [
+          3.8,
+          1.0,
+          1.4
+        ],
+        "material": "moth_fur",
+        "uv": [
+          34,
+          2
+        ]
+      },
+      {
+        "name": "abdomen_ridge_1",
+        "xyz": [
+          -1.9,
+          -2.5,
+          3
+        ],
+        "dim": [
+          3.8,
+          1.0,
+          1.4
+        ],
+        "material": "moth_fur",
+        "uv": [
+          50,
+          2
+        ]
+      },
+      {
+        "name": "abdomen_ridge_2",
+        "xyz": [
+          -1.9,
+          -2.5,
+          5
+        ],
+        "dim": [
+          3.8,
+          1.0,
+          1.4
+        ],
+        "material": "moth_fur",
+        "uv": [
+          66,
+          2
+        ]
+      },
+      {
+        "name": "abdomen_ridge_3",
+        "xyz": [
+          -1.9,
+          -2.5,
+          7
+        ],
+        "dim": [
+          3.8,
+          1.0,
+          1.4
+        ],
+        "material": "moth_fur",
+        "uv": [
+          82,
+          2
+        ]
+      },
+      {
+        "name": "thorax",
+        "xyz": [
+          -3,
+          -3.2,
+          -4
+        ],
+        "dim": [
+          6,
+          6.2,
+          6
+        ],
+        "material": "moth_fur",
+        "uv": [
+          98,
+          2
+        ]
+      },
+      {
+        "name": "collar_tuft_0",
+        "xyz": [
+          -2.7,
+          -4.3,
+          -3.0
+        ],
+        "dim": [
+          5.4,
+          1.3,
+          1.4
+        ],
+        "material": "moth_light",
+        "uv": [
+          126,
+          2
+        ]
+      },
+      {
+        "name": "collar_tuft_1",
+        "xyz": [
+          -2.7,
+          -4.3,
+          -1.4
+        ],
+        "dim": [
+          5.4,
+          1.3,
+          1.4
+        ],
+        "material": "moth_light",
+        "uv": [
+          146,
+          2
+        ]
+      },
+      {
+        "name": "collar_tuft_2",
+        "xyz": [
+          -2.7,
+          -4.3,
+          0.20000000000000018
+        ],
+        "dim": [
+          5.4,
+          1.3,
+          1.4
+        ],
+        "material": "moth_light",
+        "uv": [
+          166,
+          2
+        ]
+      },
+      {
+        "name": "leg_-1_0",
+        "xyz": [
+          -3.7,
+          2,
+          -3.0
+        ],
+        "dim": [
+          0.9,
+          3,
+          1
+        ],
+        "material": "moth_legs",
+        "uv": [
+          186,
+          2
+        ]
+      },
+      {
+        "name": "leg_-1_1",
+        "xyz": [
+          -3.7,
+          2,
+          -0.7999999999999998
+        ],
+        "dim": [
+          0.9,
+          3,
+          1
+        ],
+        "material": "moth_legs",
+        "uv": [
+          194,
+          2
+        ]
+      },
+      {
+        "name": "leg_-1_2",
+        "xyz": [
+          -3.7,
+          2,
+          1.4000000000000004
+        ],
+        "dim": [
+          0.9,
+          3,
+          1
+        ],
+        "material": "moth_legs",
+        "uv": [
+          202,
+          2
+        ]
+      },
+      {
+        "name": "leg_1_0",
+        "xyz": [
+          2.7,
+          2,
+          -3.0
+        ],
+        "dim": [
+          0.9,
+          3,
+          1
+        ],
+        "material": "moth_legs",
+        "uv": [
+          210,
+          2
+        ]
+      },
+      {
+        "name": "leg_1_1",
+        "xyz": [
+          2.7,
+          2,
+          -0.7999999999999998
+        ],
+        "dim": [
+          0.9,
+          3,
+          1
+        ],
+        "material": "moth_legs",
+        "uv": [
+          218,
+          2
+        ]
+      },
+      {
+        "name": "leg_1_2",
+        "xyz": [
+          2.7,
+          2,
+          1.4000000000000004
+        ],
+        "dim": [
+          0.9,
+          3,
+          1
+        ],
+        "material": "moth_legs",
+        "uv": [
+          226,
+          2
+        ]
+      },
+      {
+        "name": "collar_fiber_0",
+        "xyz": [
+          -3.2,
+          -4.7,
+          -3.4
+        ],
+        "dim": [
+          0.82,
+          1.5,
+          2
+        ],
+        "material": "moth_light",
+        "uv": [
+          234,
+          2
+        ]
+      },
+      {
+        "name": "collar_fiber_1",
+        "xyz": [
+          -2.12,
+          -4.7,
+          -3.4
+        ],
+        "dim": [
+          0.82,
+          1.5,
+          2
+        ],
+        "material": "moth_light",
+        "uv": [
+          244,
+          2
+        ]
+      },
+      {
+        "name": "collar_fiber_2",
+        "xyz": [
+          -1.04,
+          -4.7,
+          -3.4
+        ],
+        "dim": [
+          0.82,
+          1.5,
+          2
+        ],
+        "material": "moth_light",
+        "uv": [
+          254,
+          2
+        ]
+      },
+      {
+        "name": "collar_fiber_3",
+        "xyz": [
+          0.04,
+          -4.7,
+          -3.4
+        ],
+        "dim": [
+          0.82,
+          1.5,
+          2
+        ],
+        "material": "moth_light",
+        "uv": [
+          264,
+          2
+        ]
+      },
+      {
+        "name": "collar_fiber_4",
+        "xyz": [
+          1.12,
+          -4.7,
+          -3.4
+        ],
+        "dim": [
+          0.82,
+          1.5,
+          2
+        ],
+        "material": "moth_light",
+        "uv": [
+          274,
+          2
+        ]
+      },
+      {
+        "name": "collar_fiber_5",
+        "xyz": [
+          2.2,
+          -4.7,
+          -3.4
+        ],
+        "dim": [
+          0.82,
+          1.5,
+          2
+        ],
+        "material": "moth_light",
+        "uv": [
+          284,
+          2
+        ]
+      },
+      {
+        "name": "cream_tuft_0",
+        "xyz": [
+          -3.3,
+          -4.2,
+          -1.9
+        ],
+        "dim": [
+          0.95,
+          1.95,
+          1.55
+        ],
+        "material": "moth_light",
+        "uv": [
+          294,
+          2
+        ]
+      },
+      {
+        "name": "cream_tuft_1",
+        "xyz": [
+          -1.9,
+          -4.2,
+          -2.2
+        ],
+        "dim": [
+          0.95,
+          1.95,
+          1.55
+        ],
+        "material": "moth_light",
+        "uv": [
+          304,
+          2
+        ]
+      },
+      {
+        "name": "cream_tuft_2",
+        "xyz": [
+          -0.5,
+          -4.2,
+          -1.9
+        ],
+        "dim": [
+          0.95,
+          1.95,
+          1.55
+        ],
+        "material": "moth_light",
+        "uv": [
+          314,
+          2
+        ]
+      },
+      {
+        "name": "cream_tuft_3",
+        "xyz": [
+          0.9,
+          -4.2,
+          -2.2
+        ],
+        "dim": [
+          0.95,
+          1.95,
+          1.55
+        ],
+        "material": "moth_light",
+        "uv": [
+          324,
+          2
+        ]
+      },
+      {
+        "name": "cream_tuft_4",
+        "xyz": [
+          2.3,
+          -4.2,
+          -1.9
+        ],
+        "dim": [
+          0.95,
+          1.95,
+          1.55
+        ],
+        "material": "moth_light",
+        "uv": [
+          334,
+          2
+        ]
+      },
+      {
+        "name": "upper_thorax_mantle",
+        "xyz": [
+          -3.45,
+          -4.62,
+          -4.0
+        ],
+        "dim": [
+          6.9,
+          2.05,
+          5.7
+        ],
+        "material": "moth_fur",
+        "uv": [
+          344,
+          2
+        ]
+      },
+      {
+        "name": "breast_plate",
+        "xyz": [
+          -2.65,
+          -1.0,
+          -5.0
+        ],
+        "dim": [
+          5.3,
+          3.85,
+          4.0
+        ],
+        "material": "moth_light",
+        "uv": [
+          374,
+          2
+        ]
+      },
+      {
+        "name": "abdomen_taper_mid",
+        "xyz": [
+          -1.58,
+          -1.7,
+          7.8
+        ],
+        "dim": [
+          3.16,
+          3.1,
+          3.9
+        ],
+        "material": "moth_green",
+        "uv": [
+          398,
+          2
+        ]
+      },
+      {
+        "name": "abdomen_taper_tip",
+        "xyz": [
+          -0.95,
+          -1.0,
+          10.9
+        ],
+        "dim": [
+          1.9,
+          1.85,
+          2.3
+        ],
+        "material": "moth_fur",
+        "uv": [
+          418,
+          2
+        ]
+      },
+      {
+        "name": "shoulder_silk_tuft_-1_0",
+        "xyz": [
+          -3.8,
+          -4.84,
+          -4.25
+        ],
+        "dim": [
+          0.9,
+          1.4,
+          1.05
+        ],
+        "material": "moth_light",
+        "uv": [
+          432,
+          2
+        ]
+      },
+      {
+        "name": "shoulder_silk_tuft_1_0",
+        "xyz": [
+          2.92,
+          -4.84,
+          -4.25
+        ],
+        "dim": [
+          0.9,
+          1.4,
+          1.05
+        ],
+        "material": "moth_light",
+        "uv": [
+          442,
+          2
+        ]
+      },
+      {
+        "name": "shoulder_silk_tuft_-1_1",
+        "xyz": [
+          -3.8,
+          -5.07,
+          -3.11
+        ],
+        "dim": [
+          0.9,
+          1.4,
+          1.05
+        ],
+        "material": "moth_light",
+        "uv": [
+          452,
+          2
+        ]
+      },
+      {
+        "name": "shoulder_silk_tuft_1_1",
+        "xyz": [
+          2.92,
+          -5.07,
+          -3.11
+        ],
+        "dim": [
+          0.9,
+          1.4,
+          1.05
+        ],
+        "material": "moth_light",
+        "uv": [
+          462,
+          2
+        ]
+      },
+      {
+        "name": "shoulder_silk_tuft_-1_2",
+        "xyz": [
+          -3.8,
+          -4.84,
+          -1.97
+        ],
+        "dim": [
+          0.9,
+          1.4,
+          1.05
+        ],
+        "material": "moth_light",
+        "uv": [
+          472,
+          2
+        ]
+      },
+      {
+        "name": "shoulder_silk_tuft_1_2",
+        "xyz": [
+          2.92,
+          -4.84,
+          -1.97
+        ],
+        "dim": [
+          0.9,
+          1.4,
+          1.05
+        ],
+        "material": "moth_light",
+        "uv": [
+          482,
+          2
+        ]
+      },
+      {
+        "name": "shoulder_silk_tuft_-1_3",
+        "xyz": [
+          -3.8,
+          -5.07,
+          -0.83
+        ],
+        "dim": [
+          0.9,
+          1.4,
+          1.05
+        ],
+        "material": "moth_light",
+        "uv": [
+          492,
+          2
+        ]
+      },
+      {
+        "name": "shoulder_silk_tuft_1_3",
+        "xyz": [
+          2.92,
+          -5.07,
+          -0.83
+        ],
+        "dim": [
+          0.9,
+          1.4,
+          1.05
+        ],
+        "material": "moth_light",
+        "uv": [
+          502,
+          2
+        ]
+      },
+      {
+        "name": "shoulder_silk_tuft_-1_4",
+        "xyz": [
+          -3.8,
+          -4.84,
+          0.31
+        ],
+        "dim": [
+          0.9,
+          1.4,
+          1.05
+        ],
+        "material": "moth_light",
+        "uv": [
+          2,
+          21
+        ]
+      },
+      {
+        "name": "shoulder_silk_tuft_1_4",
+        "xyz": [
+          2.92,
+          -4.84,
+          0.31
+        ],
+        "dim": [
+          0.9,
+          1.4,
+          1.05
+        ],
+        "material": "moth_light",
+        "uv": [
+          12,
+          21
+        ]
+      },
+      {
+        "name": "shoulder_silk_tuft_-1_5",
+        "xyz": [
+          -3.8,
+          -5.07,
+          1.45
+        ],
+        "dim": [
+          0.9,
+          1.4,
+          1.05
+        ],
+        "material": "moth_light",
+        "uv": [
+          22,
+          21
+        ]
+      },
+      {
+        "name": "shoulder_silk_tuft_1_5",
+        "xyz": [
+          2.92,
+          -5.07,
+          1.45
+        ],
+        "dim": [
+          0.9,
+          1.4,
+          1.05
+        ],
+        "material": "moth_light",
+        "uv": [
+          32,
+          21
+        ]
+      },
+      {
+        "name": "furred_abdomen_ridge_0",
+        "xyz": [
+          -1.975,
+          -2.96,
+          0.1
+        ],
+        "dim": [
+          3.95,
+          0.79,
+          1.0
+        ],
+        "material": "moth_fur",
+        "uv": [
+          42,
+          21
+        ]
+      },
+      {
+        "name": "furred_abdomen_ridge_1",
+        "xyz": [
+          -1.805,
+          -2.79,
+          1.52
+        ],
+        "dim": [
+          3.61,
+          0.79,
+          1.0
+        ],
+        "material": "moth_fur",
+        "uv": [
+          56,
+          21
+        ]
+      },
+      {
+        "name": "furred_abdomen_ridge_2",
+        "xyz": [
+          -1.635,
+          -2.62,
+          2.94
+        ],
+        "dim": [
+          3.27,
+          0.79,
+          1.0
+        ],
+        "material": "moth_fur",
+        "uv": [
+          70,
+          21
+        ]
+      },
+      {
+        "name": "furred_abdomen_ridge_3",
+        "xyz": [
+          -1.465,
+          -2.45,
+          4.36
+        ],
+        "dim": [
+          2.93,
+          0.79,
+          1.0
+        ],
+        "material": "moth_fur",
+        "uv": [
+          84,
+          21
+        ]
+      },
+      {
+        "name": "furred_abdomen_ridge_4",
+        "xyz": [
+          -1.295,
+          -2.28,
+          5.78
+        ],
+        "dim": [
+          2.59,
+          0.79,
+          1.0
+        ],
+        "material": "moth_fur",
+        "uv": [
+          96,
+          21
+        ]
+      },
+      {
+        "name": "furred_abdomen_ridge_5",
+        "xyz": [
+          -1.125,
+          -2.11,
+          7.2
+        ],
+        "dim": [
+          2.25,
+          0.79,
+          1.0
+        ],
+        "material": "moth_fur",
+        "uv": [
+          108,
+          21
+        ]
+      },
+      {
+        "name": "furred_abdomen_ridge_6",
+        "xyz": [
+          -0.955,
+          -1.94,
+          8.62
+        ],
+        "dim": [
+          1.91,
+          0.79,
+          1.0
+        ],
+        "material": "moth_fur",
+        "uv": [
+          120,
+          21
+        ]
+      },
+      {
+        "name": "chest_feathery_legs_-1_0",
+        "xyz": [
+          -3.25,
+          1.1,
+          -3.3
+        ],
+        "dim": [
+          0.75,
+          3.9,
+          0.8
+        ],
+        "material": "moth_legs",
+        "uv": [
+          130,
+          21
+        ]
+      },
+      {
+        "name": "chest_feathery_legs_1_0",
+        "xyz": [
+          2.55,
+          1.1,
+          -3.3
+        ],
+        "dim": [
+          0.75,
+          3.9,
+          0.8
+        ],
+        "material": "moth_legs",
+        "uv": [
+          138,
+          21
+        ]
+      },
+      {
+        "name": "chest_feathery_legs_-1_1",
+        "xyz": [
+          -3.25,
+          1.1,
+          -1.05
+        ],
+        "dim": [
+          0.75,
+          3.9,
+          0.8
+        ],
+        "material": "moth_legs",
+        "uv": [
+          146,
+          21
+        ]
+      },
+      {
+        "name": "chest_feathery_legs_1_1",
+        "xyz": [
+          2.55,
+          1.1,
+          -1.05
+        ],
+        "dim": [
+          0.75,
+          3.9,
+          0.8
+        ],
+        "material": "moth_legs",
+        "uv": [
+          154,
+          21
+        ]
+      },
+      {
+        "name": "chest_feathery_legs_-1_2",
+        "xyz": [
+          -3.25,
+          1.1,
+          1.2
+        ],
+        "dim": [
+          0.75,
+          3.9,
+          0.8
+        ],
+        "material": "moth_legs",
+        "uv": [
+          162,
+          21
+        ]
+      },
+      {
+        "name": "chest_feathery_legs_1_2",
+        "xyz": [
+          2.55,
+          1.1,
+          1.2
+        ],
+        "dim": [
+          0.75,
+          3.9,
+          0.8
+        ],
+        "material": "moth_legs",
+        "uv": [
+          170,
+          21
+        ]
+      }
+    ],
+    "head": [
+      {
+        "name": "face",
+        "xyz": [
+          -2.7,
+          -2.5,
+          -5.5
+        ],
+        "dim": [
+          5.4,
+          4.8,
+          4.8
+        ],
+        "material": "moth_light",
+        "uv": [
+          178,
+          21
+        ]
+      },
+      {
+        "name": "eye_-1",
+        "xyz": [
+          -2.9,
+          -0.5,
+          -5.6
+        ],
+        "dim": [
+          1,
+          0.95,
+          1.3
+        ],
+        "material": "moth_eye",
+        "uv": [
+          204,
+          21
+        ]
+      },
+      {
+        "name": "antenna_-1",
+        "xyz": [
+          -1.9,
+          -5.5,
+          -6.5
+        ],
+        "dim": [
+          1.1,
+          3.1,
+          1.1
+        ],
+        "material": "moth_fur",
+        "uv": [
+          214,
+          21
+        ]
+      },
+      {
+        "name": "plume_-1_0",
+        "xyz": [
+          -3,
+          -5.2,
+          -7.1
+        ],
+        "dim": [
+          1.8,
+          0.65,
+          0.7
+        ],
+        "material": "moth_light",
+        "uv": [
+          226,
+          21
+        ]
+      },
+      {
+        "name": "plume_-1_1",
+        "xyz": [
+          -3,
+          -5.7,
+          -7.6
+        ],
+        "dim": [
+          1.8,
+          0.65,
+          0.7
+        ],
+        "material": "moth_light",
+        "uv": [
+          236,
+          21
+        ]
+      },
+      {
+        "name": "plume_-1_2",
+        "xyz": [
+          -3,
+          -6.2,
+          -8.1
+        ],
+        "dim": [
+          1.8,
+          0.65,
+          0.7
+        ],
+        "material": "moth_light",
+        "uv": [
+          246,
+          21
+        ]
+      },
+      {
+        "name": "eye_1",
+        "xyz": [
+          1.9,
+          -0.5,
+          -5.6
+        ],
+        "dim": [
+          1,
+          0.95,
+          1.3
+        ],
+        "material": "moth_eye",
+        "uv": [
+          256,
+          21
+        ]
+      },
+      {
+        "name": "antenna_1",
+        "xyz": [
+          1,
+          -5.5,
+          -6.5
+        ],
+        "dim": [
+          1.1,
+          3.1,
+          1.1
+        ],
+        "material": "moth_fur",
+        "uv": [
+          266,
+          21
+        ]
+      },
+      {
+        "name": "plume_1_0",
+        "xyz": [
+          1.3,
+          -5.2,
+          -7.1
+        ],
+        "dim": [
+          1.8,
+          0.65,
+          0.7
+        ],
+        "material": "moth_light",
+        "uv": [
+          278,
+          21
+        ]
+      },
+      {
+        "name": "plume_1_1",
+        "xyz": [
+          1.3,
+          -5.7,
+          -7.6
+        ],
+        "dim": [
+          1.8,
+          0.65,
+          0.7
+        ],
+        "material": "moth_light",
+        "uv": [
+          288,
+          21
+        ]
+      },
+      {
+        "name": "plume_1_2",
+        "xyz": [
+          1.3,
+          -6.2,
+          -8.1
+        ],
+        "dim": [
+          1.8,
+          0.65,
+          0.7
+        ],
+        "material": "moth_light",
+        "uv": [
+          298,
+          21
+        ]
+      },
+      {
+        "name": "feather_antenna_-1_0",
+        "xyz": [
+          -3.15,
+          -6.2,
+          -7.9
+        ],
+        "dim": [
+          1.8,
+          0.4,
+          0.65
+        ],
+        "material": "moth_light",
+        "uv": [
+          308,
+          21
+        ]
+      },
+      {
+        "name": "feather_antenna_-1_1",
+        "xyz": [
+          -3.27,
+          -6.65,
+          -8.45
+        ],
+        "dim": [
+          1.8,
+          0.4,
+          0.65
+        ],
+        "material": "moth_light",
+        "uv": [
+          318,
+          21
+        ]
+      },
+      {
+        "name": "feather_antenna_-1_2",
+        "xyz": [
+          -3.39,
+          -7.1,
+          -9.0
+        ],
+        "dim": [
+          1.8,
+          0.4,
+          0.65
+        ],
+        "material": "moth_light",
+        "uv": [
+          328,
+          21
+        ]
+      },
+      {
+        "name": "feather_antenna_-1_3",
+        "xyz": [
+          -3.51,
+          -7.55,
+          -9.55
+        ],
+        "dim": [
+          1.8,
+          0.4,
+          0.65
+        ],
+        "material": "moth_light",
+        "uv": [
+          338,
+          21
+        ]
+      },
+      {
+        "name": "feather_antenna_-1_4",
+        "xyz": [
+          -3.63,
+          -8.0,
+          -10.1
+        ],
+        "dim": [
+          1.8,
+          0.4,
+          0.65
+        ],
+        "material": "moth_light",
+        "uv": [
+          348,
+          21
+        ]
+      },
+      {
+        "name": "bright_eye_-1",
+        "xyz": [
+          -3.05,
+          -0.67,
+          -5.9
+        ],
+        "dim": [
+          1.05,
+          0.98,
+          0.74
+        ],
+        "material": "moth_eye",
+        "uv": [
+          358,
+          21
+        ]
+      },
+      {
+        "name": "feather_antenna_1_0",
+        "xyz": [
+          1.55,
+          -6.2,
+          -7.9
+        ],
+        "dim": [
+          1.8,
+          0.4,
+          0.65
+        ],
+        "material": "moth_light",
+        "uv": [
+          368,
+          21
+        ]
+      },
+      {
+        "name": "feather_antenna_1_1",
+        "xyz": [
+          1.67,
+          -6.65,
+          -8.45
+        ],
+        "dim": [
+          1.8,
+          0.4,
+          0.65
+        ],
+        "material": "moth_light",
+        "uv": [
+          378,
+          21
+        ]
+      },
+      {
+        "name": "feather_antenna_1_2",
+        "xyz": [
+          1.79,
+          -7.1,
+          -9.0
+        ],
+        "dim": [
+          1.8,
+          0.4,
+          0.65
+        ],
+        "material": "moth_light",
+        "uv": [
+          388,
+          21
+        ]
+      },
+      {
+        "name": "feather_antenna_1_3",
+        "xyz": [
+          1.91,
+          -7.55,
+          -9.55
+        ],
+        "dim": [
+          1.8,
+          0.4,
+          0.65
+        ],
+        "material": "moth_light",
+        "uv": [
+          398,
+          21
+        ]
+      },
+      {
+        "name": "feather_antenna_1_4",
+        "xyz": [
+          2.03,
+          -8.0,
+          -10.1
+        ],
+        "dim": [
+          1.8,
+          0.4,
+          0.65
+        ],
+        "material": "moth_light",
+        "uv": [
+          408,
+          21
+        ]
+      },
+      {
+        "name": "bright_eye_1",
+        "xyz": [
+          2.0,
+          -0.67,
+          -5.9
+        ],
+        "dim": [
+          1.05,
+          0.98,
+          0.74
+        ],
+        "material": "moth_eye",
+        "uv": [
+          418,
+          21
+        ]
+      },
+      {
+        "name": "forehead_crown",
+        "xyz": [
+          -2.75,
+          -3.9,
+          -6.6
+        ],
+        "dim": [
+          5.5,
+          1.25,
+          3.0
+        ],
+        "material": "moth_fur",
+        "uv": [
+          428,
+          21
+        ]
+      },
+      {
+        "name": "proboscis",
+        "xyz": [
+          -0.54,
+          1.25,
+          -6.6
+        ],
+        "dim": [
+          1.08,
+          2.4,
+          1.2
+        ],
+        "material": "moth_green",
+        "uv": [
+          450,
+          21
+        ]
+      },
+      {
+        "name": "moth_fuzzy_cheek_-1",
+        "xyz": [
+          -2.7,
+          -0.8,
+          -6.4
+        ],
+        "dim": [
+          1.1,
+          3.3,
+          2.5
+        ],
+        "material": "moth_light",
+        "uv": [
+          462,
+          21
+        ]
+      },
+      {
+        "name": "big_compound_eye_-1",
+        "xyz": [
+          -2.85,
+          -0.9,
+          -6.83
+        ],
+        "dim": [
+          1.0,
+          1.7,
+          1.8
+        ],
+        "material": "moth_eye",
+        "uv": [
+          476,
+          21
+        ]
+      },
+      {
+        "name": "antenna_barb_-1_0",
+        "xyz": [
+          -2.14,
+          -6.3,
+          -7.4
+        ],
+        "dim": [
+          1.5,
+          0.4,
+          0.65
+        ],
+        "material": "moth_light",
+        "uv": [
+          486,
+          21
+        ]
+      },
+      {
+        "name": "antenna_barb_-1_1",
+        "xyz": [
+          -2.29,
+          -6.8,
+          -8.01
+        ],
+        "dim": [
+          1.5,
+          0.4,
+          0.65
+        ],
+        "material": "moth_light",
+        "uv": [
+          496,
+          21
+        ]
+      },
+      {
+        "name": "antenna_barb_-1_2",
+        "xyz": [
+          -2.44,
+          -7.3,
+          -8.62
+        ],
+        "dim": [
+          1.5,
+          0.4,
+          0.65
+        ],
+        "material": "moth_light",
+        "uv": [
+          2,
+          35
+        ]
+      },
+      {
+        "name": "antenna_barb_-1_3",
+        "xyz": [
+          -2.59,
+          -7.8,
+          -9.23
+        ],
+        "dim": [
+          1.5,
+          0.4,
+          0.65
+        ],
+        "material": "moth_light",
+        "uv": [
+          12,
+          35
+        ]
+      },
+      {
+        "name": "antenna_barb_-1_4",
+        "xyz": [
+          -2.74,
+          -8.3,
+          -9.84
+        ],
+        "dim": [
+          1.5,
+          0.4,
+          0.65
+        ],
+        "material": "moth_light",
+        "uv": [
+          22,
+          35
+        ]
+      },
+      {
+        "name": "antenna_barb_-1_5",
+        "xyz": [
+          -2.89,
+          -8.8,
+          -10.45
+        ],
+        "dim": [
+          1.5,
+          0.4,
+          0.65
+        ],
+        "material": "moth_light",
+        "uv": [
+          32,
+          35
+        ]
+      },
+      {
+        "name": "antenna_barb_-1_6",
+        "xyz": [
+          -3.04,
+          -9.3,
+          -11.06
+        ],
+        "dim": [
+          1.5,
+          0.4,
+          0.65
+        ],
+        "material": "moth_light",
+        "uv": [
+          42,
+          35
+        ]
+      },
+      {
+        "name": "moth_fuzzy_cheek_1",
+        "xyz": [
+          1.72,
+          -0.8,
+          -6.4
+        ],
+        "dim": [
+          1.1,
+          3.3,
+          2.5
+        ],
+        "material": "moth_light",
+        "uv": [
+          52,
+          35
+        ]
+      },
+      {
+        "name": "big_compound_eye_1",
+        "xyz": [
+          1.88,
+          -0.9,
+          -6.83
+        ],
+        "dim": [
+          1.0,
+          1.7,
+          1.8
+        ],
+        "material": "moth_eye",
+        "uv": [
+          66,
+          35
+        ]
+      },
+      {
+        "name": "antenna_barb_1_0",
+        "xyz": [
+          1.55,
+          -6.3,
+          -7.4
+        ],
+        "dim": [
+          1.5,
+          0.4,
+          0.65
+        ],
+        "material": "moth_light",
+        "uv": [
+          76,
+          35
+        ]
+      },
+      {
+        "name": "antenna_barb_1_1",
+        "xyz": [
+          1.7,
+          -6.8,
+          -8.01
+        ],
+        "dim": [
+          1.5,
+          0.4,
+          0.65
+        ],
+        "material": "moth_light",
+        "uv": [
+          86,
+          35
+        ]
+      },
+      {
+        "name": "antenna_barb_1_2",
+        "xyz": [
+          1.85,
+          -7.3,
+          -8.62
+        ],
+        "dim": [
+          1.5,
+          0.4,
+          0.65
+        ],
+        "material": "moth_light",
+        "uv": [
+          96,
+          35
+        ]
+      },
+      {
+        "name": "antenna_barb_1_3",
+        "xyz": [
+          2.0,
+          -7.8,
+          -9.23
+        ],
+        "dim": [
+          1.5,
+          0.4,
+          0.65
+        ],
+        "material": "moth_light",
+        "uv": [
+          106,
+          35
+        ]
+      },
+      {
+        "name": "antenna_barb_1_4",
+        "xyz": [
+          2.15,
+          -8.3,
+          -9.84
+        ],
+        "dim": [
+          1.5,
+          0.4,
+          0.65
+        ],
+        "material": "moth_light",
+        "uv": [
+          116,
+          35
+        ]
+      },
+      {
+        "name": "antenna_barb_1_5",
+        "xyz": [
+          2.3,
+          -8.8,
+          -10.45
+        ],
+        "dim": [
+          1.5,
+          0.4,
+          0.65
+        ],
+        "material": "moth_light",
+        "uv": [
+          126,
+          35
+        ]
+      },
+      {
+        "name": "antenna_barb_1_6",
+        "xyz": [
+          2.45,
+          -9.3,
+          -11.06
+        ],
+        "dim": [
+          1.5,
+          0.4,
+          0.65
+        ],
+        "material": "moth_light",
+        "uv": [
+          136,
+          35
+        ]
+      },
+      {
+        "name": "furry_moth_snout",
+        "xyz": [
+          -1.72,
+          0.28,
+          -8.35
+        ],
+        "dim": [
+          3.44,
+          2.2,
+          2.23
+        ],
+        "material": "moth_light",
+        "uv": [
+          146,
+          35
+        ]
+      },
+      {
+        "name": "plush_jaw_fur_-1",
+        "xyz": [
+          -3.24,
+          -1.14,
+          -7.47
+        ],
+        "dim": [
+          1.22,
+          3.5,
+          2.2
+        ],
+        "material": "moth_fur",
+        "uv": [
+          164,
+          35
+        ]
+      },
+      {
+        "name": "face_palp_-1_0",
+        "xyz": [
+          -3.14,
+          1.13,
+          -7.56
+        ],
+        "dim": [
+          0.56,
+          0.42,
+          0.68
+        ],
+        "material": "moth_light",
+        "uv": [
+          178,
+          35
+        ]
+      },
+      {
+        "name": "face_palp_-1_1",
+        "xyz": [
+          -3.14,
+          1.5,
+          -7.99
+        ],
+        "dim": [
+          0.56,
+          0.42,
+          0.68
+        ],
+        "material": "moth_light",
+        "uv": [
+          186,
+          35
+        ]
+      },
+      {
+        "name": "face_palp_-1_2",
+        "xyz": [
+          -3.14,
+          1.87,
+          -8.42
+        ],
+        "dim": [
+          0.56,
+          0.42,
+          0.68
+        ],
+        "material": "moth_light",
+        "uv": [
+          194,
+          35
+        ]
+      },
+      {
+        "name": "plush_jaw_fur_1",
+        "xyz": [
+          2.06,
+          -1.14,
+          -7.47
+        ],
+        "dim": [
+          1.22,
+          3.5,
+          2.2
+        ],
+        "material": "moth_fur",
+        "uv": [
+          202,
+          35
+        ]
+      },
+      {
+        "name": "face_palp_1_0",
+        "xyz": [
+          1.96,
+          1.13,
+          -7.56
+        ],
+        "dim": [
+          0.56,
+          0.42,
+          0.68
+        ],
+        "material": "moth_light",
+        "uv": [
+          216,
+          35
+        ]
+      },
+      {
+        "name": "face_palp_1_1",
+        "xyz": [
+          1.96,
+          1.5,
+          -7.99
+        ],
+        "dim": [
+          0.56,
+          0.42,
+          0.68
+        ],
+        "material": "moth_light",
+        "uv": [
+          224,
+          35
+        ]
+      },
+      {
+        "name": "face_palp_1_2",
+        "xyz": [
+          1.96,
+          1.87,
+          -8.42
+        ],
+        "dim": [
+          0.56,
+          0.42,
+          0.68
+        ],
+        "material": "moth_light",
+        "uv": [
+          232,
+          35
+        ]
+      },
+      {
+        "name": "visible_front_eye_-1",
+        "xyz": [
+          -2.4,
+          -1.4,
+          -8.62
+        ],
+        "dim": [
+          0.95,
+          1.45,
+          0.65
+        ],
+        "material": "moth_eye",
+        "uv": [
+          240,
+          35
+        ]
+      },
+      {
+        "name": "visible_front_eye_1",
+        "xyz": [
+          1.42,
+          -1.4,
+          -8.62
+        ],
+        "dim": [
+          0.95,
+          1.45,
+          0.65
+        ],
+        "material": "moth_eye",
+        "uv": [
+          248,
+          35
+        ]
+      }
+    ],
+    "left_wing": [
+      {
+        "name": "wing_ocellus_outer_top",
+        "xyz": [
+          -9.1,
+          -5.6,
+          -2.7
+        ],
+        "dim": [
+          2.3,
+          0.55,
+          0.64
+        ],
+        "material": "moth_green",
+        "uv": [
+          256,
+          35
+        ]
+      },
+      {
+        "name": "wing_ocellus_outer_bottom",
+        "xyz": [
+          -9.1,
+          -5.6,
+          0.4
+        ],
+        "dim": [
+          2.3,
+          0.55,
+          0.64
+        ],
+        "material": "moth_green",
+        "uv": [
+          268,
+          35
+        ]
+      },
+      {
+        "name": "wing_ocellus_outer_front",
+        "xyz": [
+          -9.1,
+          -5.6,
+          -2.7
+        ],
+        "dim": [
+          0.66,
+          0.55,
+          3.72
+        ],
+        "material": "moth_green",
+        "uv": [
+          280,
+          35
+        ]
+      },
+      {
+        "name": "wing_ocellus_outer_back",
+        "xyz": [
+          -7.42,
+          -5.6,
+          -2.7
+        ],
+        "dim": [
+          0.66,
+          0.55,
+          3.72
+        ],
+        "material": "moth_green",
+        "uv": [
+          294,
+          35
+        ]
+      },
+      {
+        "name": "wing_ocellus_center",
+        "xyz": [
+          -8.45,
+          -5.85,
+          -1.65
+        ],
+        "dim": [
+          1.05,
+          0.65,
+          1.5
+        ],
+        "material": "moth_pattern",
+        "uv": [
+          308,
+          35
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_0_0",
+        "xyz": [
+          -3.16,
+          -6.0,
+          -7.45
+        ],
+        "dim": [
+          1.3,
+          2.35,
+          2.18
+        ],
+        "material": "moth_green",
+        "uv": [
+          320,
+          35
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_0_1",
+        "xyz": [
+          -4.32,
+          -5.21,
+          -7.45
+        ],
+        "dim": [
+          1.3,
+          2.06,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          334,
+          35
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_0_2",
+        "xyz": [
+          -5.48,
+          -4.42,
+          -7.45
+        ],
+        "dim": [
+          1.3,
+          1.77,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          348,
+          35
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_0_3",
+        "xyz": [
+          -6.64,
+          -3.63,
+          -7.45
+        ],
+        "dim": [
+          1.3,
+          1.48,
+          2.18
+        ],
+        "material": "moth_green",
+        "uv": [
+          362,
+          35
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_0_4",
+        "xyz": [
+          -7.8,
+          -2.84,
+          -7.45
+        ],
+        "dim": [
+          1.3,
+          1.19,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          376,
+          35
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_1_0",
+        "xyz": [
+          -3.64,
+          -5.9,
+          -5.3
+        ],
+        "dim": [
+          1.78,
+          2.35,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          390,
+          35
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_1_1",
+        "xyz": [
+          -5.28,
+          -5.11,
+          -5.3
+        ],
+        "dim": [
+          1.78,
+          2.06,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          404,
+          35
+        ]
+      },
+      {
+        "name": "silver_wing_lunule_1_1",
+        "xyz": [
+          -4.96,
+          -5.46,
+          -4.68
+        ],
+        "dim": [
+          0.902,
+          0.32,
+          0.76
+        ],
+        "material": "moth_pattern",
+        "uv": [
+          418,
+          35
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_1_2",
+        "xyz": [
+          -6.92,
+          -4.32,
+          -5.3
+        ],
+        "dim": [
+          1.78,
+          1.77,
+          2.18
+        ],
+        "material": "moth_green",
+        "uv": [
+          426,
+          35
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_1_3",
+        "xyz": [
+          -8.56,
+          -3.53,
+          -5.3
+        ],
+        "dim": [
+          1.78,
+          1.48,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          440,
+          35
+        ]
+      },
+      {
+        "name": "silver_wing_lunule_1_3",
+        "xyz": [
+          -8.24,
+          -3.88,
+          -4.68
+        ],
+        "dim": [
+          0.902,
+          0.32,
+          0.76
+        ],
+        "material": "moth_pattern",
+        "uv": [
+          454,
+          35
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_1_4",
+        "xyz": [
+          -10.2,
+          -2.74,
+          -5.3
+        ],
+        "dim": [
+          1.78,
+          1.19,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          462,
+          35
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_2_0",
+        "xyz": [
+          -4.16,
+          -6.0,
+          -3.15
+        ],
+        "dim": [
+          2.3,
+          2.35,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          476,
+          35
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_2_1",
+        "xyz": [
+          -6.32,
+          -5.21,
+          -3.15
+        ],
+        "dim": [
+          2.3,
+          2.06,
+          2.18
+        ],
+        "material": "moth_green",
+        "uv": [
+          492,
+          35
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_2_2",
+        "xyz": [
+          -8.48,
+          -4.42,
+          -3.15
+        ],
+        "dim": [
+          2.3,
+          1.77,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          2,
+          46
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_2_3",
+        "xyz": [
+          -10.64,
+          -3.63,
+          -3.15
+        ],
+        "dim": [
+          2.3,
+          1.48,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          18,
+          46
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_2_4",
+        "xyz": [
+          -12.8,
+          -2.84,
+          -3.15
+        ],
+        "dim": [
+          2.3,
+          1.19,
+          2.18
+        ],
+        "material": "moth_green",
+        "uv": [
+          34,
+          46
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_3_0",
+        "xyz": [
+          -4.48,
+          -5.9,
+          -1.0
+        ],
+        "dim": [
+          2.62,
+          2.35,
+          2.18
+        ],
+        "material": "moth_green",
+        "uv": [
+          50,
+          46
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_3_1",
+        "xyz": [
+          -6.96,
+          -5.11,
+          -1.0
+        ],
+        "dim": [
+          2.62,
+          2.06,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          66,
+          46
+        ]
+      },
+      {
+        "name": "silver_wing_lunule_3_1",
+        "xyz": [
+          -6.488,
+          -5.46,
+          -0.38
+        ],
+        "dim": [
+          1.364,
+          0.32,
+          0.76
+        ],
+        "material": "moth_pattern",
+        "uv": [
+          82,
+          46
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_3_2",
+        "xyz": [
+          -9.44,
+          -4.32,
+          -1.0
+        ],
+        "dim": [
+          2.62,
+          1.77,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          92,
+          46
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_3_3",
+        "xyz": [
+          -11.92,
+          -3.53,
+          -1.0
+        ],
+        "dim": [
+          2.62,
+          1.48,
+          2.18
+        ],
+        "material": "moth_green",
+        "uv": [
+          108,
+          46
+        ]
+      },
+      {
+        "name": "silver_wing_lunule_3_3",
+        "xyz": [
+          -11.448,
+          -3.88,
+          -0.38
+        ],
+        "dim": [
+          1.364,
+          0.32,
+          0.76
+        ],
+        "material": "moth_pattern",
+        "uv": [
+          124,
+          46
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_3_4",
+        "xyz": [
+          -14.4,
+          -2.74,
+          -1.0
+        ],
+        "dim": [
+          2.62,
+          1.19,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          134,
+          46
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_4_0",
+        "xyz": [
+          -4.46,
+          -6.0,
+          1.15
+        ],
+        "dim": [
+          2.6,
+          2.35,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          150,
+          46
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_4_1",
+        "xyz": [
+          -6.92,
+          -5.21,
+          1.15
+        ],
+        "dim": [
+          2.6,
+          2.06,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          166,
+          46
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_4_2",
+        "xyz": [
+          -9.38,
+          -4.42,
+          1.15
+        ],
+        "dim": [
+          2.6,
+          1.77,
+          2.18
+        ],
+        "material": "moth_green",
+        "uv": [
+          182,
+          46
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_4_3",
+        "xyz": [
+          -11.84,
+          -3.63,
+          1.15
+        ],
+        "dim": [
+          2.6,
+          1.48,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          198,
+          46
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_4_4",
+        "xyz": [
+          -14.3,
+          -2.84,
+          1.15
+        ],
+        "dim": [
+          2.6,
+          1.19,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          214,
+          46
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_5_0",
+        "xyz": [
+          -4.1,
+          -5.9,
+          3.3
+        ],
+        "dim": [
+          2.24,
+          2.35,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          230,
+          46
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_5_1",
+        "xyz": [
+          -6.2,
+          -5.11,
+          3.3
+        ],
+        "dim": [
+          2.24,
+          2.06,
+          2.18
+        ],
+        "material": "moth_green",
+        "uv": [
+          246,
+          46
+        ]
+      },
+      {
+        "name": "silver_wing_lunule_5_1",
+        "xyz": [
+          -5.797,
+          -5.46,
+          3.92
+        ],
+        "dim": [
+          1.155,
+          0.32,
+          0.76
+        ],
+        "material": "moth_pattern",
+        "uv": [
+          262,
+          46
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_5_2",
+        "xyz": [
+          -8.3,
+          -4.32,
+          3.3
+        ],
+        "dim": [
+          2.24,
+          1.77,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          272,
+          46
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_5_3",
+        "xyz": [
+          -10.4,
+          -3.53,
+          3.3
+        ],
+        "dim": [
+          2.24,
+          1.48,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          288,
+          46
+        ]
+      },
+      {
+        "name": "silver_wing_lunule_5_3",
+        "xyz": [
+          -9.997,
+          -3.88,
+          3.92
+        ],
+        "dim": [
+          1.155,
+          0.32,
+          0.76
+        ],
+        "material": "moth_pattern",
+        "uv": [
+          304,
+          46
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_5_4",
+        "xyz": [
+          -12.5,
+          -2.74,
+          3.3
+        ],
+        "dim": [
+          2.24,
+          1.19,
+          2.18
+        ],
+        "material": "moth_green",
+        "uv": [
+          314,
+          46
+        ]
+      },
+      {
+        "name": "drooping_tip_feathers_0",
+        "xyz": [
+          -8.25,
+          -2.0,
+          -6.7
+        ],
+        "dim": [
+          0.75,
+          1.62,
+          1.26
+        ],
+        "material": "moth_light",
+        "uv": [
+          330,
+          46
+        ]
+      },
+      {
+        "name": "drooping_tip_feathers_1",
+        "xyz": [
+          -10.65,
+          -1.88,
+          -4.36
+        ],
+        "dim": [
+          0.75,
+          1.62,
+          1.26
+        ],
+        "material": "moth_light",
+        "uv": [
+          340,
+          46
+        ]
+      },
+      {
+        "name": "drooping_tip_feathers_2",
+        "xyz": [
+          -13.25,
+          -2.0,
+          -2.02
+        ],
+        "dim": [
+          0.75,
+          1.62,
+          1.26
+        ],
+        "material": "moth_light",
+        "uv": [
+          350,
+          46
+        ]
+      },
+      {
+        "name": "drooping_tip_feathers_3",
+        "xyz": [
+          -14.85,
+          -1.88,
+          0.32
+        ],
+        "dim": [
+          0.75,
+          1.62,
+          1.26
+        ],
+        "material": "moth_light",
+        "uv": [
+          360,
+          46
+        ]
+      },
+      {
+        "name": "drooping_tip_feathers_4",
+        "xyz": [
+          -14.75,
+          -2.0,
+          2.66
+        ],
+        "dim": [
+          0.75,
+          1.62,
+          1.26
+        ],
+        "material": "moth_light",
+        "uv": [
+          370,
+          46
+        ]
+      },
+      {
+        "name": "raised_vein_node_0_0",
+        "xyz": [
+          -3.0,
+          -6.46,
+          -6.7
+        ],
+        "dim": [
+          1.06,
+          0.55,
+          1.0
+        ],
+        "material": "moth_light",
+        "uv": [
+          380,
+          46
+        ]
+      },
+      {
+        "name": "raised_vein_node_0_1",
+        "xyz": [
+          -5.5,
+          -5.77,
+          -6.7
+        ],
+        "dim": [
+          1.06,
+          0.55,
+          1.0
+        ],
+        "material": "moth_light",
+        "uv": [
+          390,
+          46
+        ]
+      },
+      {
+        "name": "raised_vein_node_0_2",
+        "xyz": [
+          -8.0,
+          -5.08,
+          -6.7
+        ],
+        "dim": [
+          1.06,
+          0.55,
+          1.0
+        ],
+        "material": "moth_light",
+        "uv": [
+          400,
+          46
+        ]
+      },
+      {
+        "name": "raised_vein_node_0_3",
+        "xyz": [
+          -10.5,
+          -4.39,
+          -6.7
+        ],
+        "dim": [
+          1.06,
+          0.55,
+          1.0
+        ],
+        "material": "moth_light",
+        "uv": [
+          410,
+          46
+        ]
+      },
+      {
+        "name": "raised_vein_node_2_0",
+        "xyz": [
+          -3.0,
+          -6.46,
+          -2.3
+        ],
+        "dim": [
+          1.06,
+          0.55,
+          1.0
+        ],
+        "material": "moth_light",
+        "uv": [
+          420,
+          46
+        ]
+      },
+      {
+        "name": "raised_vein_node_2_1",
+        "xyz": [
+          -5.5,
+          -5.77,
+          -2.3
+        ],
+        "dim": [
+          1.06,
+          0.55,
+          1.0
+        ],
+        "material": "moth_light",
+        "uv": [
+          430,
+          46
+        ]
+      },
+      {
+        "name": "raised_vein_node_2_2",
+        "xyz": [
+          -8.0,
+          -5.08,
+          -2.3
+        ],
+        "dim": [
+          1.06,
+          0.55,
+          1.0
+        ],
+        "material": "moth_light",
+        "uv": [
+          440,
+          46
+        ]
+      },
+      {
+        "name": "raised_vein_node_2_3",
+        "xyz": [
+          -10.5,
+          -4.39,
+          -2.3
+        ],
+        "dim": [
+          1.06,
+          0.55,
+          1.0
+        ],
+        "material": "moth_light",
+        "uv": [
+          450,
+          46
+        ]
+      },
+      {
+        "name": "raised_vein_node_4_0",
+        "xyz": [
+          -3.0,
+          -6.46,
+          2.1
+        ],
+        "dim": [
+          1.06,
+          0.55,
+          1.0
+        ],
+        "material": "moth_light",
+        "uv": [
+          460,
+          46
+        ]
+      },
+      {
+        "name": "raised_vein_node_4_1",
+        "xyz": [
+          -5.5,
+          -5.77,
+          2.1
+        ],
+        "dim": [
+          1.06,
+          0.55,
+          1.0
+        ],
+        "material": "moth_light",
+        "uv": [
+          470,
+          46
+        ]
+      },
+      {
+        "name": "raised_vein_node_4_2",
+        "xyz": [
+          -8.0,
+          -5.08,
+          2.1
+        ],
+        "dim": [
+          1.06,
+          0.55,
+          1.0
+        ],
+        "material": "moth_light",
+        "uv": [
+          480,
+          46
+        ]
+      },
+      {
+        "name": "raised_vein_node_4_3",
+        "xyz": [
+          -10.5,
+          -4.39,
+          2.1
+        ],
+        "dim": [
+          1.06,
+          0.55,
+          1.0
+        ],
+        "material": "moth_light",
+        "uv": [
+          490,
+          46
+        ]
+      }
+    ],
+    "right_wing": [
+      {
+        "name": "wing_ocellus_outer_top",
+        "xyz": [
+          7.3,
+          -5.6,
+          -2.7
+        ],
+        "dim": [
+          2.3,
+          0.55,
+          0.64
+        ],
+        "material": "moth_green",
+        "uv": [
+          500,
+          46
+        ]
+      },
+      {
+        "name": "wing_ocellus_outer_bottom",
+        "xyz": [
+          7.3,
+          -5.6,
+          0.4
+        ],
+        "dim": [
+          2.3,
+          0.55,
+          0.64
+        ],
+        "material": "moth_green",
+        "uv": [
+          2,
+          56
+        ]
+      },
+      {
+        "name": "wing_ocellus_outer_front",
+        "xyz": [
+          7.3,
+          -5.6,
+          -2.7
+        ],
+        "dim": [
+          0.66,
+          0.55,
+          3.72
+        ],
+        "material": "moth_green",
+        "uv": [
+          14,
+          56
+        ]
+      },
+      {
+        "name": "wing_ocellus_outer_back",
+        "xyz": [
+          8.98,
+          -5.6,
+          -2.7
+        ],
+        "dim": [
+          0.66,
+          0.55,
+          3.72
+        ],
+        "material": "moth_green",
+        "uv": [
+          28,
+          56
+        ]
+      },
+      {
+        "name": "wing_ocellus_center",
+        "xyz": [
+          7.95,
+          -5.85,
+          -1.65
+        ],
+        "dim": [
+          1.05,
+          0.65,
+          1.5
+        ],
+        "material": "moth_pattern",
+        "uv": [
+          42,
+          56
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_0_0",
+        "xyz": [
+          2.0,
+          -6.0,
+          -7.45
+        ],
+        "dim": [
+          1.3,
+          2.35,
+          2.18
+        ],
+        "material": "moth_green",
+        "uv": [
+          54,
+          56
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_0_1",
+        "xyz": [
+          3.16,
+          -5.21,
+          -7.45
+        ],
+        "dim": [
+          1.3,
+          2.06,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          68,
+          56
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_0_2",
+        "xyz": [
+          4.32,
+          -4.42,
+          -7.45
+        ],
+        "dim": [
+          1.3,
+          1.77,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          82,
+          56
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_0_3",
+        "xyz": [
+          5.48,
+          -3.63,
+          -7.45
+        ],
+        "dim": [
+          1.3,
+          1.48,
+          2.18
+        ],
+        "material": "moth_green",
+        "uv": [
+          96,
+          56
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_0_4",
+        "xyz": [
+          6.64,
+          -2.84,
+          -7.45
+        ],
+        "dim": [
+          1.3,
+          1.19,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          110,
+          56
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_1_0",
+        "xyz": [
+          2.0,
+          -5.9,
+          -5.3
+        ],
+        "dim": [
+          1.78,
+          2.35,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          124,
+          56
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_1_1",
+        "xyz": [
+          3.64,
+          -5.11,
+          -5.3
+        ],
+        "dim": [
+          1.78,
+          2.06,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          138,
+          56
+        ]
+      },
+      {
+        "name": "silver_wing_lunule_1_1",
+        "xyz": [
+          3.96,
+          -5.46,
+          -4.68
+        ],
+        "dim": [
+          0.902,
+          0.32,
+          0.76
+        ],
+        "material": "moth_pattern",
+        "uv": [
+          152,
+          56
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_1_2",
+        "xyz": [
+          5.28,
+          -4.32,
+          -5.3
+        ],
+        "dim": [
+          1.78,
+          1.77,
+          2.18
+        ],
+        "material": "moth_green",
+        "uv": [
+          160,
+          56
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_1_3",
+        "xyz": [
+          6.92,
+          -3.53,
+          -5.3
+        ],
+        "dim": [
+          1.78,
+          1.48,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          174,
+          56
+        ]
+      },
+      {
+        "name": "silver_wing_lunule_1_3",
+        "xyz": [
+          7.24,
+          -3.88,
+          -4.68
+        ],
+        "dim": [
+          0.902,
+          0.32,
+          0.76
+        ],
+        "material": "moth_pattern",
+        "uv": [
+          188,
+          56
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_1_4",
+        "xyz": [
+          8.56,
+          -2.74,
+          -5.3
+        ],
+        "dim": [
+          1.78,
+          1.19,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          196,
+          56
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_2_0",
+        "xyz": [
+          2.0,
+          -6.0,
+          -3.15
+        ],
+        "dim": [
+          2.3,
+          2.35,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          210,
+          56
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_2_1",
+        "xyz": [
+          4.16,
+          -5.21,
+          -3.15
+        ],
+        "dim": [
+          2.3,
+          2.06,
+          2.18
+        ],
+        "material": "moth_green",
+        "uv": [
+          226,
+          56
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_2_2",
+        "xyz": [
+          6.32,
+          -4.42,
+          -3.15
+        ],
+        "dim": [
+          2.3,
+          1.77,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          242,
+          56
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_2_3",
+        "xyz": [
+          8.48,
+          -3.63,
+          -3.15
+        ],
+        "dim": [
+          2.3,
+          1.48,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          258,
+          56
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_2_4",
+        "xyz": [
+          10.64,
+          -2.84,
+          -3.15
+        ],
+        "dim": [
+          2.3,
+          1.19,
+          2.18
+        ],
+        "material": "moth_green",
+        "uv": [
+          274,
+          56
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_3_0",
+        "xyz": [
+          2.0,
+          -5.9,
+          -1.0
+        ],
+        "dim": [
+          2.62,
+          2.35,
+          2.18
+        ],
+        "material": "moth_green",
+        "uv": [
+          290,
+          56
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_3_1",
+        "xyz": [
+          4.48,
+          -5.11,
+          -1.0
+        ],
+        "dim": [
+          2.62,
+          2.06,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          306,
+          56
+        ]
+      },
+      {
+        "name": "silver_wing_lunule_3_1",
+        "xyz": [
+          4.952,
+          -5.46,
+          -0.38
+        ],
+        "dim": [
+          1.364,
+          0.32,
+          0.76
+        ],
+        "material": "moth_pattern",
+        "uv": [
+          322,
+          56
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_3_2",
+        "xyz": [
+          6.96,
+          -4.32,
+          -1.0
+        ],
+        "dim": [
+          2.62,
+          1.77,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          332,
+          56
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_3_3",
+        "xyz": [
+          9.44,
+          -3.53,
+          -1.0
+        ],
+        "dim": [
+          2.62,
+          1.48,
+          2.18
+        ],
+        "material": "moth_green",
+        "uv": [
+          348,
+          56
+        ]
+      },
+      {
+        "name": "silver_wing_lunule_3_3",
+        "xyz": [
+          9.912,
+          -3.88,
+          -0.38
+        ],
+        "dim": [
+          1.364,
+          0.32,
+          0.76
+        ],
+        "material": "moth_pattern",
+        "uv": [
+          364,
+          56
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_3_4",
+        "xyz": [
+          11.92,
+          -2.74,
+          -1.0
+        ],
+        "dim": [
+          2.62,
+          1.19,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          374,
+          56
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_4_0",
+        "xyz": [
+          2.0,
+          -6.0,
+          1.15
+        ],
+        "dim": [
+          2.6,
+          2.35,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          390,
+          56
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_4_1",
+        "xyz": [
+          4.46,
+          -5.21,
+          1.15
+        ],
+        "dim": [
+          2.6,
+          2.06,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          406,
+          56
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_4_2",
+        "xyz": [
+          6.92,
+          -4.42,
+          1.15
+        ],
+        "dim": [
+          2.6,
+          1.77,
+          2.18
+        ],
+        "material": "moth_green",
+        "uv": [
+          422,
+          56
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_4_3",
+        "xyz": [
+          9.38,
+          -3.63,
+          1.15
+        ],
+        "dim": [
+          2.6,
+          1.48,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          438,
+          56
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_4_4",
+        "xyz": [
+          11.84,
+          -2.84,
+          1.15
+        ],
+        "dim": [
+          2.6,
+          1.19,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          454,
+          56
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_5_0",
+        "xyz": [
+          2.0,
+          -5.9,
+          3.3
+        ],
+        "dim": [
+          2.24,
+          2.35,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          470,
+          56
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_5_1",
+        "xyz": [
+          4.1,
+          -5.11,
+          3.3
+        ],
+        "dim": [
+          2.24,
+          2.06,
+          2.18
+        ],
+        "material": "moth_green",
+        "uv": [
+          486,
+          56
+        ]
+      },
+      {
+        "name": "silver_wing_lunule_5_1",
+        "xyz": [
+          4.503,
+          -5.46,
+          3.92
+        ],
+        "dim": [
+          1.155,
+          0.32,
+          0.76
+        ],
+        "material": "moth_pattern",
+        "uv": [
+          502,
+          56
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_5_2",
+        "xyz": [
+          6.2,
+          -4.32,
+          3.3
+        ],
+        "dim": [
+          2.24,
+          1.77,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          2,
+          66
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_5_3",
+        "xyz": [
+          8.3,
+          -3.53,
+          3.3
+        ],
+        "dim": [
+          2.24,
+          1.48,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          18,
+          66
+        ]
+      },
+      {
+        "name": "silver_wing_lunule_5_3",
+        "xyz": [
+          8.703,
+          -3.88,
+          3.92
+        ],
+        "dim": [
+          1.155,
+          0.32,
+          0.76
+        ],
+        "material": "moth_pattern",
+        "uv": [
+          34,
+          66
+        ]
+      },
+      {
+        "name": "sculpted_primary_wing_5_4",
+        "xyz": [
+          10.4,
+          -2.74,
+          3.3
+        ],
+        "dim": [
+          2.24,
+          1.19,
+          2.18
+        ],
+        "material": "moth_green",
+        "uv": [
+          44,
+          66
+        ]
+      },
+      {
+        "name": "drooping_tip_feathers_0",
+        "xyz": [
+          7.55,
+          -2.0,
+          -6.7
+        ],
+        "dim": [
+          0.75,
+          1.62,
+          1.26
+        ],
+        "material": "moth_light",
+        "uv": [
+          60,
+          66
+        ]
+      },
+      {
+        "name": "drooping_tip_feathers_1",
+        "xyz": [
+          9.95,
+          -1.88,
+          -4.36
+        ],
+        "dim": [
+          0.75,
+          1.62,
+          1.26
+        ],
+        "material": "moth_light",
+        "uv": [
+          70,
+          66
+        ]
+      },
+      {
+        "name": "drooping_tip_feathers_2",
+        "xyz": [
+          12.55,
+          -2.0,
+          -2.02
+        ],
+        "dim": [
+          0.75,
+          1.62,
+          1.26
+        ],
+        "material": "moth_light",
+        "uv": [
+          80,
+          66
+        ]
+      },
+      {
+        "name": "drooping_tip_feathers_3",
+        "xyz": [
+          14.15,
+          -1.88,
+          0.32
+        ],
+        "dim": [
+          0.75,
+          1.62,
+          1.26
+        ],
+        "material": "moth_light",
+        "uv": [
+          90,
+          66
+        ]
+      },
+      {
+        "name": "drooping_tip_feathers_4",
+        "xyz": [
+          14.05,
+          -2.0,
+          2.66
+        ],
+        "dim": [
+          0.75,
+          1.62,
+          1.26
+        ],
+        "material": "moth_light",
+        "uv": [
+          100,
+          66
+        ]
+      },
+      {
+        "name": "raised_vein_node_0_0",
+        "xyz": [
+          3.0,
+          -6.46,
+          -6.7
+        ],
+        "dim": [
+          1.06,
+          0.55,
+          1.0
+        ],
+        "material": "moth_light",
+        "uv": [
+          110,
+          66
+        ]
+      },
+      {
+        "name": "raised_vein_node_0_1",
+        "xyz": [
+          5.5,
+          -5.77,
+          -6.7
+        ],
+        "dim": [
+          1.06,
+          0.55,
+          1.0
+        ],
+        "material": "moth_light",
+        "uv": [
+          120,
+          66
+        ]
+      },
+      {
+        "name": "raised_vein_node_0_2",
+        "xyz": [
+          8.0,
+          -5.08,
+          -6.7
+        ],
+        "dim": [
+          1.06,
+          0.55,
+          1.0
+        ],
+        "material": "moth_light",
+        "uv": [
+          130,
+          66
+        ]
+      },
+      {
+        "name": "raised_vein_node_0_3",
+        "xyz": [
+          10.5,
+          -4.39,
+          -6.7
+        ],
+        "dim": [
+          1.06,
+          0.55,
+          1.0
+        ],
+        "material": "moth_light",
+        "uv": [
+          140,
+          66
+        ]
+      },
+      {
+        "name": "raised_vein_node_2_0",
+        "xyz": [
+          3.0,
+          -6.46,
+          -2.3
+        ],
+        "dim": [
+          1.06,
+          0.55,
+          1.0
+        ],
+        "material": "moth_light",
+        "uv": [
+          150,
+          66
+        ]
+      },
+      {
+        "name": "raised_vein_node_2_1",
+        "xyz": [
+          5.5,
+          -5.77,
+          -2.3
+        ],
+        "dim": [
+          1.06,
+          0.55,
+          1.0
+        ],
+        "material": "moth_light",
+        "uv": [
+          160,
+          66
+        ]
+      },
+      {
+        "name": "raised_vein_node_2_2",
+        "xyz": [
+          8.0,
+          -5.08,
+          -2.3
+        ],
+        "dim": [
+          1.06,
+          0.55,
+          1.0
+        ],
+        "material": "moth_light",
+        "uv": [
+          170,
+          66
+        ]
+      },
+      {
+        "name": "raised_vein_node_2_3",
+        "xyz": [
+          10.5,
+          -4.39,
+          -2.3
+        ],
+        "dim": [
+          1.06,
+          0.55,
+          1.0
+        ],
+        "material": "moth_light",
+        "uv": [
+          180,
+          66
+        ]
+      },
+      {
+        "name": "raised_vein_node_4_0",
+        "xyz": [
+          3.0,
+          -6.46,
+          2.1
+        ],
+        "dim": [
+          1.06,
+          0.55,
+          1.0
+        ],
+        "material": "moth_light",
+        "uv": [
+          190,
+          66
+        ]
+      },
+      {
+        "name": "raised_vein_node_4_1",
+        "xyz": [
+          5.5,
+          -5.77,
+          2.1
+        ],
+        "dim": [
+          1.06,
+          0.55,
+          1.0
+        ],
+        "material": "moth_light",
+        "uv": [
+          200,
+          66
+        ]
+      },
+      {
+        "name": "raised_vein_node_4_2",
+        "xyz": [
+          8.0,
+          -5.08,
+          2.1
+        ],
+        "dim": [
+          1.06,
+          0.55,
+          1.0
+        ],
+        "material": "moth_light",
+        "uv": [
+          210,
+          66
+        ]
+      },
+      {
+        "name": "raised_vein_node_4_3",
+        "xyz": [
+          10.5,
+          -4.39,
+          2.1
+        ],
+        "dim": [
+          1.06,
+          0.55,
+          1.0
+        ],
+        "material": "moth_light",
+        "uv": [
+          220,
+          66
+        ]
+      }
+    ],
+    "left_hindwing": [
+      {
+        "name": "hindwing_scale_6_0",
+        "xyz": [
+          -3.68,
+          -4.55,
+          5.45
+        ],
+        "dim": [
+          1.82,
+          2.021,
+          2.18
+        ],
+        "material": "moth_green",
+        "uv": [
+          230,
+          66
+        ]
+      },
+      {
+        "name": "hindwing_scale_6_1",
+        "xyz": [
+          -5.36,
+          -3.76,
+          5.45
+        ],
+        "dim": [
+          1.82,
+          1.7716,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          244,
+          66
+        ]
+      },
+      {
+        "name": "hindwing_scale_6_2",
+        "xyz": [
+          -7.04,
+          -2.9699999999999998,
+          5.45
+        ],
+        "dim": [
+          1.82,
+          1.5222,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          258,
+          66
+        ]
+      },
+      {
+        "name": "hindwing_scale_6_3",
+        "xyz": [
+          -8.72,
+          -2.1799999999999997,
+          5.45
+        ],
+        "dim": [
+          1.82,
+          1.2728,
+          2.18
+        ],
+        "material": "moth_green",
+        "uv": [
+          272,
+          66
+        ]
+      },
+      {
+        "name": "hindwing_scale_6_4",
+        "xyz": [
+          -10.4,
+          -1.39,
+          5.45
+        ],
+        "dim": [
+          1.82,
+          1.0233999999999999,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          286,
+          66
+        ]
+      },
+      {
+        "name": "hindwing_scale_7_0",
+        "xyz": [
+          -3.12,
+          -4.45,
+          7.6
+        ],
+        "dim": [
+          1.26,
+          2.021,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          300,
+          66
+        ]
+      },
+      {
+        "name": "hindwing_scale_7_1",
+        "xyz": [
+          -4.24,
+          -3.66,
+          7.6
+        ],
+        "dim": [
+          1.26,
+          1.7716,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          314,
+          66
+        ]
+      },
+      {
+        "name": "hindwing_scale_7_2",
+        "xyz": [
+          -5.36,
+          -2.87,
+          7.6
+        ],
+        "dim": [
+          1.26,
+          1.5222,
+          2.18
+        ],
+        "material": "moth_green",
+        "uv": [
+          328,
+          66
+        ]
+      },
+      {
+        "name": "hindwing_scale_7_3",
+        "xyz": [
+          -6.48,
+          -2.08,
+          7.6
+        ],
+        "dim": [
+          1.26,
+          1.2728,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          342,
+          66
+        ]
+      },
+      {
+        "name": "hindwing_scale_7_4",
+        "xyz": [
+          -7.6,
+          -1.2900000000000003,
+          7.6
+        ],
+        "dim": [
+          1.26,
+          1.0233999999999999,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          356,
+          66
+        ]
+      },
+      {
+        "name": "hind_drooping_tip_feathers_5",
+        "xyz": [
+          -12.95,
+          -0.8799999999999999,
+          5.0
+        ],
+        "dim": [
+          0.75,
+          1.62,
+          1.26
+        ],
+        "material": "moth_light",
+        "uv": [
+          370,
+          66
+        ]
+      },
+      {
+        "name": "hind_drooping_tip_feathers_6",
+        "xyz": [
+          -10.85,
+          -1.0,
+          7.34
+        ],
+        "dim": [
+          0.75,
+          1.62,
+          1.26
+        ],
+        "material": "moth_light",
+        "uv": [
+          380,
+          66
+        ]
+      },
+      {
+        "name": "curved_hindwing_feather_0",
+        "xyz": [
+          -11.25,
+          -0.28,
+          3.5
+        ],
+        "dim": [
+          9.7,
+          1.75,
+          2.32
+        ],
+        "material": "moth_green",
+        "uv": [
+          390,
+          66
+        ]
+      },
+      {
+        "name": "curved_hindwing_feather_1",
+        "xyz": [
+          -10.43,
+          -0.28,
+          5.7
+        ],
+        "dim": [
+          8.88,
+          1.75,
+          2.32
+        ],
+        "material": "moth_green",
+        "uv": [
+          420,
+          66
+        ]
+      },
+      {
+        "name": "curved_hindwing_feather_2",
+        "xyz": [
+          -9.61,
+          -0.28,
+          7.9
+        ],
+        "dim": [
+          8.06,
+          1.75,
+          2.32
+        ],
+        "material": "moth_green",
+        "uv": [
+          448,
+          66
+        ]
+      },
+      {
+        "name": "curved_hindwing_feather_3",
+        "xyz": [
+          -8.79,
+          -0.28,
+          10.1
+        ],
+        "dim": [
+          7.24,
+          1.75,
+          2.32
+        ],
+        "material": "moth_green",
+        "uv": [
+          476,
+          66
+        ]
+      },
+      {
+        "name": "hind_raised_vein_node_6_0",
+        "xyz": [
+          -3.0,
+          -5.46,
+          6.5
+        ],
+        "dim": [
+          1.06,
+          0.55,
+          1.0
+        ],
+        "material": "moth_light",
+        "uv": [
+          502,
+          66
+        ]
+      },
+      {
+        "name": "hind_raised_vein_node_6_1",
+        "xyz": [
+          -5.5,
+          -4.77,
+          6.5
+        ],
+        "dim": [
+          1.06,
+          0.55,
+          1.0
+        ],
+        "material": "moth_light",
+        "uv": [
+          2,
+          76
+        ]
+      },
+      {
+        "name": "hind_raised_vein_node_6_2",
+        "xyz": [
+          -8.0,
+          -4.08,
+          6.5
+        ],
+        "dim": [
+          1.06,
+          0.55,
+          1.0
+        ],
+        "material": "moth_light",
+        "uv": [
+          12,
+          76
+        ]
+      },
+      {
+        "name": "hind_raised_vein_node_6_3",
+        "xyz": [
+          -10.5,
+          -3.3899999999999997,
+          6.5
+        ],
+        "dim": [
+          1.06,
+          0.55,
+          1.0
+        ],
+        "material": "moth_light",
+        "uv": [
+          22,
+          76
+        ]
+      },
+      {
+        "name": "hindwing_scallop_0",
+        "xyz": [
+          -11.15,
+          -1.52,
+          3.95
+        ],
+        "dim": [
+          8.7,
+          1.48,
+          1.5
+        ],
+        "material": "moth_wing",
+        "uv": [
+          32,
+          76
+        ]
+      },
+      {
+        "name": "hindwing_lunule_0",
+        "xyz": [
+          -10.55,
+          -1.69,
+          4.35
+        ],
+        "dim": [
+          0.92,
+          0.58,
+          0.72
+        ],
+        "material": "moth_pattern",
+        "uv": [
+          58,
+          76
+        ]
+      },
+      {
+        "name": "hindwing_scallop_1",
+        "xyz": [
+          -10.3,
+          -1.42,
+          5.61
+        ],
+        "dim": [
+          7.85,
+          1.48,
+          1.5
+        ],
+        "material": "moth_green",
+        "uv": [
+          66,
+          76
+        ]
+      },
+      {
+        "name": "hindwing_lunule_1",
+        "xyz": [
+          -9.7,
+          -1.59,
+          6.01
+        ],
+        "dim": [
+          0.92,
+          0.58,
+          0.72
+        ],
+        "material": "moth_pattern",
+        "uv": [
+          90,
+          76
+        ]
+      },
+      {
+        "name": "hindwing_scallop_2",
+        "xyz": [
+          -9.45,
+          -1.32,
+          7.27
+        ],
+        "dim": [
+          7.0,
+          1.48,
+          1.5
+        ],
+        "material": "moth_wing",
+        "uv": [
+          98,
+          76
+        ]
+      },
+      {
+        "name": "hindwing_lunule_2",
+        "xyz": [
+          -8.85,
+          -1.49,
+          7.67
+        ],
+        "dim": [
+          0.92,
+          0.58,
+          0.72
+        ],
+        "material": "moth_pattern",
+        "uv": [
+          120,
+          76
+        ]
+      },
+      {
+        "name": "hindwing_scallop_3",
+        "xyz": [
+          -8.6,
+          -1.22,
+          8.93
+        ],
+        "dim": [
+          6.15,
+          1.48,
+          1.5
+        ],
+        "material": "moth_green",
+        "uv": [
+          128,
+          76
+        ]
+      },
+      {
+        "name": "hindwing_lunule_3",
+        "xyz": [
+          -8.0,
+          -1.39,
+          9.33
+        ],
+        "dim": [
+          0.92,
+          0.58,
+          0.72
+        ],
+        "material": "moth_pattern",
+        "uv": [
+          150,
+          76
+        ]
+      },
+      {
+        "name": "hindwing_scallop_4",
+        "xyz": [
+          -7.75,
+          -1.12,
+          10.59
+        ],
+        "dim": [
+          5.3,
+          1.48,
+          1.5
+        ],
+        "material": "moth_wing",
+        "uv": [
+          158,
+          76
+        ]
+      },
+      {
+        "name": "hindwing_lunule_4",
+        "xyz": [
+          -7.15,
+          -1.29,
+          10.99
+        ],
+        "dim": [
+          0.92,
+          0.58,
+          0.72
+        ],
+        "material": "moth_pattern",
+        "uv": [
+          178,
+          76
+        ]
+      }
+    ],
+    "right_hindwing": [
+      {
+        "name": "hindwing_scale_6_0",
+        "xyz": [
+          2.0,
+          -4.55,
+          5.45
+        ],
+        "dim": [
+          1.82,
+          2.021,
+          2.18
+        ],
+        "material": "moth_green",
+        "uv": [
+          186,
+          76
+        ]
+      },
+      {
+        "name": "hindwing_scale_6_1",
+        "xyz": [
+          3.68,
+          -3.76,
+          5.45
+        ],
+        "dim": [
+          1.82,
+          1.7716,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          200,
+          76
+        ]
+      },
+      {
+        "name": "hindwing_scale_6_2",
+        "xyz": [
+          5.36,
+          -2.9699999999999998,
+          5.45
+        ],
+        "dim": [
+          1.82,
+          1.5222,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          214,
+          76
+        ]
+      },
+      {
+        "name": "hindwing_scale_6_3",
+        "xyz": [
+          7.04,
+          -2.1799999999999997,
+          5.45
+        ],
+        "dim": [
+          1.82,
+          1.2728,
+          2.18
+        ],
+        "material": "moth_green",
+        "uv": [
+          228,
+          76
+        ]
+      },
+      {
+        "name": "hindwing_scale_6_4",
+        "xyz": [
+          8.72,
+          -1.39,
+          5.45
+        ],
+        "dim": [
+          1.82,
+          1.0233999999999999,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          242,
+          76
+        ]
+      },
+      {
+        "name": "hindwing_scale_7_0",
+        "xyz": [
+          2.0,
+          -4.45,
+          7.6
+        ],
+        "dim": [
+          1.26,
+          2.021,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          256,
+          76
+        ]
+      },
+      {
+        "name": "hindwing_scale_7_1",
+        "xyz": [
+          3.12,
+          -3.66,
+          7.6
+        ],
+        "dim": [
+          1.26,
+          1.7716,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          270,
+          76
+        ]
+      },
+      {
+        "name": "hindwing_scale_7_2",
+        "xyz": [
+          4.24,
+          -2.87,
+          7.6
+        ],
+        "dim": [
+          1.26,
+          1.5222,
+          2.18
+        ],
+        "material": "moth_green",
+        "uv": [
+          284,
+          76
+        ]
+      },
+      {
+        "name": "hindwing_scale_7_3",
+        "xyz": [
+          5.36,
+          -2.08,
+          7.6
+        ],
+        "dim": [
+          1.26,
+          1.2728,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          298,
+          76
+        ]
+      },
+      {
+        "name": "hindwing_scale_7_4",
+        "xyz": [
+          6.48,
+          -1.2900000000000003,
+          7.6
+        ],
+        "dim": [
+          1.26,
+          1.0233999999999999,
+          2.18
+        ],
+        "material": "moth_wing",
+        "uv": [
+          312,
+          76
+        ]
+      },
+      {
+        "name": "hind_drooping_tip_feathers_5",
+        "xyz": [
+          12.25,
+          -0.8799999999999999,
+          5.0
+        ],
+        "dim": [
+          0.75,
+          1.62,
+          1.26
+        ],
+        "material": "moth_light",
+        "uv": [
+          326,
+          76
+        ]
+      },
+      {
+        "name": "hind_drooping_tip_feathers_6",
+        "xyz": [
+          10.15,
+          -1.0,
+          7.34
+        ],
+        "dim": [
+          0.75,
+          1.62,
+          1.26
+        ],
+        "material": "moth_light",
+        "uv": [
+          336,
+          76
+        ]
+      },
+      {
+        "name": "curved_hindwing_feather_0",
+        "xyz": [
+          1.55,
+          -0.28,
+          3.5
+        ],
+        "dim": [
+          9.7,
+          1.75,
+          2.32
+        ],
+        "material": "moth_green",
+        "uv": [
+          346,
+          76
+        ]
+      },
+      {
+        "name": "curved_hindwing_feather_1",
+        "xyz": [
+          1.55,
+          -0.28,
+          5.7
+        ],
+        "dim": [
+          8.88,
+          1.75,
+          2.32
+        ],
+        "material": "moth_green",
+        "uv": [
+          376,
+          76
+        ]
+      },
+      {
+        "name": "curved_hindwing_feather_2",
+        "xyz": [
+          1.55,
+          -0.28,
+          7.9
+        ],
+        "dim": [
+          8.06,
+          1.75,
+          2.32
+        ],
+        "material": "moth_green",
+        "uv": [
+          404,
+          76
+        ]
+      },
+      {
+        "name": "curved_hindwing_feather_3",
+        "xyz": [
+          1.55,
+          -0.28,
+          10.1
+        ],
+        "dim": [
+          7.24,
+          1.75,
+          2.32
+        ],
+        "material": "moth_green",
+        "uv": [
+          432,
+          76
+        ]
+      },
+      {
+        "name": "hind_raised_vein_node_6_0",
+        "xyz": [
+          3.0,
+          -5.46,
+          6.5
+        ],
+        "dim": [
+          1.06,
+          0.55,
+          1.0
+        ],
+        "material": "moth_light",
+        "uv": [
+          458,
+          76
+        ]
+      },
+      {
+        "name": "hind_raised_vein_node_6_1",
+        "xyz": [
+          5.5,
+          -4.77,
+          6.5
+        ],
+        "dim": [
+          1.06,
+          0.55,
+          1.0
+        ],
+        "material": "moth_light",
+        "uv": [
+          468,
+          76
+        ]
+      },
+      {
+        "name": "hind_raised_vein_node_6_2",
+        "xyz": [
+          8.0,
+          -4.08,
+          6.5
+        ],
+        "dim": [
+          1.06,
+          0.55,
+          1.0
+        ],
+        "material": "moth_light",
+        "uv": [
+          478,
+          76
+        ]
+      },
+      {
+        "name": "hind_raised_vein_node_6_3",
+        "xyz": [
+          10.5,
+          -3.3899999999999997,
+          6.5
+        ],
+        "dim": [
+          1.06,
+          0.55,
+          1.0
+        ],
+        "material": "moth_light",
+        "uv": [
+          488,
+          76
+        ]
+      },
+      {
+        "name": "hindwing_scallop_0",
+        "xyz": [
+          2.45,
+          -1.52,
+          3.95
+        ],
+        "dim": [
+          8.7,
+          1.48,
+          1.5
+        ],
+        "material": "moth_wing",
+        "uv": [
+          2,
+          86
+        ]
+      },
+      {
+        "name": "hindwing_lunule_0",
+        "xyz": [
+          9.6,
+          -1.69,
+          4.35
+        ],
+        "dim": [
+          0.92,
+          0.58,
+          0.72
+        ],
+        "material": "moth_pattern",
+        "uv": [
+          28,
+          86
+        ]
+      },
+      {
+        "name": "hindwing_scallop_1",
+        "xyz": [
+          2.45,
+          -1.42,
+          5.61
+        ],
+        "dim": [
+          7.85,
+          1.48,
+          1.5
+        ],
+        "material": "moth_green",
+        "uv": [
+          36,
+          86
+        ]
+      },
+      {
+        "name": "hindwing_lunule_1",
+        "xyz": [
+          8.75,
+          -1.59,
+          6.01
+        ],
+        "dim": [
+          0.92,
+          0.58,
+          0.72
+        ],
+        "material": "moth_pattern",
+        "uv": [
+          60,
+          86
+        ]
+      },
+      {
+        "name": "hindwing_scallop_2",
+        "xyz": [
+          2.45,
+          -1.32,
+          7.27
+        ],
+        "dim": [
+          7.0,
+          1.48,
+          1.5
+        ],
+        "material": "moth_wing",
+        "uv": [
+          68,
+          86
+        ]
+      },
+      {
+        "name": "hindwing_lunule_2",
+        "xyz": [
+          7.9,
+          -1.49,
+          7.67
+        ],
+        "dim": [
+          0.92,
+          0.58,
+          0.72
+        ],
+        "material": "moth_pattern",
+        "uv": [
+          90,
+          86
+        ]
+      },
+      {
+        "name": "hindwing_scallop_3",
+        "xyz": [
+          2.45,
+          -1.22,
+          8.93
+        ],
+        "dim": [
+          6.15,
+          1.48,
+          1.5
+        ],
+        "material": "moth_green",
+        "uv": [
+          98,
+          86
+        ]
+      },
+      {
+        "name": "hindwing_lunule_3",
+        "xyz": [
+          7.05,
+          -1.39,
+          9.33
+        ],
+        "dim": [
+          0.92,
+          0.58,
+          0.72
+        ],
+        "material": "moth_pattern",
+        "uv": [
+          120,
+          86
+        ]
+      },
+      {
+        "name": "hindwing_scallop_4",
+        "xyz": [
+          2.45,
+          -1.12,
+          10.59
+        ],
+        "dim": [
+          5.3,
+          1.48,
+          1.5
+        ],
+        "material": "moth_wing",
+        "uv": [
+          128,
+          86
+        ]
+      },
+      {
+        "name": "hindwing_lunule_4",
+        "xyz": [
+          6.2,
+          -1.29,
+          10.99
+        ],
+        "dim": [
+          0.92,
+          0.58,
+          0.72
+        ],
+        "material": "moth_pattern",
+        "uv": [
+          148,
+          86
+        ]
+      }
+    ]
+  },
+  "animations": {
+    "left_wing.zRot": "entity.isResting() ? 1.04F : 0.44F + Mth.sin(ageInTicks * 1.25F) * 0.69F",
+    "right_wing.zRot": "entity.isResting() ? -1.04F : -0.44F - Mth.sin(ageInTicks * 1.25F) * 0.69F",
+    "left_hindwing.zRot": "entity.isResting() ? 0.88F : 0.38F + Mth.sin(ageInTicks * 1.25F - 0.34F) * 0.56F",
+    "right_hindwing.zRot": "entity.isResting() ? -0.88F : -0.38F - Mth.sin(ageInTicks * 1.25F - 0.34F) * 0.56F",
+    "left_wing.yRot": "entity.isResting() ? 0.03F : 0.05F + Mth.sin(ageInTicks * 1.25F) * 0.06F",
+    "right_wing.yRot": "entity.isResting() ? -0.03F : -0.05F - Mth.sin(ageInTicks * 1.25F) * 0.06F",
+    "left_hindwing.yRot": "entity.isResting() ? 0.03F : 0.03F + Mth.sin(ageInTicks * 1.25F - 0.34F) * 0.04F",
+    "right_hindwing.yRot": "entity.isResting() ? -0.03F : -0.03F - Mth.sin(ageInTicks * 1.25F - 0.34F) * 0.04F",
+    "head.yRot": "Mth.sin(ageInTicks * 0.08F) * 0.05F",
+    "body.xRot": "entity.isResting() ? 0.0F : Mth.sin(ageInTicks * 0.24F) * 0.025F",
+    "left_wing.xRot": "entity.isResting() ? 0.0F : Mth.sin(ageInTicks * 1.25F + 0F) * 0.08F + recoil * 0.22F",
+    "right_wing.xRot": "entity.isResting() ? 0.0F : Mth.sin(ageInTicks * 1.25F + 0F) * 0.08F + recoil * 0.22F",
+    "left_hindwing.xRot": "entity.isResting() ? 0.0F : Mth.sin(ageInTicks * 1.25F + -0.34F) * 0.08F + recoil * 0.22F",
+    "right_hindwing.xRot": "entity.isResting() ? 0.0F : Mth.sin(ageInTicks * 1.25F + -0.34F) * 0.08F + recoil * 0.22F",
+    "head.xRot": "Mth.clamp(headPitch, -30.0F, 30.0F) * 0.0174533F * 0.15F",
+    "body.yRot": "entity.isResting() ? 0.0F : Mth.sin(ageInTicks * 0.16F) * 0.055F"
+  },
+  "part_pivots": {
+    "left_wing": [
+      -3.05,
+      -4.25,
+      -1.8
+    ],
+    "right_wing": [
+      3.05,
+      -4.25,
+      -1.8
+    ],
+    "left_hindwing": [
+      -2.65,
+      -2.15,
+      4.7
+    ],
+    "right_hindwing": [
+      2.65,
+      -2.15,
+      4.7
+    ],
+    "body": [
+      0,
+      -0.04,
+      4.1
+    ],
+    "head": [
+      0,
+      -2.83,
+      -1.2
+    ]
+  }
+}

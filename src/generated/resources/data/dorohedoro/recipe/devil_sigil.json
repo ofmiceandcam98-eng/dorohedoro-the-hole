@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:bone_block"
+    },
+    "E": {
+      "item": "minecraft:emerald"
+    },
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "O": {
+      "item": "minecraft:obsidian"
+    },
+    "S": {
+      "item": "dorohedoro:smoke_residue"
+    }
+  },
+  "pattern": [
+    "OGO",
+    "SBS",
+    "OEO"
+  ],
+  "result": {
+    "count": 1,
+    "id": "dorohedoro:devil_sigil"
+  }
+}

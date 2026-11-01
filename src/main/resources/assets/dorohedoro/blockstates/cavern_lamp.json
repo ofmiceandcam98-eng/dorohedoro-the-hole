@@ -1,0 +1,20 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "hanging": "false"
+      },
+      "apply": {
+        "model": "dorohedoro:block/cavern_lamp_standing"
+      }
+    },
+    {
+      "when": {
+        "hanging": "true"
+      },
+      "apply": {
+        "model": "dorohedoro:block/cavern_lamp_hanging"
+      }
+    }
+  ]
+}

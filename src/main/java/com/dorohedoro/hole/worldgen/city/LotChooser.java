@@ -12,6 +12,76 @@ final class LotChooser {
             return roll < 0.4F ? LotType.RUBBLE : roll < 0.75F ? LotType.VACANT : LotType.JUNKYARD;
         }
         boolean large = rect.width() >= 20 && rect.depth() >= 20;
+        // Pass 25: small lots must support real small HOMES, not pretend tower blocks.
+        // Deterministic per-lot roll already comes from the plan's seeded stream.
+        if (plan.settings.worldDetailVersion() >= 14 && rect.width() <= 15 && rect.depth() <= 16) {
+            if (district == District.RESIDENTIAL) {
+                if (roll < .68F) return LotType.TENEMENT;
+                if (roll < .87F) return LotType.SHOP; // home above a tiny business
+                if (roll < .93F) return LotType.CLINIC;
+                return LotType.COMMUNAL_COURT;
+            }
+            if (district == District.MARKET) {
+                if (roll < .38F) return LotType.TENEMENT;
+                if (roll < .83F) return LotType.SHOP;
+                return LotType.MARKET_STALLS;
+            }
+            if (district == District.WATERFRONT && roll < .66F) return LotType.TENEMENT;
+        }
+        // Version 2 establishes recognizable multi-superblock neighborhoods. A repair-strip
+        // should not have the same lot mix as a warehouse belt or surviving residential pocket.
+        // All selections are seed/coordinate derived; the old layout is retained for saves v0/v1.
+        if (plan.settings.worldDetailVersion() >= 2) {
+            int focus = CityArchitecture.neighborhood(plan.seed, rect.centerX(), rect.centerZ());
+            if (district == District.RESIDENTIAL) {
+                if (focus == 0 && roll < .17F) return LotType.SHOP; // mixed storefront street
+                if (focus == 1 && roll > .53F) return LotType.APARTMENT; // taller residential pocket
+                if (focus == 2 && roll < .14F) return roll < .05F ? LotType.PARK : LotType.GREENHOUSE;
+                if (focus == 4 && roll < .12F) return LotType.TENEMENT; // older low-rise blocks
+            } else if (district == District.INDUSTRIAL) {
+                if (focus == 0 && roll < .21F) return LotType.SHOP; // repair-shop neighborhood
+                if (focus == 1 && roll < .40F) return LotType.WAREHOUSE; // freight yards
+                if (focus == 2 && roll < .42F) return LotType.FACTORY; // manufacturing belt
+                if (focus == 4 && roll < .25F) return LotType.JUNKYARD; // dismantling yards
+            } else if (district == District.MARKET) {
+                if (focus == 3 && roll < .42F) return LotType.MARKET_STALLS;
+                if (focus == 4 && roll < .30F) return LotType.SHOP;
+            } else if (district == District.DERELICT) {
+                if (focus == 0 && roll < .25F) return LotType.TENEMENT; // abandoned housing rows
+                if (focus == 2 && roll < .25F) return LotType.WAREHOUSE; // gutted depots
+            } else if (district == District.OUTSKIRTS) {
+                if (focus == 5 && roll < .20F) return LotType.TENEMENT; // surviving fringe hamlets
+            }
+        }
+        // Old saves keep their previous lot identity, while new layouts mix frontage types
+        // within districts rather than repeating wall-to-wall identical factories.
+        if (plan.settings.worldDetailVersion() > 0) {
+            if (district == District.INDUSTRIAL) {
+                if (roll < .12F) return LotType.SHOP; // repair businesses near factories
+                if (roll < .39F) return LotType.FACTORY;
+                if (roll < .62F) return LotType.WAREHOUSE;
+                if (roll < .81F) return LotType.JUNKYARD;
+                if (roll < .90F) return LotType.TENEMENT;
+                return LotType.VACANT;
+            }
+            if (district == District.MARKET && rect.width() >= 19 && roll > .75F) {
+                return roll > .88F ? LotType.APARTMENT : LotType.WAREHOUSE;
+            }
+            if (district == District.DERELICT) {
+                // A derelict district contains recognizable *buildings*, not a repeating sea
+                // of flat rubble: abandoned tenements, boarded shops and gutted warehouses
+                // alongside broken empty lots and scrap yards.
+                if (roll < .15F) return LotType.RUBBLE;
+                if (roll < .29F) return LotType.JUNKYARD;
+                if (roll < .40F) return LotType.VACANT;
+                if (roll < .47F) return LotType.PARK;
+                if (roll < .54F) return LotType.NURSERY;
+                if (roll < .75F) return LotType.TENEMENT;
+                if (roll < .87F) return LotType.WAREHOUSE;
+                if (roll < .95F) return LotType.SHOP;
+                return LotType.FACTORY;
+            }
+        }
         return switch (district) {
             case RESIDENTIAL -> {
                 if (roll < 0.02F) yield LotType.NURSERY;

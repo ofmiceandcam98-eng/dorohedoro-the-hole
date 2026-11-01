@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "dorohedoro:sludge_gland"
+    },
+    {
+      "item": "dorohedoro:sludge_gland"
+    },
+    {
+      "item": "minecraft:clay_ball"
+    }
+  ],
+  "result": {
+    "id": "minecraft:slime_ball",
+    "count": 2
+  }
+}

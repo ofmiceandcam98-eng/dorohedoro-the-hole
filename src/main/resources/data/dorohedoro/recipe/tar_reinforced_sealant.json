@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "dorohedoro:coagulated_tar"
+    },
+    {
+      "item": "dorohedoro:bitumen"
+    },
+    {
+      "item": "minecraft:clay_ball"
+    }
+  ],
+  "result": {
+    "id": "dorohedoro:sewer_sealant",
+    "count": 2
+  }
+}

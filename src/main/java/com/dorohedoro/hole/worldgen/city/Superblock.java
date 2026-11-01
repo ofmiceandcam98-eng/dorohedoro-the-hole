@@ -16,11 +16,13 @@ public record Superblock(int i, int j, Rect area, List<Lot> lots) {
         Line east = plan.xLine(i + 1);
         Line north = plan.zLine(j);
         Line south = plan.zLine(j + 1);
+        // Extra verge only in v3. Slightly bent avenues can never clip a building footprint.
+        int verge = plan.settings.worldDetailVersion() >= 8 ? 4 : plan.settings.worldDetailVersion() >= 3 ? 6 : 0;
         Rect area = new Rect(
-                west.center() + west.halfWidth() + 1,
-                north.center() + north.halfWidth() + 1,
-                east.center() - east.halfWidth() - 1,
-                south.center() - south.halfWidth() - 1);
+                west.center() + west.halfWidth() + 1 + verge,
+                north.center() + north.halfWidth() + 1 + verge,
+                east.center() - east.halfWidth() - 1 - verge,
+                south.center() - south.halfWidth() - 1 - verge);
 
         long hash = plan.blockHash(i, j);
         RandomSource random = new XoroshiroRandomSource(hash);
@@ -34,8 +36,37 @@ public record Superblock(int i, int j, Rect area, List<Lot> lots) {
                     Math.floorDiv(i, CityPlan.LANDMARK_REGION), Math.floorDiv(j, CityPlan.LANDMARK_REGION));
             if (site.blockI() == i && site.blockJ() == j) {
                 lots.add(new Lot(area, site.type(), district, random.nextLong()));
+            } else if (plan.settings.worldDetailVersion() >= 3
+                    && IrregularBlocks14.usesOffsetBlocks(hash) && area.width() >= 55 && area.depth() >= 55) {
+                // Offset local streets enter the main arterial network at both sides. Their
+                // perpendicular 5-block alleys connect the stepped diagonal segments.
+                for (Rect parcel : IrregularBlocks14.parcels(area, hash,
+                        plan.settings.worldDetailVersion() >= 13 && DenseCity25.isDenseDistrict(district))) {
+                    split(plan, parcel, district, 1, random, lots);
+                }
             } else {
                 split(plan, area, district, 0, random, lots);
+            }
+        }
+        // New-world diagonals require a building-free right-of-way. Preserve
+        // landmarks and spawn supplies rather than chopping unique structures.
+        if (plan.settings.worldDetailVersion() >= 3 && !(i == -1 && j == -1)) {
+            CityPlan.LandmarkSite protectedSite = plan.landmarkSite(
+                    Math.floorDiv(i, CityPlan.LANDMARK_REGION), Math.floorDiv(j, CityPlan.LANDMARK_REGION));
+            if (protectedSite.blockI() != i || protectedSite.blockJ() != j) {
+                // Preserve neighborhood activity along the new boulevard instead of
+                // creating long empty lots: reuse actual survival-accessible open lots.
+                // The diagonal carriageway itself is cleared and paved afterward.
+                lots.replaceAll(lot -> {
+                    if (!DiagonalBoulevards14.intersects(plan.seed, lot.rect())) return lot;
+                    LotType edgeUse = switch (district) {
+                        case INDUSTRIAL, OUTSKIRTS -> LotType.JUNKYARD;
+                        case MARKET -> LotType.MARKET_STALLS;
+                        case DERELICT -> LotType.RUBBLE;
+                        default -> LotType.VACANT;
+                    };
+                    return new Lot(lot.rect(), edgeUse, district, lot.hash());
+                });
             }
         }
         return new Superblock(i, j, area, List.copyOf(lots));
@@ -76,18 +107,31 @@ public record Superblock(int i, int j, Rect area, List<Lot> lots) {
     }
 
     private static void split(CityPlan plan, Rect rect, District district, int depth, RandomSource random, List<Lot> lots) {
+        boolean detailed = plan.settings.worldDetailVersion() > 0;
+        // Opt-in v13 only: high-density housing/shopfronts and narrower inner streets.
+        // Retain larger working yards and keep graveyard/outskirts less built-up.
+        boolean dense = plan.settings.worldDetailVersion() >= 13 && DenseCity25.isDenseDistrict(district);
         int minLot = district == District.INDUSTRIAL ? 16 : 11;
-        int maxLot = switch (district) {
+        int maxLot = dense ? DenseCity25.maxLot(district) : switch (district) {
             case INDUSTRIAL, OUTSKIRTS -> 44;
             case DERELICT, GRAVEYARD -> 34;
             default -> 26;
         };
-        int gap = depth == 0 ? STREET_GAP : ALLEY_GAP;
+        if (detailed && depth > 0) {
+            // Historical RNG draw count remains identical for all pre-v13 worlds.
+            int span = dense ? 7 : 13;
+            maxLot += random.nextInt(span) - (span - 1) / 2;
+            maxLot = Math.max(minLot + 1, maxLot);
+        }
+        // 3-wide lanes are passable on foot, unlike 1-wide slits. Main tram,
+        // canal-rivers and arterial approaches retain their existing right of way.
+        int gap = dense ? DenseCity25.localStreetWidth(depth) : depth == 0 ? STREET_GAP : ALLEY_GAP;
         boolean canCutX = rect.width() >= minLot * 2 + gap;
         boolean canCutZ = rect.depth() >= minLot * 2 + gap;
         boolean smallEnough = rect.width() <= maxLot && rect.depth() <= maxLot;
 
-        if ((!canCutX && !canCutZ) || (smallEnough && random.nextFloat() < 0.35F)) {
+        float stopChance = dense ? 0.22F : detailed ? 0.57F : 0.35F;
+        if ((!canCutX && !canCutZ) || (smallEnough && random.nextFloat() < stopChance)) {
             lots.add(new Lot(rect, LotChooser.choose(plan, district, rect, random), district, random.nextLong()));
             return;
         }

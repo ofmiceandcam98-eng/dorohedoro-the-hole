@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "dorohedoro:rusted_plating"
+    },
+    {
+      "item": "dorohedoro:rusted_plating"
+    },
+    {
+      "item": "minecraft:iron_nugget"
+    },
+    {
+      "item": "minecraft:iron_nugget"
+    }
+  ],
+  "result": {
+    "id": "dorohedoro:rusted_industrial_sheet",
+    "count": 4
+  }
+}

@@ -52,14 +52,25 @@ final class Tower {
             flight(c, interior, floorY, style.stairs());
             windows(c, box, floorY, k == 0, style, hash);
             furnisher.furnish(c, k, interior, floorY);
+            if (c.hasWorldDetail()) WorldDetail.roomDetails(c, interior, floorY, k, hash);
         }
         // The south door is cut last so nothing above can wall it back in.
         int doorX = box.centerX();
-        c.door(doorX, GROUND_Y, box.z1(), Direction.NORTH, style.door());
+        // Keep new-world entrances interactable without requiring a powered iron door.
+        Block entrance = c.hasWorldDetail() && style.door() == Blocks.IRON_DOOR
+                ? Blocks.SPRUCE_DOOR : style.door();
+        c.door(doorX, GROUND_Y, box.z1(), Direction.NORTH, entrance);
         c.clear(new Rect(doorX, box.z1() - 1, doorX, box.z1() - 1), GROUND_Y, GROUND_Y + 1);
 
         roofDetail(c, box, top, hash, roof);
         pipes(c, box, top, hash);
+        if (c.hasWorldDetail()) {
+            WorldDetail.tower(c, box, floors, style, hash, roof);
+            if (c.hasArchitectureVariation()) ArchitecturePass13.tower(c, box, floors, style, hash, roof);
+        }
+        if (c.hasIrregularCity()) StructuralVolumes14.tower(c, box, floors, style, hash, roof);
+        if (c.hasLoreArchitecture()) LoreArchitecture19.tower(c, box, floors, style, hash, roof);
+        if (c.hasUrbanFabric()) UrbanFabric25.roof(c, box, top, hash, roof);
     }
 
     private static void corners(Canvas c, Rect box, int top, Style style) {
@@ -197,6 +208,10 @@ final class Tower {
 
     /** Ceiling light for a room. */
     static void lamp(Canvas c, int x, int floorY, int z) {
-        c.set(x, floorY + STOREY - 1, z, Blocks.LANTERN.defaultBlockState().setValue(LanternBlock.HANGING, true));
+        if (c.hasAtmosphere28()) {
+            ResidentialAtmosphere28.hang(c, x, floorY, z, c.hash(x, floorY, z));
+        } else {
+            c.set(x, floorY + STOREY - 1, z, Blocks.LANTERN.defaultBlockState().setValue(LanternBlock.HANGING, true));
+        }
     }
 }

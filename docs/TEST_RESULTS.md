@@ -33,11 +33,7 @@ Command: `bash tools/qa-world.sh <seed> <radius> <order>`. Each run is a real de
 
 Result: **8 of 10 seeds passed all 26 checks. 2 of 10 failed one check.** Raw output is in `docs/evidence/qa-summary.txt`.
 
-That table is the run before the district fix. Seeds -987654321 and 555 failed `multiple_districts` with only `[MARKET, OUTSKIRTS]` in range. `District.ofCell` now keeps outskirts at least 6 cells (768 blocks) from the origin.
-
-### 10-seed rerun with the district fix, commit `ca5eb9b`
-
-**All 10 seeds passed all 26 checks, 0 failures.** Seeds 2, 3, 42, 777, 1234567, -987654321, 20261030, 555 and 8675309 ran in the batch. Seed 1 failed to start because a concurrent `gradlew build` corrupted its compile, then passed when rerun alone (0 failures, 34.3 ms per chunk). ms per chunk ranged from 34.3 to 42.1. Raw output: `docs/evidence/qa-summary.txt`.
+**Fix applied, rerun pending at the time of writing:** seeds -987654321 and 555 failed `multiple_districts` with only `[MARKET, OUTSKIRTS]` in range. `District.ofCell` now keeps outskirts at least 6 cells (768 blocks) from the origin. See `docs/evidence/qa-summary.txt` for the rerun. If that file does not show all seeds passing, this is not yet confirmed.
 
 On every one of the 10 seeds, all other checks passed, including spawn, street reachability, building entry, resources, fluid leaks and ore in the city.
 
@@ -59,22 +55,7 @@ Same seed, chunks requested in opposite orders, per-chunk block-state hashes com
 | Full city, seed 42, radius 12 | **625 of 625 identical** | 75 of 625 identical |
 | Full city, seed 8675309, radius 12 | **624 of 625 identical** | 19 of 625 identical |
 
-With the district fix and the corrected hash:
-
-| Run | City layer (y≥64) |
-| --- | --- |
-| Seed 1 | 625 of 625 identical |
-| Seed 555 | 625 of 625 identical |
-| Seed 8675309, batch | **623 of 625 identical**, chunks -3,12 and -2,12 |
-| Seed 8675309, immediate rerun | 625 of 625 identical |
-
-**Open bug, cause unknown: intermittent mismatch on seed 8675309.** It has appeared in 3 of 5 comparisons on this seed, on chunks 1,2, then -3,12 and -2,12, then -3,12 and -2,12 again. Same seed and same code sometimes match fully, so this is not simply forward versus reverse order. Every direct block dump so far landed on a run that matched, so **the differing blocks have never been seen**.
-
-One real defect was found and fixed along the way: `HoleQa.hash` counted whether sections below the cutoff were all air, so a cave vine in an empty cavern section changed the city hash. That fix did not end the mismatch.
-
-What is known: seeds 1, 42 and 555 have not shown it, though they had only 1 to 2 comparisons each. The flagged result does not fail any gameplay check.
-
-Next step: make `HoleQa` write a per-column hash of y≥64 for every chunk on each run, so a bad run can be diffed afterwards without needing to predict which chunk to dump. Then loop seed 8675309 until it fires. Likely suspects to check first: something ticking or post-processing before the hash is taken, entities acting on blocks, and thread timing in chunk promotion. These are untested guesses.
+**Resolved false alarm, seed 8675309:** the 624 of 625 result came from the test, not the world. The mismatch moved between runs, which pointed at the measurement. `HoleQa.hash` still counted whether sections below the cutoff were all air, so one vanilla cave vine in an empty cavern section changed the city hash. With that fixed, seed 8675309 gives **625 of 625 identical**, and direct block comparison of chunks -3,12, -2,12 and 1,2 found 0 differences at y≥64. Evidence: `docs/evidence/hash-fix-test.txt`. Earlier city-layer numbers in the table used the flawed hash, which can only have overstated differences.
 
 Bug found by this test: vanilla ore features replaced `tuff` in road surfaces, putting `deepslate_coal_ore` in the streets. Fixed by removing every feature-replaceable block from city palettes. QA now enforces this.
 
@@ -83,3 +64,29 @@ Below the city, whole-chunk hashes differ. A block-level diff of one chunk showe
 ## Known not verified
 
 Rendering, Create World screen, experimental warning, survival play, stairs beyond ground entry, chest loot in game, mob behaviour, vanilla structures, End access, multiplayer with real clients, tick performance, restart and save integrity.
+
+## Post-handoff source-only check (2026-10-31)
+
+Java 21 `javac` compiled the independent `CityHash` and new `CityElevation` classes.
+Five seed samples showed 0..11 blocks broad relief, zero spawn offset, and no >1-block
+adjacent elevation jumps in the sampled grid. Java compiler parsed all 34 active `.java`
+files without syntax errors. All biome JSON files and new preset JSON parsed successfully.
+Full NeoForge Gradle build could **not** run: Gradle 9.2.1 distribution was not cached and
+`services.gradle.org` could not be resolved. New content has **not been client/server tested**.
+See `docs/HANDOFF_TAKEOVER_2026-10-31.md`.
+
+## Opaque-smog atmosphere patch — 2026-10-31
+
+- New `HoleAtmosphere.java` and updated mod constructor: Java 21 parser accepted all 35 Java source files with 0 syntax errors.
+- Confirmed proposed API signatures in NeoForge 1.21.1 published javadocs.
+- Real NeoForge compile and client rendering **NOT RUN** here (Gradle wrapper distribution cannot be downloaded; network DNS unavailable).
+- Requires `/time set noon` and `/time set midnight` in a freshly loaded Hole to confirm no sky, sun, moon, or stars are rendered; verify rain, skylight, crops, mods and dimension transitions.
+
+
+## October 31 — Offline Phase 4 materials and portals checkpoint
+
+- `python tools/qa-phase4-materials.py`: 86/86 structure/source/reference checks pass, **not** Minecraft tests.
+- `python tools/qa-phase3-static.py`: 81/81 offline realm checks pass.
+- JDK 21 `JavacTask.parse`: 45 Java files, 0 syntax errors. Does NOT validate NeoForge API types or linking.
+- `node tools/make-textures.mjs`: produces nine distinct 16x item sprites plus existing block textures.
+- NeoForge `runData/build/runClient/runServer`: **not verified** due Gradle distribution missing on isolated environment.

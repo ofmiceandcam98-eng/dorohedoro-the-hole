@@ -1,6 +1,8 @@
 package com.dorohedoro.hole.worldgen;
 
 import com.dorohedoro.hole.worldgen.city.District;
+import com.dorohedoro.hole.worldgen.city.ColdDistricts17;
+import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import java.util.stream.Stream;
@@ -31,9 +33,11 @@ public final class HoleBiomeSource extends BiomeSource {
             RegistryOps.retrieveElement(HoleBiomes.GRAVEYARD),
             RegistryOps.retrieveElement(HoleBiomes.OUTSKIRTS),
             RegistryOps.retrieveElement(HoleBiomes.UNDERCITY),
+            RegistryOps.retrieveElement(HoleBiomes.FROSTBITTEN_INDUSTRIAL),
             RegistryOps.retrieveElement(Biomes.LUSH_CAVES),
             RegistryOps.retrieveElement(Biomes.DRIPSTONE_CAVES),
-            RegistryOps.retrieveElement(Biomes.DEEP_DARK)
+            RegistryOps.retrieveElement(Biomes.DEEP_DARK),
+            Codec.BOOL.optionalFieldOf("winter_districts", false).forGetter(src -> src.winterDistricts)
     ).apply(instance, instance.stable(HoleBiomeSource::new)));
 
     private final Holder<Biome> residential;
@@ -44,13 +48,15 @@ public final class HoleBiomeSource extends BiomeSource {
     private final Holder<Biome> graveyard;
     private final Holder<Biome> outskirts;
     private final Holder<Biome> undercity;
+    private final Holder<Biome> frostbittenIndustrial;
+    private final boolean winterDistricts;
     private final Holder<Biome> lushCaves;
     private final Holder<Biome> dripstoneCaves;
     private final Holder<Biome> deepDark;
 
     private HoleBiomeSource(Holder<Biome> residential, Holder<Biome> market, Holder<Biome> industrial, Holder<Biome> waterfront,
-                            Holder<Biome> derelict, Holder<Biome> graveyard, Holder<Biome> outskirts, Holder<Biome> undercity, Holder<Biome> lushCaves,
-                            Holder<Biome> dripstoneCaves, Holder<Biome> deepDark) {
+                            Holder<Biome> derelict, Holder<Biome> graveyard, Holder<Biome> outskirts, Holder<Biome> undercity, Holder<Biome> frostbittenIndustrial, Holder<Biome> lushCaves,
+                            Holder<Biome> dripstoneCaves, Holder<Biome> deepDark, boolean winterDistricts) {
         this.residential = residential;
         this.market = market;
         this.industrial = industrial;
@@ -59,6 +65,8 @@ public final class HoleBiomeSource extends BiomeSource {
         this.graveyard = graveyard;
         this.outskirts = outskirts;
         this.undercity = undercity;
+        this.frostbittenIndustrial = frostbittenIndustrial;
+        this.winterDistricts = winterDistricts;
         this.lushCaves = lushCaves;
         this.dripstoneCaves = dripstoneCaves;
         this.deepDark = deepDark;
@@ -71,7 +79,7 @@ public final class HoleBiomeSource extends BiomeSource {
 
     @Override
     protected Stream<Holder<Biome>> collectPossibleBiomes() {
-        return Stream.of(residential, market, industrial, waterfront, derelict, graveyard, outskirts, undercity, lushCaves, dripstoneCaves, deepDark);
+        return Stream.of(residential, market, industrial, waterfront, derelict, graveyard, outskirts, undercity, frostbittenIndustrial, lushCaves, dripstoneCaves, deepDark);
     }
 
     @Override
@@ -82,6 +90,7 @@ public final class HoleBiomeSource extends BiomeSource {
         if (blockY < UNDERGROUND_TOP) {
             return underground(blockX, blockY, blockZ, sampler);
         }
+        if (winterDistricts && ColdDistricts17.isCold(sampler, blockX, blockZ)) return frostbittenIndustrial;
         return switch (District.at(sampler, blockX, blockZ)) {
             case RESIDENTIAL -> residential;
             case MARKET -> market;

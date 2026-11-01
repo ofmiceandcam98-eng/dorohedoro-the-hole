@@ -1,0 +1,2181 @@
+{
+  "mob": "sewer_leech",
+  "class": "SewerLeech",
+  "texture_size": [
+    512,
+    256
+  ],
+  "groups": {
+    "seg_0": [
+      {
+        "name": "wet_highlight_0",
+        "xyz": [
+          -2.093,
+          -5.058,
+          -5.673
+        ],
+        "dim": [
+          2.87,
+          0.333,
+          1.705
+        ],
+        "material": "leech_bright",
+        "uv": [
+          2,
+          2
+        ]
+      },
+      {
+        "name": "left_mottling_0",
+        "xyz": [
+          -2.47,
+          -4.582,
+          -5.89
+        ],
+        "dim": [
+          1.885,
+          0.286,
+          1.317
+        ],
+        "material": "leech_bright",
+        "uv": [
+          16,
+          2
+        ]
+      },
+      {
+        "name": "rounded_ring_l_0",
+        "xyz": [
+          -2.977,
+          -3.867,
+          -6.2
+        ],
+        "dim": [
+          5.954,
+          5.55,
+          3.952
+        ],
+        "material": "leech_body",
+        "uv": [
+          28,
+          2
+        ]
+      },
+      {
+        "name": "round_ridge_0",
+        "xyz": [
+          -2.382,
+          -4.939,
+          -5.921
+        ],
+        "dim": [
+          4.763,
+          0.952,
+          3.255
+        ],
+        "material": "leech_dark",
+        "uv": [
+          52,
+          2
+        ]
+      },
+      {
+        "name": "sidefold_0_l",
+        "xyz": [
+          -3.211,
+          -2.856,
+          -5.657
+        ],
+        "dim": [
+          0.78,
+          3.608,
+          2.325
+        ],
+        "material": "leech_bright",
+        "uv": [
+          74,
+          2
+        ]
+      },
+      {
+        "name": "sidefold_0_r",
+        "xyz": [
+          2.522,
+          -2.856,
+          -5.657
+        ],
+        "dim": [
+          0.78,
+          3.608,
+          2.325
+        ],
+        "material": "leech_bright",
+        "uv": [
+          86,
+          2
+        ]
+      },
+      {
+        "name": "dorsal_crinkle_0",
+        "xyz": [
+          -1.5,
+          -4.8,
+          -6.2
+        ],
+        "dim": [
+          3.0,
+          0.4,
+          1.0
+        ],
+        "material": "leech_bright",
+        "uv": [
+          98,
+          2
+        ]
+      },
+      {
+        "name": "underside_ridge_0",
+        "xyz": [
+          -1.7,
+          1.1,
+          -6.2
+        ],
+        "dim": [
+          3.4,
+          0.5,
+          1.6
+        ],
+        "material": "leech_dark",
+        "uv": [
+          110,
+          2
+        ]
+      }
+    ],
+    "seg_1": [
+      {
+        "name": "ventral_mucus",
+        "xyz": [
+          -0.585,
+          0.535,
+          -1.318
+        ],
+        "dim": [
+          1.17,
+          1.785,
+          1.24
+        ],
+        "material": "leech_slime",
+        "uv": [
+          126,
+          2
+        ]
+      },
+      {
+        "name": "wet_highlight_1",
+        "xyz": [
+          -2.457,
+          -4.879,
+          -2.341
+        ],
+        "dim": [
+          3.37,
+          0.333,
+          1.705
+        ],
+        "material": "leech_bright",
+        "uv": [
+          138,
+          2
+        ]
+      },
+      {
+        "name": "left_mottling_1",
+        "xyz": [
+          -2.99,
+          -4.582,
+          -2.558
+        ],
+        "dim": [
+          1.885,
+          0.286,
+          1.317
+        ],
+        "material": "leech_bright",
+        "uv": [
+          154,
+          2
+        ]
+      },
+      {
+        "name": "under_slime_l_1",
+        "xyz": [
+          -1.966,
+          0.297,
+          -1.008
+        ],
+        "dim": [
+          0.611,
+          1.725,
+          0.744
+        ],
+        "material": "leech_slime",
+        "uv": [
+          166,
+          2
+        ]
+      },
+      {
+        "name": "under_slime_r_1",
+        "xyz": [
+          1.966,
+          0.297,
+          -1.008
+        ],
+        "dim": [
+          0.611,
+          1.428,
+          0.744
+        ],
+        "material": "leech_slime",
+        "uv": [
+          174,
+          2
+        ]
+      },
+      {
+        "name": "rounded_ring_l_1",
+        "xyz": [
+          -3.42,
+          -3.867,
+          -2.868
+        ],
+        "dim": [
+          7.176,
+          5.99,
+          3.952
+        ],
+        "material": "leech_bright",
+        "uv": [
+          182,
+          2
+        ]
+      },
+      {
+        "name": "round_ridge_1",
+        "xyz": [
+          -2.703,
+          -4.939,
+          -2.588
+        ],
+        "dim": [
+          5.741,
+          0.952,
+          3.255
+        ],
+        "material": "leech_dark",
+        "uv": [
+          210,
+          2
+        ]
+      },
+      {
+        "name": "sidefold_1_l",
+        "xyz": [
+          -3.654,
+          -2.856,
+          -2.325
+        ],
+        "dim": [
+          0.78,
+          3.894,
+          2.325
+        ],
+        "material": "leech_bright",
+        "uv": [
+          234,
+          2
+        ]
+      },
+      {
+        "name": "sidefold_1_r",
+        "xyz": [
+          3.301,
+          -2.856,
+          -2.325
+        ],
+        "dim": [
+          0.78,
+          3.894,
+          2.325
+        ],
+        "material": "leech_bright",
+        "uv": [
+          246,
+          2
+        ]
+      },
+      {
+        "name": "dorsal_crinkle_1",
+        "xyz": [
+          -2.5,
+          -4.8,
+          -2.868
+        ],
+        "dim": [
+          5,
+          0.4,
+          1.0
+        ],
+        "material": "leech_bright",
+        "uv": [
+          258,
+          2
+        ]
+      }
+    ],
+    "seg_2": [
+      {
+        "name": "wet_highlight_2",
+        "xyz": [
+          -2.821,
+          -5.058,
+          0.992
+        ],
+        "dim": [
+          3.869,
+          0.333,
+          1.705
+        ],
+        "material": "leech_bright",
+        "uv": [
+          274,
+          2
+        ]
+      },
+      {
+        "name": "left_mottling_2",
+        "xyz": [
+          -3.51,
+          -4.582,
+          0.775
+        ],
+        "dim": [
+          1.885,
+          0.286,
+          1.317
+        ],
+        "material": "leech_bright",
+        "uv": [
+          290,
+          2
+        ]
+      },
+      {
+        "name": "rounded_ring_l_2",
+        "xyz": [
+          -3.965,
+          -3.867,
+          0.465
+        ],
+        "dim": [
+          8.398,
+          6.431,
+          3.952
+        ],
+        "material": "leech_body",
+        "uv": [
+          302,
+          2
+        ]
+      },
+      {
+        "name": "round_ridge_2",
+        "xyz": [
+          -3.125,
+          -4.939,
+          0.744
+        ],
+        "dim": [
+          6.718,
+          0.952,
+          3.255
+        ],
+        "material": "leech_dark",
+        "uv": [
+          332,
+          2
+        ]
+      },
+      {
+        "name": "sidefold_2_l",
+        "xyz": [
+          -4.199,
+          -2.856,
+          1.008
+        ],
+        "dim": [
+          0.78,
+          4.18,
+          2.325
+        ],
+        "material": "leech_bright",
+        "uv": [
+          358,
+          2
+        ]
+      },
+      {
+        "name": "sidefold_2_r",
+        "xyz": [
+          3.978,
+          -2.856,
+          1.008
+        ],
+        "dim": [
+          0.78,
+          4.18,
+          2.325
+        ],
+        "material": "leech_bright",
+        "uv": [
+          370,
+          2
+        ]
+      },
+      {
+        "name": "dorsal_crinkle_2",
+        "xyz": [
+          -2.5,
+          -4.8,
+          0.465
+        ],
+        "dim": [
+          5,
+          0.4,
+          1.0
+        ],
+        "material": "leech_bright",
+        "uv": [
+          382,
+          2
+        ]
+      },
+      {
+        "name": "underside_ridge_2",
+        "xyz": [
+          -1.7,
+          1.1,
+          0.465
+        ],
+        "dim": [
+          3.4,
+          0.5,
+          1.6
+        ],
+        "material": "leech_dark",
+        "uv": [
+          398,
+          2
+        ]
+      }
+    ],
+    "seg_3": [
+      {
+        "name": "ventral_mucus",
+        "xyz": [
+          -0.585,
+          0.535,
+          5.347
+        ],
+        "dim": [
+          1.17,
+          1.785,
+          1.24
+        ],
+        "material": "leech_slime",
+        "uv": [
+          414,
+          2
+        ]
+      },
+      {
+        "name": "wet_highlight_3",
+        "xyz": [
+          -3.185,
+          -4.879,
+          4.325
+        ],
+        "dim": [
+          4.368,
+          0.333,
+          1.705
+        ],
+        "material": "leech_bright",
+        "uv": [
+          426,
+          2
+        ]
+      },
+      {
+        "name": "left_mottling_3",
+        "xyz": [
+          -4.03,
+          -4.582,
+          4.107
+        ],
+        "dim": [
+          1.885,
+          0.286,
+          1.317
+        ],
+        "material": "leech_bright",
+        "uv": [
+          444,
+          2
+        ]
+      },
+      {
+        "name": "under_slime_l_3",
+        "xyz": [
+          -2.548,
+          0.297,
+          5.657
+        ],
+        "dim": [
+          0.611,
+          1.725,
+          0.744
+        ],
+        "material": "leech_slime",
+        "uv": [
+          456,
+          2
+        ]
+      },
+      {
+        "name": "under_slime_r_3",
+        "xyz": [
+          2.548,
+          0.297,
+          5.657
+        ],
+        "dim": [
+          0.611,
+          1.428,
+          0.744
+        ],
+        "material": "leech_slime",
+        "uv": [
+          464,
+          2
+        ]
+      },
+      {
+        "name": "rounded_ring_l_3",
+        "xyz": [
+          -4.651,
+          -3.867,
+          3.798
+        ],
+        "dim": [
+          9.62,
+          6.695,
+          3.952
+        ],
+        "material": "leech_bright",
+        "uv": [
+          472,
+          2
+        ]
+      },
+      {
+        "name": "round_ridge_3",
+        "xyz": [
+          -3.689,
+          -4.939,
+          4.077
+        ],
+        "dim": [
+          7.696,
+          0.952,
+          3.255
+        ],
+        "material": "leech_dark",
+        "uv": [
+          2,
+          17
+        ]
+      },
+      {
+        "name": "sidefold_3_l",
+        "xyz": [
+          -4.885,
+          -2.856,
+          4.34
+        ],
+        "dim": [
+          0.78,
+          4.352,
+          2.325
+        ],
+        "material": "leech_bright",
+        "uv": [
+          30,
+          17
+        ]
+      },
+      {
+        "name": "sidefold_3_r",
+        "xyz": [
+          4.514,
+          -2.856,
+          4.34
+        ],
+        "dim": [
+          0.78,
+          4.352,
+          2.325
+        ],
+        "material": "leech_bright",
+        "uv": [
+          42,
+          17
+        ]
+      },
+      {
+        "name": "dorsal_crinkle_3",
+        "xyz": [
+          -2.5,
+          -4.8,
+          3.797
+        ],
+        "dim": [
+          5,
+          0.4,
+          1.0
+        ],
+        "material": "leech_bright",
+        "uv": [
+          54,
+          17
+        ]
+      }
+    ],
+    "seg_4": [
+      {
+        "name": "wet_highlight_4",
+        "xyz": [
+          -3.185,
+          -5.058,
+          7.657
+        ],
+        "dim": [
+          4.368,
+          0.333,
+          1.705
+        ],
+        "material": "leech_bright",
+        "uv": [
+          70,
+          17
+        ]
+      },
+      {
+        "name": "left_mottling_4",
+        "xyz": [
+          -4.03,
+          -4.582,
+          7.44
+        ],
+        "dim": [
+          1.885,
+          0.286,
+          1.317
+        ],
+        "material": "leech_bright",
+        "uv": [
+          88,
+          17
+        ]
+      },
+      {
+        "name": "rounded_ring_l_4",
+        "xyz": [
+          -4.213,
+          -3.867,
+          7.13
+        ],
+        "dim": [
+          8.398,
+          6.255,
+          3.952
+        ],
+        "material": "leech_body",
+        "uv": [
+          100,
+          17
+        ]
+      },
+      {
+        "name": "round_ridge_4",
+        "xyz": [
+          -3.374,
+          -4.939,
+          7.409
+        ],
+        "dim": [
+          6.718,
+          0.952,
+          3.255
+        ],
+        "material": "leech_dark",
+        "uv": [
+          130,
+          17
+        ]
+      },
+      {
+        "name": "sidefold_4_l",
+        "xyz": [
+          -4.447,
+          -2.856,
+          7.673
+        ],
+        "dim": [
+          0.78,
+          4.065,
+          2.325
+        ],
+        "material": "leech_bright",
+        "uv": [
+          156,
+          17
+        ]
+      },
+      {
+        "name": "sidefold_4_r",
+        "xyz": [
+          3.73,
+          -2.856,
+          7.673
+        ],
+        "dim": [
+          0.78,
+          4.065,
+          2.325
+        ],
+        "material": "leech_bright",
+        "uv": [
+          168,
+          17
+        ]
+      },
+      {
+        "name": "dorsal_crinkle_4",
+        "xyz": [
+          -2.5,
+          -4.8,
+          7.13
+        ],
+        "dim": [
+          5,
+          0.4,
+          1.0
+        ],
+        "material": "leech_bright",
+        "uv": [
+          180,
+          17
+        ]
+      },
+      {
+        "name": "underside_ridge_4",
+        "xyz": [
+          -1.7,
+          1.1,
+          7.13
+        ],
+        "dim": [
+          3.4,
+          0.5,
+          1.6
+        ],
+        "material": "leech_dark",
+        "uv": [
+          196,
+          17
+        ]
+      }
+    ],
+    "seg_5": [
+      {
+        "name": "ventral_mucus",
+        "xyz": [
+          -0.585,
+          0.535,
+          12.013
+        ],
+        "dim": [
+          1.17,
+          1.785,
+          1.24
+        ],
+        "material": "leech_slime",
+        "uv": [
+          212,
+          17
+        ]
+      },
+      {
+        "name": "wet_highlight_5",
+        "xyz": [
+          -2.821,
+          -4.879,
+          10.989
+        ],
+        "dim": [
+          3.869,
+          0.333,
+          1.705
+        ],
+        "material": "leech_bright",
+        "uv": [
+          224,
+          17
+        ]
+      },
+      {
+        "name": "left_mottling_5",
+        "xyz": [
+          -3.51,
+          -4.582,
+          10.773
+        ],
+        "dim": [
+          1.885,
+          0.286,
+          1.317
+        ],
+        "material": "leech_bright",
+        "uv": [
+          240,
+          17
+        ]
+      },
+      {
+        "name": "under_slime_l_5",
+        "xyz": [
+          -2.257,
+          0.297,
+          12.322
+        ],
+        "dim": [
+          0.611,
+          1.725,
+          0.744
+        ],
+        "material": "leech_slime",
+        "uv": [
+          252,
+          17
+        ]
+      },
+      {
+        "name": "under_slime_r_5",
+        "xyz": [
+          2.257,
+          0.297,
+          12.322
+        ],
+        "dim": [
+          0.611,
+          1.428,
+          0.744
+        ],
+        "material": "leech_slime",
+        "uv": [
+          260,
+          17
+        ]
+      },
+      {
+        "name": "rounded_ring_l_5",
+        "xyz": [
+          -3.765,
+          -3.867,
+          10.463
+        ],
+        "dim": [
+          7.176,
+          5.814,
+          3.952
+        ],
+        "material": "leech_bright",
+        "uv": [
+          268,
+          17
+        ]
+      },
+      {
+        "name": "round_ridge_5",
+        "xyz": [
+          -3.047,
+          -4.939,
+          10.742
+        ],
+        "dim": [
+          5.741,
+          0.952,
+          3.255
+        ],
+        "material": "leech_dark",
+        "uv": [
+          296,
+          17
+        ]
+      },
+      {
+        "name": "sidefold_5_l",
+        "xyz": [
+          -3.999,
+          -2.856,
+          11.005
+        ],
+        "dim": [
+          0.78,
+          3.779,
+          2.325
+        ],
+        "material": "leech_bright",
+        "uv": [
+          320,
+          17
+        ]
+      },
+      {
+        "name": "sidefold_5_r",
+        "xyz": [
+          2.956,
+          -2.856,
+          11.005
+        ],
+        "dim": [
+          0.78,
+          3.779,
+          2.325
+        ],
+        "material": "leech_bright",
+        "uv": [
+          332,
+          17
+        ]
+      },
+      {
+        "name": "dorsal_crinkle_5",
+        "xyz": [
+          -2.5,
+          -4.8,
+          10.463
+        ],
+        "dim": [
+          5,
+          0.4,
+          1.0
+        ],
+        "material": "leech_bright",
+        "uv": [
+          344,
+          17
+        ]
+      }
+    ],
+    "seg_6": [
+      {
+        "name": "wet_highlight_6",
+        "xyz": [
+          -2.457,
+          -5.058,
+          14.322
+        ],
+        "dim": [
+          3.37,
+          0.333,
+          1.705
+        ],
+        "material": "leech_bright",
+        "uv": [
+          360,
+          17
+        ]
+      },
+      {
+        "name": "left_mottling_6",
+        "xyz": [
+          -2.99,
+          -4.582,
+          14.105
+        ],
+        "dim": [
+          1.885,
+          0.286,
+          1.317
+        ],
+        "material": "leech_bright",
+        "uv": [
+          376,
+          17
+        ]
+      },
+      {
+        "name": "rounded_ring_l_6",
+        "xyz": [
+          -3.21,
+          -3.867,
+          13.795
+        ],
+        "dim": [
+          5.954,
+          5.374,
+          3.952
+        ],
+        "material": "leech_body",
+        "uv": [
+          388,
+          17
+        ]
+      },
+      {
+        "name": "round_ridge_6",
+        "xyz": [
+          -2.614,
+          -4.939,
+          14.074
+        ],
+        "dim": [
+          4.763,
+          0.952,
+          3.255
+        ],
+        "material": "leech_dark",
+        "uv": [
+          412,
+          17
+        ]
+      },
+      {
+        "name": "sidefold_6_l",
+        "xyz": [
+          -3.444,
+          -2.856,
+          14.338
+        ],
+        "dim": [
+          0.78,
+          3.493,
+          2.325
+        ],
+        "material": "leech_bright",
+        "uv": [
+          434,
+          17
+        ]
+      },
+      {
+        "name": "sidefold_6_r",
+        "xyz": [
+          2.289,
+          -2.856,
+          14.338
+        ],
+        "dim": [
+          0.78,
+          3.493,
+          2.325
+        ],
+        "material": "leech_bright",
+        "uv": [
+          446,
+          17
+        ]
+      },
+      {
+        "name": "dorsal_crinkle_6",
+        "xyz": [
+          -2.5,
+          -4.8,
+          13.795
+        ],
+        "dim": [
+          5,
+          0.4,
+          1.0
+        ],
+        "material": "leech_bright",
+        "uv": [
+          458,
+          17
+        ]
+      },
+      {
+        "name": "underside_ridge_6",
+        "xyz": [
+          -1.7,
+          1.1,
+          13.795
+        ],
+        "dim": [
+          3.4,
+          0.5,
+          1.6
+        ],
+        "material": "leech_dark",
+        "uv": [
+          474,
+          17
+        ]
+      }
+    ],
+    "seg_7": [
+      {
+        "name": "wet_highlight_7",
+        "xyz": [
+          -2.093,
+          -4.879,
+          17.655
+        ],
+        "dim": [
+          2.87,
+          0.333,
+          1.705
+        ],
+        "material": "leech_bright",
+        "uv": [
+          490,
+          17
+        ]
+      },
+      {
+        "name": "left_mottling_7",
+        "xyz": [
+          -2.47,
+          -4.582,
+          17.438
+        ],
+        "dim": [
+          1.885,
+          0.286,
+          1.317
+        ],
+        "material": "leech_bright",
+        "uv": [
+          2,
+          32
+        ]
+      },
+      {
+        "name": "under_slime_l_7",
+        "xyz": [
+          -1.674,
+          0.297,
+          18.988
+        ],
+        "dim": [
+          0.611,
+          1.725,
+          0.744
+        ],
+        "material": "leech_slime",
+        "uv": [
+          14,
+          32
+        ]
+      },
+      {
+        "name": "under_slime_r_7",
+        "xyz": [
+          1.674,
+          0.297,
+          18.988
+        ],
+        "dim": [
+          0.611,
+          1.428,
+          0.744
+        ],
+        "material": "leech_slime",
+        "uv": [
+          22,
+          32
+        ]
+      },
+      {
+        "name": "rounded_ring_l_7",
+        "xyz": [
+          -2.514,
+          -3.867,
+          17.128
+        ],
+        "dim": [
+          4.732,
+          4.934,
+          3.952
+        ],
+        "material": "leech_bright",
+        "uv": [
+          30,
+          32
+        ]
+      },
+      {
+        "name": "round_ridge_7",
+        "xyz": [
+          -2.041,
+          -4.939,
+          17.407
+        ],
+        "dim": [
+          3.786,
+          0.952,
+          3.255
+        ],
+        "material": "leech_dark",
+        "uv": [
+          52,
+          32
+        ]
+      },
+      {
+        "name": "sidefold_7_l",
+        "xyz": [
+          -2.748,
+          -2.856,
+          17.67
+        ],
+        "dim": [
+          0.78,
+          3.207,
+          2.325
+        ],
+        "material": "leech_bright",
+        "uv": [
+          72,
+          32
+        ]
+      },
+      {
+        "name": "sidefold_7_r",
+        "xyz": [
+          1.763,
+          -2.856,
+          17.67
+        ],
+        "dim": [
+          0.78,
+          3.207,
+          2.325
+        ],
+        "material": "leech_bright",
+        "uv": [
+          84,
+          32
+        ]
+      },
+      {
+        "name": "dorsal_crinkle_7",
+        "xyz": [
+          -1.5,
+          -4.8,
+          17.127
+        ],
+        "dim": [
+          3.0,
+          0.4,
+          1.0
+        ],
+        "material": "leech_bright",
+        "uv": [
+          96,
+          32
+        ]
+      }
+    ],
+    "mouth": [
+      {
+        "name": "sucker_outer",
+        "xyz": [
+          -5.2,
+          -4.522,
+          -10.075
+        ],
+        "dim": [
+          10.4,
+          6.069,
+          4.65
+        ],
+        "material": "leech_mouth",
+        "uv": [
+          108,
+          32
+        ]
+      },
+      {
+        "name": "sucker_inner",
+        "xyz": [
+          -3.9,
+          -3.451,
+          -11.315
+        ],
+        "dim": [
+          7.8,
+          4.046,
+          2.17
+        ],
+        "material": "leech_dark",
+        "uv": [
+          144,
+          32
+        ]
+      },
+      {
+        "name": "upper_lip",
+        "xyz": [
+          -4.94,
+          -4.879,
+          -11.005
+        ],
+        "dim": [
+          9.88,
+          1.309,
+          2.635
+        ],
+        "material": "leech_bright",
+        "uv": [
+          170,
+          32
+        ]
+      },
+      {
+        "name": "lower_lip",
+        "xyz": [
+          -4.94,
+          0.119,
+          -11.005
+        ],
+        "dim": [
+          9.88,
+          1.309,
+          2.635
+        ],
+        "material": "leech_bright",
+        "uv": [
+          200,
+          32
+        ]
+      },
+      {
+        "name": "mouth_side_-1",
+        "xyz": [
+          -5.07,
+          -4.284,
+          -11.47
+        ],
+        "dim": [
+          1.235,
+          4.998,
+          2.17
+        ],
+        "material": "leech_body",
+        "uv": [
+          230,
+          32
+        ]
+      },
+      {
+        "name": "mouth_side_1",
+        "xyz": [
+          3.835,
+          -4.284,
+          -11.47
+        ],
+        "dim": [
+          1.235,
+          4.998,
+          2.17
+        ],
+        "material": "leech_body",
+        "uv": [
+          244,
+          32
+        ]
+      },
+      {
+        "name": "inner_throat",
+        "xyz": [
+          -2.99,
+          -3.153,
+          -12.555
+        ],
+        "dim": [
+          5.98,
+          3.451,
+          1.24
+        ],
+        "material": "leech_dark",
+        "uv": [
+          258,
+          32
+        ]
+      },
+      {
+        "name": "gloss_drip_0",
+        "xyz": [
+          -2.99,
+          1.368,
+          -10.85
+        ],
+        "dim": [
+          0.442,
+          1.725,
+          0.589
+        ],
+        "material": "leech_slime",
+        "uv": [
+          278,
+          32
+        ]
+      },
+      {
+        "name": "gloss_drip_1",
+        "xyz": [
+          -0.975,
+          1.368,
+          -10.85
+        ],
+        "dim": [
+          0.442,
+          2.083,
+          0.589
+        ],
+        "material": "leech_slime",
+        "uv": [
+          286,
+          32
+        ]
+      },
+      {
+        "name": "gloss_drip_2",
+        "xyz": [
+          1.04,
+          1.368,
+          -10.85
+        ],
+        "dim": [
+          0.442,
+          2.439,
+          0.589
+        ],
+        "material": "leech_slime",
+        "uv": [
+          294,
+          32
+        ]
+      },
+      {
+        "name": "forward_sucker_rim_top",
+        "xyz": [
+          -4.68,
+          -5.176,
+          -12.09
+        ],
+        "dim": [
+          9.36,
+          0.928,
+          2.093
+        ],
+        "material": "leech_mouth",
+        "uv": [
+          302,
+          32
+        ]
+      },
+      {
+        "name": "forward_sucker_rim_bottom",
+        "xyz": [
+          -4.68,
+          1.19,
+          -12.09
+        ],
+        "dim": [
+          9.36,
+          0.773,
+          2.093
+        ],
+        "material": "leech_mouth",
+        "uv": [
+          332,
+          32
+        ]
+      },
+      {
+        "name": "gullet_dark_depth",
+        "xyz": [
+          -3.15,
+          -3.05,
+          -14.86
+        ],
+        "dim": [
+          6.3,
+          3.8,
+          0.48
+        ],
+        "material": "leech_dark",
+        "uv": [
+          362,
+          32
+        ]
+      },
+      {
+        "name": "gullet_center",
+        "xyz": [
+          -2.1,
+          -2.4,
+          -15.12
+        ],
+        "dim": [
+          4.2,
+          2.4,
+          0.43
+        ],
+        "material": "leech_dark",
+        "uv": [
+          382,
+          32
+        ]
+      },
+      {
+        "name": "outer_upper_gum_0",
+        "xyz": [
+          -5.4,
+          -4.55,
+          -12.05
+        ],
+        "dim": [
+          10.8,
+          0.65,
+          0.95
+        ],
+        "material": "leech_mouth",
+        "uv": [
+          398,
+          32
+        ]
+      },
+      {
+        "name": "outer_lower_gum_0",
+        "xyz": [
+          -5.4,
+          1.1,
+          -12.05
+        ],
+        "dim": [
+          10.8,
+          0.75,
+          0.95
+        ],
+        "material": "leech_mouth",
+        "uv": [
+          426,
+          32
+        ]
+      },
+      {
+        "name": "outer_left_gum_0",
+        "xyz": [
+          -5.4,
+          -4.55,
+          -12.05
+        ],
+        "dim": [
+          0.75,
+          6.4,
+          0.95
+        ],
+        "material": "leech_mouth",
+        "uv": [
+          454,
+          32
+        ]
+      },
+      {
+        "name": "outer_right_gum_0",
+        "xyz": [
+          4.65,
+          -4.55,
+          -12.05
+        ],
+        "dim": [
+          0.75,
+          6.4,
+          0.95
+        ],
+        "material": "leech_mouth",
+        "uv": [
+          462,
+          32
+        ]
+      },
+      {
+        "name": "outer_upper_gum_1",
+        "xyz": [
+          -4.9,
+          -4.25,
+          -13.0
+        ],
+        "dim": [
+          9.8,
+          0.65,
+          0.95
+        ],
+        "material": "leech_bright",
+        "uv": [
+          470,
+          32
+        ]
+      },
+      {
+        "name": "outer_lower_gum_1",
+        "xyz": [
+          -4.9,
+          0.8,
+          -13.0
+        ],
+        "dim": [
+          9.8,
+          0.75,
+          0.95
+        ],
+        "material": "leech_bright",
+        "uv": [
+          2,
+          48
+        ]
+      },
+      {
+        "name": "outer_left_gum_1",
+        "xyz": [
+          -4.9,
+          -4.25,
+          -13.0
+        ],
+        "dim": [
+          0.75,
+          5.8,
+          0.95
+        ],
+        "material": "leech_bright",
+        "uv": [
+          28,
+          48
+        ]
+      },
+      {
+        "name": "outer_right_gum_1",
+        "xyz": [
+          4.15,
+          -4.25,
+          -13.0
+        ],
+        "dim": [
+          0.75,
+          5.8,
+          0.95
+        ],
+        "material": "leech_bright",
+        "uv": [
+          36,
+          48
+        ]
+      },
+      {
+        "name": "outer_upper_gum_2",
+        "xyz": [
+          -4.35,
+          -3.85,
+          -14.02
+        ],
+        "dim": [
+          8.7,
+          0.65,
+          0.95
+        ],
+        "material": "leech_mouth",
+        "uv": [
+          44,
+          48
+        ]
+      },
+      {
+        "name": "outer_lower_gum_2",
+        "xyz": [
+          -4.35,
+          0.4,
+          -14.02
+        ],
+        "dim": [
+          8.7,
+          0.75,
+          0.95
+        ],
+        "material": "leech_mouth",
+        "uv": [
+          68,
+          48
+        ]
+      },
+      {
+        "name": "outer_left_gum_2",
+        "xyz": [
+          -4.35,
+          -3.85,
+          -14.02
+        ],
+        "dim": [
+          0.75,
+          5.0,
+          0.95
+        ],
+        "material": "leech_mouth",
+        "uv": [
+          92,
+          48
+        ]
+      },
+      {
+        "name": "outer_right_gum_2",
+        "xyz": [
+          3.6,
+          -3.85,
+          -14.02
+        ],
+        "dim": [
+          0.75,
+          5.0,
+          0.95
+        ],
+        "material": "leech_mouth",
+        "uv": [
+          100,
+          48
+        ]
+      },
+      {
+        "name": "outer_jaw_fold_-1_0",
+        "xyz": [
+          -5.55,
+          -3.0,
+          -11.9
+        ],
+        "dim": [
+          0.51,
+          3.45,
+          1.5
+        ],
+        "material": "leech_body",
+        "uv": [
+          108,
+          48
+        ]
+      },
+      {
+        "name": "outer_jaw_fold_-1_1",
+        "xyz": [
+          -5.91,
+          -2.43,
+          -11.9
+        ],
+        "dim": [
+          0.51,
+          3.15,
+          1.5
+        ],
+        "material": "leech_body",
+        "uv": [
+          118,
+          48
+        ]
+      },
+      {
+        "name": "outer_jaw_fold_-1_2",
+        "xyz": [
+          -6.27,
+          -1.86,
+          -11.9
+        ],
+        "dim": [
+          0.51,
+          2.85,
+          1.5
+        ],
+        "material": "leech_body",
+        "uv": [
+          128,
+          48
+        ]
+      },
+      {
+        "name": "outer_jaw_fold_1_0",
+        "xyz": [
+          5.05,
+          -3.0,
+          -11.9
+        ],
+        "dim": [
+          0.51,
+          3.45,
+          1.5
+        ],
+        "material": "leech_body",
+        "uv": [
+          138,
+          48
+        ]
+      },
+      {
+        "name": "outer_jaw_fold_1_1",
+        "xyz": [
+          5.41,
+          -2.43,
+          -11.9
+        ],
+        "dim": [
+          0.51,
+          3.15,
+          1.5
+        ],
+        "material": "leech_body",
+        "uv": [
+          148,
+          48
+        ]
+      },
+      {
+        "name": "outer_jaw_fold_1_2",
+        "xyz": [
+          5.77,
+          -1.86,
+          -11.9
+        ],
+        "dim": [
+          0.51,
+          2.85,
+          1.5
+        ],
+        "material": "leech_body",
+        "uv": [
+          158,
+          48
+        ]
+      },
+      {
+        "name": "upper_canine_base_L",
+        "xyz": [
+          -2.65,
+          -4.12,
+          -16.2
+        ],
+        "dim": [
+          1.15,
+          1.5,
+          1.1
+        ],
+        "material": "leech_tooth",
+        "uv": [
+          168,
+          48
+        ]
+      },
+      {
+        "name": "upper_canine_tip_L",
+        "xyz": [
+          -2.32,
+          -2.62,
+          -16.62
+        ],
+        "dim": [
+          0.52,
+          0.65,
+          0.83
+        ],
+        "material": "leech_tooth",
+        "uv": [
+          180,
+          48
+        ]
+      },
+      {
+        "name": "lower_canine_base_L",
+        "xyz": [
+          -2.65,
+          -0.2,
+          -16.2
+        ],
+        "dim": [
+          1.15,
+          1.38,
+          1.1
+        ],
+        "material": "leech_tooth",
+        "uv": [
+          188,
+          48
+        ]
+      },
+      {
+        "name": "lower_canine_tip_L",
+        "xyz": [
+          -2.32,
+          -0.78,
+          -16.61
+        ],
+        "dim": [
+          0.5,
+          0.68,
+          0.82
+        ],
+        "material": "leech_tooth",
+        "uv": [
+          200,
+          48
+        ]
+      },
+      {
+        "name": "upper_canine_base_R",
+        "xyz": [
+          1.6,
+          -4.12,
+          -16.2
+        ],
+        "dim": [
+          1.15,
+          1.5,
+          1.1
+        ],
+        "material": "leech_tooth",
+        "uv": [
+          208,
+          48
+        ]
+      },
+      {
+        "name": "upper_canine_tip_R",
+        "xyz": [
+          1.9300000000000002,
+          -2.62,
+          -16.62
+        ],
+        "dim": [
+          0.52,
+          0.65,
+          0.83
+        ],
+        "material": "leech_tooth",
+        "uv": [
+          220,
+          48
+        ]
+      },
+      {
+        "name": "lower_canine_base_R",
+        "xyz": [
+          1.6,
+          -0.2,
+          -16.2
+        ],
+        "dim": [
+          1.15,
+          1.38,
+          1.1
+        ],
+        "material": "leech_tooth",
+        "uv": [
+          228,
+          48
+        ]
+      },
+      {
+        "name": "lower_canine_tip_R",
+        "xyz": [
+          1.9300000000000002,
+          -0.78,
+          -16.61
+        ],
+        "dim": [
+          0.5,
+          0.68,
+          0.82
+        ],
+        "material": "leech_tooth",
+        "uv": [
+          240,
+          48
+        ]
+      },
+      {
+        "name": "side_hook_base_L",
+        "xyz": [
+          -4.42,
+          -2.5,
+          -16.25
+        ],
+        "dim": [
+          0.97,
+          0.91,
+          1.12
+        ],
+        "material": "leech_tooth",
+        "uv": [
+          248,
+          48
+        ]
+      },
+      {
+        "name": "side_hook_tip_L",
+        "xyz": [
+          -4.2299999999999995,
+          -2.31,
+          -16.66
+        ],
+        "dim": [
+          0.58,
+          0.5,
+          0.8
+        ],
+        "material": "leech_tooth",
+        "uv": [
+          258,
+          48
+        ]
+      },
+      {
+        "name": "side_hook_base_R",
+        "xyz": [
+          3.45,
+          -2.5,
+          -16.25
+        ],
+        "dim": [
+          0.97,
+          0.91,
+          1.12
+        ],
+        "material": "leech_tooth",
+        "uv": [
+          266,
+          48
+        ]
+      },
+      {
+        "name": "side_hook_tip_R",
+        "xyz": [
+          3.64,
+          -2.31,
+          -16.66
+        ],
+        "dim": [
+          0.58,
+          0.5,
+          0.8
+        ],
+        "material": "leech_tooth",
+        "uv": [
+          276,
+          48
+        ]
+      }
+    ]
+  },
+  "animations": {
+    "seg_0.yRot": "Mth.sin(ageInTicks * (entity.isInWater() ? 0.32F : 0.16F) - 0.000F) * (0.038F + motion * 0.14F)",
+    "seg_0.xRot": "Mth.sin(ageInTicks * 0.22F - 0.000F) * (0.025F + motion * 0.08F)",
+    "seg_1.yRot": "Mth.sin(ageInTicks * (entity.isInWater() ? 0.32F : 0.16F) - 0.550F) * (0.052F + motion * 0.14F)",
+    "seg_1.xRot": "Mth.sin(ageInTicks * 0.22F - 0.420F) * (0.025F + motion * 0.08F)",
+    "seg_2.yRot": "Mth.sin(ageInTicks * (entity.isInWater() ? 0.32F : 0.16F) - 1.100F) * (0.066F + motion * 0.14F)",
+    "seg_2.xRot": "Mth.sin(ageInTicks * 0.22F - 0.840F) * (0.025F + motion * 0.08F)",
+    "seg_3.yRot": "Mth.sin(ageInTicks * (entity.isInWater() ? 0.32F : 0.16F) - 1.650F) * (0.080F + motion * 0.14F)",
+    "seg_3.xRot": "Mth.sin(ageInTicks * 0.22F - 1.260F) * (0.025F + motion * 0.08F)",
+    "seg_4.yRot": "Mth.sin(ageInTicks * (entity.isInWater() ? 0.32F : 0.16F) - 2.200F) * (0.094F + motion * 0.14F)",
+    "seg_4.xRot": "Mth.sin(ageInTicks * 0.22F - 1.680F) * (0.025F + motion * 0.08F)",
+    "seg_5.yRot": "Mth.sin(ageInTicks * (entity.isInWater() ? 0.32F : 0.16F) - 2.750F) * (0.108F + motion * 0.14F)",
+    "seg_5.xRot": "Mth.sin(ageInTicks * 0.22F - 2.100F) * (0.025F + motion * 0.08F)",
+    "seg_6.yRot": "Mth.sin(ageInTicks * (entity.isInWater() ? 0.32F : 0.16F) - 3.300F) * (0.122F + motion * 0.14F)",
+    "seg_6.xRot": "Mth.sin(ageInTicks * 0.22F - 2.520F) * (0.025F + motion * 0.08F)",
+    "seg_7.yRot": "Mth.sin(ageInTicks * (entity.isInWater() ? 0.32F : 0.16F) - 3.850F) * (0.136F + motion * 0.14F)",
+    "seg_7.xRot": "Mth.sin(ageInTicks * 0.22F - 2.940F) * (0.025F + motion * 0.08F)",
+    "mouth.xRot": "Mth.sin(ageInTicks * 0.21F) * 0.12F - attack * 0.55F + recoil * 0.25F",
+    "mouth.yRot": "Mth.sin(ageInTicks * 0.13F) * 0.04F",
+    "seg_0.y": "20.310F - Math.max(0.0F, Mth.sin(limbSwing * 1.72F - 0.000F)) * motion * 0.55F",
+    "seg_0.z": "-6.200F + Mth.sin(limbSwing * 1.72F - 0.000F) * motion * 0.40F",
+    "seg_1.y": "20.690F - Math.max(0.0F, Mth.sin(limbSwing * 1.72F - 0.600F)) * motion * 0.55F",
+    "seg_1.z": "-2.870F + Mth.sin(limbSwing * 1.72F - 0.600F) * motion * 0.40F",
+    "seg_2.y": "20.750F - Math.max(0.0F, Mth.sin(limbSwing * 1.72F - 1.200F)) * motion * 0.55F",
+    "seg_2.z": "0.470F + Mth.sin(limbSwing * 1.72F - 1.200F) * motion * 0.40F",
+    "seg_3.y": "20.940F - Math.max(0.0F, Mth.sin(limbSwing * 1.72F - 1.800F)) * motion * 0.55F",
+    "seg_3.z": "3.800F + Mth.sin(limbSwing * 1.72F - 1.800F) * motion * 0.40F",
+    "seg_4.y": "20.670F - Math.max(0.0F, Mth.sin(limbSwing * 1.72F - 2.400F)) * motion * 0.55F",
+    "seg_4.z": "7.130F + Mth.sin(limbSwing * 1.72F - 2.400F) * motion * 0.40F",
+    "seg_5.y": "20.690F - Math.max(0.0F, Mth.sin(limbSwing * 1.72F - 3.000F)) * motion * 0.55F",
+    "seg_5.z": "10.460F + Mth.sin(limbSwing * 1.72F - 3.000F) * motion * 0.40F",
+    "seg_6.y": "20.270F - Math.max(0.0F, Mth.sin(limbSwing * 1.72F - 3.600F)) * motion * 0.55F",
+    "seg_6.z": "13.790F + Mth.sin(limbSwing * 1.72F - 3.600F) * motion * 0.40F",
+    "seg_7.y": "20.540F - Math.max(0.0F, Mth.sin(limbSwing * 1.72F - 4.200F)) * motion * 0.55F",
+    "seg_7.z": "17.130F + Mth.sin(limbSwing * 1.72F - 4.200F) * motion * 0.40F"
+  },
+  "part_pivots": {
+    "seg_0": [
+      0,
+      -1.69,
+      -6.2
+    ],
+    "seg_1": [
+      0,
+      -1.31,
+      -2.87
+    ],
+    "seg_2": [
+      0,
+      -1.25,
+      0.47
+    ],
+    "seg_3": [
+      0,
+      -1.06,
+      3.8
+    ],
+    "seg_4": [
+      0,
+      -1.33,
+      7.13
+    ],
+    "seg_5": [
+      0,
+      -1.31,
+      10.46
+    ],
+    "seg_6": [
+      0,
+      -1.73,
+      13.79
+    ],
+    "seg_7": [
+      0,
+      -1.46,
+      17.13
+    ],
+    "mouth": [
+      0,
+      -0.68,
+      -5.42
+    ]
+  }
+}

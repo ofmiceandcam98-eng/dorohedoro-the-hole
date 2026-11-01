@@ -9,12 +9,41 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
  *
  * @param density   chance in {@code [0, 1]} that a lot holds a building rather than open ground
  * @param maxFloors tallest residential tower, in storeys
+ * @param terrainRelief use terraced city elevations; false for previously-created worlds
+ * @param sewerUnderworld add sewers and selective cave access while preserving deep Minecraft caverns
+ * @param sewerCaveFrequency percentage of intersections with long cave-leading passages; absent in
+ *                           existing worlds means the exact original one-in-eleven selector
+ * @param worldDetailVersion 19 protects large-world fish performance and verifies canal supply foundations; 18 corrects wall-mounted residential fixtures on new saves; 17 adds compact-house roof silhouettes and furnished rooms; 16 adds mixed-source room lighting and procedural lived-in furniture; 15 adds furnished residential lighting and room-use variations; 14 adds size-aware fully furnished housing and residential lighting; 13 adds compact procedural lots and tighter local alleys; 12 adds coordinate-seeded neighborhood fabric, service yards and rooflines; 11 adds river morphology; 10 adds supplementary furnishing; 9 adds more detailed interior furnishing; 0 keeps historic architecture, 1 adds the original detail pass, 2 adds multiscale architectural variation, 3 adds irregular blocks and structural massing, 4 adds varied interior room plans, 5 adds scarce urban vegetation, 6 adds sparse frost and optional cold districts, 7 adds district signature landmarks/materials, 8 introduces lore-grounded dense concrete/brick architecture and coherent street surfaces
+ * @param sewerCavernVersion 0 retains original cave geometry for saved worlds, 1 adds connected
+ *                           walkable chamber entrances and broader cavern-size variation; 2 adds separate sewer dungeons; 3 adds riverbank and submerged drain entrances; 4 adds canal ecology and municipal sewer detailing; 5 adds meandering canal-river channels
  */
-public record CitySettings(float density, int maxFloors) {
-    public static final CitySettings DEFAULT = new CitySettings(0.92F, 11);
+public record CitySettings(float density, int maxFloors, boolean terrainRelief, boolean sewerUnderworld, int sewerCaveFrequency, int sewerCavernVersion, int worldDetailVersion) {
+    // Existing worlds did not encode the terrain flag. They remain at their original
+    // elevation to avoid seams where previously generated chunks meet new chunks.
+    public static final CitySettings DEFAULT = new CitySettings(0.92F, 11, false, false, SewerBranchPolicy.LEGACY_CAVE_FREQUENCY, 0, 0);
+
+    public CitySettings {
+        if (worldDetailVersion < 0 || worldDetailVersion > 19) {
+            throw new IllegalArgumentException("worldDetailVersion must be 0..19");
+        }
+        if (sewerCavernVersion < 0 || sewerCavernVersion > 5) {
+            throw new IllegalArgumentException("sewerCavernVersion must be 0..5");
+        }
+        if (sewerCaveFrequency < 0 || sewerCaveFrequency > 40) {
+            throw new IllegalArgumentException("sewerCaveFrequency must be 0..40");
+        }
+    }
 
     public static final Codec<CitySettings> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Codec.floatRange(0.0F, 1.0F).optionalFieldOf("density", DEFAULT.density).forGetter(CitySettings::density),
-            Codec.intRange(2, 16).optionalFieldOf("max_floors", DEFAULT.maxFloors).forGetter(CitySettings::maxFloors)
+            Codec.intRange(2, 16).optionalFieldOf("max_floors", DEFAULT.maxFloors).forGetter(CitySettings::maxFloors),
+            Codec.BOOL.optionalFieldOf("terrain_relief", false).forGetter(CitySettings::terrainRelief),
+            Codec.BOOL.optionalFieldOf("sewer_underworld", false).forGetter(CitySettings::sewerUnderworld),
+            Codec.intRange(0, 40).optionalFieldOf("sewer_cave_frequency", SewerBranchPolicy.LEGACY_CAVE_FREQUENCY)
+                    .forGetter(CitySettings::sewerCaveFrequency),
+            Codec.intRange(0, 5).optionalFieldOf("sewer_cavern_version", 0)
+                    .forGetter(CitySettings::sewerCavernVersion),
+            Codec.intRange(0, 19).optionalFieldOf("world_detail_version", 0)
+                    .forGetter(CitySettings::worldDetailVersion)
     ).apply(instance, CitySettings::new));
 }

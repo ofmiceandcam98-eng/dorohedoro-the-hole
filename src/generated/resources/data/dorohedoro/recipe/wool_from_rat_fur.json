@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "dorohedoro:rat_fur"
+    },
+    {
+      "item": "dorohedoro:rat_fur"
+    },
+    {
+      "item": "dorohedoro:rat_fur"
+    },
+    {
+      "item": "dorohedoro:rat_fur"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:white_wool"
+  }
+}

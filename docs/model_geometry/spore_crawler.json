@@ -1,0 +1,1074 @@
+{
+  "mob": "spore_crawler",
+  "class": "SporeCrawler",
+  "texture_size": [
+    512,
+    256
+  ],
+  "groups": {
+    "body": [
+      {
+        "name": "thorax",
+        "xyz": [
+          -4,
+          -4.5,
+          -6
+        ],
+        "dim": [
+          8,
+          5.5,
+          12
+        ],
+        "material": "spore_skin",
+        "uv": [
+          2,
+          2
+        ]
+      },
+      {
+        "name": "back_fungus_0",
+        "xyz": [
+          -3,
+          -6.2,
+          -5
+        ],
+        "dim": [
+          6,
+          2.5,
+          2.3
+        ],
+        "material": "spore_pod",
+        "uv": [
+          46,
+          2
+        ]
+      },
+      {
+        "name": "cap_0",
+        "xyz": [
+          -4.1,
+          -8,
+          -5
+        ],
+        "dim": [
+          8.2,
+          1.6,
+          3.0
+        ],
+        "material": "spore_cap",
+        "uv": [
+          68,
+          2
+        ]
+      },
+      {
+        "name": "gill_0",
+        "xyz": [
+          -3.6,
+          -6.4,
+          -5
+        ],
+        "dim": [
+          7.2,
+          0.7,
+          2.3
+        ],
+        "material": "spore_gill",
+        "uv": [
+          96,
+          2
+        ]
+      },
+      {
+        "name": "back_fungus_1",
+        "xyz": [
+          -3,
+          -6.2,
+          -2
+        ],
+        "dim": [
+          6,
+          2.5,
+          2.3
+        ],
+        "material": "spore_pod",
+        "uv": [
+          122,
+          2
+        ]
+      },
+      {
+        "name": "cap_1",
+        "xyz": [
+          -4.1,
+          -8,
+          -2
+        ],
+        "dim": [
+          8.2,
+          1.6,
+          3.0
+        ],
+        "material": "spore_cap",
+        "uv": [
+          144,
+          2
+        ]
+      },
+      {
+        "name": "gill_1",
+        "xyz": [
+          -3.6,
+          -6.4,
+          -2
+        ],
+        "dim": [
+          7.2,
+          0.7,
+          2.3
+        ],
+        "material": "spore_gill",
+        "uv": [
+          172,
+          2
+        ]
+      },
+      {
+        "name": "back_fungus_2",
+        "xyz": [
+          -3,
+          -6.2,
+          1
+        ],
+        "dim": [
+          6,
+          2.5,
+          2.3
+        ],
+        "material": "spore_pod",
+        "uv": [
+          198,
+          2
+        ]
+      },
+      {
+        "name": "cap_2",
+        "xyz": [
+          -4.1,
+          -8,
+          1
+        ],
+        "dim": [
+          8.2,
+          1.6,
+          3.0
+        ],
+        "material": "spore_cap",
+        "uv": [
+          220,
+          2
+        ]
+      },
+      {
+        "name": "gill_2",
+        "xyz": [
+          -3.6,
+          -6.4,
+          1
+        ],
+        "dim": [
+          7.2,
+          0.7,
+          2.3
+        ],
+        "material": "spore_gill",
+        "uv": [
+          248,
+          2
+        ]
+      },
+      {
+        "name": "back_fungus_3",
+        "xyz": [
+          -3,
+          -6.2,
+          4
+        ],
+        "dim": [
+          6,
+          2.5,
+          2.3
+        ],
+        "material": "spore_pod",
+        "uv": [
+          274,
+          2
+        ]
+      },
+      {
+        "name": "cap_3",
+        "xyz": [
+          -4.1,
+          -8,
+          4
+        ],
+        "dim": [
+          8.2,
+          1.6,
+          3.0
+        ],
+        "material": "spore_cap",
+        "uv": [
+          296,
+          2
+        ]
+      },
+      {
+        "name": "gill_3",
+        "xyz": [
+          -3.6,
+          -6.4,
+          4
+        ],
+        "dim": [
+          7.2,
+          0.7,
+          2.3
+        ],
+        "material": "spore_gill",
+        "uv": [
+          324,
+          2
+        ]
+      },
+      {
+        "name": "speckled_cap_0_0",
+        "xyz": [
+          -3.25,
+          -8.2,
+          -4.65
+        ],
+        "dim": [
+          1.6,
+          0.24,
+          1.3
+        ],
+        "material": "spore_glow",
+        "uv": [
+          350,
+          2
+        ]
+      },
+      {
+        "name": "speckled_cap_0_1",
+        "xyz": [
+          -0.6,
+          -8.2,
+          -4.65
+        ],
+        "dim": [
+          1.6,
+          0.24,
+          1.3
+        ],
+        "material": "spore_gill",
+        "uv": [
+          362,
+          2
+        ]
+      },
+      {
+        "name": "speckled_cap_0_2",
+        "xyz": [
+          2.05,
+          -8.2,
+          -4.65
+        ],
+        "dim": [
+          1.6,
+          0.24,
+          1.3
+        ],
+        "material": "spore_glow",
+        "uv": [
+          374,
+          2
+        ]
+      },
+      {
+        "name": "speckled_cap_1_0",
+        "xyz": [
+          -3.25,
+          -8.2,
+          -1.65
+        ],
+        "dim": [
+          1.6,
+          0.24,
+          1.3
+        ],
+        "material": "spore_gill",
+        "uv": [
+          386,
+          2
+        ]
+      },
+      {
+        "name": "speckled_cap_1_1",
+        "xyz": [
+          -0.6,
+          -8.2,
+          -1.65
+        ],
+        "dim": [
+          1.6,
+          0.24,
+          1.3
+        ],
+        "material": "spore_glow",
+        "uv": [
+          398,
+          2
+        ]
+      },
+      {
+        "name": "speckled_cap_1_2",
+        "xyz": [
+          2.05,
+          -8.2,
+          -1.65
+        ],
+        "dim": [
+          1.6,
+          0.24,
+          1.3
+        ],
+        "material": "spore_gill",
+        "uv": [
+          410,
+          2
+        ]
+      },
+      {
+        "name": "speckled_cap_2_0",
+        "xyz": [
+          -3.25,
+          -8.2,
+          1.35
+        ],
+        "dim": [
+          1.6,
+          0.24,
+          1.3
+        ],
+        "material": "spore_glow",
+        "uv": [
+          422,
+          2
+        ]
+      },
+      {
+        "name": "speckled_cap_2_1",
+        "xyz": [
+          -0.6,
+          -8.2,
+          1.35
+        ],
+        "dim": [
+          1.6,
+          0.24,
+          1.3
+        ],
+        "material": "spore_gill",
+        "uv": [
+          434,
+          2
+        ]
+      },
+      {
+        "name": "speckled_cap_2_2",
+        "xyz": [
+          2.05,
+          -8.2,
+          1.35
+        ],
+        "dim": [
+          1.6,
+          0.24,
+          1.3
+        ],
+        "material": "spore_glow",
+        "uv": [
+          446,
+          2
+        ]
+      },
+      {
+        "name": "speckled_cap_3_0",
+        "xyz": [
+          -3.25,
+          -8.2,
+          4.35
+        ],
+        "dim": [
+          1.6,
+          0.24,
+          1.3
+        ],
+        "material": "spore_gill",
+        "uv": [
+          458,
+          2
+        ]
+      },
+      {
+        "name": "speckled_cap_3_1",
+        "xyz": [
+          -0.6,
+          -8.2,
+          4.35
+        ],
+        "dim": [
+          1.6,
+          0.24,
+          1.3
+        ],
+        "material": "spore_glow",
+        "uv": [
+          470,
+          2
+        ]
+      },
+      {
+        "name": "speckled_cap_3_2",
+        "xyz": [
+          2.05,
+          -8.2,
+          4.35
+        ],
+        "dim": [
+          1.6,
+          0.24,
+          1.3
+        ],
+        "material": "spore_gill",
+        "uv": [
+          482,
+          2
+        ]
+      }
+    ],
+    "head": [
+      {
+        "name": "head",
+        "xyz": [
+          -3,
+          -3,
+          -4
+        ],
+        "dim": [
+          6,
+          4,
+          5
+        ],
+        "material": "spore_skin",
+        "uv": [
+          2,
+          24
+        ]
+      },
+      {
+        "name": "eye_-1",
+        "xyz": [
+          -3.2,
+          -2.5,
+          -5
+        ],
+        "dim": [
+          1,
+          0.95,
+          1.2
+        ],
+        "material": "spore_glow",
+        "uv": [
+          28,
+          24
+        ]
+      },
+      {
+        "name": "eye_1",
+        "xyz": [
+          2.2,
+          -2.5,
+          -5
+        ],
+        "dim": [
+          1,
+          0.95,
+          1.2
+        ],
+        "material": "spore_glow",
+        "uv": [
+          38,
+          24
+        ]
+      },
+      {
+        "name": "spore_mouth_0",
+        "xyz": [
+          -1.8,
+          -0.3,
+          -5.3
+        ],
+        "dim": [
+          0.5,
+          0.8,
+          0.6
+        ],
+        "material": "spore_gill",
+        "uv": [
+          48,
+          24
+        ]
+      },
+      {
+        "name": "spore_mouth_1",
+        "xyz": [
+          -0.85,
+          -0.3,
+          -5.3
+        ],
+        "dim": [
+          0.5,
+          0.8,
+          0.6
+        ],
+        "material": "spore_gill",
+        "uv": [
+          56,
+          24
+        ]
+      },
+      {
+        "name": "spore_mouth_2",
+        "xyz": [
+          0.1,
+          -0.3,
+          -5.3
+        ],
+        "dim": [
+          0.5,
+          0.8,
+          0.6
+        ],
+        "material": "spore_gill",
+        "uv": [
+          64,
+          24
+        ]
+      },
+      {
+        "name": "spore_mouth_3",
+        "xyz": [
+          1.05,
+          -0.3,
+          -5.3
+        ],
+        "dim": [
+          0.5,
+          0.8,
+          0.6
+        ],
+        "material": "spore_gill",
+        "uv": [
+          72,
+          24
+        ]
+      }
+    ],
+    "leg_l_0": [
+      {
+        "name": "upper",
+        "xyz": [
+          -7.3,
+          -1.1,
+          -5
+        ],
+        "dim": [
+          4,
+          1.6,
+          1.4
+        ],
+        "material": "spore_claw",
+        "uv": [
+          80,
+          24
+        ]
+      },
+      {
+        "name": "lower",
+        "xyz": [
+          -8.3,
+          0.2,
+          -5
+        ],
+        "dim": [
+          1.2,
+          3.6,
+          1.4
+        ],
+        "material": "spore_skin",
+        "uv": [
+          96,
+          24
+        ]
+      },
+      {
+        "name": "fungus_patches",
+        "xyz": [
+          -7.9,
+          0.4,
+          -5
+        ],
+        "dim": [
+          0.72,
+          0.65,
+          1.3
+        ],
+        "material": "spore_cap",
+        "uv": [
+          108,
+          24
+        ]
+      }
+    ],
+    "leg_l_1": [
+      {
+        "name": "upper",
+        "xyz": [
+          -7.3,
+          -1.1,
+          0
+        ],
+        "dim": [
+          4,
+          1.6,
+          1.4
+        ],
+        "material": "spore_claw",
+        "uv": [
+          118,
+          24
+        ]
+      },
+      {
+        "name": "lower",
+        "xyz": [
+          -8.3,
+          0.2,
+          0
+        ],
+        "dim": [
+          1.2,
+          3.6,
+          1.4
+        ],
+        "material": "spore_skin",
+        "uv": [
+          134,
+          24
+        ]
+      },
+      {
+        "name": "fungus_patches",
+        "xyz": [
+          -7.9,
+          0.4,
+          0
+        ],
+        "dim": [
+          0.72,
+          0.65,
+          1.3
+        ],
+        "material": "spore_cap",
+        "uv": [
+          146,
+          24
+        ]
+      }
+    ],
+    "leg_l_2": [
+      {
+        "name": "upper",
+        "xyz": [
+          -7.3,
+          -1.1,
+          5
+        ],
+        "dim": [
+          4,
+          1.6,
+          1.4
+        ],
+        "material": "spore_claw",
+        "uv": [
+          156,
+          24
+        ]
+      },
+      {
+        "name": "lower",
+        "xyz": [
+          -8.3,
+          0.2,
+          5
+        ],
+        "dim": [
+          1.2,
+          3.6,
+          1.4
+        ],
+        "material": "spore_skin",
+        "uv": [
+          172,
+          24
+        ]
+      },
+      {
+        "name": "fungus_patches",
+        "xyz": [
+          -7.9,
+          0.4,
+          5
+        ],
+        "dim": [
+          0.72,
+          0.65,
+          1.3
+        ],
+        "material": "spore_cap",
+        "uv": [
+          184,
+          24
+        ]
+      }
+    ],
+    "leg_r_0": [
+      {
+        "name": "upper",
+        "xyz": [
+          3.7,
+          -1.1,
+          -5
+        ],
+        "dim": [
+          4,
+          1.6,
+          1.4
+        ],
+        "material": "spore_claw",
+        "uv": [
+          194,
+          24
+        ]
+      },
+      {
+        "name": "lower",
+        "xyz": [
+          6.4,
+          0.2,
+          -5
+        ],
+        "dim": [
+          1.2,
+          3.6,
+          1.4
+        ],
+        "material": "spore_skin",
+        "uv": [
+          210,
+          24
+        ]
+      },
+      {
+        "name": "fungus_patches",
+        "xyz": [
+          7.2,
+          0.4,
+          -5
+        ],
+        "dim": [
+          0.72,
+          0.65,
+          1.3
+        ],
+        "material": "spore_cap",
+        "uv": [
+          222,
+          24
+        ]
+      }
+    ],
+    "leg_r_1": [
+      {
+        "name": "upper",
+        "xyz": [
+          3.7,
+          -1.1,
+          0
+        ],
+        "dim": [
+          4,
+          1.6,
+          1.4
+        ],
+        "material": "spore_claw",
+        "uv": [
+          232,
+          24
+        ]
+      },
+      {
+        "name": "lower",
+        "xyz": [
+          6.4,
+          0.2,
+          0
+        ],
+        "dim": [
+          1.2,
+          3.6,
+          1.4
+        ],
+        "material": "spore_skin",
+        "uv": [
+          248,
+          24
+        ]
+      },
+      {
+        "name": "fungus_patches",
+        "xyz": [
+          7.2,
+          0.4,
+          0
+        ],
+        "dim": [
+          0.72,
+          0.65,
+          1.3
+        ],
+        "material": "spore_cap",
+        "uv": [
+          260,
+          24
+        ]
+      }
+    ],
+    "leg_r_2": [
+      {
+        "name": "upper",
+        "xyz": [
+          3.7,
+          -1.1,
+          5
+        ],
+        "dim": [
+          4,
+          1.6,
+          1.4
+        ],
+        "material": "spore_claw",
+        "uv": [
+          270,
+          24
+        ]
+      },
+      {
+        "name": "lower",
+        "xyz": [
+          6.4,
+          0.2,
+          5
+        ],
+        "dim": [
+          1.2,
+          3.6,
+          1.4
+        ],
+        "material": "spore_skin",
+        "uv": [
+          286,
+          24
+        ]
+      },
+      {
+        "name": "fungus_patches",
+        "xyz": [
+          7.2,
+          0.4,
+          5
+        ],
+        "dim": [
+          0.72,
+          0.65,
+          1.3
+        ],
+        "material": "spore_cap",
+        "uv": [
+          298,
+          24
+        ]
+      }
+    ],
+    "spore_sac_0": [
+      {
+        "name": "fungal_spore_sacs_0",
+        "xyz": [
+          -2.5,
+          -9.1,
+          -4.0
+        ],
+        "dim": [
+          2.1,
+          1.3,
+          2.4
+        ],
+        "material": "spore_glow",
+        "uv": [
+          308,
+          24
+        ]
+      }
+    ],
+    "spore_sac_1": [
+      {
+        "name": "fungal_spore_sacs_1",
+        "xyz": [
+          -0.25,
+          -9.1,
+          -0.8
+        ],
+        "dim": [
+          2.1,
+          1.3,
+          2.4
+        ],
+        "material": "spore_glow",
+        "uv": [
+          324,
+          24
+        ]
+      }
+    ],
+    "spore_sac_2": [
+      {
+        "name": "fungal_spore_sacs_2",
+        "xyz": [
+          2.0,
+          -9.1,
+          2.4
+        ],
+        "dim": [
+          2.1,
+          1.3,
+          2.4
+        ],
+        "material": "spore_glow",
+        "uv": [
+          340,
+          24
+        ]
+      }
+    ]
+  },
+  "animations": {
+    "leg_l_0.zRot": "-1 * motion * Mth.sin(limbSwing * 2.35F + 0.0000F) * 0.53F",
+    "leg_l_0.xRot": "motion * Mth.cos(limbSwing * 2.35F + 0.0000F) * 0.23F + Mth.sin(ageInTicks * 0.43F + 0.0000F) * 0.03F",
+    "leg_l_0.y": "20.100F - motion * Math.max(0.0F, Mth.sin(limbSwing * 2.35F + 0.0000F)) * 0.95F",
+    "leg_l_1.zRot": "-1 * motion * Mth.sin(limbSwing * 2.35F + 2.1800F) * 0.53F",
+    "leg_l_1.xRot": "motion * Mth.cos(limbSwing * 2.35F + 2.1800F) * 0.23F + Mth.sin(ageInTicks * 0.43F + 2.1800F) * 0.03F",
+    "leg_l_1.y": "20.100F - motion * Math.max(0.0F, Mth.sin(limbSwing * 2.35F + 2.1800F)) * 0.95F",
+    "leg_l_2.zRot": "-1 * motion * Mth.sin(limbSwing * 2.35F + 4.3600F) * 0.53F",
+    "leg_l_2.xRot": "motion * Mth.cos(limbSwing * 2.35F + 4.3600F) * 0.23F + Mth.sin(ageInTicks * 0.43F + 4.3600F) * 0.03F",
+    "leg_l_2.y": "20.100F - motion * Math.max(0.0F, Mth.sin(limbSwing * 2.35F + 4.3600F)) * 0.95F",
+    "leg_r_0.zRot": "1 * motion * Mth.sin(limbSwing * 2.35F + 1.4000F) * 0.53F",
+    "leg_r_0.xRot": "motion * Mth.cos(limbSwing * 2.35F + 1.4000F) * 0.23F + Mth.sin(ageInTicks * 0.43F + 1.4000F) * 0.03F",
+    "leg_r_0.y": "20.100F - motion * Math.max(0.0F, Mth.sin(limbSwing * 2.35F + 1.4000F)) * 0.95F",
+    "leg_r_1.zRot": "1 * motion * Mth.sin(limbSwing * 2.35F + 3.5800F) * 0.53F",
+    "leg_r_1.xRot": "motion * Mth.cos(limbSwing * 2.35F + 3.5800F) * 0.23F + Mth.sin(ageInTicks * 0.43F + 3.5800F) * 0.03F",
+    "leg_r_1.y": "20.100F - motion * Math.max(0.0F, Mth.sin(limbSwing * 2.35F + 3.5800F)) * 0.95F",
+    "leg_r_2.zRot": "1 * motion * Mth.sin(limbSwing * 2.35F + 5.7600F) * 0.53F",
+    "leg_r_2.xRot": "motion * Mth.cos(limbSwing * 2.35F + 5.7600F) * 0.23F + Mth.sin(ageInTicks * 0.43F + 5.7600F) * 0.03F",
+    "leg_r_2.y": "20.100F - motion * Math.max(0.0F, Mth.sin(limbSwing * 2.35F + 5.7600F)) * 0.95F",
+    "body.xRot": "Mth.sin(ageInTicks * 0.16F) * 0.10F + motion * Mth.sin(limbSwing * 2.35F) * 0.16F + attack * 0.31F",
+    "body.zRot": "Mth.sin(ageInTicks * 0.11F) * 0.055F + motion * Mth.sin(limbSwing * 1.175F) * 0.13F + recoil * 0.15F",
+    "body.y": "16.950F + Mth.sin(ageInTicks * 0.14F) * 0.12F + motion * Mth.cos(limbSwing * 2.35F) * 0.29F",
+    "head.xRot": "Mth.sin(ageInTicks * 0.17F) * 0.09F - attack * 0.40F + motion * Mth.sin(limbSwing * 2.35F - 0.7F) * 0.13F",
+    "head.yRot": "Mth.sin(ageInTicks * 0.11F) * 0.11F + motion * Mth.sin(limbSwing * 1.175F) * 0.12F",
+    "spore_sac_0.xRot": "Mth.sin(ageInTicks * 0.20F + 0.000F) * 0.09F + motion * Mth.sin(limbSwing * 2.35F - 0.000F) * 0.15F + attack * 0.28F",
+    "spore_sac_0.zRot": "Mth.sin(ageInTicks * 0.17F + 0.000F) * 0.10F + attack * Mth.sin(ageInTicks * 1.3F + 0.000F) * 0.21F",
+    "spore_sac_1.xRot": "Mth.sin(ageInTicks * 0.20F + 0.800F) * 0.09F + motion * Mth.sin(limbSwing * 2.35F - 0.700F) * 0.15F + attack * 0.28F",
+    "spore_sac_1.zRot": "Mth.sin(ageInTicks * 0.17F + 1.200F) * 0.10F + attack * Mth.sin(ageInTicks * 1.3F + 1.000F) * 0.21F",
+    "spore_sac_2.xRot": "Mth.sin(ageInTicks * 0.20F + 1.600F) * 0.09F + motion * Mth.sin(limbSwing * 2.35F - 1.400F) * 0.15F + attack * 0.28F",
+    "spore_sac_2.zRot": "Mth.sin(ageInTicks * 0.17F + 2.400F) * 0.10F + attack * Mth.sin(ageInTicks * 1.3F + 2.000F) * 0.21F"
+  },
+  "part_pivots": {
+    "body": [
+      0,
+      -4.05,
+      0.5
+    ],
+    "head": [
+      0,
+      -1.0,
+      0.5
+    ],
+    "leg_l_0": [
+      -3.3,
+      -0.9,
+      -4.3
+    ],
+    "leg_l_1": [
+      -3.3,
+      -0.9,
+      0.7
+    ],
+    "leg_l_2": [
+      -3.3,
+      -0.9,
+      5.7
+    ],
+    "leg_r_0": [
+      3.7,
+      -0.9,
+      -4.3
+    ],
+    "leg_r_1": [
+      3.7,
+      -0.9,
+      0.7
+    ],
+    "leg_r_2": [
+      3.7,
+      -0.9,
+      5.7
+    ],
+    "spore_sac_0": [
+      -1.45,
+      -8.4,
+      -2.8
+    ],
+    "spore_sac_1": [
+      0.8,
+      -8.4,
+      0.40000000000000036
+    ],
+    "spore_sac_2": [
+      3.05,
+      -8.4,
+      3.6000000000000005
+    ]
+  }
+}

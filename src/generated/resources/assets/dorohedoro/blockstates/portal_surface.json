@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "dorohedoro:block/portal_surface"
+    },
+    "axis=z": {
+      "model": "dorohedoro:block/portal_surface"
+    }
+  }
+}

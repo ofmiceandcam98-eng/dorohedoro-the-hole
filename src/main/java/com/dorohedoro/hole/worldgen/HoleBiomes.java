@@ -17,6 +17,7 @@ public final class HoleBiomes {
     public static final ResourceKey<Biome> GRAVEYARD = key("hole_graveyard");
     public static final ResourceKey<Biome> OUTSKIRTS = key("hole_outskirts");
     public static final ResourceKey<Biome> UNDERCITY = key("hole_undercity");
+    public static final ResourceKey<Biome> FROSTBITTEN_INDUSTRIAL = key("hole_frostbitten_industrial");
 
     private HoleBiomes() {}
 
