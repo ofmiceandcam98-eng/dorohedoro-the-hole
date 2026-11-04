@@ -11,6 +11,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 /** Skips structure candidates that {@link StructurePrecheck72} proves vanilla would reject anyway. */
 @Mixin(Structure.class)
 public abstract class StructureMixin {
+    /** v54: pyramids and jungle temples measure the city's ground, not the flat noise under it. */
+    @Inject(method = "getLowestY(Lnet/minecraft/world/level/levelgen/structure/Structure$GenerationContext;II)I",
+            at = @At("HEAD"), cancellable = true)
+    private static void dorohedoro$cityGround(Structure.GenerationContext context, int width, int depth,
+                                             CallbackInfoReturnable<Integer> cir) {
+        Integer y = com.dorohedoro.hole.worldgen.SurfaceStructures73.cityLowestY(context, width, depth);
+        if (y != null) cir.setReturnValue(y);
+    }
+
     @Inject(method = "findValidGenerationPoint", at = @At("HEAD"), cancellable = true)
     private void dorohedoro$skipProvablyAbsent(Structure.GenerationContext context,
                                                CallbackInfoReturnable<Optional<Structure.GenerationStub>> cir) {

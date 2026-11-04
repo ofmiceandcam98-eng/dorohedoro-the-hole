@@ -35,7 +35,7 @@ public final class HoleBiomeSource extends BiomeSource {
                                    Holder<Biome> ocean, Holder<Biome> deepOcean,
                                    Holder<Biome> coldOcean, Holder<Biome> deepColdOcean,
                                    Holder<Biome> beach, Holder<Biome> snowyBeach,
-                                   boolean oceanRegions, boolean coastalShelves) {}
+                                   boolean oceanRegions, boolean coastalShelves, boolean oceanMonumentFloors) {}
 
     private static final MapCodec<FrontierBiomes> FRONTIER_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             RegistryOps.retrieveElement(HoleBiomes.SNOWFIELDS),
@@ -50,7 +50,8 @@ public final class HoleBiomeSource extends BiomeSource {
             RegistryOps.retrieveElement(Biomes.BEACH),
             RegistryOps.retrieveElement(Biomes.SNOWY_BEACH),
             Codec.BOOL.optionalFieldOf("ocean_regions", false).forGetter(FrontierBiomes::oceanRegions),
-            Codec.BOOL.optionalFieldOf("coastal_shelves", false).forGetter(FrontierBiomes::coastalShelves)
+            Codec.BOOL.optionalFieldOf("coastal_shelves", false).forGetter(FrontierBiomes::coastalShelves),
+            Codec.BOOL.optionalFieldOf("ocean_monument_floors", false).forGetter(FrontierBiomes::oceanMonumentFloors)
     ).apply(instance, FrontierBiomes::new));
 
     public static final MapCodec<HoleBiomeSource> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
@@ -110,6 +111,16 @@ public final class HoleBiomeSource extends BiomeSource {
         this.deepDark = deepDark;
     }
 
+    /** Sea level 63 minus vanilla's monument radius 29, aligned down to a biome cell. */
+    private static final int OCEAN_FLOOR_BIOME_BOTTOM = 32;
+
+    private Holder<Biome> oceanBiome(int depth, int blockX, int blockZ, Climate.Sampler sampler) {
+        boolean cold = sampler.temperature().compute(new DensityFunction.SinglePointContext(blockX, 0, blockZ)) < -0.28;
+        return depth >= 16
+                ? (cold ? frontier.deepColdOcean() : frontier.deepOcean())
+                : (cold ? frontier.coldOcean() : frontier.ocean());
+    }
+
     @Override
     protected MapCodec<? extends BiomeSource> codec() {
         return CODEC;
@@ -135,19 +146,19 @@ public final class HoleBiomeSource extends BiomeSource {
         int blockY = QuartPos.toBlock(y);
         int blockZ = QuartPos.toBlock(z);
         if (blockY < UNDERGROUND_TOP) {
+            // v54 (absent in older saves): open sea keeps its ocean biome down to y 32, the bottom of vanilla's
+            // monument check, which otherwise always found cave biomes there and rejected every monument.
+            if (frontier.oceanMonumentFloors() && frontier.oceanRegions() && blockY >= OCEAN_FLOOR_BIOME_BOTTOM) {
+                int depth = OceanRegions65.depthAt(sampler, blockX, blockZ);
+                if (depth > 0) return oceanBiome(depth, blockX, blockZ, sampler);
+            }
             return underground(blockX, blockY, blockZ, sampler);
         }
         // Oceans use real vanilla biome identities for native structure and creature generation.
         // This flag is absent/false for old saved generators and is climate-seed-dependent.
         if (frontier.oceanRegions()) {
             int depth = OceanRegions65.depthAt(sampler, blockX, blockZ);
-            if (depth > 0) {
-                boolean cold = sampler.temperature().compute(
-                        new DensityFunction.SinglePointContext(blockX, 0, blockZ)) < -0.28;
-                return depth >= 16
-                        ? (cold ? frontier.deepColdOcean() : frontier.deepOcean())
-                        : (cold ? frontier.coldOcean() : frontier.ocean());
-            }
+            if (depth > 0) return oceanBiome(depth, blockX, blockZ, sampler);
             // Beach biomes are not substituted for the whole coast: a dry, narrow
             // natural beach keeps the inland Hole climate, flora and roads intact.
             if (frontier.coastalShelves()) {

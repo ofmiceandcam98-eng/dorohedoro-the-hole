@@ -69,7 +69,8 @@ public final class HoleChunkGenerator extends NoiseBasedChunkGenerator {
         super.buildSurface(region, structureManager, random, chunk);
         CityPlan cityPlan = plan(region.getSeed(), random);
         if (citySettings.worldDetailVersion() >= 46) {
-            var protectedStructures = VanillaStructureLookup64.forChunk(structureManager, chunk.getPos());
+            var protectedStructures = VanillaStructureLookup64.forChunk(structureManager, chunk.getPos(),
+                    citySettings.worldDetailVersion());
             CityPainter.paint(cityPlan, chunk, protectedStructures);
             // Newly generated v47 oceans supersede paved city surface only in genuine sea columns.
             // Vanilla structures then generate normally in their selected ocean biomes.

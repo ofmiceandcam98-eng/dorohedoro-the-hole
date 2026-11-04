@@ -64,6 +64,8 @@ public final class StructurePrecheck72 {
             // Vanilla's getLowestY is the minimum of four corner heights, the first at the chunk's minimum corner, so one
             // corner below sea level settles it. The Hole's surface noise is flat just below sea level, so in the
             // frontier biomes this is what rejects every pyramid. It costs one column instead of five plus a disk read.
+            // v54 worlds measure city ground instead (SurfaceStructures73), so the noise shortcut no longer holds.
+            if (SurfaceStructures73.applies(context)) return false;
             int corner = context.chunkGenerator().getFirstOccupiedHeight(chunk.getMinBlockX(), chunk.getMinBlockZ(),
                     Heightmap.Types.WORLD_SURFACE_WG, context.heightAccessor(), context.randomState());
             return corner < context.chunkGenerator().getSeaLevel();

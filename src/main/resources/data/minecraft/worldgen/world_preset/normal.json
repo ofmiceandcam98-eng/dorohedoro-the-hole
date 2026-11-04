@@ -10,7 +10,8 @@
           "frontier_biomes": true,
           "climate_across_city": true,
           "ocean_regions": true,
-          "coastal_shelves": true
+          "coastal_shelves": true,
+          "ocean_monument_floors": true
         },
         "settings": "dorohedoro:hole_sewers",
         "city": {
@@ -18,7 +19,7 @@
           "sewer_underworld": true,
           "sewer_cave_frequency": 30,
           "sewer_cavern_version": 5,
-          "world_detail_version": 53,
+          "world_detail_version": 54,
           "density": 0.97
         }
       }

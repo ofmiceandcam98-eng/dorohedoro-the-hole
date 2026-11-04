@@ -110,6 +110,10 @@ public final class ClientQa {
 
     private static void script(Minecraft mc) {
         int t = ticks;
+        if (VISITS.length > 0) {
+            visit(mc, t);
+            return;
+        }
         // Origin: photograph the real choice screen, then let fate pick a smoke family through the real packet.
         if (t == 1) {
             command(mc, "gamerule doDaylightCycle false");
@@ -262,6 +266,47 @@ public final class ClientQa {
             case 2 -> String.format(Locale.ROOT, "tp @a %.2f %.2f %.2f 0 24", x, y, z - 2.8);
             default -> String.format(Locale.ROOT, "tp @a %.2f %.2f %.2f 135 52", x + 2.0, y + 2.4, z + 2.0);
         };
+    }
+
+    /**
+     * Visit mode: {@code -Ddorohedoro.clientqa.visit=name:x:z;name:x:z} flies a spectator camera to each structure start
+     * and takes a high view and a close view of it, then quits. Used to check that generated structures look right.
+     */
+    private static final String[] VISITS = System.getProperty("dorohedoro.clientqa.visit", "").isBlank() ? new String[0]
+            : System.getProperty("dorohedoro.clientqa.visit").split(";");
+    private static final int VISIT_WAIT = 700;
+    private static final int VISIT_STEP = VISIT_WAIT + 160;
+
+    private static void visit(Minecraft mc, int t) {
+        if (t == 2) PacketDistributor.sendToServer(new CharacterNetwork.Submit("fate", ""));
+        if (t == 40) {
+            closeScreen(mc);
+            mc.options.hideGui = true;
+            command(mc, "gamemode spectator @a");
+            command(mc, "gamerule doDaylightCycle false");
+            command(mc, "time set 6000");
+            command(mc, "effect give @a minecraft:night_vision 99999 0 true");
+        }
+        int n = (t - 60) / VISIT_STEP, k = (t - 60) % VISIT_STEP;
+        if (t < 60) return;
+        if (n >= VISITS.length) {
+            if (k == 10) {
+                log("tour complete, quitting");
+                mc.stop();
+            }
+            return;
+        }
+        String[] p = VISITS[n].split(":");
+        String name = p[0];
+        int x = Integer.parseInt(p[1]), z = Integer.parseInt(p[2]);
+        boolean sea = name.contains("monument");
+        // Pyramid pieces start at the chunk corner and span about 21 blocks; the monument centers on chunk cell 9.
+        int cx = x + (sea ? 9 : 10), cz = z + (sea ? 9 : 10);
+        if (k == 0) command(mc, String.format(Locale.ROOT, "tp @a %d %d %d 180 42", cx, sea ? 110 : 125, cz + (sea ? 75 : 55)));
+        else if (k == VISIT_WAIT) shot(mc, "visit-" + name + "-high");
+        else if (k == VISIT_WAIT + 1) command(mc, String.format(Locale.ROOT, "tp @a %d %d %d 180 %d", cx, sea ? 48 : 92,
+                cz + (sea ? 48 : 30), sea ? 4 : 18));
+        else if (k == VISIT_WAIT + 140) shot(mc, "visit-" + name + "-close");
     }
 
     private static String tpHome(float yaw, float pitch) {

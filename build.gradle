@@ -83,6 +83,7 @@ neoForge {
             gameDirectory = project.file('runs/qaclient')
             systemProperty 'dorohedoro.clientqa', 'true'
             systemProperty 'dorohedoro.clientqa.seed', project.findProperty('qa_seed') ?: '8675309'
+            systemProperty 'dorohedoro.clientqa.visit', project.findProperty('qa_visit') ?: ''
             // A 1600x900 window gives GUI scale 3, close to what players see, so HUD screenshots are representative.
             programArguments.addAll('--width', '1600', '--height', '900')
         }

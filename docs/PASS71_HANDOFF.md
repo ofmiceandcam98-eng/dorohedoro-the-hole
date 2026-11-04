@@ -390,3 +390,40 @@ Vanilla progression loses prismarine, sponges, elder guardians and the pyramid l
 Either change alters biomes or structures in new chunks, so it must sit behind `world_detail_version` 54 (or a new
 biome-source flag that old saves lack, like `ocean_regions`), as §4 describes. Buried treasure (spacing 1, 100 chunks)
 and warm ocean ruins were also not found near spawn on 12345; they were not investigated further.
+
+## 11. Pass 73: monuments and pyramids generate again (v54, 2026-11-04)
+
+The owner chose to bring them back. **New worlds only**: `world_detail_version` **54**, plus the biome-source flag
+`ocean_monument_floors`, which is absent from older saves. Old worlds generate exactly as before.
+
+- **Ocean monuments:** with the flag, `HoleBiomeSource` keeps open-sea columns' ocean biome down to y 32, the bottom
+  of vanilla's radius-29 monument check, instead of cave biomes below `UNDERGROUND_TOP` (40). The monument then
+  carves itself into the basin like vanilla.
+- **Desert pyramids and jungle temples:** `worldgen/SurfaceStructures73` replaces vanilla's corner-height rule
+  (`Structure.getLowestY`, mixin in `StructureMixin`) with the city ground. A footprint must sit inside one city
+  block: no street or canal within 2 blocks, and no corner in the sea or within 12 blocks of the shore. Anything else
+  reports "below sea level", so vanilla rejects it.
+- **Clear lots:** `VanillaStructureLookup64` (v54) reserves accepted temple footprints as surface boxes.
+  `Canvas.protectsVanillaWrite` then skips city writes above street level there, so the temple stands in a clear lot
+  on city ground.
+- **Precheck:** `StructurePrecheck72` skips its noise-corner shortcut in v54 worlds. The QA equivalence check is still
+  441 of 441 per structure with 0 mismatches.
+- **Results (seed 12345):**
+
+  | Structure | Status | Position | Distance from spawn | Search time |
+  |---|---|---|---|---|
+  | Monument | **verified** (prismarine) | 6896, -1280 | 3,392 | 27 ms |
+  | Desert pyramid | found | 3312, -2848 | 559 | 1 ms |
+  | Jungle pyramid | found | 2288, -3856 | 1,894 | 0 ms |
+
+  Raw output is in `docs/evidence/pass73/structures-seed-12345-v54.txt`.
+- **Visual check:** `./gradlew runQaClient -Pqa_seed=12345 "-Pqa_visit=name:x:z;..."` is the new visit mode in
+  `ClientQa`. All three look right: each pyramid in its own clear city lot, the monument complete underwater with
+  guardians. Screenshots are in `docs/evidence/pass73/`.
+- **Regression checks:**
+  - Seed 12345 has the same 4 known failures (district count at radius 6, 3 sewer checks).
+  - Seed 8675309 has only `resource_sugar_cane`.
+  - 0 ERROR lines everywhere. `build` is green.
+- **Release:** `Dorohedoro The Hole-BETA0.3.jar` (`0.3.0-beta`), because BETA 0.2 was already handed to the owner for
+  upload.
+- **Still not investigated:** buried treasure and warm ocean ruins near spawn.

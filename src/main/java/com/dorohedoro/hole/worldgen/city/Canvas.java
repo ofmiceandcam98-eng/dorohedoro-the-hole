@@ -308,7 +308,9 @@ public final class Canvas {
     /** Suppress all custom write paths, including tile entity/NBT writes, near actual vanilla starts. */
     private boolean protectsVanillaWrite(int x, int adjustedY, int z) {
         return DeepDarkBuffer63.protects(worldDetailVersion, adjustedY, protectDeepDark63)
-                || VanillaStructureBuffer64.protects(worldDetailVersion, x, adjustedY, z, protectedVanillaStructures64);
+                || VanillaStructureBuffer64.protects(worldDetailVersion, x, adjustedY, z, protectedVanillaStructures64)
+                || VanillaStructureBuffer64.protectsSurface(worldDetailVersion, x, adjustedY, z,
+                        worldY(x, CityPlan.STREET_Y, z), protectedVanillaStructures64);
     }
 
     private boolean isOceanCityWrite(int x, int worldY, int z) {

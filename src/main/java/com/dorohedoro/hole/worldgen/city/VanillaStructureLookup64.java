@@ -19,6 +19,11 @@ public final class VanillaStructureLookup64 {
     private VanillaStructureLookup64() {}
 
     public static List<VanillaStructureBuffer64.Box> forChunk(StructureManager manager, ChunkPos chunk) {
+        return forChunk(manager, chunk, 0);
+    }
+
+    /** v54 also reserves desert pyramid and jungle temple footprints at street level. */
+    public static List<VanillaStructureBuffer64.Box> forChunk(StructureManager manager, ChunkPos chunk, int worldDetailVersion) {
         if (!manager.shouldGenerateStructures()) return List.of();
         var registry = manager.registryAccess().registryOrThrow(Registries.STRUCTURE);
         List<VanillaStructureBuffer64.Box> result = new ArrayList<>();
@@ -26,14 +31,17 @@ public final class VanillaStructureLookup64 {
             ResourceLocation id = registry.getKey(structure);
             return id != null && "minecraft".equals(id.getNamespace()) && switch (id.getPath()) {
                 case "stronghold", "mineshaft", "mineshaft_mesa", "trial_chambers", "ancient_city" -> true;
+                case "desert_pyramid", "jungle_pyramid" -> worldDetailVersion >= 54;
                 default -> false;
             };
         })) {
             if (!start.isValid()) continue;
             BoundingBox bounds = start.getBoundingBox();
+            ResourceLocation id = registry.getKey(start.getStructure());
+            boolean surface = id != null && (id.getPath().equals("desert_pyramid") || id.getPath().equals("jungle_pyramid"));
             VanillaStructureBuffer64.Box box = new VanillaStructureBuffer64.Box(
                     bounds.minX(), bounds.minY(), bounds.minZ(),
-                    bounds.maxX(), bounds.maxY(), bounds.maxZ());
+                    bounds.maxX(), bounds.maxY(), bounds.maxZ(), surface);
             if (box.nearChunk(chunk.getMinBlockX(), chunk.getMinBlockZ())) result.add(box);
         }
         return List.copyOf(result);
