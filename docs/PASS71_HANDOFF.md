@@ -376,7 +376,8 @@ is vanilla's wording and is misleading.) Each candidate was expensive, and every
 - **Logs and failures:** 0 ERROR lines. Seed 12345 has the same 4 failures as unmodified HEAD:
   `multiple_districts` at radius 6 and the 3 known sewer checks.
 - **Seed 8675309:** only `resource_sugar_cane`, which is known and expected. 0 ERROR lines.
-- `./gradlew build` is green. `runData` was not needed, because no datagen changed.
+- `./gradlew build` is green and GitHub CI is green on `a439cb5`. `runData` was not needed, because no datagen changed.
+- `./gradlew runQaClient` with the new mixins: tour complete, 51 screenshots, 0 ERROR lines, 0 exceptions.
 
 ### Open: monuments and pyramids never generate (owner decision, needs v54)
 
