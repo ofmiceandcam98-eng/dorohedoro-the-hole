@@ -2,6 +2,9 @@ name: NeoForge build verification
 
 on:
   workflow_dispatch:
+  push:
+    branches: [gate-0-1-hole-world, "pass-*"]
+  pull_request:
 
 permissions:
   contents: read
