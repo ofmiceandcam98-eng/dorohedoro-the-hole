@@ -59,3 +59,11 @@ See below as it fills in.
 - There is **no modpack project** on the account, so it was not created. That needs the owner's decision.
 - The author dashboard session expired. GitHub OAuth asked for a password, so I stopped. **The owner must sign in to CurseForge** before any upload.
 - CI on `pass-70-neoforge-build` passed: https://github.com/ofmiceandcam98-eng/dorohedoro-the-hole/actions/runs/41816727987
+
+## State at about 05:40 (resume here)
+
+- Pushed `1266424` to `pass-70-neoforge-build`. PR #1 is open. The previous CI run was green.
+- The vanilla structure survey for seed 12345 is in `docs/evidence/pass70/structures-seed-12345.txt`. Nearly every structure was found. Missing: monument, warm ocean ruin, desert and jungle pyramids, buried treasure.
+- **Open performance bug:** the `minecraft:monument` search took 708 s, and the desert and jungle pyramid searches about 120 s each. Next step: time `HoleBiomeSource.getNoiseBiome` directly, for example by calling it 100k times from QA, and find the hot path. Suspects are `CoastalShelf66.distanceAt`, which runs about 40 or more `depthAt` probes, and the district and climate sampling. Any fix must keep the city hashes identical against `/c/dev/report-12345-before-cache.json`, using `node tools/qa-compare.mjs`.
+- Then: build the jar, install it to `C:\Users\Cam\Dorohedoro-Minecraft\mods` after backing up the old one to `old-jars`, run a client test through the Minecraft Launcher with computer-use, update `docs/OVERNIGHT_DEBRIEF_2026-11-04.md`, and send the user the debrief.
+- CurseForge needs the owner to sign in. There is no modpack project.
