@@ -163,6 +163,12 @@
         "weight": 5
       },
       {
+        "type": "dorohedoro:spore_crawler",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 10
+      },
+      {
         "type": "minecraft:husk",
         "maxCount": 3,
         "minCount": 1,
@@ -173,12 +179,6 @@
         "maxCount": 2,
         "minCount": 1,
         "weight": 20
-      },
-      {
-        "type": "dorohedoro:spore_crawler",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 10
       },
       {
         "type": "dorohedoro:sewer_roach",
@@ -216,9 +216,9 @@
     "water_ambient": [
       {
         "type": "minecraft:salmon",
-        "weight": 12,
+        "maxCount": 3,
         "minCount": 2,
-        "maxCount": 3
+        "weight": 12
       }
     ],
     "water_creature": []

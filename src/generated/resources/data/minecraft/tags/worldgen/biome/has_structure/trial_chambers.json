@@ -1,6 +1,6 @@
 {
-  "replace": false,
   "values": [
+    "dorohedoro:hole_undercity",
     "dorohedoro:hole_residential",
     "dorohedoro:hole_market",
     "dorohedoro:hole_industrial",
@@ -13,7 +13,6 @@
     "dorohedoro:hole_dead_taiga",
     "dorohedoro:hole_dust_basin",
     "dorohedoro:hole_iron_badlands",
-    "dorohedoro:hole_mountain_rim",
-    "dorohedoro:hole_undercity"
+    "dorohedoro:hole_mountain_rim"
   ]
 }

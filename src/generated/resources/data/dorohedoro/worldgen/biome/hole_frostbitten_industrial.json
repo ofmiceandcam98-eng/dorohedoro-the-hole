@@ -163,12 +163,6 @@
         "weight": 5
       },
       {
-        "type": "minecraft:stray",
-        "maxCount": 2,
-        "minCount": 1,
-        "weight": 8
-      },
-      {
         "type": "dorohedoro:sewer_roach",
         "maxCount": 1,
         "minCount": 1,
@@ -179,6 +173,12 @@
         "maxCount": 1,
         "minCount": 1,
         "weight": 4
+      },
+      {
+        "type": "minecraft:stray",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 8
       },
       {
         "type": "dorohedoro:sewer_leech",
@@ -210,9 +210,9 @@
     "water_ambient": [
       {
         "type": "minecraft:salmon",
-        "weight": 12,
+        "maxCount": 3,
         "minCount": 2,
-        "maxCount": 3
+        "weight": 12
       }
     ],
     "water_creature": []

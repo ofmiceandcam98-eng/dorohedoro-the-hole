@@ -94,31 +94,18 @@
         "type": "dorohedoro:scrap_rat",
         "maxCount": 2,
         "minCount": 1,
-        "weight": 9
-      },
-      {
-        "type": "dorohedoro:glow_moth",
-        "maxCount": 2,
-        "minCount": 1,
-        "weight": 7
+        "weight": 6
       }
     ],
     "axolotls": [],
-    "creature": [
-      {
-        "type": "dorohedoro:rust_eater_beetle",
-        "maxCount": 2,
-        "minCount": 1,
-        "weight": 8
-      }
-    ],
+    "creature": [],
     "misc": [],
     "monster": [
       {
         "type": "minecraft:zombie",
         "maxCount": 4,
         "minCount": 2,
-        "weight": 90
+        "weight": 85
       },
       {
         "type": "minecraft:zombie_villager",
@@ -130,13 +117,13 @@
         "type": "minecraft:skeleton",
         "maxCount": 4,
         "minCount": 2,
-        "weight": 100
+        "weight": 90
       },
       {
         "type": "minecraft:spider",
         "maxCount": 3,
         "minCount": 2,
-        "weight": 65
+        "weight": 70
       },
       {
         "type": "minecraft:creeper",
@@ -166,34 +153,10 @@
         "type": "minecraft:stray",
         "maxCount": 2,
         "minCount": 1,
-        "weight": 8
-      },
-      {
-        "type": "dorohedoro:sewer_roach",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 10
-      },
-      {
-        "type": "dorohedoro:sludge_crawler",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 4
+        "weight": 22
       },
       {
         "type": "dorohedoro:sewer_leech",
-        "maxCount": 2,
-        "minCount": 1,
-        "weight": 7
-      },
-      {
-        "type": "dorohedoro:cavern_burrower",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 4
-      },
-      {
-        "type": "dorohedoro:spore_crawler",
         "maxCount": 2,
         "minCount": 1,
         "weight": 7
@@ -210,9 +173,9 @@
     "water_ambient": [
       {
         "type": "minecraft:salmon",
-        "weight": 12,
+        "maxCount": 3,
         "minCount": 2,
-        "maxCount": 3
+        "weight": 12
       }
     ],
     "water_creature": []

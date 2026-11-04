@@ -8,6 +8,11 @@
     "dorohedoro:hole_graveyard",
     "dorohedoro:hole_outskirts",
     "dorohedoro:hole_frostbitten_industrial",
+    "dorohedoro:hole_snowfields",
+    "dorohedoro:hole_dead_taiga",
+    "dorohedoro:hole_dust_basin",
+    "dorohedoro:hole_iron_badlands",
+    "dorohedoro:hole_mountain_rim",
     "dorohedoro:hole_undercity",
     "dorohedoro:sw_city",
     "dorohedoro:sw_city_edge",
@@ -17,11 +22,6 @@
     "dorohedoro:sw_blight",
     "dorohedoro:sw_waters",
     "dorohedoro:sw_caves",
-    "dorohedoro:sw_frostbound_highlands",
-    "dorohedoro:hole_snowfields",
-    "dorohedoro:hole_dead_taiga",
-    "dorohedoro:hole_dust_basin",
-    "dorohedoro:hole_iron_badlands",
-    "dorohedoro:hole_mountain_rim"
+    "dorohedoro:sw_frostbound_highlands"
   ]
 }

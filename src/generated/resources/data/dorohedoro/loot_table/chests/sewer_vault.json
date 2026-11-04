@@ -81,8 +81,7 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "minecraft:diamond",
-          "weight": 1
+          "name": "minecraft:diamond"
         },
         {
           "type": "minecraft:item",
@@ -113,8 +112,7 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "minecraft:golden_apple",
-          "weight": 1
+          "name": "minecraft:golden_apple"
         },
         {
           "type": "minecraft:item",

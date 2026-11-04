@@ -89,18 +89,6 @@
         "maxCount": 8,
         "minCount": 8,
         "weight": 10
-      },
-      {
-        "type": "dorohedoro:scrap_rat",
-        "maxCount": 2,
-        "minCount": 1,
-        "weight": 9
-      },
-      {
-        "type": "dorohedoro:glow_moth",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 7
       }
     ],
     "axolotls": [],
@@ -109,43 +97,7 @@
         "type": "dorohedoro:rust_eater_beetle",
         "maxCount": 1,
         "minCount": 1,
-        "weight": 3
-      },
-      {
-        "type": "minecraft:rabbit",
-        "maxCount": 3,
-        "minCount": 2,
-        "weight": 8
-      },
-      {
-        "type": "minecraft:chicken",
-        "maxCount": 4,
-        "minCount": 2,
-        "weight": 10
-      },
-      {
-        "type": "minecraft:sheep",
-        "maxCount": 3,
-        "minCount": 2,
-        "weight": 10
-      },
-      {
-        "type": "minecraft:pig",
-        "maxCount": 3,
-        "minCount": 2,
-        "weight": 10
-      },
-      {
-        "type": "minecraft:cow",
-        "maxCount": 3,
-        "minCount": 2,
-        "weight": 8
-      },
-      {
-        "type": "minecraft:horse",
-        "maxCount": 2,
-        "minCount": 1,
-        "weight": 3
+        "weight": 6
       }
     ],
     "misc": [],
@@ -154,7 +106,7 @@
         "type": "minecraft:zombie",
         "maxCount": 4,
         "minCount": 2,
-        "weight": 100
+        "weight": 85
       },
       {
         "type": "minecraft:zombie_villager",
@@ -166,19 +118,19 @@
         "type": "minecraft:skeleton",
         "maxCount": 4,
         "minCount": 2,
-        "weight": 90
+        "weight": 120
       },
       {
         "type": "minecraft:spider",
         "maxCount": 3,
         "minCount": 2,
-        "weight": 110
+        "weight": 80
       },
       {
         "type": "minecraft:creeper",
         "maxCount": 2,
         "minCount": 1,
-        "weight": 35
+        "weight": 20
       },
       {
         "type": "minecraft:slime",
@@ -202,28 +154,10 @@
         "type": "dorohedoro:cavern_burrower",
         "maxCount": 1,
         "minCount": 1,
-        "weight": 8
-      },
-      {
-        "type": "dorohedoro:sewer_roach",
-        "maxCount": 2,
-        "minCount": 1,
-        "weight": 16
+        "weight": 9
       },
       {
         "type": "dorohedoro:sewer_leech",
-        "maxCount": 2,
-        "minCount": 1,
-        "weight": 7
-      },
-      {
-        "type": "dorohedoro:sludge_crawler",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 8
-      },
-      {
-        "type": "dorohedoro:spore_crawler",
         "maxCount": 2,
         "minCount": 1,
         "weight": 7
@@ -240,9 +174,9 @@
     "water_ambient": [
       {
         "type": "minecraft:salmon",
-        "weight": 12,
+        "maxCount": 3,
         "minCount": 2,
-        "maxCount": 3
+        "weight": 12
       }
     ],
     "water_creature": []

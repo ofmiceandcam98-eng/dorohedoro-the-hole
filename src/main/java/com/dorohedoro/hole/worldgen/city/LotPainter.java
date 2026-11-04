@@ -99,10 +99,11 @@ final class LotPainter {
         Style style = c.hasLoreArchitecture() ? LoreArchitecture19.styleFor(c, lot) : Style.forDistrict(lot.district(), c.hasArchitectureVariation()
                 ? CityArchitecture.styleHash(c.seed(), lot.rect().centerX(), lot.rect().centerZ(), lot.hash())
                 : lot.hash(), c.hasWorldDetail());
-        Tower.build(c, box, floors, style, lot.hash(),
-                c.hasHousing29() ? HousingDetail29.chooseRoof(box, floors, lot.hash(), roofFor(lot.hash())) : roofFor(lot.hash()),
+        final int finalFloors = floors;
+        Tower.build(c, box, finalFloors, style, lot.hash(),
+                c.hasHousing29() ? HousingDetail29.chooseRoof(box, finalFloors, lot.hash(), roofFor(lot.hash())) : roofFor(lot.hash()),
                 (cv, k, in, y) -> {
-            if (cv.hasHousing25() && Housing25.compact(box, floors)) { Housing25.residence(cv, in, y, k, floors, lot.hash()); if (cv.hasResidential26()) ResidentialDetails26.compact(cv, in, y, k, floors, lot.hash()); }
+            if (cv.hasHousing25() && Housing25.compact(box, finalFloors)) { Housing25.residence(cv, in, y, k, finalFloors, lot.hash()); if (cv.hasResidential26()) ResidentialDetails26.compact(cv, in, y, k, finalFloors, lot.hash()); }
             else {
                 dwelling(cv, style, k, in, y);
                 if (cv.hasHousing25()) Housing25.residentialDetails(cv, in, y, k, lot.hash());
@@ -110,9 +111,9 @@ final class LotPainter {
             }
             if (cv.hasAtmosphere28()) ResidentialAtmosphere28.residence(cv, in, y, k, lot.hash());
             if (cv.hasHousing29()) HousingDetail29.furnish(cv, in, y, k, lot.hash());
-            if (cv.hasOccupiedInteriors35()) OccupiedInteriors35.home(cv, in, y, k, lot.hash(), Housing25.compact(box, floors));
-            if (cv.hasHillside37()) RoomPurpose37.residential(cv, in, y, k, lot.hash(), Housing25.compact(box, floors));
-            if (cv.hasOccupiedDetail39()) LivedInRooms39.residence(cv, in, y, k, lot.hash(), Housing25.compact(box, floors));
+            if (cv.hasOccupiedInteriors35()) OccupiedInteriors35.home(cv, in, y, k, lot.hash(), Housing25.compact(box, finalFloors));
+            if (cv.hasHillside37()) RoomPurpose37.residential(cv, in, y, k, lot.hash(), Housing25.compact(box, finalFloors));
+            if (cv.hasOccupiedDetail39()) LivedInRooms39.residence(cv, in, y, k, lot.hash(), Housing25.compact(box, finalFloors));
         });
         if (c.hasHousing25()) Housing25.facade(c, box, floors, lot.hash(), lot.district());
         if (c.hasAtmosphere28()) ResidentialAtmosphere28.eaves(c, box, floors, lot.hash(), lot.district());
@@ -141,10 +142,11 @@ final class LotPainter {
         Style style = c.hasLoreArchitecture() ? LoreArchitecture19.styleFor(c, lot) : Style.forDistrict(lot.district(), c.hasArchitectureVariation()
                 ? CityArchitecture.styleHash(c.seed(), lot.rect().centerX(), lot.rect().centerZ(), lot.hash())
                 : lot.hash(), c.hasWorldDetail());
-        Tower.build(c, box, floors, style, lot.hash(),
-                c.hasHousing29() ? HousingDetail29.chooseRoof(box, floors, lot.hash(), roofFor(lot.hash())) : roofFor(lot.hash()),
+        final int finalFloors = floors;
+        Tower.build(c, box, finalFloors, style, lot.hash(),
+                c.hasHousing29() ? HousingDetail29.chooseRoof(box, finalFloors, lot.hash(), roofFor(lot.hash())) : roofFor(lot.hash()),
                 (cv, k, in, y) -> {
-            if (cv.hasHousing25() && Housing25.compact(box, floors)) { Housing25.residence(cv, in, y, k, floors, lot.hash()); if (cv.hasResidential26()) ResidentialDetails26.compact(cv, in, y, k, floors, lot.hash()); }
+            if (cv.hasHousing25() && Housing25.compact(box, finalFloors)) { Housing25.residence(cv, in, y, k, finalFloors, lot.hash()); if (cv.hasResidential26()) ResidentialDetails26.compact(cv, in, y, k, finalFloors, lot.hash()); }
             else {
                 dwelling(cv, style, k, in, y);
                 if (cv.hasHousing25()) Housing25.residentialDetails(cv, in, y, k, lot.hash());
@@ -152,9 +154,9 @@ final class LotPainter {
             }
             if (cv.hasAtmosphere28()) ResidentialAtmosphere28.residence(cv, in, y, k, lot.hash());
             if (cv.hasHousing29()) HousingDetail29.furnish(cv, in, y, k, lot.hash());
-            if (cv.hasOccupiedInteriors35()) OccupiedInteriors35.home(cv, in, y, k, lot.hash(), Housing25.compact(box, floors));
-            if (cv.hasHillside37()) RoomPurpose37.residential(cv, in, y, k, lot.hash(), Housing25.compact(box, floors));
-            if (cv.hasOccupiedDetail39()) LivedInRooms39.residence(cv, in, y, k, lot.hash(), Housing25.compact(box, floors));
+            if (cv.hasOccupiedInteriors35()) OccupiedInteriors35.home(cv, in, y, k, lot.hash(), Housing25.compact(box, finalFloors));
+            if (cv.hasHillside37()) RoomPurpose37.residential(cv, in, y, k, lot.hash(), Housing25.compact(box, finalFloors));
+            if (cv.hasOccupiedDetail39()) LivedInRooms39.residence(cv, in, y, k, lot.hash(), Housing25.compact(box, finalFloors));
         });
         if (c.hasHousing25()) Housing25.facade(c, box, floors, lot.hash(), lot.district());
         if (c.hasAtmosphere28()) ResidentialAtmosphere28.eaves(c, box, floors, lot.hash(), lot.district());
@@ -265,15 +267,16 @@ final class LotPainter {
                 ? CityArchitecture.styleHash(c.seed(), lot.rect().centerX(), lot.rect().centerZ(), lot.hash())
                 : lot.hash(), c.hasWorldDetail());
         Block site = JOB_SITES[CityHash.range(lot.hash() >>> 12, JOB_SITES.length)];
-        Tower.build(c, box, floors, style, lot.hash(), Tower.Roof.PLAIN, (cv, k, in, y) -> {
+        final int finalFloors = floors;
+        Tower.build(c, box, finalFloors, style, lot.hash(), Tower.Roof.PLAIN, (cv, k, in, y) -> {
             if (k > 0) {
-                if (cv.hasHousing25() && Housing25.compact(box, floors)) { Housing25.residence(cv, in, y, k, floors, lot.hash()); if (cv.hasResidential26()) ResidentialDetails26.compact(cv, in, y, k, floors, lot.hash()); }
+                if (cv.hasHousing25() && Housing25.compact(box, finalFloors)) { Housing25.residence(cv, in, y, k, finalFloors, lot.hash()); if (cv.hasResidential26()) ResidentialDetails26.compact(cv, in, y, k, finalFloors, lot.hash()); }
                 else dwelling(cv, style, k, in, y);
                 if (cv.hasAtmosphere28()) ResidentialAtmosphere28.residence(cv, in, y, k, lot.hash());
                 if (cv.hasHousing29()) HousingDetail29.furnish(cv, in, y, k, lot.hash());
-                if (cv.hasOccupiedInteriors35()) OccupiedInteriors35.home(cv, in, y, k, lot.hash(), Housing25.compact(box, floors));
-            if (cv.hasHillside37()) RoomPurpose37.residential(cv, in, y, k, lot.hash(), Housing25.compact(box, floors));
-            if (cv.hasOccupiedDetail39()) LivedInRooms39.residence(cv, in, y, k, lot.hash(), Housing25.compact(box, floors));
+                if (cv.hasOccupiedInteriors35()) OccupiedInteriors35.home(cv, in, y, k, lot.hash(), Housing25.compact(box, finalFloors));
+            if (cv.hasHillside37()) RoomPurpose37.residential(cv, in, y, k, lot.hash(), Housing25.compact(box, finalFloors));
+            if (cv.hasOccupiedDetail39()) LivedInRooms39.residence(cv, in, y, k, lot.hash(), Housing25.compact(box, finalFloors));
                 return;
             }
             if (cv.hasInteriorVariety()) {
@@ -327,7 +330,8 @@ final class LotPainter {
             return;
         }
         int floors = 2 + CityHash.range(lot.hash(), 2);
-        Tower.build(c, box, floors, Style.CLEAN, lot.hash(), Tower.Roof.PLAIN, (cv, k, in, y) -> ward(cv, k, in, y));
+        final int finalFloors = floors;
+        Tower.build(c, box, finalFloors, Style.CLEAN, lot.hash(), Tower.Roof.PLAIN, (cv, k, in, y) -> ward(cv, k, in, y));
         redCross(c, box.centerX(), GROUND_Y + floors * Tower.STOREY - 3, box.z1());
     }
 

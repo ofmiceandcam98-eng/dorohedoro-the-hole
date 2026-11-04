@@ -3,6 +3,7 @@ package com.dorohedoro.hole.client.ui;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractButton;
+import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
 
 /** Small accessible vanilla GUI widget with original Hole industrial styling. */
@@ -22,5 +23,10 @@ public final class HoleMenuButton extends AbstractButton {
         var f=Minecraft.getInstance().font;
         String label=HoleUiTheme.fit(f,getMessage().getString(),Math.max(4,w-11));
         g.drawCenteredString(f,label,x+w/2,y+(h-8)/2,active?HoleUiTheme.TEXT:HoleUiTheme.MUTED);
+    }
+
+    @Override
+    protected void updateWidgetNarration(NarrationElementOutput output) {
+        this.defaultButtonNarrationText(output);
     }
 }
