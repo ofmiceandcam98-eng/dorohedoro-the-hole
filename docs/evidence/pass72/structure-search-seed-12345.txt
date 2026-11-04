@@ -1,0 +1,50 @@
+# Seed 12345, Pass 72, QA_STRUCTURES=true bash tools/qa-world.sh 12345 6
+seed=12345 order=forward failures=4 chunks=169 ms/chunk=35.3
+  FAIL multiple_districts: [RESIDENTIAL, MARKET]
+  FAIL sewer_deep_chamber_carved: 83, -30, 60
+  FAIL sewer_branch_begins_lined: 90, -35, 47
+  FAIL sewer_selective_cave_destination: 90, -35, -4
+stronghold           verified                       2384, 0, -3888       d=1833 mk=12 t=17ms
+ancient_city         verified                       4016, 0, -3024       d=253 mk=1 t=0ms
+trial_chambers       verified                       3312, 0, -3808       d=1138 mk=1 t=197ms
+mineshaft            verified                       3856, 0, -2928       d=113 mk=1 t=0ms
+monument             not found within 100 chunks                         d=- mk=- t=93ms
+shipwreck            found                          6384, 0, -1104       d=3040 mk=- t=210ms
+ocean_ruin_cold      found                          6512, 0, -1264       d=3063 mk=- t=185ms
+ocean_ruin_warm      not found within 100 chunks                         d=- mk=- t=0ms
+desert_pyramid       not found within 100 chunks                         d=- mk=- t=4794ms
+jungle_pyramid       not found within 100 chunks                         d=- mk=- t=3106ms
+igloo                found                          2400, 0, -1776       d=1801 mk=- t=21ms
+trail_ruins          found                          2192, 0, -3952       d=2027 mk=- t=14ms
+mansion              found                          4064, 0, -5056       d=2248 mk=- t=54ms
+pillager_outpost     found                          4192, 0, -2752       d=327 mk=- t=15ms
+village_plains       found                          4064, 0, -2544       d=333 mk=- t=8ms
+village_desert       found                          3392, 0, -3728       d=1030 mk=- t=1ms
+village_savanna      found                          3840, 0, -3152       d=337 mk=- t=0ms
+village_snowy        found                          2240, 0, -2000       d=1823 mk=- t=142ms
+village_taiga        found                          2352, 0, -3648       d=1731 mk=- t=15ms
+ruined_portal        found                          3568, 0, -2848       d=304 mk=- t=23ms
+swamp_hut            found                          3744, 0, -1888       d=936 mk=- t=9ms
+buried_treasure      not found within 100 chunks                         d=- mk=- t=881ms
+fortress             verified                       112, 0, 672          d=681 mk=1 t=219ms
+bastion_remnant      found                          192, 0, 320          d=373 mk=- t=0ms
+end_city             verified                       992, 0, 384          d=1063 mk=1 t=189ms
+biome_timing {"street_near_spawn_ns":4051,"street_wide_ns":5162,"underground_wide_ns":1325}
+minecraft:monument {"candidates":441,"vanilla_ms":4218,"precheck_ms":2,"present_vanilla":0,"present_precheck":0,"proved_absent":441,"mismatches":0,"center_biome_outcomes":{"hole_dead_taiga:proved_absent":378,"hole_industrial:proved_absent":15,"hole_waterfront:proved_absent":48}}
+minecraft:desert_pyramid {"candidates":441,"vanilla_ms":873,"precheck_ms":3,"present_vanilla":0,"present_precheck":0,"proved_absent":441,"mismatches":0,"center_biome_outcomes":{"hole_dead_taiga:proved_absent":378,"hole_derelict:proved_absent":15,"hole_residential:proved_absent":48}}
+minecraft:jungle_pyramid {"candidates":441,"vanilla_ms":944,"precheck_ms":411,"present_vanilla":0,"present_precheck":0,"proved_absent":441,"mismatches":0,"center_biome_outcomes":{"hole_dead_taiga:proved_absent":378,"hole_industrial:proved_absent":63}}
+
+# chunk hashes: unmodified HEAD 2272f9c run 1 vs run 2
+chunk_hashes: 169/169 identical
+chunk_hashes_y64_raw: 168/169 identical, differing e.g. 238,-176
+chunk_hashes_full: 132/169 identical, differing e.g. 235,-180 236,-182 237,-180 237,-179 237,-178 237,-177
+# chunk hashes: HEAD run 2 vs Pass 72
+chunk_hashes: 169/169 identical
+chunk_hashes_y64_raw: 169/169 identical
+chunk_hashes_full: 127/169 identical, differing e.g. 235,-180 235,-170 236,-182 236,-181 236,-180 236,-170
+# ERROR lines in server log: 0
+
+# Seed 8675309, bash tools/qa-world.sh 8675309 6
+seed=8675309 order=forward failures=1 chunks=169 ms/chunk=37.0
+  FAIL resource_sugar_cane: 0
+# ERROR lines: 0

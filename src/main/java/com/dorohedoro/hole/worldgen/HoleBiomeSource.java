@@ -9,6 +9,7 @@ import com.dorohedoro.hole.worldgen.city.CoastalShelf66;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 import net.minecraft.core.Holder;
 import net.minecraft.core.QuartPos;
@@ -179,6 +180,19 @@ public final class HoleBiomeSource extends BiomeSource {
             case GRAVEYARD -> graveyard;
             case OUTSKIRTS -> outskirts;
         };
+    }
+
+    /**
+     * The biome of a column at or above {@link #UNDERGROUND_TOP}. Every height there resolves to the same biome, because
+     * the surface branch of {@link #getNoiseBiome} reads only x and z.
+     */
+    public Holder<Biome> surfaceBiome(int blockX, int blockZ, Climate.Sampler sampler) {
+        return getNoiseBiome(QuartPos.fromBlock(blockX), QuartPos.fromBlock(UNDERGROUND_TOP), QuartPos.fromBlock(blockZ), sampler);
+    }
+
+    /** Whether any biome that {@link #underground} can return passes the test. */
+    public boolean anyUndergroundBiome(Predicate<Holder<Biome>> test) {
+        return test.test(deepDark) || test.test(lushCaves) || test.test(dripstoneCaves) || test.test(undercity);
     }
 
     private Holder<Biome> underground(int x, int y, int z, Climate.Sampler sampler) {

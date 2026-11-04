@@ -285,10 +285,11 @@ Evidence screenshots are in `docs/evidence/pass70/` and `docs/evidence/pass71/`.
 
 ## 8. Known issues and next steps (priority order)
 
-1. **Ocean monument search is extremely slow** (more than 10 minutes, nothing found). `/locate` and cartographer ocean
-   explorer maps can freeze a server. The time goes into vanilla `OceanMonumentStructure.findGenerationPoint` biome
-   checks and chunk loading against `HoleBiomeSource`. The desert and jungle pyramid searches take about 2 minutes.
-   Fix it without changing worlds, using `qa-compare.mjs` hash checks.
+1. **Fixed in Pass 72 (see §10):** the monument search now takes 0.09 s instead of 708 s, and the pyramid searches
+   about 3–5 s instead of about 120 s. Worlds are unchanged. **Still open, and an owner decision:** ocean monuments,
+   desert pyramids and jungle pyramids **can never generate** in Hole worlds (v47+). The search was slow because it
+   checked about 40,000 candidates that all fail. Making them generate is a worldgen change and needs a gated
+   `world_detail_version` 54; see §10 for what that involves.
 2. **CurseForge:** confirm the owner's BETA 0.2 upload went through and the gallery screenshots are in. Answer the
    modpack question (create one, or it lives on another account?).
 3. **Iterate with the owner's play-test** on room furnishing, the HUD and menus, the mobs and the ores. Likely
@@ -312,3 +313,79 @@ Evidence screenshots are in `docs/evidence/pass70/` and `docs/evidence/pass71/`.
 - `curseforge/`: the changelog, project description and summary as written for the owner, plus `gallery/` with 19
   real screenshots.
 - `owner-feedback.md`: the owner's requests from this session, in order, so the reasons behind each change are clear.
+
+## 10. Pass 72: structure search speed (2026-11-04)
+
+Branch `pass-70-neoforge-build`. Evidence: `docs/evidence/pass72/structure-search-seed-12345.txt`.
+
+### What was wrong
+
+`/locate` and explorer maps search **100 placement cells** in every direction, not 100 chunks. For the monument and
+the pyramids that is about 40,000 candidate chunks across roughly ±50,000 blocks. (The QA label "within 100 chunks"
+is vanilla's wording and is misleading.) Each candidate was expensive, and every one failed:
+
+| Structure | Why every candidate fails in a Hole world | Why each failure was slow |
+|---|---|---|
+| Ocean monument | Vanilla requires every biome in a radius-29 cube around sea level (63) to be ocean or river. The cube reaches y = 32, below `HoleBiomeSource.UNDERGROUND_TOP` (40), where the Hole always returns cave biomes. | About 3,400 `getNoiseBiome` calls per candidate (about 5 µs each at street level) |
+| Desert / jungle pyramid | Outside Dust Basin / Dead Taiga, the biome is wrong. Inside them, vanilla's `getLowestY` (four corners) must be at or above sea level, but the `hole_sewers` surface noise is a flat `y_clamped_gradient` that puts the noise surface just below sea level everywhere. | Five noise-column height evaluations per candidate |
+| All three | (Same as above) | A blocking chunk read through the IO thread (`StructureCheck.tryLoadFromStorage`, about 1.4 ms) before each candidate |
+
+### What changed (no worldgen change)
+
+- `worldgen/StructurePrecheck72`: decides "vanilla would certainly reject this candidate" cheaply. It applies only in
+  worlds using `HoleBiomeSource`.
+  - **Monument:** one biome sample at the bottom layer of vanilla's own cube.
+  - **Pyramids:** the surface biome (y-independent above `UNDERGROUND_TOP`) plus a check that no cave biome is valid.
+    Failing that, one corner height (the first corner `getLowestY` reads) below sea level.
+- `mixin/StructureMixin`: `Structure.findValidGenerationPoint` returns empty when the precheck proves it. This path
+  is also used by chunk generation, so it speeds up normal world generation too, with identical results.
+- `mixin/StructureCheckMixin`: skips the disk read in `StructureCheck.checkStart` for proven-absent candidates.
+  Chunks already in memory keep vanilla's answer. Only `/locate` and maps use this class.
+- **These are the mod's first mixins.** The config is `src/main/resources/dorohedoro.mixins.json`, enabled in
+  `neoforge.mods.toml`.
+- `-Ddorohedoro.structurePrecheck=false` turns the precheck off.
+- `HoleBiomeSource` gained `surfaceBiome(...)` and `anyUndergroundBiome(...)`. `getNoiseBiome` is unchanged.
+- **QA:** `StructureQa` now:
+  - times `getNoiseBiome` (`biome_timing`);
+  - runs vanilla's placement test on 441 real candidates per structure with the precheck off and then on, recording
+    a `structure_precheck_matches_vanilla_*` check that fails on any difference in result or position;
+  - records why candidates fail (`precheck_comparison`).
+
+### Results, seed 12345, `QA_STRUCTURES=true bash tools/qa-world.sh 12345 6`
+
+| Search | Before (Pass 70 run) | After |
+|---|---|---|
+| monument | 707,751 ms, not found | **93 ms**, not found (proved absent) |
+| desert_pyramid | 119,336 ms, not found | **4,794 ms**, not found |
+| jungle_pyramid | 120,605 ms, not found | **3,106 ms**, not found |
+| all other structures | found as before, same positions | unchanged |
+
+- **Equivalence:** 441 of 441 candidates per structure gave the same answer with and without the precheck (0
+  mismatches). On those candidates the precheck took 2 ms where vanilla took 3,865–4,218 ms for the monument, and
+  3 ms where vanilla took 873 ms for the desert pyramid.
+- **Worlds unchanged:** the baseline `C:\dev\report-12345-before-cache.json` predates Pass 71's v53 changes, so it
+  no longer matches any current build (0/169). The baseline was therefore regenerated from the unmodified HEAD
+  `2272f9c`:
+
+  | Comparison | City layer `chunk_hashes` | `y64_raw` | `full` |
+  |---|---|---|---|
+  | Pass 72 vs HEAD | 169/169 | 169/169 | 127–143 of 169 |
+  | HEAD vs HEAD, two runs | 169/169 | 168/169 | 132/169 |
+
+  The `full` and raw drift is pre-existing run-to-run nondeterminism below street level, not this change.
+- **Logs and failures:** 0 ERROR lines. Seed 12345 has the same 4 failures as unmodified HEAD:
+  `multiple_districts` at radius 6 and the 3 known sewer checks.
+- **Seed 8675309:** only `resource_sugar_cane`, which is known and expected. 0 ERROR lines.
+- `./gradlew build` is green. `runData` was not needed, because no datagen changed.
+
+### Open: monuments and pyramids never generate (owner decision, needs v54)
+
+Vanilla progression loses prismarine, sponges, elder guardians and the pyramid loot in Hole worlds. To enable them:
+- **Monuments:** ocean columns would need ocean biomes down to at least y ≈ 32 (sea level − 29, quart-aligned), and
+  the ocean floor must not report a cave biome.
+- **Pyramids:** they need a structure-height rule that reads the city surface rather than the flat noise, or their
+  own placement.
+
+Either change alters biomes or structures in new chunks, so it must sit behind `world_detail_version` 54 (or a new
+biome-source flag that old saves lack, like `ocean_regions`), as §4 describes. Buried treasure (spacing 1, 100 chunks)
+and warm ocean ruins were also not found near spawn on 12345; they were not investigated further.
