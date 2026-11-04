@@ -132,13 +132,12 @@ public final class SmokeMeshClient {
         Vec3 camera=e.getCamera().getPosition();
         PoseStack pose=e.getPoseStack();
         MultiBufferSource.BufferSource buffers=mc.renderBuffers().bufferSource();
-        var severTexture=buffers.getBuffer(RenderType.entityTranslucent(SLASH));
-        var healTexture=buffers.getBuffer(RenderType.entityTranslucent(HEAL));
-        var blastTexture=buffers.getBuffer(RenderType.entityTranslucent(BLAST));
-        var fungusTexture=buffers.getBuffer(RenderType.entityTranslucent(FUNGAL));
-        var curseTexture=buffers.getBuffer(RenderType.entityTranslucent(CURSE));
-        var protectionTexture=buffers.getBuffer(RenderType.entityTranslucent(PROTECTION));
-        var timeTexture=buffers.getBuffer(RenderType.entityTranslucent(TIME));
+        // Fetch each consumer right before drawing into it. In 1.21 asking the buffer source for a new render
+        // type ends the previous shared batch, so consumers fetched up front were closed by the time smoke used
+        // them, which crashed the client with "Not building!" whenever two or more magic types were on screen.
+        // Fetch each consumer right before drawing into it. In 1.21, asking the buffer source for a new render
+        // type ends the previous shared batch, so consumers fetched up front were already closed when smoke used
+        // them. That crashed the client with "Not building!" while magic effects were on screen.
         Iterator<Cue> it=EVENTS.iterator();
         while(it.hasNext()) {
             Cue c=it.next();
@@ -176,7 +175,7 @@ public final class SmokeMeshClient {
                     pose.translate(0,-.72,0);
                     pose.mulPose(Axis.YP.rotationDegrees(rotationAge*3.4f));
                     pose.scale(scale,scale,scale);
-                    meshes.fungal().render(pose,fungusTexture,0xF000F0,OverlayTexture.NO_OVERLAY);
+                    meshes.fungal().render(pose,buffers.getBuffer(RenderType.entityTranslucent(FUNGAL)),0xF000F0,OverlayTexture.NO_OVERLAY);
                 }
                 case CURSE -> {
                     // A strangling wreath: eight irregular dark tendrils close
@@ -188,7 +187,7 @@ public final class SmokeMeshClient {
                     pose.mulPose(Axis.YP.rotationDegrees(rotationAge*11f));
                     pose.mulPose(Axis.XP.rotationDegrees((float)Math.sin(age*.22)*10));
                     pose.scale(scale,scale,scale);
-                    meshes.curse().render(pose,curseTexture,0xF000F0,OverlayTexture.NO_OVERLAY);
+                    meshes.curse().render(pose,buffers.getBuffer(RenderType.entityTranslucent(CURSE)),0xF000F0,OverlayTexture.NO_OVERLAY);
                 }
                 case PROTECTION -> {
                     // Shell geometry forms outward from the protected target;
@@ -197,7 +196,7 @@ public final class SmokeMeshClient {
                         *(c.skill()==SmokeSkill.SMOKE_BULWARK?1.32f:1f);
                     pose.mulPose(Axis.YP.rotationDegrees(rotationAge*2.4f));
                     pose.scale(scale,scale,scale);
-                    meshes.protection().render(pose,protectionTexture,0xF000F0,OverlayTexture.NO_OVERLAY);
+                    meshes.protection().render(pose,buffers.getBuffer(RenderType.entityTranslucent(PROTECTION)),0xF000F0,OverlayTexture.NO_OVERLAY);
                 }
                 case TIME -> {
                     // Uneven double chronometer: visually distinct from a
@@ -207,21 +206,21 @@ public final class SmokeMeshClient {
                     pose.mulPose(Axis.YP.rotationDegrees(rotationAge*2f));
                     pose.mulPose(Axis.ZP.rotationDegrees(rotationAge*(c.focused?13f:8f)));
                     pose.scale(scale,scale,scale);
-                    meshes.time().render(pose,timeTexture,0xF000F0,OverlayTexture.NO_OVERLAY);
+                    meshes.time().render(pose,buffers.getBuffer(RenderType.entityTranslucent(TIME)),0xF000F0,OverlayTexture.NO_OVERLAY);
                 }
                 case DISMEMBERMENT -> {
                     // A violent, short lived cross-cut. Grows then collapses.
                     scale=(float)(.24+Math.min(1,age/5.0)*1.35)*(1-t*.85f);
                     pose.mulPose(Axis.ZP.rotationDegrees(t*38f));
                     pose.scale(scale,scale,scale);
-                    meshes.sever().render(pose,severTexture,0xF000F0,OverlayTexture.NO_OVERLAY);
+                    meshes.sever().render(pose,buffers.getBuffer(RenderType.entityTranslucent(SLASH)),0xF000F0,OverlayTexture.NO_OVERLAY);
                 }
                 case HEALING -> {
                     // Anatomical repair: crisscrossing wound fibers converge.
                     scale=(float)(.10+.9*Math.min(1,age/7.0))*(1-t*.87f);
                     pose.mulPose(Axis.YP.rotationDegrees(rotationAge*8f));
                     pose.scale(scale,scale,scale);
-                    meshes.healing().render(pose,healTexture,0xF000F0,OverlayTexture.NO_OVERLAY);
+                    meshes.healing().render(pose,buffers.getBuffer(RenderType.entityTranslucent(HEAL)),0xF000F0,OverlayTexture.NO_OVERLAY);
                 }
                 case DESTRUCTION -> {
                     // A compressed core erupts into 3D outward ribs.
@@ -237,7 +236,7 @@ public final class SmokeMeshClient {
                     pose.mulPose(Axis.YP.rotationDegrees(rotationAge*16f));
                     pose.mulPose(Axis.ZP.rotationDegrees(rotationAge*9f));
                     pose.scale(scale,scale,scale);
-                    meshes.blast().render(pose,blastTexture,0xF000F0,OverlayTexture.NO_OVERLAY);
+                    meshes.blast().render(pose,buffers.getBuffer(RenderType.entityTranslucent(BLAST)),0xF000F0,OverlayTexture.NO_OVERLAY);
                 }
                 default -> { }
             }

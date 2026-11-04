@@ -67,3 +67,11 @@ See below as it fills in.
 - **Open performance bug:** the `minecraft:monument` search took 708 s, and the desert and jungle pyramid searches about 120 s each. Next step: time `HoleBiomeSource.getNoiseBiome` directly, for example by calling it 100k times from QA, and find the hot path. Suspects are `CoastalShelf66.distanceAt`, which runs about 40 or more `depthAt` probes, and the district and climate sampling. Any fix must keep the city hashes identical against `/c/dev/report-12345-before-cache.json`, using `node tools/qa-compare.mjs`.
 - Then: build the jar, install it to `C:\Users\Cam\Dorohedoro-Minecraft\mods` after backing up the old one to `old-jars`, run a client test through the Minecraft Launcher with computer-use, update `docs/OVERNIGHT_DEBRIEF_2026-11-04.md`, and send the user the debrief.
 - CurseForge needs the owner to sign in. There is no modpack project.
+
+## State at about 10:10 (resume here)
+
+- **Fixed the client crash "Not building!"** in `SmokeMeshClient`. The renderer fetched 7 buffer consumers up front, and 1.21 closes each when the next is requested. Each is now fetched right before drawing. These were the owner's Nov 1 crash reports.
+- **New `runQaClient`** (`ClientQa`, active only with `-Ddorohedoro.clientqa=true`): creates a world in the real client, takes 5 screenshots and fires all 8 magic types in one frame. Before and after the fix: 6 of 8 types failed with the old renderer, 0 with the new one. Evidence is in `docs/evidence/pass70/client/`.
+- The owner's "spawned weird" screenshot was the spectator test camera 12 blocks underground, after a relative drop. The tour now teleports back to the join point.
+- Built jar `e8dad782…c243f8`, installed to `C:\Users\Cam\Dorohedoro-Minecraft\mods`. The previous jar is in `old-jars\dorohedoro-0.1.1-alpha.1-pre-smokefix.jar`.
+- Still open: monument search speed, sewer checks, CurseForge sign-in, and the modpack decision.

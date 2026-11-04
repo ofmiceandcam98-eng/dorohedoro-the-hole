@@ -1,0 +1,14 @@
+10:05:09 CLIENTQA screen -> TitleScreen
+10:05:12 CLIENTQA creating world clientqa-8675309 with the default preset
+10:05:19 CLIENTQA screen -> LevelLoadingScreen
+10:05:21 CLIENTQA screen -> CharacterCreationScreen
+10:05:21 CLIENTQA joined world at 4602, 81, 826
+10:05:34 CLIENTQA closing CharacterCreationScreen before screenshots
+10:05:34 CLIENTQA screen -> none
+10:05:35 CLIENTQA screenshot 01-spawn-street at 4602, 81, 826: Saved screenshot as qa-01-spawn-street.png
+10:05:50 CLIENTQA screenshot 02-aerial at 4602, 121, 826: Saved screenshot as qa-02-aerial.png
+10:06:05 CLIENTQA screenshot 03-overview at 4602, 231, 826: Saved screenshot as qa-03-overview.png
+10:06:20 CLIENTQA screenshot 04-night-street at 4602, 81, 826: Saved screenshot as qa-04-night-street.png
+10:06:20 CLIENTQA smoke storm: sent 8 magic types in one frame
+10:06:21 CLIENTQA screenshot 05-all-magic-smoke at 4602, 81, 826: Saved screenshot as qa-05-all-magic-smoke.png
+10:06:21 CLIENTQA tour complete, quitting

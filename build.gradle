@@ -72,6 +72,14 @@ neoForge {
         }
 
         // Headless world validation on a real dedicated server. Driven by tools/qa-world.sh.
+        // Unattended client test: creates a fresh world, takes screenshots, quits. See ClientQa.
+        qaClient {
+            client()
+            gameDirectory = project.file('runs/qaclient')
+            systemProperty 'dorohedoro.clientqa', 'true'
+            systemProperty 'dorohedoro.clientqa.seed', project.findProperty('qa_seed') ?: '8675309'
+        }
+
         qaServer {
             server()
             gameDirectory = project.file(project.findProperty('qa_dir') ?: 'runs/qa/manual')
