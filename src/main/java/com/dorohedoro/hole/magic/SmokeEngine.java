@@ -1,5 +1,6 @@
 package com.dorohedoro.hole.magic;
 
+import com.dorohedoro.hole.Dorohedoro;
 import com.dorohedoro.hole.character.CharacterAttachments;
 import com.dorohedoro.hole.character.CharacterProfile;
 import com.dorohedoro.hole.character.MagicType;
@@ -330,7 +331,15 @@ public final class SmokeEngine {
         }
         // Every completed cast has a visible family-specific shape, including
         // self-buffs and healing, so effects are never status-only/invisible.
-        SmokeVisuals.cast(level,p,skill,target,ally,focused,mastery);
+        // A cosmetic packet/particle failure must not invalidate a successful
+        // server-authoritative spell. The exception is logged with skill and
+        // player context; never silently swallow broken visuals.
+        try {
+            SmokeVisuals.cast(level,p,skill,target,ally,focused,mastery);
+        } catch (RuntimeException visualFailure) {
+            Dorohedoro.LOGGER.error("Smoke VFX failure for skill {} (player {}): mechanics were applied; visuals skipped",
+                    skill.id(), p.getUUID(), visualFailure);
+        }
         return true;
     }
     /** Find a living player under the crosshair. Healing never affects hostile entities. */

@@ -34,4 +34,17 @@ public record SewerCavernProfile(int radiusX, int radiusZ, boolean broad) {
         int offset = terrainRelief ? CityElevation.offset(seed, x, sourceZ + direction * step) : 0;
         return actualY - offset;
     }
+
+    /** New city elevation profile: real stair endpoints and per-column grade
+     * must agree with Canvas, otherwise a multi-block subterranean step can
+     * be introduced merely by switching world profiles. */
+    public static int entranceFloor(CityPlan plan, int x, int sourceZ, int direction, int step) {
+        if (step < 43 || step > 59) throw new IllegalArgumentException("Landing step must be 43..59");
+        int firstZ = sourceZ + direction * 43;
+        int lastZ = sourceZ + direction * 59;
+        int start = -39 + CityTerrain40.offset(plan, x, firstZ);
+        int end = -43 + CityTerrain40.offset(plan, x, lastZ);
+        int actualY = start + (int) Math.round((end - start) * ((step - 43) / 16.0));
+        return actualY - CityTerrain40.offset(plan, x, sourceZ + direction * step);
+    }
 }

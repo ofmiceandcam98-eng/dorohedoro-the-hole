@@ -90,3 +90,11 @@ See `docs/HANDOFF_TAKEOVER_2026-10-31.md`.
 - JDK 21 `JavacTask.parse`: 45 Java files, 0 syntax errors. Does NOT validate NeoForge API types or linking.
 - `node tools/make-textures.mjs`: produces nine distinct 16x item sprites plus existing block textures.
 - NeoForge `runData/build/runClient/runServer`: **not verified** due Gradle distribution missing on isolated environment.
+
+## Pass 45 — 2026-11-02 (offline only)
+
+- Pass45 source integration QA: 18/18.
+- Actual Pass45 Java class compiled on JDK21 with lightweight Minecraft API stubs; 3,780 parcels and 858 selected courts; 1,195,956 clipped block writes; chunk splitting, individual room entries and unobstructed outdoor approaches verified.
+- Prior Pass44/43/42/41/35 offline suites passed after updating version-aware *test* expectations.
+- Actual Gradle invocation failed: missing official `gradle/wrapper/gradle-wrapper.jar`. No full NeoForge compile, client test, or true runtime verification was performed.
+- The user-supplied November 1 screenshots are a baseline and **not images of Pass45**.

@@ -2,6 +2,8 @@ package com.dorohedoro.hole.client.magic;
 
 import com.dorohedoro.hole.magic.SmokeNetwork;
 import com.dorohedoro.hole.magic.SmokeSkill;
+import com.dorohedoro.hole.client.ui.HoleUiTheme;
+import com.dorohedoro.hole.client.ui.SmokeSkillIcon;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
@@ -9,6 +11,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
+import net.neoforged.neoforge.client.event.RenderGuiLayerEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
@@ -38,6 +41,7 @@ public final class SmokeClient {
         modBus.addListener(SmokeClient::registerKeys);
         modBus.addListener(SmokeClient::registerHud);
         NeoForge.EVENT_BUS.addListener(SmokeClient::onTick);
+        NeoForge.EVENT_BUS.addListener(SmokeClient::onVanillaHudLayer);
     }
     private static void registerKeys(RegisterKeyMappingsEvent event){event.register(LEDGER);event.register(CYCLE);for(KeyMapping k:KEYS)event.register(k);}
     private static void registerHud(RegisterGuiLayersEvent event){
@@ -99,37 +103,73 @@ public final class SmokeClient {
             }else request("cast",i+":"+(FOCUSED[i]?"focused":"standard"));
         }
     }
+    /** Replace only vanilla hunger/hearts during survival play, never stack duplicate meters.
+     * Native armor/air/experience retain their existing Minecraft presentation.
+     * Guarded so Creative, Spectator and menus are not unexpectedly stripped. */
+    private static void onVanillaHudLayer(RenderGuiLayerEvent.Pre e) {
+        Minecraft mc=Minecraft.getInstance();
+        if(mc.player==null || mc.player.isCreative() || mc.player.isSpectator())return;
+        if(mc.options.hideGui)return;
+        if(e.getName().equals(VanillaGuiLayers.PLAYER_HEALTH)
+            || e.getName().equals(VanillaGuiLayers.FOOD_LEVEL))e.setCanceled(true);
+    }
+
     private static void renderHud(GuiGraphics g){
         Minecraft mc=Minecraft.getInstance();
-        if(mc.player==null||mc.screen!=null)return;
-        // Injuries are visible to Humans and other players too, even without
-        // innate smoke. The server sends this read-only diagnosis on changes.
-        if(!"none".equals(injury)) {
-            g.fill(6,5,Math.max(132,9+mc.font.width("INJURY: "+injury)),25,0xD0402426);
-            g.drawString(mc.font,"INJURY: "+injury,9,11,0xFFFFC3A8);
+        if(mc.player==null||mc.screen!=null||mc.options.hideGui||mc.player.isSpectator())return;
+        boolean smokeUser=!"none".equals(innate);
+        // No boxed panels or permanent text labels.  Icons + 4px meters only.
+        // Native heart/food stacks are hidden only where these replacement bars display.
+        int x=9,y=9;
+        if(!mc.player.isCreative()){
+            meter(g, 0, mc.player.getHealth(), mc.player.getMaxHealth(), x,y,104,0xFFD36B64);
+            meter(g, 1, mc.player.getFoodData().getFoodLevel(),20,x,y+12,104,0xFFD4AD68);
+            y+=24;
         }
-        if("none".equals(innate))return;
-        int w=mc.getWindow().getGuiScaledWidth(),h=mc.getWindow().getGuiScaledHeight();
-        final int width=190;
-        int left=w/2-width/2,top=h-91;
-        g.fill(left-6,top-20,left+width+6,top+31,0xD0182427);
-        g.drawString(mc.font,"SMOKE "+smoke+"/"+maxSmoke+"   R"+rank+"   LOADOUT "+(preset+1)+"/9",left,top-16,0xFFE5D4C0);
-        g.fill(left,top-5,left+width,top-1,0xFF3D5250);
-        g.fill(left,top-5,left+(int)(width*Math.min(1.0,smoke/(double)Math.max(1,maxSmoke))),top-1,0xFF51B9B1);
-        String[] keys={"Z","X","C"};
-        for(int i=0;i<KEYS.length;i++){
-            int x=left+i*64;
-            String id=slot(i);SmokeSkill skill=SmokeSkill.fromId(id);
-            g.fill(x,top+2,x+60,top+27,COOLDOWNS[i]>0?0xFF5B3435:0xFF30494A);
-            if(FOCUSED[i])g.fill(x,top+2,x+60,top+4,0xFFCEB56B);
-            g.drawString(mc.font,keys[i],x+3,top+7,0xFFFFF3D8);
+        if(smokeUser)meter(g,2,smoke,maxSmoke,x,y,104,0xFF6FC1B2);
+        if(!smokeUser)return;
+        // Quick access only; the B pop-up contains names, costs and mastery.
+        int sy=y+22;
+        for(int i=0;i<3;i++){
+            int yy=sy+i*29;
+            SmokeSkill skill=SmokeSkill.fromId(slot(i));
+            int bg=FOCUSED[i]?0xFFBBA075:0xFF516660;
+            g.fill(x,yy,x+27,yy+27,bg);
+            g.fill(x+1,yy+1,x+26,yy+26,0xF0182729);
             if(skill!=null){
-                String name=skill.display();
-                if(name.length()>9)name=name.substring(0,8)+"…";
-                g.drawString(mc.font,name,x+16,top+7,0xFF8DE5D9);
-                if(COOLDOWNS[i]>0)g.drawCenteredString(mc.font,""+((COOLDOWNS[i]+19)/20)+"s",x+30,top+18,0xFFFFC9AF);
-            }else g.drawString(mc.font,"Empty",x+16,top+7,0xFF849B96);
+                SmokeSkillIcon.draw(g,skill,x+2,yy+2,23);
+                if(COOLDOWNS[i]>0){
+                    g.fill(x+2,yy+2,x+25,yy+25,0xB0091116);
+                    String seconds=Integer.toString((COOLDOWNS[i]+19)/20);
+                    g.drawCenteredString(mc.font,seconds,x+14,yy+10,0xFFFFFFFF);
+                }
+            }else{
+                g.drawCenteredString(mc.font,"-",x+14,yy+10,0xFF8D9B99);
+            }
+            g.drawString(mc.font,i==0?"Z":i==1?"X":"C",x+31,yy+9,0xFFE6E9E3);
         }
-        g.drawCenteredString(mc.font,"R: next loadout   Shift+R: previous",w/2,top+32,0xFFB1CAC5);
+        if(!"none".equals(injury)){
+            // A single warning icon; full injury names remain in the Medical tab.
+            g.fill(x,sy+89,x+8,sy+97,0xFFDCA47C);
+            g.drawString(mc.font,"!",x+1,sy+88,0xFF202629);
+        }
+    }
+    private static void meter(GuiGraphics g,int kind,float value,float max,int x,int y,int width,int color){
+        int bx=x+14,by=y+3;int barWidth=width-14;
+        g.fill(bx,by,bx+barWidth,by+5,0xB00A1619);
+        int px=(int)Math.round(barWidth*Math.clamp(value/Math.max(1f,max),0f,1f));
+        if(px>0)g.fill(bx,by,bx+px,by+5,color);
+        // Tiny pixel icons, 9x9 with silhouettes that differ without labels.
+        if(kind==0){
+            g.fill(x+1,y+1,x+4,y+3,color);g.fill(x+6,y+1,x+9,y+3,color);
+            g.fill(x,y+3,x+10,y+6,color);g.fill(x+2,y+6,x+8,y+8,color);
+            g.fill(x+4,y+8,x+6,y+9,color);
+        }else if(kind==1){
+            g.fill(x+2,y+2,x+8,y+6,color);g.fill(x+1,y+3,x+9,y+5,color);
+            g.fill(x+5,y+6,x+7,y+8,color);g.fill(x+7,y+7,x+10,y+9,0xFFE9E4D3);
+        }else{
+            g.fill(x+5,y,x+8,y+3,color);g.fill(x+3,y+2,x+6,y+5,color);
+            g.fill(x+5,y+5,x+9,y+7,color);g.fill(x+2,y+7,x+6,y+9,color);
+        }
     }
 }

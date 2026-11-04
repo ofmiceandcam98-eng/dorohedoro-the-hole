@@ -1,0 +1,10 @@
+{
+  "test": "Pass39 source geometry fixture",
+  "javac_fixture": "pass",
+  "java_logic": "pass",
+  "runs": 1792,
+  "new_files": 2,
+  "changed_existing": 5,
+  "full_neoforge_build": "not_run",
+  "actual_client_test": "not_run"
+}

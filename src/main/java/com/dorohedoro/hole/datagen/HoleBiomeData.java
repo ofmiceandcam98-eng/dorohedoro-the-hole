@@ -197,6 +197,49 @@ final class HoleBiomeData {
             spawns.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.CAVERN_BURROWER.get(), 4, 1, 1));
             spawns.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.SPORE_CRAWLER.get(), 7, 1, 2));
         }));
+        // Pass 42: distinct registered biomes, recognizable in the F3 readout.
+        // These represent polluted Hole fringe landscapes, NOT pristine vanilla wilderness.
+        context.register(HoleBiomes.SNOWFIELDS, biome(context,
+                new Air(0x747B7A, 0x8A9392, 0x344B49, 0x192624, 0x7F8380, 0x696F6D, 0.004F), spawns -> {
+            hunters(spawns, 85, 90, 70, 15);
+            spawns.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.STRAY, 22, 1, 2));
+            spawns.addSpawn(MobCategory.AMBIENT, new MobSpawnSettings.SpawnerData(ModEntities.SCRAP_RAT.get(), 6, 1, 2));
+            spawns.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.SEWER_LEECH.get(), 7, 1, 2));
+            canalFish(spawns);
+        }, -0.35F));
+        context.register(HoleBiomes.DEAD_TAIGA, biome(context,
+                new Air(0x797D73, 0x939689, 0x344F3E, 0x19281E, 0x666A4C, 0x505740, 0.004F), spawns -> {
+            hunters(spawns, 95, 90, 90, 20);
+            spawns.addSpawn(MobCategory.AMBIENT, new MobSpawnSettings.SpawnerData(ModEntities.SCRAP_RAT.get(), 13, 1, 3));
+            spawns.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(ModEntities.RUST_EATER_BEETLE.get(), 6, 1, 2));
+            spawns.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.SEWER_ROACH.get(), 8, 1, 2));
+            spawns.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.SEWER_LEECH.get(), 7, 1, 2));
+            canalFish(spawns);
+        }, 0.10F));
+        context.register(HoleBiomes.DUST_BASIN, biome(context,
+                new Air(0x958C7B, 0x9C9586, 0x574E3B, 0x2F271D, 0x918164, 0x746C52, 0.003F), spawns -> {
+            hunters(spawns, 85, 100, 95, 28);
+            spawns.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.RABBIT, 9, 1, 2));
+            spawns.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.SEWER_ROACH.get(), 12, 1, 2));
+            spawns.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.SEWER_LEECH.get(), 7, 1, 2));
+            canalFish(spawns);
+        }, 1.45F));
+        context.register(HoleBiomes.IRON_BADLANDS, biome(context,
+                new Air(0x937F73, 0xA08A7E, 0x56493F, 0x2A201D, 0x846C57, 0x785F4D, 0.004F), spawns -> {
+            hunters(spawns, 100, 120, 90, 30);
+            spawns.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(ModEntities.RUST_EATER_BEETLE.get(), 9, 1, 2));
+            spawns.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.SEWER_ROACH.get(), 13, 1, 2));
+            spawns.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.SEWER_LEECH.get(), 7, 1, 2));
+            canalFish(spawns);
+        }, 1.25F));
+        context.register(HoleBiomes.MOUNTAIN_RIM, biome(context,
+                new Air(0x727C77, 0x86918A, 0x394C43, 0x17241D, 0x636B59, 0x575E51, 0.004F), spawns -> {
+            hunters(spawns, 85, 120, 80, 20);
+            spawns.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(ModEntities.RUST_EATER_BEETLE.get(), 6, 1, 1));
+            spawns.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.CAVERN_BURROWER.get(), 9, 1, 1));
+            spawns.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.SEWER_LEECH.get(), 7, 1, 2));
+            canalFish(spawns);
+        }, 0.27F));
         context.register(HoleBiomes.UNDERCITY, biome(context, BELOW, spawns -> {
             hunters(spawns, 95, 100, 100, 60);
             spawns.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.SEWER_ROACH.get(), 65, 1, 2));

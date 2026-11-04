@@ -29,6 +29,9 @@ public final class CityPopulator {
             if (r.centerX() >> 4 != chunk.x || r.centerZ() >> 4 != chunk.z) {
                 continue;
             }
+            // The urban lot planner predates ocean regions. Never spawn city residents
+            // above a submerged lot when the v47 ocean column takes precedence.
+            if (plan.oceanDepthAt(r.centerX(), r.centerZ()) > 0 || plan.coastalDistanceAt(r.centerX(), r.centerZ()) > 0) continue;
             switch (lot.type()) {
                 case LIVESTOCK_PEN -> {
                     EntityType<?> first = LIVESTOCK[CityHash.range(lot.hash(), LIVESTOCK.length)];
@@ -104,7 +107,7 @@ public final class CityPopulator {
         }
         if (!eligible) return;
         int waterY = 59 + (plan.settings.terrainRelief()
-                ? CityElevation.offset(plan.seed, x, z) : 0);
+                ? CityTerrain40.offset(plan, x, z) : 0);
         // Verify actual water in the generated world, avoiding dry blocks and the
         // culvert bulkhead / canal bank. Under bridges, fish still have water.
         if (!region.getFluidState(new BlockPos(x, waterY, z)).is(net.minecraft.tags.FluidTags.WATER)) return;
@@ -132,7 +135,7 @@ public final class CityPopulator {
 
     private static void spawn(WorldGenRegion region, CityPlan plan, EntityType<?> type, int x, int z) {
         int groundY = GROUND_Y + (plan.settings.terrainRelief()
-                ? CityElevation.offset(region.getSeed(), x, z) : 0);
+                ? CityTerrain40.offset(plan, x, z) : 0);
         BlockPos pos = new BlockPos(x, groundY, z);
         if (!region.getBlockState(pos).isAir() || !region.getBlockState(pos.above()).isAir()) {
             return;

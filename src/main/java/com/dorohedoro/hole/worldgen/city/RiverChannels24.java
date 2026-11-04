@@ -22,7 +22,7 @@ final class RiverChannels24 {
     private static final long WIDTH_X = 0x714EA005L, WIDTH_Z = 0x714EA006L;
     private static final long COAST = 0x714EA007L;
     private static final long BED = 0x714EA008L;
-    private static final int ROW_RADIUS = 9;
+    // The ROW itself is now supplied by Line.halfWidth(). Older profiles keep nine.
     private static final int WATER_TOP = 61;
     private RiverChannels24() {}
 
@@ -39,7 +39,24 @@ final class RiverChannels24 {
     }
 
     static int centerOffset(long seed, Line line, boolean alongZ, int along) {
-        return (int)Math.round(3.0 * station(seed, alongZ ? BEND_X : BEND_Z, line.index(), along, 80));
+        long salt = alongZ ? BEND_X : BEND_Z;
+        if (line.halfWidth() < 15) {
+            return (int)Math.round(3.0 * station(seed, salt, line.index(), along, 80));
+        }
+        if (line.halfWidth() >= 24) {
+            // v24: a visible curving thalweg with a secondary riffle; the plan
+            // reserves the full ROW before laying any lots. Keeps 4+ block banks.
+            double longBend = station(seed, salt ^ 0x40F120L, line.index(), along, 158);
+            double shortBend = station(seed, salt ^ 0x40F121L, line.index(), along, 63);
+            return Math.max(-17, Math.min(17,
+                    (int)Math.round(14.0 * longBend + 3.0 * shortBend)));
+        }
+        // New v21 waterway reserve: bends travel 8-10 blocks laterally, with a
+        // separate smaller wave so a whole street-length is not one straight run.
+        // This is a fixed world-coordinate field, never a random walk or chunk RNG.
+        double broad = station(seed, salt, line.index(), along, 112);
+        double local = station(seed, salt ^ 0x36B1EC0L, line.index(), along, 47);
+        return Math.max(-10, Math.min(10, (int)Math.round(8.4 * broad + 2.0 * local)));
     }
 
     static int width(long seed, Line line, boolean alongZ, int along) {
@@ -50,10 +67,10 @@ final class RiverChannels24 {
         double local = station(seed, (alongZ ? WIDTH_X : WIDTH_Z) ^ 0x5E6D123L,
                 line.index(), along, 40);
         int desired = 5 + (int)Math.round(2.3 * broad + 0.7 * local);
-        int radius = Math.max(3, Math.min(7, desired));
-        // The nine-block municipal corridor reserves a walkable outer lip;
-        // bends necessarily constrain the outer-bank width to avoid building lots.
-        int corridorLimit = 7 - Math.abs(centerOffset(seed, line, alongZ, along));
+        int radius = Math.max(3, Math.min(line.halfWidth() >= 24 ? 10 : line.halfWidth() >= 15 ? 8 : 7, desired));
+        // Preserve at least a two-block bank on both edges of the reservation.
+        // This is the key difference from merely snaking water across existing lots.
+        int corridorLimit = line.halfWidth() - 2 - Math.abs(centerOffset(seed, line, alongZ, along));
         return Math.max(3, Math.min(radius, corridorLimit));
     }
 
@@ -188,7 +205,7 @@ final class RiverChannels24 {
 
     private static Line canalAt(List<Line> lines, int coord) {
         for (Line line : lines) if (line.kind() == Line.Kind.CANAL &&
-                Math.abs(coord - line.center()) <= ROW_RADIUS) return line;
+                Math.abs(coord - line.center()) <= line.halfWidth()) return line;
         return null;
     }
 

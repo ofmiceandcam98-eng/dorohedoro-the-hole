@@ -154,6 +154,7 @@ public final class SmokeMeshClient {
             if(live!=null && live.isAlive())at=live.position().add(0,live.getBbHeight()*.60,0);
             if(at.distanceToSqr(camera)>96*96)continue;
             pose.pushPose();
+            try {
             pose.translate(at.x-camera.x,at.y-camera.y,at.z-camera.z);
             Entity caster=mc.level.getEntity(c.caster);
             if(caster!=null) {
@@ -240,7 +241,14 @@ public final class SmokeMeshClient {
                 }
                 default -> { }
             }
-            pose.popPose();
+            } catch (RuntimeException visualFailure) {
+                // Never let one malformed cosmetic cast poison subsequent frames.
+                // The server still owns all damage/status effects.
+                it.remove();
+                Dorohedoro.LOGGER.error("Smoke mesh render failed for {}: cue discarded", c.skill().id(), visualFailure);
+            } finally {
+                pose.popPose();
+            }
         }
         buffers.endBatch(RenderType.entityTranslucent(SLASH));
         buffers.endBatch(RenderType.entityTranslucent(HEAL));

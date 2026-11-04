@@ -67,7 +67,9 @@ final class SewerDetails24 {
                 }
                 // Hanging lamps light the real route while leaving a full 3-block
                 // clearance from Y50..52 and keeping dungeon junctions uncluttered.
-                if (d == 0 && Math.floorMod(along, 31) == 0) {
+                int trunk = northSouth ? x - signed : z - signed;
+                if (d == 0 && SewerHazards61.lampAt(plan.seed, trunk, along,
+                        plan.settings.worldDetailVersion())) {
                     c.set(x, 53, z, Blocks.LANTERN.defaultBlockState()
                             .setValue(LanternBlock.HANGING, true));
                 }

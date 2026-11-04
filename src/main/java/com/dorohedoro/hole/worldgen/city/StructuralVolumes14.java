@@ -113,14 +113,17 @@ final class StructuralVolumes14 {
                 || original.width() < 31 || original.depth() < 20) return original;
         // Seven blocks of the original warehouse become a service yard, retaining
         // a 1-block separation and a wide, ordinary walkable cart entrance.
-        return new Rect(original.x0() + 8, original.z0(), original.x1(), original.z1());
+        // Fresh v39 worlds reserve a three-wide service connection beside the
+        // existing detached workshop. Older saves retain their +8 footprint.
+        int setback = c.hasLinkedServiceYards56() ? 10 : 8;
+        return new Rect(original.x0() + setback, original.z0(), original.x1(), original.z1());
     }
 
     /** A detached yard workshop with usable storage; never overwrites the main hall. */
     static void serviceOutbuilding(Canvas c, Lot lot, Rect main) {
         if (!c.hasIrregularCity() || lot.rect().width() < 36 || lot.rect().depth() < 26) return;
         Rect yard = lot.rect();
-        Rect shack = new Rect(yard.x0() + 1, yard.z0() + 4, main.x0() - 2, yard.z0() + 12);
+        Rect shack = LinkedServiceYards56.shack(yard, main, c.hasLinkedServiceYards56());
         if (shack.width() < 5 || shack.depth() < 8) return;
         int roof = GROUND_Y + 5;
         c.fill(shack, STREET_Y, STREET_Y, Blocks.POLISHED_ANDESITE);
@@ -134,6 +137,9 @@ final class StructuralVolumes14 {
         c.barrel(shack.x1() - 1, GROUND_Y, shack.z0() + 1, "warehouse");
         c.set(shack.x1() - 1, GROUND_Y, shack.z0() + 3, Blocks.SMITHING_TABLE);
         c.fill(shack.x1() + 1, STREET_Y, shack.z0(), main.x0() - 1, STREET_Y, shack.z1(), Blocks.GRAVEL);
+        // Connect the workshop's usable side room to the hall without
+        // obstructing either building's street-facing cart door.
+        if (c.hasLinkedServiceYards56()) LinkedServiceYards56.connect(c, lot, shack, main);
     }
 
     /** A separate, accessible raised machine office that breaks up the factory roofline. */

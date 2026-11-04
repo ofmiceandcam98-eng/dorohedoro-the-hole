@@ -77,7 +77,9 @@ final class UrbanFabric25 {
                 // Keep the earlier lamp/fixture positions and potential shaft paths clear.
                 if (Math.floorMod(along + avenue.center(), 15) == 0
                         || Math.floorMod(along + avenue.center(), 37) == 19) continue;
-                c.set(x, CityPlan.GROUND_Y, z, serviceFixture(plan.districtAt(x, z), h));
+                Block fixture = serviceFixture(plan.districtAt(x, z), h);
+                if (c.hasOccupiedInteriors35() && fixture == Blocks.BARREL) fixture = Blocks.COMPOSTER;
+                c.set(x, CityPlan.GROUND_Y, z, fixture);
             }
         }
     }
@@ -103,6 +105,7 @@ final class UrbanFabric25 {
             if (!c.get(x, CityPlan.GROUND_Y, pz).isAir()
                     || c.get(x, CityPlan.STREET_Y, pz).isAir()) continue;
             Block fixture = yardFixture(lot.district(), CityHash.mix(h + i * 97L));
+            if (c.hasOccupiedInteriors35() && fixture == Blocks.BARREL) fixture = Blocks.CAULDRON;
             c.set(x, CityPlan.GROUND_Y, pz, fixture);
         }
     }

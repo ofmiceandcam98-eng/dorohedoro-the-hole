@@ -1,6 +1,7 @@
 package com.dorohedoro.hole.worldgen.city;
 
 import com.dorohedoro.hole.Dorohedoro;
+import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
@@ -38,7 +39,12 @@ public final class Canvas {
     private final boolean terrainRelief;
     private final int worldDetailVersion;
     private Integer fixedLotHeight;
+    private final CityPlan terrainPlan;
+    private final boolean protectDeepDark63;
+    private final List<VanillaStructureBuffer64.Box> protectedVanillaStructures64;
     private final byte[] columnHeights = new byte[256];
+    private final byte[] oceanColumns65 = new byte[256];
+    private final byte[] dryCoastColumns66 = new byte[256];
     private final BlockPos.MutableBlockPos cursor = new BlockPos.MutableBlockPos();
     public final int minX;
     public final int minZ;
@@ -53,7 +59,21 @@ public final class Canvas {
         this(chunk, seed, terrainRelief, worldDetail ? 1 : 0);
     }
 
+    public Canvas(ChunkAccess chunk, CityPlan plan) {
+        this(chunk, plan, List.of());
+    }
+
+    public Canvas(ChunkAccess chunk, CityPlan plan, List<VanillaStructureBuffer64.Box> structures) {
+        this(chunk, plan.seed, plan.settings.terrainRelief(), plan.settings.worldDetailVersion(), plan, structures);
+    }
+
     public Canvas(ChunkAccess chunk, long seed, boolean terrainRelief, int worldDetailVersion) {
+        this(chunk, seed, terrainRelief, worldDetailVersion, null, List.of());
+    }
+
+    private Canvas(ChunkAccess chunk, long seed, boolean terrainRelief, int worldDetailVersion, CityPlan terrainPlan, List<VanillaStructureBuffer64.Box> structures) {
+        this.terrainPlan = terrainPlan;
+        this.protectedVanillaStructures64 = List.copyOf(structures);
         this.chunk = chunk;
         this.seed = seed;
         this.terrainRelief = terrainRelief;
@@ -63,19 +83,78 @@ public final class Canvas {
         this.minZ = pos.getMinBlockZ();
         this.maxX = pos.getMaxBlockX();
         this.maxZ = pos.getMaxBlockZ();
+        this.protectDeepDark63 = terrainPlan != null && terrainPlan.protectsDeepDarkNearChunk(minX, minZ);
         // Most city blocks write dozens of blocks in each (x,z) column.
         // Cache relief once per chunk instead of performing four coordinate hashes per placement.
         for (int x = minX; x <= maxX; x++) {
             for (int z = minZ; z <= maxZ; z++) {
-                columnHeights[(x - minX) + ((z - minZ) << 4)] =
-                        (byte) (terrainRelief ? CityElevation.offset(seed, x, z) : 0);
+                int index = (x - minX) + ((z - minZ) << 4);
+                columnHeights[index] = (byte) (terrainRelief ? terrainAt(x, z) : 0);
+                // Refuse urban structures and their tile entities in new ocean columns
+                // BEFORE the ocean painter runs; this prevents ghost block-entity NBT.
+                if (terrainPlan != null && worldDetailVersion >= 47) {
+                    oceanColumns65[index] = (byte) terrainPlan.oceanDepthAt(x, z);
+                    if (worldDetailVersion >= 48 && oceanColumns65[index] == 0) {
+                        int shoreDistance = terrainPlan.coastalDistanceAt(x, z);
+                        if (shoreDistance > 0) dryCoastColumns66[index] = (byte) shoreDistance;
+                    }
+                }
             }
         }
     }
 
+    /** World- and version-aware terrain, recomputed for off-chunk queries too. */
+    private int terrainAt(int x, int z) {
+        return terrainPlan != null ? CityTerrain40.offset(terrainPlan, x, z)
+                : CityElevation.offset(seed, x, z);
+    }
+
+    /** Pass 60: industrial loading approaches and connected workshop circulation. */
+    public boolean hasFreightApproaches60() { return worldDetailVersion >= 43; }
+
+    /** Pass 59: access from industrial side workshops to public frontage, plus working courts. */
+    public boolean hasWorkingServiceCourts59() { return worldDetailVersion >= 42; }
+
+    /** Pass 58: non-rectangular working industrial halls with genuinely attached, furnished low bays. */
+    public boolean hasIndustrialAnnex58() { return worldDetailVersion >= 41; }
+
+    /** Pass 56: three-wide covered routes connect industrial workshops with their factory halls. */
+    public boolean hasLinkedServiceYards56() { return worldDetailVersion >= 39; }
+
+    /** Pass 55: real attached, connected service rooms and reachable stepped maintenance roofs. */
+    public boolean hasAttachedServiceWings55() { return worldDetailVersion >= 38; }
+
+    /** Pass 44: infrastructure-based residential and industrial silhouettes. */
+    public boolean hasFunctionalFacades44() { return worldDetailVersion >= 28; }
+    public boolean hasInhabitedCourts45() { return worldDetailVersion >= 29; }
+    /** Fresh v30 worlds cluster habitable rooflines over several city blocks. */
+    public boolean hasNeighborhoodSkyline46() { return worldDetailVersion >= 30; }
+    boolean isHoleCity(int x, int z) {
+        return terrainPlan != null && (worldDetailVersion >= 35
+                ? UrbanPattern52.at(seed, x, z) == UrbanPattern52.Fabric.DENSE
+                : terrainPlan.regionAt(x, z) == HoleRegions42.Region.CITY);
+    }
+
+    /** Pass 43: occupied civic spaces and nonuniform vendor frontages. */
+    public boolean hasOccupiedCommons43() { return worldDetailVersion >= 27; }
+
+    /** Pass 41: street-matched foundations and conditional facade relief. */
+    public boolean hasEntranceGrade41() { return worldDetailVersion >= 25; }
+
+    public boolean hasSkyline40() {
+        return worldDetailVersion >= 24;
+    }
+
+    public boolean hasMacroRelief40() {
+        return terrainRelief && terrainPlan != null && worldDetailVersion >= 24;
+    }
+
     /** Per-lot planar foundation: prevents slopes from cutting across rooms, stairs and doors. */
     public void beginLot(Rect lot) {
-        fixedLotHeight = terrainRelief ? CityElevation.offset(seed, lot.centerX(), lot.centerZ()) : 0;
+        fixedLotHeight = !terrainRelief ? 0
+                : terrainPlan != null && worldDetailVersion >= 25
+                ? CityTerrain40.frontageOffset(terrainPlan, lot)
+                : terrainAt(lot.centerX(), lot.centerZ());
     }
 
     public void endLot() {
@@ -136,6 +215,15 @@ public final class Canvas {
     public boolean hasHousing29() { return worldDetailVersion >= 17; }
     /** Pass31: fixes residential wall fixtures without changing v0-v17 saved worlds. */
     public boolean hasHousingLighting31() { return worldDetailVersion >= 18; }
+    /** Pass 35: inhabited rooms and reduced exposed storage; saved worlds stay unchanged. */
+    public boolean hasOccupiedInteriors35() { return worldDetailVersion >= 20; }
+    /** Pass 36: additional layered facades and larger river reservations in new worlds. */
+    public boolean hasFacadeDetail36() { return worldDetailVersion >= 21; }
+    /** Pass 37: occupied room use and small parcel-contained earthworks; no changes to canals. */
+    public boolean hasHillside37() { return worldDetailVersion >= 22; }
+    /** Pass 39: purpose-led microfurnishings and inhabited plain roof corners. */
+    public boolean hasOccupiedDetail39() { return worldDetailVersion >= 23; }
+
 
     /** Richer interior furnishing in new-world profiles only. */
     /** New high-detail furniture palette; no retroactive edits in pre-24 world profiles. */
@@ -161,7 +249,7 @@ public final class Canvas {
         // Cache access is valid only for the 16x16 columns of this chunk;
         // elsewhere recompute the same deterministic relief without indexing
         // the local cache. All actual world writes remain chunk-clipped.
-        if (!contains(x, z)) return terrainRelief ? CityElevation.offset(seed, x, z) : 0;
+        if (!contains(x, z)) return terrainRelief ? terrainAt(x, z) : 0;
         return columnHeights[(x - minX) + ((z - minZ) << 4)];
     }
 
@@ -181,17 +269,40 @@ public final class Canvas {
         return CityHash.of(seed, x, y, z);
     }
 
+    /** Suppress all custom write paths, including tile entity/NBT writes, near actual vanilla starts. */
+    private boolean protectsVanillaWrite(int x, int adjustedY, int z) {
+        return DeepDarkBuffer63.protects(worldDetailVersion, adjustedY, protectDeepDark63)
+                || VanillaStructureBuffer64.protects(worldDetailVersion, x, adjustedY, z, protectedVanillaStructures64);
+    }
+
+    private boolean isOceanCityWrite(int x, int worldY, int z) {
+        int index = (x - minX) + ((z - minZ) << 4);
+        return worldY >= 28 && ((oceanColumns65[index] & 0xff) > 0 || (dryCoastColumns66[index] & 0xff) > 0);
+    }
+
     public void set(int x, int y, int z, BlockState state) {
         if (!contains(x, z)) {
             return;
         }
         int adjustedY = worldY(x, y, z);
+        // Preserve the deep-dark habitat and future Ancient City footprints from our
+        // own sewer/gallery/cavern painter. Vanilla structures place later in FEATURES.
+        if (protectsVanillaWrite(x, adjustedY, z)) return;
+        if (isOceanCityWrite(x, adjustedY, z)) return;
         chunk.setBlockState(cursor.set(x, adjustedY, z), state, false);
         if (state.hasBlockEntity()) {
             CompoundTag tag = positioned(x, adjustedY, z);
             tag.putString("id", "DUMMY");
             chunk.setBlockEntityNbt(tag);
         }
+    }
+
+    /** Absolute world-Y placement for ocean terrain, without terraced city elevation.
+     * Retains all vanilla structure and deep-dark protections from normal writes.
+     */
+    public void setRaw(int x, int worldY, int z, Block block) {
+        if (!contains(x, z) || protectsVanillaWrite(x, worldY, z)) return;
+        chunk.setBlockState(cursor.set(x, worldY, z), block.defaultBlockState(), false);
     }
 
     public void set(int x, int y, int z, Block block) {
@@ -345,6 +456,9 @@ public final class Canvas {
     public void spawner(int x, int y, int z, String entityId) {
         if (!contains(x, z)) return;
         int adjustedY = worldY(x, y, z);
+        // The spawner block AND its NBT must be suppressed together in protected habitat.
+        if (protectsVanillaWrite(x, adjustedY, z)) return;
+        if (isOceanCityWrite(x, adjustedY, z)) return;
         chunk.setBlockState(cursor.set(x, adjustedY, z), Blocks.SPAWNER.defaultBlockState(), false);
         CompoundTag tag = positioned(x, adjustedY, z);
         tag.putString("id", "minecraft:mob_spawner");
@@ -378,6 +492,10 @@ public final class Canvas {
             return;
         }
         int adjustedY = worldY(x, y, z);
+        // Preserve the deep-dark habitat and future Ancient City footprints from our
+        // own sewer/gallery/cavern painter. Vanilla structures place later in FEATURES.
+        if (protectsVanillaWrite(x, adjustedY, z)) return;
+        if (isOceanCityWrite(x, adjustedY, z)) return;
         chunk.setBlockState(cursor.set(x, adjustedY, z), state, false);
         CompoundTag tag = positioned(x, adjustedY, z);
         tag.putString("id", id);
@@ -394,6 +512,8 @@ public final class Canvas {
             return;
         }
         int adjustedY = worldY(x, y, z);
+        if (protectsVanillaWrite(x, adjustedY, z)) return;
+        if (isOceanCityWrite(x, adjustedY, z)) return;
         chunk.setBlockState(cursor.set(x, adjustedY, z), wallSign.defaultBlockState().setValue(WallSignBlock.FACING, facing), false);
         ListTag messages = new ListTag();
         for (int i = 0; i < 4; i++) {

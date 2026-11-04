@@ -53,11 +53,19 @@ public final class CityPainter {
     private CityPainter() {}
 
     public static void paint(CityPlan plan, ChunkAccess chunk) {
+        paint(plan, chunk, List.of());
+    }
+
+    public static void paint(CityPlan plan, ChunkAccess chunk, List<VanillaStructureBuffer64.Box> structures) {
         ChunkPos pos = chunk.getPos();
-        Canvas canvas = new Canvas(chunk, plan.seed, plan.settings.terrainRelief(), plan.settings.worldDetailVersion());
+        Canvas canvas = new Canvas(chunk, plan, structures);
         List<Line> xLines = plan.xLinesNear(canvas.minX - 8, canvas.maxX + 8);
         List<Line> zLines = plan.zLinesNear(canvas.minZ - 8, canvas.maxZ + 8);
 
+        // Pass 42: foundation columns fill down to the old bedrock-side grade.
+        // Build solid terrain BEFORE drilling sewers, avoiding floating highlands
+        // and avoiding a later surface fill sealing up municipal passages.
+        if (plan.settings.worldDetailVersion() >= 26) paintGround(canvas, plan, xLines, zLines);
         if (plan.settings.sewerUnderworld()) {
             // Preserve natural deep cave noise for mining; these chambers are optional underground destinations.
             paintDeepExcavations(canvas, plan);
@@ -66,6 +74,14 @@ public final class CityPainter {
         paintSewers(canvas, xLines, zLines);
         if (plan.settings.sewerUnderworld() && plan.settings.sewerCavernVersion() >= 4) {
             SewerDetails24.paint(canvas, plan, xLines, zLines);
+            // Pass 70: varied outer sewer masonry (not the dry lanes or wastewater).
+            SewerVaultVariants70.paint(canvas, plan, xLines, zLines);
+            // Pass 67: sparse walk-in repair/filter bays along unobstructed sewer runs.
+            SewerServiceBays67.paint(canvas, plan);
+            // Pass 68: rare walk-in stormwater pump halls with dry catwalks and an optional lever-operated booth.
+            StormwaterPumpHalls68.paint(canvas, plan);
+            // Pass 70: uncommon dual-entrance, dry-lane stormwater bypass galleries.
+            StormDrainBypasses70.paint(canvas, plan);
         }
         if (plan.settings.sewerUnderworld()) {
             paintMaintenanceTunnels(canvas, xLines, zLines);
@@ -76,7 +92,7 @@ public final class CityPainter {
                 SewerDungeon22.paint(canvas, plan);
             }
         }
-        paintGround(canvas, plan, xLines, zLines);
+        if (plan.settings.worldDetailVersion() < 26) paintGround(canvas, plan, xLines, zLines);
         if (plan.settings.sewerCavernVersion() >= 5) {
             // River profile is a replacement for the rigid strip painter, not a second
             // water overlay. The plan reserves the existing canal corridor so buildings
@@ -88,18 +104,27 @@ public final class CityPainter {
         if (plan.settings.sewerCavernVersion() >= 4) {
             CanalEcology24.paint(canvas, plan, xLines, zLines);
         }
+        // Pass 43: sparse functional riverside workshops in dry quarry/quay
+        // corridors, after actual channel edges are painted, before open lots.
+        if (plan.settings.worldDetailVersion() >= 27)
+            CanalWorksites43.paint(canvas, plan, xLines, zLines);
         // Pass 25: coordinate-seeded neighborhood texture and infrastructure.
         // Lot bounds are excluded so generated streets never replace buildings.
         List<Lot> currentLots = plan.lotsIn(pos);
         if (canvas.hasUrbanFabric()) {
             UrbanFabric25.streets(canvas, plan, xLines, zLines, currentLots);
         }
+        if (plan.settings.worldDetailVersion() >= 27)
+            Backstreets43.paint(canvas, plan, xLines, zLines, currentLots);
         for (Lot lot : currentLots) {
             LotPainter.paint(canvas, plan, lot);
+            if (plan.settings.worldDetailVersion() >= 26) RegionalSurface42.openLot(canvas, plan, lot);
         }
         if (canvas.hasWorldDetail()) {
             WorldDetail.streetFixtures(canvas, plan, xLines, zLines);
         }
+        // Functional tram shelters at safe stretches, never on tracks or bridges.
+        if (plan.settings.worldDetailVersion() >= 26) HoleTransit42.paint(canvas, plan, xLines, zLines);
         if (canvas.hasIrregularCity()) DiagonalBoulevards14.paint(canvas, plan);
         paintShafts(canvas, plan, xLines, zLines);
         // Added after water and surface fixtures: both access routes meet the
@@ -144,7 +169,9 @@ public final class CityPainter {
                 // Clear remnants of vanilla surface terrain above the graded street, then
                 // build a compacted road foundation at the same elevation as its surface.
                 c.fill(x, STREET_Y + 1, z, x, STREET_Y + 13, z, Blocks.AIR);
-                c.fill(x, FILL_BOTTOM, z, x, STREET_Y - 5, z, DEEP_FILL);
+                int foundationBottom = plan.settings.worldDetailVersion() >= 26
+                        ? FILL_BOTTOM - c.heightOffset(x, z) : FILL_BOTTOM;
+                c.fill(x, foundationBottom, z, x, STREET_Y - 5, z, DEEP_FILL);
                 c.fill(x, STREET_Y - 4, z, x, STREET_Y - 1, z, ROAD_BED);
 
                 if (xBand != null || zBand != null) {
@@ -157,6 +184,8 @@ public final class CityPainter {
                     if (c.hasArchitectureVariation()) ArchitecturePass13.streetSurface(c, plan, x, z, xBand, zBand);
                     if (c.hasLoreArchitecture()) LoreArchitecture19.streetSurface(c, plan, x, z, xBand, zBand);
                 }
+                if (plan.settings.worldDetailVersion() >= 26)
+                    RegionalSurface42.street(c, plan, x, z, xBand, zBand);
             }
         }
     }
@@ -186,7 +215,22 @@ public final class CityPainter {
             c.set(x, STREET_Y, z, band.kind() == Line.Kind.CANAL ? QUAY : SIDEWALK);
             int edge = xBand != null ? dx : dz;
             int along = xBand != null ? z : x;
-            if (edge == band.halfWidth() && Math.floorMod(along + band.center(), 15) == 0) {
+            // Protect the starter area while leaving outer streets dark enough
+            // for natural Minecraft monster spawning at night.
+            int lightSpacing = c.hasOccupiedInteriors35()
+                    ? ((Math.abs(x) < 64 && Math.abs(z) < 64) ? 30 : 45) : 15;
+            boolean placeLamp = plan.settings.worldDetailVersion() >= 27
+                    ? streetlamp43(plan, band, along, xBand != null ? x : z,
+                            xBand != null ? plan.xAvenueOffset(band, z) : plan.zAvenueOffset(band, x))
+                    : Math.floorMod(along + band.center(), lightSpacing) == 0;
+            if (plan.settings.worldDetailVersion() >= 35
+                    ? UrbanPattern52.at(plan.seed, x, z) == UrbanPattern52.Fabric.OPEN_COUNTRY
+                    : plan.settings.worldDetailVersion() >= 31
+                      && plan.regionAt(x, z) != HoleRegions42.Region.CITY
+                      && SettlementBands47.at(plan.seed, x, z) == SettlementBands47.Form.OPEN_COUNTRY) {
+                placeLamp = false; // dark wilderness; settlement lamps still mark lived-in roads
+            }
+            if (edge == band.halfWidth() && placeLamp) {
                 c.fill(x, GROUND_Y, z, x, GROUND_Y + 3, z, Blocks.SPRUCE_FENCE);
                 if (Math.floorMod(along, 3) == 0) {
                     // Some always-lit fixtures keep early survival reasonably safe.
@@ -202,19 +246,39 @@ public final class CityPainter {
         }
     }
 
+    /**
+     * Uneven, mostly one-sided lamp coverage. Every decision comes from a
+     * fixed absolute street segment, not a chunk RNG; side alleys stay dark.
+     * Existing v0-v26 saved worlds retain their old lamp positions.
+     */
+    private static boolean streetlamp43(CityPlan plan, Line band, int along, int cross, int bend) {
+        final int segmentSize = 73;
+        int distance = along + band.center();
+        int section = Math.floorDiv(distance, segmentSize);
+        long h = CityHash.of(plan.seed ^ 0x43A401L,
+                band.index() * 13L + band.kind().ordinal(), section);
+        // The quarter around player spawn retains significantly more protection.
+        boolean spawn = Math.abs(along) < 65 && Math.abs(cross) < 65;
+        if (!spawn && CityHash.range(h >>> 14, 4) == 0) return false;
+        int intended = section * segmentSize + 12 + CityHash.range(h >>> 19, 45);
+        if (distance != intended) return false;
+        // Only one sidewalk edge per fixture, to eliminate symmetric avenues.
+        return (cross - band.center() - bend > 0) == (CityHash.range(h >>> 31, 2) == 0);
+    }
+
     /** Match tram track grade to the deterministic relief (rather than leaving floating flat rails). */
     private static RailShape gradedRailShape(CityPlan plan, int x, int z, boolean alongZ) {
         if (!plan.settings.terrainRelief()) {
             return alongZ ? RailShape.NORTH_SOUTH : RailShape.EAST_WEST;
         }
-        int y = CityElevation.offset(plan.seed, x, z);
+        int y = CityTerrain40.offset(plan, x, z);
         if (alongZ) {
-            if (CityElevation.offset(plan.seed, x, z + 1) > y) return RailShape.ASCENDING_SOUTH;
-            if (CityElevation.offset(plan.seed, x, z - 1) > y) return RailShape.ASCENDING_NORTH;
+            if (CityTerrain40.offset(plan, x, z + 1) > y) return RailShape.ASCENDING_SOUTH;
+            if (CityTerrain40.offset(plan, x, z - 1) > y) return RailShape.ASCENDING_NORTH;
             return RailShape.NORTH_SOUTH;
         }
-        if (CityElevation.offset(plan.seed, x + 1, z) > y) return RailShape.ASCENDING_EAST;
-        if (CityElevation.offset(plan.seed, x - 1, z) > y) return RailShape.ASCENDING_WEST;
+        if (CityTerrain40.offset(plan, x + 1, z) > y) return RailShape.ASCENDING_EAST;
+        if (CityTerrain40.offset(plan, x - 1, z) > y) return RailShape.ASCENDING_WEST;
         return RailShape.EAST_WEST;
     }
 

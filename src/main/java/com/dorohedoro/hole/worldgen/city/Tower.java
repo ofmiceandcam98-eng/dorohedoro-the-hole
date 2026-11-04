@@ -71,6 +71,8 @@ final class Tower {
         if (c.hasIrregularCity()) StructuralVolumes14.tower(c, box, floors, style, hash, roof);
         if (c.hasLoreArchitecture()) LoreArchitecture19.tower(c, box, floors, style, hash, roof);
         if (c.hasUrbanFabric()) UrbanFabric25.roof(c, box, top, hash, roof);
+        if (c.hasOccupiedDetail39()) OccupiedRoofs39.decorate(c, box, floors, hash, roof);
+        if (c.hasSkyline40()) Skyline40.rooftop(c, box, floors, hash, roof);
     }
 
     private static void corners(Canvas c, Rect box, int top, Style style) {

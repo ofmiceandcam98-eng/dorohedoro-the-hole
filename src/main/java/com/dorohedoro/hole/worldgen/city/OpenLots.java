@@ -49,6 +49,7 @@ final class OpenLots {
     }
 
     static void marketStalls(Canvas c, Lot lot) {
+        if (c.hasOccupiedCommons43()) { OccupiedCommons43.market(c, lot); return; }
         Rect r = lot.rect();
         Block[][] goods = {
                 {Blocks.HAY_BLOCK, Blocks.MELON},
@@ -74,7 +75,12 @@ final class OpenLots {
                 }
                 c.set(x + 1, GROUND_Y, z + 1, stock[0]);
                 c.set(x + 2, GROUND_Y, z + 1, stock[1]);
-                c.chest(x + 3, GROUND_Y, z + 1, Direction.SOUTH, "market");
+                if (!c.hasOccupiedInteriors35() || CityHash.range(h >>> 30, 11) == 0) {
+                    c.chest(x + 3, GROUND_Y, z + 1, Direction.SOUTH, "market");
+                } else {
+                    c.set(x + 3, GROUND_Y, z + 1,
+                            CityHash.range(h >>> 42, 2) == 0 ? Blocks.COMPOSTER : Blocks.SPRUCE_PLANKS);
+                }
             }
         }
     }
@@ -136,7 +142,8 @@ final class OpenLots {
         c.set(in.x1() - 1, GROUND_Y, in.z1(), Blocks.MELON);
         c.facing(box.x0() + 1, GROUND_Y + 3, box.z0() + 1, Direction.SOUTH, Blocks.BEE_NEST);
         c.set(in.x1() - 1, GROUND_Y, aisleZ + 1, Blocks.COMPOSTER);
-        c.chest(in.x0(), GROUND_Y, aisleZ, Direction.EAST, "nursery");
+        if (c.hasOccupiedInteriors35()) c.barrel(in.x0(), GROUND_Y, aisleZ, "nursery");
+        else c.chest(in.x0(), GROUND_Y, aisleZ, Direction.EAST, "nursery");
 
         // The door sits at the east end of the central aisle.
         c.door(box.x1(), GROUND_Y, aisleZ, Direction.WEST, Blocks.DARK_OAK_DOOR);
@@ -195,7 +202,8 @@ final class OpenLots {
                 tree(c, in.x1() - 2, in.centerZ(), 6, Blocks.BIRCH_LOG, Blocks.BIRCH_LEAVES);
             }
         }
-        c.chest(in.x1(), GROUND_Y, in.z1(), Direction.WEST, "nursery");
+        if (c.hasOccupiedInteriors35()) c.barrel(in.x1(), GROUND_Y, in.z1(), "nursery");
+        else c.chest(in.x1(), GROUND_Y, in.z1(), Direction.WEST, "nursery");
         c.set(in.x0(), GROUND_Y, in.z1(), Blocks.COMPOSTER);
     }
 
@@ -250,6 +258,10 @@ final class OpenLots {
      * vegetation belongs. Most lots stay treeless, and even a living tree here is small and thin.
      */
     static void vacant(Canvas c, Lot lot) {
+        if (InhabitedCourts45.eligible(c, lot, false)) { InhabitedCourts45.paint(c, lot, false); return; }
+        // Only v22+ parcels with enough room for a graded perimeter become hills.
+        // A converted lot owns its own plants/soil so older trees are not buried.
+        if (Hillside37.vacant(c, lot)) return;
         Rect r = lot.rect();
         c.fill(r, STREET_Y - 1, STREET_Y - 1, Blocks.DIRT);
         c.fill(r, STREET_Y, STREET_Y, Mix.of(Blocks.COARSE_DIRT, 5, Blocks.DIRT, 3, Blocks.GRASS_BLOCK, 3, Blocks.GRAVEL, 1, Blocks.PODZOL, 1));
@@ -325,10 +337,12 @@ final class OpenLots {
         }
         c.fenceRing(fence, GROUND_Y, Blocks.IRON_BARS, fence.centerX(), fence.z1());
         c.set(fence.centerX(), GROUND_Y + 1, fence.z1(), Blocks.AIR);
-        c.chest(fence.x1() - 1, GROUND_Y, fence.z1() - 1, Direction.WEST, "scrap");
+        if (c.hasOccupiedInteriors35()) c.barrel(fence.x1() - 1, GROUND_Y, fence.z1() - 1, "scrap");
+        else c.chest(fence.x1() - 1, GROUND_Y, fence.z1() - 1, Direction.WEST, "scrap");
     }
 
     static void rubble(Canvas c, Lot lot) {
+        if (InhabitedCourts45.eligible(c, lot, true)) { InhabitedCourts45.paint(c, lot, true); return; }
         Rect r = lot.rect();
         Rect shell = r.inset(1);
         Mix broken = Mix.of(Blocks.CRACKED_STONE_BRICKS, 3, Blocks.COBBLESTONE, 3, Blocks.MOSSY_COBBLESTONE, 1, Blocks.BRICKS, 2);
@@ -404,7 +418,8 @@ final class OpenLots {
                 c.fill(x, GROUND_Y + 4, in.centerZ() - 2, x, GROUND_Y + 4, in.centerZ() + 2, Blocks.CHAIN);
             }
         }
-        c.chest(in.x1(), GROUND_Y, in.centerZ(), Direction.WEST, "apartment");
+        if (c.hasOccupiedInteriors35()) c.set(in.x1(), GROUND_Y, in.centerZ(), Blocks.LOOM);
+        else c.chest(in.x1(), GROUND_Y, in.centerZ(), Direction.WEST, "apartment");
     }
 
     static void bazaar(Canvas c, Lot lot) {
@@ -460,7 +475,8 @@ final class OpenLots {
         }
         for (int x = in.x0() + 1; x <= in.x1() - 1; x += 4) {
             c.set(x, GROUND_Y, in.z1(), Blocks.BARREL);
-            c.set(x + 1, GROUND_Y, in.z1(), Blocks.CHEST);
+            c.set(x + 1, GROUND_Y, in.z1(),
+                    c.hasOccupiedInteriors35() ? Blocks.STRIPPED_SPRUCE_WOOD : Blocks.CHEST);
         }
         c.sign(in.centerX(), GROUND_Y + 1, r.z1() - 1, Direction.SOUTH, Blocks.SPRUCE_WALL_SIGN, "DOCK", "DEPOT");
     }
@@ -513,7 +529,8 @@ final class OpenLots {
         c.fill(house.x0(), GROUND_Y + 5, house.z0(), house.x1(), GROUND_Y + 5, house.z1(), Blocks.GLASS);
         int penX0 = Math.max(in.x1() - 5, in.x0());
         c.fill(penX0, GROUND_Y, in.z0(), in.x1(), GROUND_Y, Math.min(in.z0() + 4, in.z1()), Blocks.HAY_BLOCK);
-        c.set(in.x1(), GROUND_Y, in.z1(), Blocks.CHEST);
+        c.set(in.x1(), GROUND_Y, in.z1(),
+                c.hasOccupiedInteriors35() ? Blocks.COMPOSTER : Blocks.CHEST);
         c.fill(in.x1() - 2, GROUND_Y, in.z1() - 2, in.x1() - 1, GROUND_Y + 1, in.z1() - 1, Blocks.OAK_LOG);
     }
 

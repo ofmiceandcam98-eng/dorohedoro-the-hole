@@ -1,3 +1,117 @@
+# Latest: Pass 70 — expanded connected storm drains and graded natural-rock cave approaches
+
+**Source-only, uncompiled against NeoForge.** New world-detail v52 adds two-mouth parallel stormwater bypass galleries, 3 construction variants on sewer walls, and gradually widening rock at cave branch approaches. The three-wide cave staircase and main municipal dry lanes stay open, the 30% cave-branch selection target is unchanged, and vanilla structure safeguards remain active. Complete details: `docs/PASS70_CONNECTED_STORM_DRAINS_CAVE_TRANSITIONS.md`. Wednesday handoff: `Pass70_Claude_Wednesday_Handoff.md`. Targeted Java fixture: **171,461 checks passed**; source QA: **30/30 passed**. Historical passes 69–54 and 53–41 passed in two runs; full single chain timed out after Pass54. **Actual NeoForge/MC build and gameplay unverified.**
+
+---
+
+# Pass 69 CURRENT CHECKPOINT — Vanilla piston sluice controls (2026-11-03)
+
+Fresh-world `world_detail_version: 51` extends the Pass68 14×19 stormwater pumping halls with a **local, lever-operated sticky-piston sluice** feeding a two-cell runoff. Vanilla iron block movement is intended to close/reopen a narrow water channel; the dry bridge, main sewer and repair benches remain accessible without techniques. Versions 0–50 retain previous gallery geometry, 30% cave-branch target remains, and vanilla structure protections remain. **OFFLINE SOURCE ONLY — NOT NEOFORGE-COMPILED OR IN-GAME VERIFIED.** Actual lever power and fluid updates must be tested in Minecraft on Wednesday, Nov 4. Tests: `bash tools/qa-pass69-all.sh`; details: `docs/PASS69_REDSTONE_SLUICE_CONTROLS.md` and `Pass69_Claude_Wednesday_Handoff.md`. This supersedes older latest-checkpoint headings below.
+
+---
+
+# Pass 68 CURRENT CHECKPOINT — Pump halls and no-techniques sewer survival (2026-11-03)
+
+Fresh-world `world_detail_version: 50` adds rare 14×19 masonry stormwater halls connected by an open 3-wide entrance to the existing seven-wide municipal sewer, contained wet sumps and dry footbridges, practical vanilla workstations, and an optional operator room with a manual lever-operated iron door. Pass67 small bay generation reserves the same footprints only in new v50 worlds. No extra lanterns/spawners/chests or artificial need for techniques. **100,679 Pass68 production-class Java fixture assertions and 34/34 source checks passed; earlier Pass41–67 offline regressions completed across split runs. UNCOMPILED against real NeoForge; no Minecraft playtest.** See `docs/PASS68_STORMWATER_PUMP_HALLS_AND_MANUAL_CONTROLS.md` and `Pass68_Claude_Wednesday_Handoff.md`; run `bash tools/qa-pass68-all.sh` (long). As agreed, Claude restores Gradle and builds on Wednesday Nov 4. This supersedes the prior latest-checkpoint headings below.
+
+---
+
+# Pass 67 CURRENT CHECKPOINT — New worlds v49 (2026-11-03)
+
+Added sparse, walk-in municipal sewer repair and filtration bays on the upper trunk walls, with real vanilla workstations, no new lamps/chests/spawners and no obstruction of the municipal water channel or dry walkways. Both side and along-axis positions are deterministic; room placement avoids shafts/intersections, ocean/coast, and inherits real vanilla structure protection. Pass67 Java geometry tests and integration tests are included. **Uncompiled against real NeoForge; in-game verification remains mandatory.** Details: `docs/PASS67_CONNECTED_SEWER_SERVICE_BAYS.md`; run `bash tools/qa-pass67-all.sh`. The latest complete checkpoint supersedes Pass66 for Wednesday's Claude build.
+
+## CURRENT SOURCE CHECKPOINT — PASS 66 (November 2, 2026)
+
+Fresh `world_detail_version: 48` reserves a walkable dry coast around Pass65 ocean basins, introduces real vanilla beach/snowy-beach biome holders on the near-sea strip, suppresses city construction/block entities and artificial residents in reserved shoreline columns, and keeps old v47 and earlier save generation intact. **SOURCE ONLY — not NeoForge-compiled or in-game verified.** New tests: 37/37 source checks, production-class Java coast + seabed fixtures (255 dry coast / 119 sand beach cells), and earlier offline regression family passed across time-split runs. Runtime beach ecology/turtles/monuments, coast appearance/performance and vanilla survival completion remain unverified. Read `docs/PASS66_WALKABLE_VANILLA_BEACHES_AND_COASTAL_ACCESS.md` and `Pass66_Claude_Wednesday_Handoff.md` first. Claude will handle verified Gradle wrapper and NeoForge 1.21.1 build Wednesday Nov 4 as user directed.
+
+---
+
+## CURRENT SOURCE CHECKPOINT — PASS 65 (2026-11-02)
+
+Fresh-world version **47** enables broad real-water vanilla ocean basins (normal/deep/cold/deep-cold ocean biome IDs) outside protected randomized starting regions, preserving land biomes and city/sewer systems. New ocean-aware Canvas stops submerged urban block entities before placement, ocean painter shapes ocean seabed and surface water, while old saved generators retain their prior biome-source flag and version. **SOURCE ONLY, NOT A COMPILED OR INSTALLABLE MOD.** Offline Java ocean and bathymetry fixtures, 29 source checks, and previous pass regression chains pass; actual vanilla ocean structures, biomes, end completion and live performance are NOT verified. See `docs/PASS65_TRUE_OCEAN_BASINS_AND_VANILLA_WATER_STRUCTURES.md` and `Pass65_Claude_Wednesday_Handoff.md`.
+
+---
+
+## CURRENT SOURCE CHECKPOINT — PASS 64 (2026-11-02)
+
+**Fresh-world detail profile 46. SOURCE ONLY, NOT A PLAYABLE MOD.** Registered vanilla structure starts (strongholds, mineshafts, trial chambers, Ancient Cities) now supply 3D protective envelopes to the custom city/sewer painter. All block and block-entity writes respect them; v45 and older saved profiles remain unchanged. Pass63 Deep Dark climate guard retained. New Java fixture: **220,320 assertions**; new QA **33/33**; Pass41–63 offline suites completed. **NeoForge compilation, live worldgen and vanilla End completion still NOT verified**; planned with Claude Wednesday Nov 4. Read `docs/PASS64_VANILLA_STRUCTURE_START_PROTECTION.md`, then `Pass64_Claude_Wednesday_Handoff.md`. This replaces all below status headings; the older entries are historical.
+
+---
+
+## CURRENT SOURCE CHECKPOINT — PASS 60 (2026-11-02)
+
+**Fresh world profile v43** adds functional three-wide four-high loading aprons in front of factories/warehouses, with a 3-wide transverse court connection only on suitably deep parcels. No street, waterway, external loot or light changes. **Source only; never claim a NeoForge build was completed.** New QA: 27/27 source checks and 8,200 production-class Java fixture parcels. Historical regressions passed in multiple runs; the one long run timed out near Pass43 before the Pass43 placement and Pass42 regional tails passed separately. **Claude will handle the verified Gradle wrapper and NeoForge build on Wednesday Nov 4 per user.** Read `docs/PASS60_ACCESSIBLE_INDUSTRIAL_FREIGHT_COURTS.md` and run `bash tools/qa-pass60-all.sh` or its components. Older handoffs below are historical.
+
+---
+
+## CURRENT SOURCE CHECKPOINT — PASS 59 (2026-11-02)
+
+Fresh-world detail **v42**. Industrial service yards with a west workshop now provide an unobstructed three-wide connection to their south street frontage and a practical side wash/repair pocket. No added lamps, exposed reward chests or changes to normal Minecraft survival. Existing saved v0–41 geometry retained. New fixture: 6,500 real Java production-class layouts, 650,286 walk-path cells, 1,400 invalid lots excluded, 500 negative-world examples, 210 cross-chunk consistency tests, 723 legacy cases; 21/21 new static checks. Previous offline regressions completed in separate timeout-safe runs. **Full NeoForge build and in-game verification NOT performed** — user explicitly plans Gradle and NeoForge build with Claude Wednesday Nov 4. See `docs/PASS59_WORKING_SERVICE_COURTS_AND_CLAUDE_HANDOFF.md`; run `bash tools/qa-pass59-all.sh` (long), or split `bash tools/qa-pass58-all.sh` and `bash tools/qa-pass44-all.sh`. Historical handoffs follow.
+
+---
+
+## CURRENT SOURCE CHECKPOINT — PASS 58 (2026-11-02)
+
+Latest fresh-world preset: **world_detail_version 41**. Some sufficiently large factories and warehouses gain real shared-wall low service bays with two distinct functional rooms, an interior hall connection, open loading setback, and reachable lower roof. Western Pass56 covered workshops remain in place; biome-independent Pass52/57 development and vanilla survival are preserved. No new outdoor lamps or public loot chests. Older saved-world v0–40 generation stays on original logic. **Verified offline:** 18/18 source checks, 3,600 actual Java geometry fixtures, 2,090 annexes, 71 chunk checks, 515 legacy unchanged cases, and full Pass41–57 offline regression suites. **NOT VERIFIED:** NeoForge `build`, `runData`, client/server or Minecraft rendering; official Gradle wrapper JAR still missing. See `docs/PASS58_SHARED_WALL_INDUSTRIAL_ANNEXES.md`; run `bash tools/qa-pass58-all.sh`. Historical material follows.
+
+---
+
+## CURRENT SOURCE HANDOFF — PASS 57 (2026-11-02)
+
+Newest fresh-world profile: **40**. Fixed a real integration problem: for v35–39, biome-independent INHABITED/DERELICT urban fabric could bypass INDUSTRIAL district land use entirely. New v40 worlds retain coherent grouped manufacturing, freight, salvage and worker-service neighborhoods independently of biome, with functional small-plot repair shop fallback and unchanged OPEN_COUNTRY survival. **Actual production Java policy compiled in an offline fixture: 864,000 parcel decisions; full Pass41–56 regressions pass.** Older saved v0–39 worlds keep their earlier worldgen. Source only; no verified NeoForge JAR, client or screenshot. `docs/PASS57_COHERENT_INDUSTRIAL_BELTS.md`; QA `bash tools/qa-pass57-all.sh`. Earlier sections below are historical.
+
+---
+
+## CURRENT SOURCE HANDOFF — PASS 56 (2026-11-02)
+
+Latest fresh-world profile **39**. Large industrial lots now receive a real **three-block-wide covered connector** linking their detached workshop to their factory/warehouse hall. This replaces the prior one-wide ornamental-looking service sliver and adds internal access doors, preserving existing workstations, industrial rooftops, existing broader street network, and old saved-world versions. **20/20 new source checks, 12,000 compiled Java geometry cases, and the Pass41–55 offline regression suite passed.** The project is still **NOT NeoForge-compiled or tested in Minecraft**, and has no verified installable JAR. Authoritative handoff: `docs/PASS56_COVERED_INDUSTRIAL_SERVICE_YARDS.md`; offline QA: `bash tools/qa-pass56-all.sh`. Reports below are historical.
+
+---
+
+## CURRENT SOURCE HANDOFF — PASS 55 (2026-11-02)
+
+Newest fresh-world profile: **38**. Larger homes, apartments and multi-floor shops can include a *real* connected service wing (laundry/repairs/food prep) and a reachable stepped maintenance roof, changing silhouettes without filling city streets or opening redundant chests. Built-in rooms are purposeful and the original staircase / entrance is protected. Old save profiles remain untouched. **Java offline QA passed; full NeoForge compilation and Minecraft visual testing remain unverified.** Read `docs/PASS55_LIVED_IN_ATTACHED_SERVICE_WINGS.md`. Offline QA: `bash tools/qa-pass55-all.sh`. All historical status reports below are superseded.
+
+---
+
+## CURRENT SOURCE HANDOFF — PASS 54 (2026-11-02)
+
+Latest saved fresh-world profile: **37**. The new CrookedLanes54 local passage shapes depend on urban fabric, not biome. Pass54 Java/pathing and Pass41–53 offline tests passed, but **NeoForge compilation and Minecraft runtime/visual QA have NOT been performed**. Primary arterials remain largely straight; do not assume the city appearance is complete. Read `docs/PASS54_CROOKED_LANES_AND_CITY_SILHOUETTE_HANDOFF.md`. Old handoff milestones below are historical.
+
+---
+
+# Current handoff: Pass52, version 35 (source only)
+
+For new worlds, climate is independent of urban density. A snowy/desert/mountain Hole city is possible in the same seed as wilderness and derelict settlements. Do not revert to a fixed all-CITY core or assume outer climates must always be outskirts.
+
+Detailed implementation and verification: docs/PASS52_BIOME_INDEPENDENT_HOLE_CITY.md. World visual contract: docs/HOLE_WORLD_VISUAL_AND_SURVIVAL_RULES.md. Run `bash tools/qa-pass52-all.sh` for the offline checks. Real NeoForge build + six-climate client playtests remain unverified; Gradle wrapper jar absent.
+
+---
+
+## CURRENT CHECKPOINT — PASS 51 (2026-11-02)
+
+Read `docs/PASS51_REGIONAL_START_ROUTE_AND_SPAWN_CACHE.md` before this older material. Version 34 fresh worlds use full southern regional starter access checks; version 33 and earlier saves keep their rules. Pass51 Java/static QA passed; NeoForge build and gameplay NOT verified.
+
+---
+
+# CURRENT CHECKPOINT — Pass 49: Region-aware terrain blending (SOURCE ONLY)
+
+New-world `world_detail_version: 32` removes false periodic terrain troughs between same-biome 512-block cells, while preserving true biome-edge smoothing. Old version-31-and-earlier saves keep their terrain and spawn rules. **Not NeoForge-compiled, not a playable JAR.** See `docs/PASS49_REGION_TERRAIN_CONTINUITY_HANDOFF.md`; offline regression: `bash tools/qa-pass49-all.sh`. The full build still needs network access to restore Gradle's verified wrapper.
+
+---
+
+# NEWEST CHECKPOINT — Pass47 seed-dependent region starts (source only)
+
+User requirement: the player should not always spawn in downtown The Hole, and every outer biome should mix occupied neighborhoods, derelict districts and open land. Fresh-world source preset v31 implements an intended matching-biome regional landing and shelter. **Not NeoForge compiled or in-game verified.** See [`docs/PASS47_VARIABLE_REGIONAL_SPAWNS_SETTLEMENTS.md`](docs/PASS47_VARIABLE_REGIONAL_SPAWNS_SETTLEMENTS.md) for implementation and blockers. Do not describe earlier Pass 18/32/46 handoffs below as the newest status.
+
+---
+
+# LATEST: PASS 42 SOURCE CHECKPOINT (2026-11-02) — NOT COMPILED
+
+The up-to-date source handoff is `docs/PASS42_HOLE_REGIONS_CITY_IDENTITY_HANDOFF.md`. It supersedes this historical Pass 32 status note, and covers the user's latest request for recognizable Dorohedoro city identity plus snow, dead taiga, desert, badlands and mountain regions. This Pass 42 archive **cannot be installed as a working mod** until NeoForge `runData`, `build`, runtime, visual and gameplay QA pass. Do not use older statements of successful builds as verification for Pass 42.
+
+---
+
 # LATEST SOURCE CHECKPOINT — PASS 32 (2026-11-01)
 
 **Read `docs/PASS32_PURPOSE_FIRST_AUDIT.md` before modifying this source.** This is the latest source checkpoint, **NOT a compiled or Minecraft-tested release**. The default new world now uses world-detail profile 19 to prevent unnecessary permanent canal fish and unsupported supply barrels; versions 0–18 preserve their previous choices. The cosmetic preserved-conduit edit from Pass 31 was rolled back. Phase 3 Hell and Healing tests now verify gameplay/schema intent instead of obsolete text.
@@ -12307,3 +12421,17 @@ SOFTWARE.
                      }
 }
 ```
+
+## Pass 61 source handoff — 2026-11-02
+
+**User priority:** sewers should be challenging to survive without techniques, **but ordinary Minecraft survival must remain possible**. Pass61 implementation: new-world saved world detail v44, `SewerHazards61`, fewer powered municipal lantern stretches and roughly one quarter of existing optional inspection rooms receiving breakable sewer-roach spawners. See `docs/PASS61_SEWER_SURVIVAL_WITHOUT_TECHNIQUES.md`. The entire old-city system, 30% cave approach selection and all deferred environmental poison/biome effects remain unchanged. Start on Wednesday by restoring verified Gradle wrapper, running NeoForge compile and playtests; don't assume these offline source checks prove successful runtime world generation. Compare fresh v43 and v44 seed-matched worlds and verify vanilla-only survival without techniques.
+
+## Latest Pass 62 checkpoint — Vanilla Minecraft completion contract
+
+Use the **Pass 62 consolidated source ZIP**, not Pass 61, as the new basis. Must first restore official verified Gradle wrapper and run `./gradlew runData`, `./gradlew build`, `./gradlew runClient` and `./gradlew runServer` on Java 21 / NeoForge 21.1.265. Run `bash tools/qa-pass62-all.sh` after data generation. See `docs/PASS62_VANILLA_MINECRAFT_COMPLETION_AND_STRUCTURE_TAGS.md` and `docs/PASS62_STRUCTURE_RUNTIME_CHECKLIST.md`.
+
+No Dorohedoro technique may be required to beat the Ender Dragon; do a real survival End completion. Test stronghold Eyes of Ender, functional frames, Nether fortress/blazes, ancient city sculk/Warden, 1.21 trial chamber vaults/Breeze/mace, temples, woodland mansions, underground mines/ore. Clarification from the user: "Forgotten City" meant the **vanilla Ancient City**. Do NOT plan or implement a separate Forgotten City. Preserve vanilla Deep Dark, sculk shriekers, Wardens, and the Ancient City structure. The custom Overworld currently has no genuine oceans, so shipwrecks, monuments, ocean ruins and normal buried treasure are NOT yet supported. Do not claim full 1.21.1 parity until implemented and playtested. New structure biome tags apply globally to newly generated chunks, even in older saves; back up worlds first.
+
+## Pass 63 (latest) — vanilla Ancient City / Deep Dark preservation
+
+**Correction:** The user meant *vanilla Ancient Cities* by "Forgotten City"; there is NO custom Forgotten City request. In fresh v45 worlds, deep-custom excavation is suppressed at/below Y=-24 in chunks close to Deep Dark climate, preserving underlying natural habitat and reducing interference with Ancient City terrain. Applies to *all* Canvas block placement/NBT paths. Older save versions remain unchanged. See `docs/PASS63_VANILLA_ANCIENT_CITY_PROTECTION.md` and run `bash tools/qa-pass63-all.sh`. This is only a preventative buffer, not verified structure-box collision protection. Test natural Ancient Cities, Wardens, mineshafts, strongholds, trial chambers and vanilla end completion once Gradle and NeoForge builds are working. True oceans are still missing.

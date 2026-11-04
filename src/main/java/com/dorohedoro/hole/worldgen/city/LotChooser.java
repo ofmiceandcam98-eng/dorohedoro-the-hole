@@ -8,6 +8,71 @@ final class LotChooser {
 
     static LotType choose(CityPlan plan, District district, Rect rect, RandomSource random) {
         float roll = random.nextFloat();
+        // Pass 52: climate identifies scenery, NOT development density.
+        // The same province can hold proper dense city blocks, small lived-in
+        // neighborhoods, derelict lots and real open survival terrain.
+        if (plan.settings.worldDetailVersion() >= 35) {
+            UrbanPattern52.Fabric fabric = UrbanPattern52.at(plan.seed, rect.centerX(), rect.centerZ());
+            // Pass 57: a climate cannot turn an occupied INDUSTRIAL district
+            // into a generic village. Preserve open countryside unchanged.
+            if (plan.settings.worldDetailVersion() >= 40 && district == District.INDUSTRIAL
+                    && fabric != UrbanPattern52.Fabric.OPEN_COUNTRY)
+                return IndustrialBelts57.choose(plan.seed, rect, fabric, roll);
+            if (fabric != UrbanPattern52.Fabric.DENSE)
+                return UrbanPattern52.choose(plan.regionAt(rect.centerX(), rect.centerZ()), fabric, roll);
+            // In Pass 52 the OUTSKIRTS district still used mostly VACANT/RUBBLE
+            // even where the independent fabric said DENSE. Build actual
+            // lived-in rooms and workplaces, without eliminating open plots.
+            if (plan.settings.worldDetailVersion() >= 36 && district == District.OUTSKIRTS)
+                return UrbanParcels53.denseFringeLot(roll, rect);
+        }
+        // Pass 47: the same biome can contain occupied blocks, ruins or open
+        // country; this is not just the same city density with a new texture.
+        if (plan.settings.worldDetailVersion() >= 31 && plan.settings.worldDetailVersion() < 35) {
+            HoleRegions42.Region province = plan.regionAt(rect.centerX(), rect.centerZ());
+            if (province != HoleRegions42.Region.CITY) {
+                return SettlementBands47.choose(province,
+                        SettlementBands47.at(plan.seed, rect.centerX(), rect.centerZ()), roll);
+            }
+        }
+        if (plan.settings.worldDetailVersion() >= 26 && plan.settings.worldDetailVersion() < 35) {
+            // The city thins into farms, mining outcrops and condemned lots.
+            // Building forms remain from the Hole's existing real lot generator.
+            HoleRegions42.Region region = plan.regionAt(rect.centerX(), rect.centerZ());
+            switch (region) {
+                case SNOWFIELDS -> {
+                    if (roll < .35F) return LotType.VACANT;
+                    if (roll < .54F) return LotType.RUBBLE;
+                    if (roll < .70F) return LotType.WAREHOUSE;
+                    if (roll < .83F) return LotType.TENEMENT;
+                }
+                case DEAD_TAIGA -> {
+                    if (roll < .39F) return LotType.VACANT;
+                    if (roll < .55F) return LotType.NURSERY;
+                    if (roll < .66F) return LotType.GREENHOUSE;
+                    if (roll < .80F) return LotType.TENEMENT;
+                }
+                case DUST_BASIN -> {
+                    if (roll < .36F) return LotType.VACANT;
+                    if (roll < .59F) return LotType.RUBBLE;
+                    if (roll < .73F) return LotType.JUNKYARD;
+                    if (roll < .83F) return LotType.WAREHOUSE;
+                }
+                case IRON_BADLANDS -> {
+                    if (roll < .30F) return LotType.RUBBLE;
+                    if (roll < .55F) return LotType.JUNKYARD;
+                    if (roll < .70F) return LotType.VACANT;
+                    if (roll < .85F) return LotType.FACTORY;
+                }
+                case MOUNTAIN_RIM -> {
+                    if (roll < .40F) return LotType.RUBBLE;
+                    if (roll < .70F) return LotType.VACANT;
+                    if (roll < .82F) return LotType.WAREHOUSE;
+                    if (roll < .91F) return LotType.GUARD_POST;
+                }
+                case CITY -> { }
+            }
+        }
         if (random.nextFloat() > plan.settings.density()) {
             return roll < 0.4F ? LotType.RUBBLE : roll < 0.75F ? LotType.VACANT : LotType.JUNKYARD;
         }

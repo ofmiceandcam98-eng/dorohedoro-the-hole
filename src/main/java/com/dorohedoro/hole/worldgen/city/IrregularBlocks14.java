@@ -33,10 +33,19 @@ public final class IrregularBlocks14 {
     /** Dense districts use a narrow, fully connected local passage, with original
      *  seven-wide paths retained for older saved worlds and open districts. */
     public static List<Rect> parcels(Rect area, long hash, boolean dense) {
+        return parcelsWithMinParcel(area, hash, dense, dense ? 11 : MIN_PARCEL);
+    }
+
+    /** New-world parcel frontage can always fit the minimum 11-wide building plot. */
+    static List<Rect> parcelsV36(Rect area, long hash, boolean dense) {
+        return parcelsWithMinParcel(area, hash, dense, 11);
+    }
+
+    private static List<Rect> parcelsWithMinParcel(Rect area, long hash, boolean dense, int minimum) {
         if (area.width() < 55 || area.depth() < 55) return List.of(area);
         int crossAlley = dense ? 3 : CROSS_ALLEY;
         int diagonalAlley = dense ? 5 : DIAGONAL_ALLEY;
-        int minParcel = dense ? 11 : MIN_PARCEL;
+        int minParcel = minimum;
         boolean longX = CityHash.range(CityHash.mix(hash + SALT), 2) == 0;
         int along0 = longX ? area.x0() : area.z0();
         int along1 = longX ? area.x1() : area.z1();

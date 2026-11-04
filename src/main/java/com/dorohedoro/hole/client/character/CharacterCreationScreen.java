@@ -2,9 +2,10 @@ package com.dorohedoro.hole.client.character;
 
 import com.dorohedoro.hole.character.CharacterNetwork;
 import com.dorohedoro.hole.character.PersonalityQuiz;
+import com.dorohedoro.hole.client.ui.HoleUiTheme;
+import com.dorohedoro.hole.client.ui.HoleMenuButton;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -16,7 +17,7 @@ public final class CharacterCreationScreen extends Screen {
     private Stage stage=Stage.ORIGIN;
     private final int[] order;
     private final int[] answers=new int[PersonalityQuiz.QUESTIONS_PER_RUN];
-    private int page=0,panelX,panelY,panelW;
+    private int page=0,panelX,panelY,panelW,panelH;
     private String error="",completion="",origin="";
     private String[] tied=new String[0];
 
@@ -48,11 +49,11 @@ public final class CharacterCreationScreen extends Screen {
         screen.rebuild();
     }
     @Override protected void init(){
-        panelW=Math.min(560,width-24);panelX=(width-panelW)/2;
-        panelY=Math.max(8,(height-288)/2);rebuild();
+        panelW=Math.min(600,width-24);panelX=(width-panelW)/2;
+        panelH=Math.min(335,height-12);panelY=(height-panelH)/2;rebuild();
     }
     private void add(String label,int x,int y,int w,int h,Runnable action){
-        addRenderableWidget(Button.builder(Component.literal(label),b->action.run()).bounds(x,y,w,h).build());
+        addRenderableWidget(new HoleMenuButton(label,x,y,w,h,action));
     }
     private void rebuild(){
         if(minecraft==null)return;
@@ -76,15 +77,17 @@ public final class CharacterCreationScreen extends Screen {
             }
             case QUIZ -> {
                 PersonalityQuiz.Question q=PersonalityQuiz.question(order[page]);
+                int first=panelH>=318?110:(panelH>=265?91:75);
+                int step=panelH>=318?36:(panelH>=265?32:25);
                 for(int i=0;i<4;i++){
                     final int opt=i;
                     String mark=answers[page]==i?"[X] ":"[ ] ";
-                    add(mark+q.options()[i].text(),x,top+78+i*31,w,28,()->{answers[page]=opt;rebuild();});
+                    add(mark+q.options()[i].text(),x,top+first+i*step,w,step-4,()->{answers[page]=opt;rebuild();});
                 }
-                add("Back",x,top+213,82,23,()->{
+                add("Back",x,top+panelH-47,82,25,()->{
                     if(page==0)stage=Stage.MODE;else page--;rebuild();});
                 if(answers[page]>=0)
-                    add(page==order.length-1?"Discover my magic":"Next",x+w-152,top+213,152,23,()->{
+                    add(page==order.length-1?"Discover my magic":"Next",x+w-152,top+panelH-47,152,25,()->{
                         if(page==order.length-1)submitQuiz();else {page++;rebuild();}
                     });
             }
@@ -111,11 +114,18 @@ public final class CharacterCreationScreen extends Screen {
     @Override public boolean shouldCloseOnEsc(){return false;}
     @Override public void onClose(){}
     @Override public void render(GuiGraphics g,int mx,int my,float partial){
-        g.fill(0,0,width,height,0xD90A0E12);
-        g.fill(panelX-3,panelY-3,panelX+panelW+3,panelY+282,0xFF456568);
-        g.fill(panelX,panelY,panelX+panelW,panelY+279,0xFF171B1C);
-        g.fill(panelX+1,panelY+1,panelX+panelW-1,panelY+30,0xFF233436);
-        g.drawCenteredString(font,"THE HOLE / CHARACTER ORIGIN",width/2,panelY+11,0xFFE8E1CF);
+        // Draw the full panel first. Screen.render may apply Minecraft's
+        // background blur, so draw all QUESTION TEXT *after* super.render.
+        HoleUiTheme.backdrop(g,width,height,panelX,panelY,panelW,panelH);
+        if(stage==Stage.QUIZ){
+            int first=panelH>=318?110:(panelH>=265?91:75);
+            HoleUiTheme.section(g,panelX+14,panelY+51,panelW-28,first-54);
+            g.fill(panelX+16,panelY+panelH-15,panelX+panelW-16,panelY+panelH-11,0xFF203536);
+            int progress=(panelW-32)*(page+1)/order.length;
+            g.fill(panelX+16,panelY+panelH-15,panelX+16+progress,panelY+panelH-11,HoleUiTheme.ACCENT);
+        }
+        super.render(g,mx,my,partial);
+        g.drawCenteredString(font,"THE HOLE / CHARACTER ORIGIN",width/2,panelY+12,HoleUiTheme.TEXT);
         switch(stage){
             case ORIGIN -> {
                 g.drawCenteredString(font,"Who are you in this city?",width/2,panelY+46,0xFF9EDDD0);
@@ -126,9 +136,9 @@ public final class CharacterCreationScreen extends Screen {
                 g.drawCenteredString(font,"No free selection. No ordinary rerolls.",width/2,panelY+245,0xFF9DADAF);
             }
             case QUIZ -> {
-                g.drawString(font,"SORCERER APTITUDE  /  "+(page+1)+" OF "+order.length,panelX+18,panelY+42,0xFF67CBC3);
-                g.drawWordWrap(font,Component.literal(PersonalityQuiz.question(order[page]).text()),panelX+18,panelY+58,panelW-36,0xFFE7E1D2);
-                g.drawCenteredString(font,"Answer instinctively. Your affinity scores are hidden.",width/2,panelY+256,0xFF9DADAF);
+                g.drawString(font,"SORCERER APTITUDE  /  "+(page+1)+" OF "+order.length,panelX+18,panelY+39,HoleUiTheme.ACCENT);
+                g.drawWordWrap(font,Component.literal(PersonalityQuiz.question(order[page]).text()),panelX+22,panelY+63,panelW-44,HoleUiTheme.TEXT);
+                g.drawCenteredString(font,"Answer instinctively. Your affinity scores remain hidden.",width/2,panelY+panelH-32,HoleUiTheme.MUTED);
             }
             case SUBMITTING -> g.drawCenteredString(font,"Your smoke is taking shape...",width/2,panelY+122,0xFFE2D5C1);
             case TIE -> {
@@ -140,7 +150,6 @@ public final class CharacterCreationScreen extends Screen {
                 g.drawCenteredString(font,"Saved to your character; there are no rerolls.",width/2,panelY+209,0xFFADB9B3);
             }
         }
-        if(!error.isEmpty()) g.drawWordWrap(font,Component.literal(error),panelX+18,panelY+262,panelW-36,0xFFFF9A8A);
-        super.render(g,mx,my,partial);
+        if(!error.isEmpty()) g.drawWordWrap(font,Component.literal(error),panelX+18,panelY+panelH-22,panelW-36,0xFFFF9A8A);
     }
 }

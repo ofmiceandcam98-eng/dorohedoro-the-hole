@@ -5,6 +5,7 @@ import com.dorohedoro.hole.worldgen.HoleChunkGenerator;
 import com.dorohedoro.hole.worldgen.RealmBiomes;
 import com.dorohedoro.hole.worldgen.city.CityPlan;
 import com.dorohedoro.hole.worldgen.city.CityElevation;
+import com.dorohedoro.hole.worldgen.city.CityTerrain40;
 import com.dorohedoro.hole.worldgen.city.District;
 import com.dorohedoro.hole.worldgen.city.Lot;
 import com.dorohedoro.hole.worldgen.city.LotType;
@@ -325,13 +326,13 @@ public final class HoleQa {
             int cx = plan.xLine(0).center();
             int cz = plan.zLine(0).center();
             int relief = plan.settings.terrainRelief()
-                    ? com.dorohedoro.hole.worldgen.city.CityElevation.offset(plan.seed, cx + 5, cz + 5) : 0;
+                    ? CityTerrain40.offset(plan, cx + 5, cz + 5) : 0;
             BlockPos chamber = new BlockPos(cx + 5, -30 + relief, cz + 5);
             BlockPos floor = new BlockPos(cx + 5, -37 + relief, cz + 5);
             check("sewer_deep_chamber_carved", level.getBlockState(chamber).isAir(), chamber.toShortString());
             check("sewer_chamber_supported", !level.getBlockState(floor).isAir(), floor.toShortString());
             int drainRelief = plan.settings.terrainRelief()
-                    ? com.dorohedoro.hole.worldgen.city.CityElevation.offset(plan.seed, cx, cz + 10) : 0;
+                    ? CityTerrain40.offset(plan, cx, cz + 10) : 0;
             BlockPos drain = new BlockPos(cx, 29 + drainRelief, cz + 10);
             check("sewer_midlevel_water", level.getFluidState(drain).is(net.minecraft.tags.FluidTags.WATER),
                     drain.toShortString());
@@ -341,7 +342,7 @@ public final class HoleQa {
             int dir = com.dorohedoro.hole.worldgen.city.SewerCaveBranches.branchDirection(plan.seed, 0, 0);
             int linedZ = cz + dir * 8;
             int linedRelief = plan.settings.terrainRelief()
-                    ? com.dorohedoro.hole.worldgen.city.CityElevation.offset(plan.seed, branchX, linedZ) : 0;
+                    ? CityTerrain40.offset(plan, branchX, linedZ) : 0;
             BlockPos linedPassage = new BlockPos(branchX, -35 + linedRelief, linedZ);
             BlockPos linedWall = new BlockPos(branchX + 2, -35 + linedRelief, linedZ);
             check("sewer_branch_begins_lined", level.getBlockState(linedPassage).isAir()
@@ -349,7 +350,7 @@ public final class HoleQa {
                     linedPassage.toShortString());
             int caveZ = cz + dir * 59;
             int caveRelief = plan.settings.terrainRelief()
-                    ? com.dorohedoro.hole.worldgen.city.CityElevation.offset(plan.seed, branchX, caveZ) : 0;
+                    ? CityTerrain40.offset(plan, branchX, caveZ) : 0;
             BlockPos naturalCave = new BlockPos(branchX, -35 + caveRelief, caveZ);
             check("sewer_selective_cave_destination", level.getBlockState(naturalCave).isAir(),
                     naturalCave.toShortString());
@@ -360,7 +361,7 @@ public final class HoleQa {
                 for (int step = 43; step <= 59; step++) {
                     int z = cz + dir * step;
                     int offset = plan.settings.terrainRelief()
-                            ? com.dorohedoro.hole.worldgen.city.CityElevation.offset(plan.seed, branchX, z) : 0;
+                            ? CityTerrain40.offset(plan, branchX, z) : 0;
                     int y = com.dorohedoro.hole.worldgen.city.SewerCavernProfile.entranceFloor(
                             plan.seed, branchX, cz, dir, step, plan.settings.terrainRelief()) + offset;
                     BlockPos p = new BlockPos(branchX, y, z);
@@ -383,7 +384,11 @@ public final class HoleQa {
         private void checkSpawn(CityPlan plan) {
             BlockPos spawn = level.getSharedSpawnPos();
             report.addProperty("spawn", spawn.toShortString());
-            check("spawn_at_plaza", Math.abs(spawn.getX()) <= 13 && Math.abs(spawn.getZ()) <= 13 && spawn.getY() == CityPlan.GROUND_Y, spawn.toShortString());
+            // Pass 47+ supports seed-selected regional starts. The headless QA originally
+            // assumed every valid world spawned at (0, 65, 0), producing false failures.
+            BlockPos plannedSpawn = plan.spawnPoint();
+            check("spawn_matches_planned_start", spawn.equals(plannedSpawn),
+                    "actual=" + spawn.toShortString() + " expected=" + plannedSpawn.toShortString());
             boolean feet = level.getBlockState(spawn).isAir();
             boolean head = level.getBlockState(spawn.above()).isAir();
             boolean floor = level.getBlockState(spawn.below()).isFaceSturdy(level, spawn.below(), net.minecraft.core.Direction.UP);
@@ -436,7 +441,7 @@ public final class HoleQa {
             if (!plan.settings.terrainRelief()) return feet;
             for (int x = area.x0(); x <= area.x1(); x++) {
                 for (int z = area.z0(); z <= area.z1(); z++) {
-                    feet[columnIndex(area, x, z)] = CityPlan.GROUND_Y + CityElevation.offset(plan.seed, x, z);
+                    feet[columnIndex(area, x, z)] = CityPlan.GROUND_Y + CityTerrain40.offset(plan, x, z);
                 }
             }
             // A building uses a level foundation at its LOT center, not the
@@ -447,7 +452,7 @@ public final class HoleQa {
                     for (Lot lot : plan.lotsIn(new ChunkPos(cx, cz))) {
                         if (!seenLots.add(lot.hash())) continue;
                         Rect r = lot.rect();
-                        int lotFeet = CityPlan.GROUND_Y + CityElevation.offset(plan.seed, r.centerX(), r.centerZ());
+                        int lotFeet = CityPlan.GROUND_Y + CityTerrain40.offset(plan, r.centerX(), r.centerZ());
                         for (int x = Math.max(area.x0(), r.x0()); x <= Math.min(area.x1(), r.x1()); x++) {
                             for (int z = Math.max(area.z0(), r.z0()); z <= Math.min(area.z1(), r.z1()); z++) {
                                 feet[columnIndex(area, x, z)] = lotFeet;
@@ -468,6 +473,13 @@ public final class HoleQa {
             BitSet visited = new BitSet(area.area());
             ArrayDeque<long[]> queue = new ArrayDeque<>();
             BlockPos spawn = level.getSharedSpawnPos();
+            // Core-city QA samples origin-centered chunks even if the player spawns in
+            // a distant seed-selected climate. Avoid indexing outside that sample.
+            // The real spawn is independently checked by checkSpawn().
+            if (!area.contains(spawn.getX(), spawn.getZ())) {
+                spawn = new BlockPos(0, CityPlan.GROUND_Y, 0);
+                report.addProperty("core_connectivity_anchor", "origin plaza (regional player spawn lies outside the sampled area)");
+            }
             queue.add(new long[]{spawn.getX(), spawn.getY(), spawn.getZ()});
             visited.set(columnIndex(area, spawn.getX(), spawn.getZ()));
             int[][] steps = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};

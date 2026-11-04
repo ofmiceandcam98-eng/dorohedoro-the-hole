@@ -145,3 +145,12 @@ Verify each mob idle/walk/attack/hurt animation, local pivot articulation, clipp
 - [ ] Sorcerers frostbound highlands generate with visible ground snow but no ordinary precipitation.
 - [ ] Biome feature sorting, mining, nearby biome transitions and multi-seed determinism.
 - [ ] Full `runData`, `build`, `runClient`, `runServer` and multiplayer checks.
+
+## Pass 45 working urban courts (not yet verified in game)
+
+- [ ] Fresh v29 world: test both individually accessible street-facing rooms in residential, market and industrial courts; check east/west room functions and their roof clearance.
+- [ ] Use installed cauldron, smoker, stonecutter, furnace, loom, crafting and smithing workstations; test generated block validity and merchant access.
+- [ ] Ensure a continuous 2-block wide public courtyard approach from every door to the lot's south edge; no blocking by earlier postprocess, lot grading or rail/canal terrain.
+- [ ] Compare density against the five owner's November 1 screenshots on 3+ new seeds; verify unaffected wild/ruin parcels and no strange mass-produced identical sheds.
+- [ ] Verify no newly added light prevents night hostile spawning; check preserved vegetation/wood sources outside converted courts.
+- [ ] Ensure older world-detail v0–28 saves do not acquire new courts when new chunks generate.

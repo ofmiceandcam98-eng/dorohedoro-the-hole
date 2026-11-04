@@ -47,6 +47,7 @@ public final class CityPlan {
     public final CitySettings settings;
     private final Climate.Sampler climate;
     private final LoadingCache<Long, Superblock> superblocks;
+    private volatile StartingRegions47.Site selectedStart;
 
     public CityPlan(long seed, Climate.Sampler climate, CitySettings settings) {
         this.seed = seed;
@@ -91,9 +92,25 @@ public final class CityPlan {
         int halfWidth = switch (kind) {
             case AVENUE -> settings.worldDetailVersion() >= 8 ? 4 : 6;
             case TRAM -> 7;
-            case CANAL -> 9;
+            case CANAL -> settings.worldDetailVersion() >= 24 ? 24 : settings.worldDetailVersion() >= 21 ? 17 : 9;
         };
+        if (kind == Line.Kind.CANAL && settings.worldDetailVersion() >= 24) {
+            // Irregular streets occasionally put two adjacent corridors close
+            // together. Keep a public passage between their reservations,
+            // rather than letting the widened river delete nearby lots.
+            int gap = Math.min(center - rawLineCenter(salt, index - 1),
+                    rawLineCenter(salt, index + 1) - center);
+            halfWidth = Math.min(halfWidth, Math.max(12, (gap - 16) / 2));
+        }
         return new Line(index, center, halfWidth, kind);
+    }
+
+    /** Same seed-derived position as line(), without constructing neighbors recursively. */
+    private int rawLineCenter(long salt, int index) {
+        int period = pitch(salt);
+        int reach = index == -1 || index == 0 ? START_LINE_JITTER : LINE_JITTER;
+        long hash = CityHash.of(seed, salt, index);
+        return index * period + period / 2 + CityHash.range(hash, reach * 2 + 1) - reach;
     }
 
     /** Index of the superblock column containing {@code x}: the last line whose center is at or before it. */
@@ -137,6 +154,38 @@ public final class CityPlan {
             }
         }
         return lines;
+    }
+
+    /** Pass 42 terrain/biome identity; legacy saves retain the old city. */
+    public HoleRegions42.Region regionAt(int x, int z) {
+        return settings.worldDetailVersion() >= 35 ? HoleRegions42.atAnywhere(climate, x, z)
+                : settings.worldDetailVersion() >= 26 ? HoleRegions42.at(climate, x, z)
+                : HoleRegions42.Region.CITY;
+    }
+
+    /** Broad vanilla-ocean habitat independent of neighborhood density and Hole frontier climate. */
+    public int oceanDepthAt(int x, int z) {
+        return settings.worldDetailVersion() >= 47 ? OceanRegions65.depthAt(climate, x, z) : 0;
+    }
+
+    /** v48 coastline reservation; earlier ocean worlds retain their exact old coastline. */
+    public int coastalDistanceAt(int x, int z) {
+        return settings.worldDetailVersion() >= 48 ? CoastalShelf66.distanceAt(climate, x, z) : -1;
+    }
+
+    /** Protect vanilla deep-dark terrain from our own deep excavations in new worlds. */
+    public boolean protectsDeepDarkNearChunk(int minX, int minZ) {
+        return settings.worldDetailVersion() >= 45
+                && DeepDarkBuffer63.nearDeepDark(climate, minX, minZ);
+    }
+
+    /** Preserve old 512-cell terrain grading in v0..31 saves. */
+    public double terrainBlendAt(int x, int z) {
+        return settings.worldDetailVersion() >= 35
+                ? HoleRegions42.terrainBlendAnywhere(climate, x, z)
+                : settings.worldDetailVersion() >= 32
+                ? HoleRegions42.terrainBlend(climate, x, z)
+                : HoleRegions42.terrainBlend(x, z);
     }
 
     public District districtAt(int x, int z) {
@@ -217,8 +266,79 @@ public final class CityPlan {
 
     public record LandmarkSite(int blockI, int blockJ, LotType type) {}
 
-    /** Where players first appear. The plaza at the origin exists on every seed. */
+    /**
+     * One deterministic, climate-verified starting superblock for fresh worlds.
+     * Legacy versions preserve the exact original (0,65,0) spawn and old lots.
+     * The selected landing stays within one climate province; no temporary
+     * teleportation, exploration-order state or player join-time relocation.
+     */
+    public StartingRegions47.Site startingSite() {
+        if (settings.worldDetailVersion() < 31) return new StartingRegions47.Site(-1, -1, StartingRegions47.Origin.CITY);
+        StartingRegions47.Site result = selectedStart;
+        if (result == null) synchronized (this) {
+            result = selectedStart;
+            if (result != null) return result;
+            StartingRegions47.Probe probe = (i, j, preferred) -> {
+                Rect area = Superblock.areaFor(this, i, j);
+                if (area.width() < 92 || area.depth() < 72) return false;
+                int x = area.centerX(), z = area.centerZ();
+                HoleRegions42.Region region = HoleRegions42.Region.valueOf(preferred.name());
+                // Keep the entire landing and its nearby shelter within a real
+                // province, not at the edge of a 512-block climate cell.
+                return regionAt(x, z) == region && regionAt(x - 30, z - 24) == region
+                        && regionAt(x + 38, z - 24) == region
+                        && regionAt(x - 30, z + 24) == region
+                        && regionAt(x + 38, z + 24) == region
+                        // The landing must not erase a protected unique landmark.
+                        && !isReservedLandmark(i, j)
+                        // Only the new v33 preset filters out hard terrain steps
+                        // between the two furnished starting parcels.
+                        && (settings.worldDetailVersion() < 33
+                            || !settings.terrainRelief()
+                            || SpawnApproach50.isWalkable(x, z,
+                                (px, pz) -> CityTerrain40.offset(this, px, pz)))
+                        // v34 additionally traces the SOUTH entrance path (not
+                        // just the parallel alley); older saved starts do not move.
+                        && (settings.worldDetailVersion() < 34
+                            || !settings.terrainRelief()
+                            || SpawnRoute51.accessible(x, z,
+                                (px, pz) -> CityTerrain40.offset(this, px, pz)));
+            };
+            result = settings.worldDetailVersion() >= 33
+                    ? StartingRegions47.chooseWithRegionalFallback(seed, probe)
+                    : StartingRegions47.choose(seed, probe);
+            selectedStart = result;
+        }
+        return result;
+    }
+
+    private boolean isReservedLandmark(int i, int j) {
+        LandmarkSite site = landmarkSite(Math.floorDiv(i, LANDMARK_REGION), Math.floorDiv(j, LANDMARK_REGION));
+        return site.blockI() == i && site.blockJ() == j;
+    }
+
+    public boolean isRegionalStartingBlock(int i, int j) {
+        if (settings.worldDetailVersion() < 31) return false;
+        StartingRegions47.Site site = startingSite();
+        return !site.downtown() && site.blockI() == i && site.blockJ() == j;
+    }
+
+    public boolean isRegionalStartingPlaza(Lot lot) {
+        if (settings.worldDetailVersion() < 31 || lot.type() != LotType.PLAZA) return false;
+        StartingRegions47.Site site = startingSite();
+        if (site.downtown()) return false;
+        Rect area = Superblock.areaFor(this, site.blockI(), site.blockJ());
+        return lot.rect().centerX() == area.centerX() && lot.rect().centerZ() == area.centerZ();
+    }
+
+    /** Street-safe and flat in the landing's lot grading, even in mountain terrain. */
     public BlockPos spawnPoint() {
-        return new BlockPos(0, GROUND_Y, 0);
+        StartingRegions47.Site site = startingSite();
+        if (site.downtown()) return new BlockPos(0, GROUND_Y, 0);
+        Rect area = Superblock.areaFor(this, site.blockI(), site.blockJ());
+        int x = area.centerX(), z = area.centerZ();
+        Rect landing = new Rect(x - 13, z - 13, x + 13, z + 13);
+        int elevation = settings.terrainRelief() ? CityTerrain40.frontageOffset(this, landing) : 0;
+        return new BlockPos(x, GROUND_Y + elevation, z);
     }
 }

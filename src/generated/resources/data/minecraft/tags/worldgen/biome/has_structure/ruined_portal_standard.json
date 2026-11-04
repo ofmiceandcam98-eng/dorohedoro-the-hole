@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "dorohedoro:hole_residential",
+    "dorohedoro:hole_market",
+    "dorohedoro:hole_industrial",
+    "dorohedoro:hole_derelict",
+    "dorohedoro:hole_graveyard",
+    "dorohedoro:hole_outskirts",
+    "dorohedoro:hole_frostbitten_industrial",
+    "dorohedoro:hole_snowfields",
+    "dorohedoro:hole_dead_taiga",
+    "dorohedoro:hole_iron_badlands"
+  ]
+}

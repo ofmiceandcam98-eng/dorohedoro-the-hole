@@ -59,12 +59,14 @@ public final class SewerCaveBranches {
                     int reach = extended ? 86 : 78;
                     if (c.overlaps(new Rect(bx - footprint, Math.min(cz, cz + reach * direction),
                             bx + footprint, Math.max(cz, cz + reach * direction)))) {
-                        paintCaveApproach(c, plan.seed, bx, cz, direction, extended);
+                        paintCaveApproach(c, plan, bx, cz, direction, extended);
                     }
                 } else if (type == 1 || type == 2) {
                     if (c.overlaps(new Rect(bx - 6, Math.min(cz, cz + direction * 21),
                             bx + 6, Math.max(cz, cz + direction * 21)))) {
-                        paintClosedInspectionBay(c, plan.seed, bx, cz, direction);
+                        paintClosedInspectionBay(c, plan.seed, bx, cz, direction,
+                                SewerHazards61.infested(plan.seed, xLine.index(), zLine.index(),
+                                        type, plan.settings.worldDetailVersion()));
                     }
                 }
             }
@@ -75,7 +77,8 @@ public final class SewerCaveBranches {
      * Distinct, *closed* shallow sewer side-chamber. This never connects to natural caves.
      * The hall takes 11 blocks to reach the inspection room and the end is masonry-sealed.
      */
-    private static void paintClosedInspectionBay(Canvas c, long seed, int bx, int cz, int direction) {
+    private static void paintClosedInspectionBay(Canvas c, long seed, int bx, int cz,
+                                                  int direction, boolean infested) {
         for (int step = 0; step <= 12; step++) {
             int z = cz + direction * step;
             for (int x = bx - 2; x <= bx + 2; x++) {
@@ -101,12 +104,20 @@ public final class SewerCaveBranches {
         // Keep this room clearly part of the sewer network and sealed at its far wall.
         c.set(bx - 3, 50, endZ + direction * 5, Blocks.CRAFTING_TABLE);
         c.barrel(bx + 3, 50, endZ + direction * 5, "sewer_cache");
-        c.set(bx, 54, endZ + direction * 5,
-                Blocks.LANTERN.defaultBlockState().setValue(LanternBlock.HANGING, true));
+        if (infested) {
+            // Optional encounter: spawner can be broken with ordinary mining tools.
+            // Behind the side-bay entrance, away from the continuous sewer walkway.
+            // The established loot barrel and crafting table remain obtainable.
+            c.spawner(bx + 2, 50, endZ + direction * 6, "dorohedoro:sewer_roach");
+        } else {
+            c.set(bx, 54, endZ + direction * 5,
+                    Blocks.LANTERN.defaultBlockState().setValue(LanternBlock.HANGING, true));
+        }
     }
 
     /** A long lower-level side branch. First intact infrastructure, then damage, then rock. */
-    private static void paintCaveApproach(Canvas c, long seed, int bx, int cz, int direction, boolean extended) {
+    private static void paintCaveApproach(Canvas c, CityPlan plan, int bx, int cz, int direction, boolean extended) {
+        long seed = plan.seed;
         for (int step = 0; step <= 49; step++) {
             int z = cz + direction * step;
             // Short staircase down from the -36 rail gallery: accessible one-block rises only.
@@ -166,11 +177,25 @@ public final class SewerCaveBranches {
         // 4-block fall straight into a cavern at the end of the passage.
         for (int step = extended ? 43 : 49; step <= 59; step++) {
             int z = cz + direction * step;
-            int floor = extended ? SewerCavernProfile.entranceFloor(seed, bx, cz, direction,
-                    step, c.hasTerrainRelief()) : -39;
+            int floor = extended ? (c.hasMacroRelief40()
+                    ? SewerCavernProfile.entranceFloor(plan, bx, cz, direction, step)
+                    : SewerCavernProfile.entranceFloor(seed, bx, cz, direction, step, c.hasTerrainRelief())) : -39;
             for (int x = bx - 1; x <= bx + 1; x++) {
                 c.fill(x, floor + 1, z, x, floor + 3, z, Blocks.AIR);
                 c.set(x, floor, z, Blocks.COBBLED_DEEPSLATE);
+            }
+        }
+        // Pass 70: outside the protected 3-wide descent, widen and weather the
+        // last masonry into a progressively rough cave passage. This is still
+        // an ordinary mineable route and needs no techniques or special items.
+        if (plan.settings.worldDetailVersion() >= SewerCaveTransitions70.FIRST_VERSION) {
+            for (int step = 20; step <= 55; step++) {
+                int floor = step < 43 ? -36 - Math.min(3, Math.max(0, (step - 15) / 8))
+                        : c.hasMacroRelief40()
+                          ? SewerCavernProfile.entranceFloor(plan, bx, cz, direction, step)
+                          : SewerCavernProfile.entranceFloor(seed, bx, cz, direction, step,
+                                  c.hasTerrainRelief());
+                SewerCaveTransitions70.paintStep(c, seed, bx, cz + direction * step, step, floor);
             }
         }
     }

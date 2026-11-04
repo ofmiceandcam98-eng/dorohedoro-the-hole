@@ -29,7 +29,7 @@ final class DiagonalBoulevards14 {
         for (int x = c.minX; x <= c.maxX; x++) for (int z = c.minZ; z <= c.maxZ; z++) {
             if (!isRoad(plan.seed, x, z)) continue;
             int i = plan.xIndex(x), j = plan.zIndex(z);
-            if (i == -1 && j == -1) continue;
+            if ((i == -1 && j == -1) || plan.isRegionalStartingBlock(i, j)) continue;
             CityPlan.LandmarkSite site = plan.landmarkSite(
                     Math.floorDiv(i, CityPlan.LANDMARK_REGION),
                     Math.floorDiv(j, CityPlan.LANDMARK_REGION));

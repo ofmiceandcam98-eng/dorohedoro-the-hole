@@ -161,7 +161,8 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "minecraft:iron_pickaxe"
+          "name": "minecraft:iron_pickaxe",
+          "weight": 1
         }
       ],
       "rolls": {

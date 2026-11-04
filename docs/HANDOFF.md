@@ -1,3 +1,9 @@
+# LATEST CHECKPOINT — PASS 44 (2026-11-02)
+
+**SOURCE-ONLY.** Refer first to `docs/PASS44_HOLE_SKYLINE_FUNCTIONAL_FACADES.md` (v28 new-world building-service architecture). All earlier notes below are historical. Do not treat Pass 32 and other older headings as the newest source version. No complete NeoForge compilation or in-game screenshot validation has been performed.
+
+---
+
 # LATEST SOURCE CHECKPOINT — PASS 32 (2026-11-01)
 
 **Read `docs/PASS32_PURPOSE_FIRST_AUDIT.md` before modifying this source.** This is the latest source checkpoint, **NOT a compiled or Minecraft-tested release**. The default new world now uses world-detail profile 19 to prevent unnecessary permanent canal fish and unsupported supply barrels; versions 0–18 preserve their previous choices. The cosmetic preserved-conduit edit from Pass 31 was rolled back. Phase 3 Hell and Healing tests now verify gameplay/schema intent instead of obsolete text.
@@ -127,3 +133,16 @@ Move from the Hole foundation to **Phase 3 (Sorcerers' World and Hell generation
 6. After each stage, update `docs/TEST_RESULTS.md`, `docs/IMPLEMENTATION_STATUS.md`, and this handoff with verified status only.
 
 **FTB Quests:** Planned, currently deferred. Magic remains queued. Minecraft survival sandbox freedom and lore distinctions are mandatory.
+
+## Pass 43 continuation (2026-11-02) — authoritative later checkpoint
+
+**The source is uncompiled and has no client verification.** Use
+`docs/PASS43_WORLD_IDENTITY_SCREENSHOT_REFINEMENT.md` for the current work,
+version-27 world preset, recovered November 1 actual Minecraft screenshot
+review, changed class list, and testing checklist. This takes priority over
+historical earlier headings in this file. Old saved world versions are gated
+and must not be assumed to receive new building/region content.
+
+## Pass 45 continuation (2026-11-02) — newest working-source checkpoint
+
+**Priority is first making The Hole visually authentic, not adding deferred magic/weather/faction systems.** Fresh-world `world_detail_version: 29` adds limited 2-room functional service courts in a minority of appropriately sized **central-city** vacant or rubble parcels. See `docs/PASS45_WORKING_CITY_SERVICE_COURTS.md`. Working rooms and clear walking approaches were verified with a Java 21 stubbed-Minecraft fixture (3,780 parcel scenarios); all prior Pass41–44 offline QA suites passed, but this is **NOT an actual NeoForge build**. Direct `bash gradlew --version` confirms the wrapper cannot start: `gradle/wrapper/gradle-wrapper.jar` missing. The original November 1 in-game screenshots predate Pass42–45. Preserve them as evidence, never call them new build screenshots. Restore the official wrapper, compile, runData, client/server test and collect *fresh* screenshots before approving distribution. New content does not apply retroactively to saved world profiles.

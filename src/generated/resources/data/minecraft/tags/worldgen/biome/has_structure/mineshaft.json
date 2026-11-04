@@ -17,6 +17,11 @@
     "dorohedoro:sw_blight",
     "dorohedoro:sw_waters",
     "dorohedoro:sw_caves",
-    "dorohedoro:sw_frostbound_highlands"
+    "dorohedoro:sw_frostbound_highlands",
+    "dorohedoro:hole_snowfields",
+    "dorohedoro:hole_dead_taiga",
+    "dorohedoro:hole_dust_basin",
+    "dorohedoro:hole_iron_badlands",
+    "dorohedoro:hole_mountain_rim"
   ]
 }

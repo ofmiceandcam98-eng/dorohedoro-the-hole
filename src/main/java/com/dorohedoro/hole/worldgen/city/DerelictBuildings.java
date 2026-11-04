@@ -23,6 +23,7 @@ final class DerelictBuildings {
         // Named/story landmarks, primary hospitals, active agricultural sites and utility entrances
         // are never destroyed merely because their neighbourhood has weathered buildings.
         if (lot.type() == LotType.RUBBLE && lot.district() == District.DERELICT) {
+            if (InhabitedCourts45.eligible(c, lot, true)) return; // occupied service rooms, not a second ruin shell
             shellRemnant(c, lot);
             return;
         }

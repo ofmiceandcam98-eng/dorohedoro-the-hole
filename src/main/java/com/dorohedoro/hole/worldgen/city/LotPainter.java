@@ -25,10 +25,13 @@ final class LotPainter {
         // streets use the gradual city elevation field. This also preserves room geometry.
         c.beginLot(lot.rect());
         try {
-            c.fill(lot.rect(), STREET_Y - 3, STREET_Y, c.hasDistrictIdentity() ? DistrictIdentity18.lotGround(lot.district()) : YARD);
+            c.fill(lot.rect(), STREET_Y - (c.hasMacroRelief40() ? 9 : 3), STREET_Y, c.hasDistrictIdentity() ? DistrictIdentity18.lotGround(lot.district()) : YARD);
             if (c.hasLoreArchitecture()) LoreArchitecture19.foundation(c, lot);
             switch (lot.type()) {
-            case PLAZA -> Landmarks.plaza(c, lot);
+            case PLAZA -> {
+                if (plan.isRegionalStartingPlaza(lot)) Landmarks.regionalLanding(c, lot, plan.regionAt(lot.rect().centerX(), lot.rect().centerZ()));
+                else Landmarks.plaza(c, lot);
+            }
             case HUNGRY_BUG -> Landmarks.hungryBug(c, lot);
             case STARTER_SHELTER -> Landmarks.starterShelter(c, lot);
             case HOSPITAL -> Landmarks.hospital(c, lot);
@@ -64,6 +67,8 @@ final class LotPainter {
                 DerelictBuildings.decorate(c, plan, lot);
                 if (c.hasUrbanFabric()) UrbanFabric25.yard(c, lot);
             }
+            if (c.hasWorkingServiceCourts59()) WorkingServiceCourts59.build(c, lot);
+            if (c.hasFreightApproaches60()) FreightApproaches60.build(c, lot);
         } finally {
             c.endLot();
         }
@@ -79,13 +84,18 @@ final class LotPainter {
     }
 
     private static void tenement(Canvas c, CityPlan plan, Lot lot) {
-        Rect box = WorldDetail.footprint(c, lot);
+        Rect original = WorldDetail.footprint(c, lot);
+        Rect box = AttachedWings55.mainFootprint(c, lot, original, 2);
         if (!Tower.fits(box)) {
             OpenLots.rubble(c, lot);
             return;
         }
         int floors = c.hasHousing25() ? Housing25.floors(false, box, lot.hash(), plan.settings.maxFloors())
                 : Math.min(plan.settings.maxFloors(), 2 + CityHash.range(lot.hash(), 3));
+        if (c.hasNeighborhoodSkyline46() && c.isHoleCity(lot.rect().centerX(), lot.rect().centerZ())) {
+            floors = NeighborhoodSkyline46.floors(c.seed(), lot.district(), box, lot.hash(),
+                    floors, plan.settings.maxFloors(), false);
+        }
         Style style = c.hasLoreArchitecture() ? LoreArchitecture19.styleFor(c, lot) : Style.forDistrict(lot.district(), c.hasArchitectureVariation()
                 ? CityArchitecture.styleHash(c.seed(), lot.rect().centerX(), lot.rect().centerZ(), lot.hash())
                 : lot.hash(), c.hasWorldDetail());
@@ -100,14 +110,23 @@ final class LotPainter {
             }
             if (cv.hasAtmosphere28()) ResidentialAtmosphere28.residence(cv, in, y, k, lot.hash());
             if (cv.hasHousing29()) HousingDetail29.furnish(cv, in, y, k, lot.hash());
+            if (cv.hasOccupiedInteriors35()) OccupiedInteriors35.home(cv, in, y, k, lot.hash(), Housing25.compact(box, floors));
+            if (cv.hasHillside37()) RoomPurpose37.residential(cv, in, y, k, lot.hash(), Housing25.compact(box, floors));
+            if (cv.hasOccupiedDetail39()) LivedInRooms39.residence(cv, in, y, k, lot.hash(), Housing25.compact(box, floors));
         });
         if (c.hasHousing25()) Housing25.facade(c, box, floors, lot.hash(), lot.district());
         if (c.hasAtmosphere28()) ResidentialAtmosphere28.eaves(c, box, floors, lot.hash(), lot.district());
         if (c.hasHousing29()) HousingDetail29.facade(c, box, floors, lot.hash(), lot.district());
+        if (c.hasFacadeDetail36()) FacadeDetail36.residence(c, box, floors, lot.hash(), lot.district());
+        if (c.hasEntranceGrade41()) FacadeDepth41.residence(c, box, floors, lot.hash(), lot.district());
+        if (c.hasFunctionalFacades44()) FunctionalFacade44.residence(c, lot, box, floors, lot.hash(),
+                c.hasHousing29() ? HousingDetail29.chooseRoof(box, floors, lot.hash(), roofFor(lot.hash())) : roofFor(lot.hash()));
+        if (c.hasAttachedServiceWings55()) AttachedWings55.build(c, lot, original, box, floors, style);
     }
 
     private static void apartment(Canvas c, CityPlan plan, Lot lot) {
-        Rect box = WorldDetail.footprint(c, lot);
+        Rect original = WorldDetail.footprint(c, lot);
+        Rect box = AttachedWings55.mainFootprint(c, lot, original, 2);
         if (!Tower.fits(box)) {
             OpenLots.rubble(c, lot);
             return;
@@ -115,6 +134,10 @@ final class LotPainter {
         int span = Math.max(1, plan.settings.maxFloors() - 4);
         int floors = c.hasHousing25() ? Housing25.floors(true, box, lot.hash(), plan.settings.maxFloors())
                 : Math.min(plan.settings.maxFloors(), 5 + CityHash.range(lot.hash(), span));
+        if (c.hasNeighborhoodSkyline46() && c.isHoleCity(lot.rect().centerX(), lot.rect().centerZ())) {
+            floors = NeighborhoodSkyline46.floors(c.seed(), lot.district(), box, lot.hash(),
+                    floors, plan.settings.maxFloors(), true);
+        }
         Style style = c.hasLoreArchitecture() ? LoreArchitecture19.styleFor(c, lot) : Style.forDistrict(lot.district(), c.hasArchitectureVariation()
                 ? CityArchitecture.styleHash(c.seed(), lot.rect().centerX(), lot.rect().centerZ(), lot.hash())
                 : lot.hash(), c.hasWorldDetail());
@@ -129,10 +152,18 @@ final class LotPainter {
             }
             if (cv.hasAtmosphere28()) ResidentialAtmosphere28.residence(cv, in, y, k, lot.hash());
             if (cv.hasHousing29()) HousingDetail29.furnish(cv, in, y, k, lot.hash());
+            if (cv.hasOccupiedInteriors35()) OccupiedInteriors35.home(cv, in, y, k, lot.hash(), Housing25.compact(box, floors));
+            if (cv.hasHillside37()) RoomPurpose37.residential(cv, in, y, k, lot.hash(), Housing25.compact(box, floors));
+            if (cv.hasOccupiedDetail39()) LivedInRooms39.residence(cv, in, y, k, lot.hash(), Housing25.compact(box, floors));
         });
         if (c.hasHousing25()) Housing25.facade(c, box, floors, lot.hash(), lot.district());
         if (c.hasAtmosphere28()) ResidentialAtmosphere28.eaves(c, box, floors, lot.hash(), lot.district());
         if (c.hasHousing29()) HousingDetail29.facade(c, box, floors, lot.hash(), lot.district());
+        if (c.hasFacadeDetail36()) FacadeDetail36.residence(c, box, floors, lot.hash(), lot.district());
+        if (c.hasEntranceGrade41()) FacadeDepth41.residence(c, box, floors, lot.hash(), lot.district());
+        if (c.hasFunctionalFacades44()) FunctionalFacade44.residence(c, lot, box, floors, lot.hash(),
+                c.hasHousing29() ? HousingDetail29.chooseRoof(box, floors, lot.hash(), roofFor(lot.hash())) : roofFor(lot.hash()));
+        if (c.hasAttachedServiceWings55()) AttachedWings55.build(c, lot, original, box, floors, style);
     }
 
     /** Living quarters: a shared entry on the ground floor, then rooms off a corridor beside the stairs. */
@@ -221,14 +252,15 @@ final class LotPainter {
     }
 
     private static void shop(Canvas c, Lot lot) {
-        Rect box = WorldDetail.footprint(c, lot);
-        if (!Tower.fits(box)) {
+        Rect original = WorldDetail.footprint(c, lot);
+        if (!Tower.fits(original)) {
             OpenLots.marketStalls(c, lot);
             return;
         }
-        int floors = c.hasHousing25() && box.width() <= 15
+        int floors = c.hasHousing25() && original.width() <= 15
                 ? 2 + CityHash.range(lot.hash(), 2)
                 : 1 + CityHash.range(lot.hash(), 3);
+        Rect box = AttachedWings55.mainFootprint(c, lot, original, floors);
         Style style = c.hasLoreArchitecture() ? LoreArchitecture19.styleFor(c, lot) : Style.forDistrict(lot.district(), c.hasArchitectureVariation()
                 ? CityArchitecture.styleHash(c.seed(), lot.rect().centerX(), lot.rect().centerZ(), lot.hash())
                 : lot.hash(), c.hasWorldDetail());
@@ -239,10 +271,16 @@ final class LotPainter {
                 else dwelling(cv, style, k, in, y);
                 if (cv.hasAtmosphere28()) ResidentialAtmosphere28.residence(cv, in, y, k, lot.hash());
                 if (cv.hasHousing29()) HousingDetail29.furnish(cv, in, y, k, lot.hash());
+                if (cv.hasOccupiedInteriors35()) OccupiedInteriors35.home(cv, in, y, k, lot.hash(), Housing25.compact(box, floors));
+            if (cv.hasHillside37()) RoomPurpose37.residential(cv, in, y, k, lot.hash(), Housing25.compact(box, floors));
+            if (cv.hasOccupiedDetail39()) LivedInRooms39.residence(cv, in, y, k, lot.hash(), Housing25.compact(box, floors));
                 return;
             }
             if (cv.hasInteriorVariety()) {
                 InteriorLayouts15.shop(cv, in, y, site);
+                if (cv.hasOccupiedInteriors35()) OccupiedInteriors35.shop(cv, in, y, lot.hash());
+                if (cv.hasHillside37()) RoomPurpose37.shop(cv, in, y, lot.hash());
+                if (cv.hasOccupiedDetail39()) LivedInRooms39.shop(cv, in, y, lot.hash());
                 return;
             }
             for (int z = in.z0() + 3; z <= in.z1() - 2; z++) {
@@ -269,6 +307,9 @@ final class LotPainter {
         if (c.hasWorldDetail()) WorldDetail.shopfront(c, box, lot.hash());
         if (c.hasArchitectureVariation()) ArchitecturePass13.shopfront(c, box, lot.hash());
         if (c.hasLoreArchitecture()) LoreArchitecture19.shopfront(c, box, lot.hash());
+        if (c.hasFacadeDetail36()) FacadeDetail36.shop(c, box, lot.hash());
+        if (c.hasEntranceGrade41()) FacadeDepth41.shop(c, box, lot.hash());
+        if (c.hasAttachedServiceWings55()) AttachedWings55.build(c, lot, original, box, floors, style);
     }
 
     private static void awning(Canvas c, Rect box, long hash) {
@@ -294,6 +335,9 @@ final class LotPainter {
     static void ward(Canvas c, int storey, Rect in, int y) {
         if (c.hasInteriorVariety()) {
             InteriorLayouts15.clinic(c, in, y, storey);
+            if (c.hasOccupiedInteriors35()) OccupiedInteriors35.clinic(c, in, y, storey);
+            if (c.hasHillside37()) RoomPurpose37.clinic(c, in, y, storey);
+            if (c.hasOccupiedDetail39()) LivedInRooms39.clinic(c, in, y, storey);
             return;
         }
         for (int x = in.x0(); x <= in.x1() - 1; x += 2) {
@@ -360,13 +404,15 @@ final class LotPainter {
         Rect in = box.inset(1);
         for (int x = in.x0() + 2; x < in.x1(); x += 6) {
             for (int z = in.z0() + 2; z < in.z1(); z += 6) {
-                c.set(x, roofY - 1, z, Blocks.LANTERN.defaultBlockState().setValue(net.minecraft.world.level.block.LanternBlock.HANGING, true));
+                if (!c.hasOccupiedInteriors35() || Math.floorMod(x / 6 + z / 6, 4) == 0)
+                    c.set(x, roofY - 1, z, Blocks.LANTERN.defaultBlockState().setValue(net.minecraft.world.level.block.LanternBlock.HANGING, true));
             }
         }
     }
 
     private static void warehouse(Canvas c, Lot lot) {
-        Rect box = StructuralVolumes14.industrialFootprint(c, lot, WorldDetail.footprint(c, lot));
+        Rect industrialBase = StructuralVolumes14.industrialFootprint(c, lot, WorldDetail.footprint(c, lot));
+        Rect box = IndustrialAnnex58.mainFootprint(c, lot, industrialBase);
         if (box.width() < 7 || box.depth() < 7) {
             OpenLots.junkyard(c, lot);
             return;
@@ -394,14 +440,20 @@ final class LotPainter {
         }
         c.chest(in.x0(), GROUND_Y, in.z1(), Direction.EAST, "warehouse");
         if (c.hasInteriorVariety()) InteriorLayouts15.industrial(c, in, GROUND_Y, GROUND_Y + height, false, lot.hash());
+        if (c.hasOccupiedInteriors35()) OccupiedInteriors35.industrial(c, in, GROUND_Y, false, lot.hash());
+        if (c.hasHillside37()) RoomPurpose37.workshop(c, in, GROUND_Y, false);
+        if (c.hasOccupiedDetail39()) LivedInRooms39.industrial(c, in, GROUND_Y, false, lot.hash());
         if (c.hasIrregularCity()) {
             StructuralVolumes14.industrialOffice(c, box, GROUND_Y + height, lot.hash());
             StructuralVolumes14.serviceOutbuilding(c, lot, box);
         }
+        if (c.hasFunctionalFacades44()) FunctionalFacade44.industry(c, lot, box, GROUND_Y + height, lot.hash(), false);
+        if (c.hasIndustrialAnnex58()) IndustrialAnnex58.build(c, lot, industrialBase, box, false);
     }
 
     private static void factory(Canvas c, Lot lot) {
-        Rect box = StructuralVolumes14.industrialFootprint(c, lot, WorldDetail.footprint(c, lot));
+        Rect industrialBase = StructuralVolumes14.industrialFootprint(c, lot, WorldDetail.footprint(c, lot));
+        Rect box = IndustrialAnnex58.mainFootprint(c, lot, industrialBase);
         if (box.width() < 9 || box.depth() < 9) {
             OpenLots.junkyard(c, lot);
             return;
@@ -423,6 +475,9 @@ final class LotPainter {
         c.set(in.x1(), GROUND_Y, in.z1() - 3, Blocks.ANVIL);
         c.chest(in.x1(), GROUND_Y, in.z1() - 2, Direction.WEST, "factory");
         if (c.hasInteriorVariety()) InteriorLayouts15.industrial(c, in, GROUND_Y, roofY, true, lot.hash());
+        if (c.hasOccupiedInteriors35()) OccupiedInteriors35.industrial(c, in, GROUND_Y, true, lot.hash());
+        if (c.hasHillside37()) RoomPurpose37.workshop(c, in, GROUND_Y, true);
+        if (c.hasOccupiedDetail39()) LivedInRooms39.industrial(c, in, GROUND_Y, true, lot.hash());
         // Distinct fabrication and maintenance stations instead of a giant
         // empty shed with furnaces only at one wall.
         if (in.width() >= 12 && in.depth() >= 12) {
@@ -456,5 +511,7 @@ final class LotPainter {
         // Roof pipework running the length of the hall.
         int pipeZ = box.z1() - 3;
         c.fill(box.x0() + 1, roofY + 1, pipeZ, box.x1() - 1, roofY + 2, pipeZ, Blocks.WAXED_OXIDIZED_COPPER);
+        if (c.hasFunctionalFacades44()) FunctionalFacade44.industry(c, lot, box, roofY, lot.hash(), true);
+        if (c.hasIndustrialAnnex58()) IndustrialAnnex58.build(c, lot, industrialBase, box, true);
     }
 }

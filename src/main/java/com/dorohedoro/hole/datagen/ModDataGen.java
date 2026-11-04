@@ -7,8 +7,11 @@ import com.dorohedoro.hole.worldgen.RealmBiomes;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.BiomeTagsProvider;
@@ -85,15 +88,72 @@ public final class ModDataGen {
         @Override
         protected void addTags(HolderLookup.Provider provider) {
             tag(BiomeTags.IS_OVERWORLD).add(HoleBiomes.RESIDENTIAL, HoleBiomes.MARKET, HoleBiomes.INDUSTRIAL, HoleBiomes.WATERFRONT,
-                    HoleBiomes.DERELICT, HoleBiomes.GRAVEYARD, HoleBiomes.OUTSKIRTS, HoleBiomes.FROSTBITTEN_INDUSTRIAL, HoleBiomes.UNDERCITY);
+                    HoleBiomes.DERELICT, HoleBiomes.GRAVEYARD, HoleBiomes.OUTSKIRTS, HoleBiomes.FROSTBITTEN_INDUSTRIAL, HoleBiomes.SNOWFIELDS, HoleBiomes.DEAD_TAIGA,
+                    HoleBiomes.DUST_BASIN, HoleBiomes.IRON_BADLANDS, HoleBiomes.MOUNTAIN_RIM, HoleBiomes.UNDERCITY);
             tag(BiomeTags.STRONGHOLD_BIASED_TO).add(HoleBiomes.RESIDENTIAL, HoleBiomes.MARKET, HoleBiomes.INDUSTRIAL, HoleBiomes.WATERFRONT,
-                    HoleBiomes.DERELICT, HoleBiomes.GRAVEYARD, HoleBiomes.OUTSKIRTS, HoleBiomes.FROSTBITTEN_INDUSTRIAL, HoleBiomes.UNDERCITY);
+                    HoleBiomes.DERELICT, HoleBiomes.GRAVEYARD, HoleBiomes.OUTSKIRTS, HoleBiomes.FROSTBITTEN_INDUSTRIAL, HoleBiomes.SNOWFIELDS, HoleBiomes.DEAD_TAIGA,
+                    HoleBiomes.DUST_BASIN, HoleBiomes.IRON_BADLANDS, HoleBiomes.MOUNTAIN_RIM, HoleBiomes.UNDERCITY);
             tag(BiomeTags.HAS_MINESHAFT).add(HoleBiomes.RESIDENTIAL, HoleBiomes.MARKET, HoleBiomes.INDUSTRIAL, HoleBiomes.WATERFRONT,
-                    HoleBiomes.DERELICT, HoleBiomes.GRAVEYARD, HoleBiomes.OUTSKIRTS, HoleBiomes.FROSTBITTEN_INDUSTRIAL, HoleBiomes.UNDERCITY,
+                    HoleBiomes.DERELICT, HoleBiomes.GRAVEYARD, HoleBiomes.OUTSKIRTS, HoleBiomes.FROSTBITTEN_INDUSTRIAL, HoleBiomes.SNOWFIELDS, HoleBiomes.DEAD_TAIGA,
+                    HoleBiomes.DUST_BASIN, HoleBiomes.IRON_BADLANDS, HoleBiomes.MOUNTAIN_RIM, HoleBiomes.UNDERCITY,
                     RealmBiomes.SW_CITY, RealmBiomes.SW_CITY_EDGE, RealmBiomes.SW_FARMLAND,
                     RealmBiomes.SW_WOODLAND, RealmBiomes.SW_HYDRA_FOREST, RealmBiomes.SW_BLIGHT,
                     RealmBiomes.SW_WATERS, RealmBiomes.SW_CAVES, RealmBiomes.SW_FROSTBOUND_HIGHLANDS);
             tag(BiomeTags.HAS_TRIAL_CHAMBERS).add(HoleBiomes.UNDERCITY);
+            vanillaSurvivalStructures();
+        }
+
+        /**
+         * Java 1.21.1 vanilla structures are gated by biome tags. Custom Hole climates
+         * otherwise silently exclude many standard exploration/progression locations.
+         * Tags append to vanilla data; never replace vanilla structures or the original tags.
+         *
+         * No artificial ancient city tag: those must remain in vanilla DEEP_DARK so
+         * naturally generated sculk shriekers, the Warden and atmosphere stay coherent.
+         * No ocean structure tags: the custom world currently has canals, not actual oceans.
+         * Don't claim those structures are supported until genuine ocean areas exist.
+         */
+        private void vanillaSurvivalStructures() {
+            // Dry and snowy settlements; vanilla villager systems remain intact.
+            tag(hasStructure("village_desert")).add(HoleBiomes.DUST_BASIN);
+            tag(hasStructure("village_snowy")).add(HoleBiomes.SNOWFIELDS);
+            tag(hasStructure("village_taiga")).add(HoleBiomes.DEAD_TAIGA);
+            tag(hasStructure("village_savanna")).add(HoleBiomes.IRON_BADLANDS);
+            tag(hasStructure("village_plains")).add(HoleBiomes.OUTSKIRTS, HoleBiomes.RESIDENTIAL);
+
+            // Vanilla temples, archaeology and small ruins survive in suitable Hole climates.
+            tag(hasStructure("desert_pyramid")).add(HoleBiomes.DUST_BASIN);
+            tag(hasStructure("igloo")).add(HoleBiomes.SNOWFIELDS);
+            tag(hasStructure("jungle_temple")).add(HoleBiomes.DEAD_TAIGA);
+            tag(hasStructure("swamp_hut")).add(HoleBiomes.WATERFRONT);
+            tag(hasStructure("trail_ruins")).add(HoleBiomes.DEAD_TAIGA);
+
+            // Larger exploration sites and raids in the more isolated regions.
+            tag(hasStructure("woodland_mansion")).add(HoleBiomes.DEAD_TAIGA);
+            tag(hasStructure("pillager_outpost")).add(
+                    HoleBiomes.OUTSKIRTS, HoleBiomes.SNOWFIELDS, HoleBiomes.DEAD_TAIGA,
+                    HoleBiomes.DUST_BASIN, HoleBiomes.IRON_BADLANDS, HoleBiomes.MOUNTAIN_RIM);
+            tag(hasStructure("mineshaft_mesa")).add(HoleBiomes.IRON_BADLANDS);
+            tag(hasStructure("ruined_portal_desert")).add(HoleBiomes.DUST_BASIN);
+            tag(hasStructure("ruined_portal_mountain")).add(HoleBiomes.MOUNTAIN_RIM);
+            tag(hasStructure("ruined_portal_swamp")).add(HoleBiomes.WATERFRONT);
+            tag(hasStructure("ruined_portal_jungle")).add(HoleBiomes.DEAD_TAIGA);
+            tag(hasStructure("ruined_portal_standard")).add(
+                    HoleBiomes.RESIDENTIAL, HoleBiomes.MARKET, HoleBiomes.INDUSTRIAL,
+                    HoleBiomes.DERELICT, HoleBiomes.GRAVEYARD, HoleBiomes.OUTSKIRTS,
+                    HoleBiomes.FROSTBITTEN_INDUSTRIAL, HoleBiomes.SNOWFIELDS,
+                    HoleBiomes.DEAD_TAIGA, HoleBiomes.IRON_BADLANDS);
+            tag(hasStructure("trial_chambers")).add(
+                    HoleBiomes.RESIDENTIAL, HoleBiomes.MARKET, HoleBiomes.INDUSTRIAL,
+                    HoleBiomes.WATERFRONT, HoleBiomes.DERELICT, HoleBiomes.GRAVEYARD,
+                    HoleBiomes.OUTSKIRTS, HoleBiomes.FROSTBITTEN_INDUSTRIAL,
+                    HoleBiomes.SNOWFIELDS, HoleBiomes.DEAD_TAIGA, HoleBiomes.DUST_BASIN,
+                    HoleBiomes.IRON_BADLANDS, HoleBiomes.MOUNTAIN_RIM);
+        }
+
+        private static TagKey<Biome> hasStructure(String id) {
+            return TagKey.create(Registries.BIOME,
+                    ResourceLocation.fromNamespaceAndPath("minecraft", "has_structure/" + id));
         }
     }
 }

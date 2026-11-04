@@ -234,9 +234,9 @@
     "water_ambient": [
       {
         "type": "minecraft:salmon",
-        "maxCount": 3,
+        "weight": 12,
         "minCount": 2,
-        "weight": 12
+        "maxCount": 3
       }
     ],
     "water_creature": []

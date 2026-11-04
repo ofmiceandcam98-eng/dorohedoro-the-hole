@@ -3,6 +3,7 @@ package com.dorohedoro.hole.registry;
 import com.dorohedoro.hole.Dorohedoro;
 import com.dorohedoro.hole.portal.PortalKind;
 import com.dorohedoro.hole.world.light.GlowMothLightBlock;
+import com.dorohedoro.hole.world.light.CavernLampBlock;
 import com.dorohedoro.hole.portal.PortalCoreBlock;
 import com.dorohedoro.hole.portal.PortalSurfaceBlock;
 import java.util.function.Supplier;
@@ -88,9 +89,9 @@ public final class ModBlocks {
                     .sound(SoundType.STONE).requiresCorrectToolForDrops()));
 
     /** Permanent light uses a renewable moth resource and ordinary glass/iron. */
-    public static final DeferredBlock<Block> CAVERN_LAMP = register("cavern_lamp", () -> new net.minecraft.world.level.block.LanternBlock(
+    public static final DeferredBlock<Block> CAVERN_LAMP = register("cavern_lamp", () -> new CavernLampBlock(
             BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(1.6F, 5.0F)
-                    .lightLevel(state -> 13).sound(SoundType.GLASS).requiresCorrectToolForDrops()));
+                    .lightLevel(state -> 12).sound(SoundType.GLASS).requiresCorrectToolForDrops()));
 
     /** Durable masonry from cockroach chitin and scavenged concrete. */
     public static final DeferredBlock<Block> CHITIN_PLATING = register("chitin_plating", () -> new Block(

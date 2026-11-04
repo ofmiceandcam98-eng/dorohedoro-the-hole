@@ -163,6 +163,12 @@
         "weight": 5
       },
       {
+        "type": "minecraft:drowned",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 40
+      },
+      {
         "type": "dorohedoro:sewer_roach",
         "maxCount": 2,
         "minCount": 1,
@@ -179,12 +185,6 @@
         "maxCount": 1,
         "minCount": 1,
         "weight": 7
-      },
-      {
-        "type": "minecraft:drowned",
-        "maxCount": 2,
-        "minCount": 1,
-        "weight": 40
       },
       {
         "type": "dorohedoro:cavern_burrower",

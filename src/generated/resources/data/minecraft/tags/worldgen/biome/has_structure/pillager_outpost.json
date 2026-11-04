@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "dorohedoro:hole_outskirts",
+    "dorohedoro:hole_snowfields",
+    "dorohedoro:hole_dead_taiga",
+    "dorohedoro:hole_dust_basin",
+    "dorohedoro:hole_iron_badlands",
+    "dorohedoro:hole_mountain_rim"
+  ]
+}

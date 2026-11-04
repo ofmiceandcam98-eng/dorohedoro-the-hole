@@ -92,11 +92,11 @@ public final class ModEntities {
                 (type, level, reason, pos, random) -> canalFishHabitat(level, pos),
                 RegisterSpawnPlacementsEvent.Operation.AND);
         event.register(SEWER_ROACH.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-                (type, level, reason, pos, random) -> (underground(pos) || surface(level, pos, HoleBiomes.INDUSTRIAL, HoleBiomes.DERELICT, HoleBiomes.MARKET, HoleBiomes.RESIDENTIAL, HoleBiomes.WATERFRONT, HoleBiomes.FROSTBITTEN_INDUSTRIAL)) &&
+                (type, level, reason, pos, random) -> (underground(pos) || surface(level, pos, HoleBiomes.INDUSTRIAL, HoleBiomes.DERELICT, HoleBiomes.MARKET, HoleBiomes.RESIDENTIAL, HoleBiomes.WATERFRONT, HoleBiomes.FROSTBITTEN_INDUSTRIAL, HoleBiomes.SNOWFIELDS, HoleBiomes.DEAD_TAIGA, HoleBiomes.DUST_BASIN, HoleBiomes.IRON_BADLANDS, HoleBiomes.MOUNTAIN_RIM)) &&
                         net.minecraft.world.entity.monster.Monster.checkMonsterSpawnRules(type, level, reason, pos, random),
                 RegisterSpawnPlacementsEvent.Operation.REPLACE);
         event.register(SCRAP_RAT.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-                (type, level, reason, pos, random) -> (underground(pos) || surface(level, pos, HoleBiomes.RESIDENTIAL, HoleBiomes.MARKET, HoleBiomes.INDUSTRIAL, HoleBiomes.WATERFRONT, HoleBiomes.DERELICT, HoleBiomes.GRAVEYARD, HoleBiomes.OUTSKIRTS, HoleBiomes.FROSTBITTEN_INDUSTRIAL)) &&
+                (type, level, reason, pos, random) -> (underground(pos) || surface(level, pos, HoleBiomes.RESIDENTIAL, HoleBiomes.MARKET, HoleBiomes.INDUSTRIAL, HoleBiomes.WATERFRONT, HoleBiomes.DERELICT, HoleBiomes.GRAVEYARD, HoleBiomes.OUTSKIRTS, HoleBiomes.FROSTBITTEN_INDUSTRIAL, HoleBiomes.SNOWFIELDS, HoleBiomes.DEAD_TAIGA, HoleBiomes.DUST_BASIN, HoleBiomes.IRON_BADLANDS, HoleBiomes.MOUNTAIN_RIM)) &&
                         Mob.checkMobSpawnRules(type, level, reason, pos, random),
                 RegisterSpawnPlacementsEvent.Operation.REPLACE);
         event.register(SEWER_LEECH.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
@@ -109,7 +109,7 @@ public final class ModEntities {
                         level.isEmptyBlock(pos) && level.getRawBrightness(pos, 0) <= 7,
                 RegisterSpawnPlacementsEvent.Operation.REPLACE);
         event.register(SLUDGE_CRAWLER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-                (type, level, reason, pos, random) -> (underground(pos) || surface(level, pos, HoleBiomes.INDUSTRIAL, HoleBiomes.WATERFRONT, HoleBiomes.FROSTBITTEN_INDUSTRIAL)) && net.minecraft.world.entity.monster.Monster.checkMonsterSpawnRules(type, level, reason, pos, random),
+                (type, level, reason, pos, random) -> (underground(pos) || surface(level, pos, HoleBiomes.INDUSTRIAL, HoleBiomes.WATERFRONT, HoleBiomes.FROSTBITTEN_INDUSTRIAL, HoleBiomes.SNOWFIELDS, HoleBiomes.DEAD_TAIGA, HoleBiomes.DUST_BASIN, HoleBiomes.IRON_BADLANDS, HoleBiomes.MOUNTAIN_RIM)) && net.minecraft.world.entity.monster.Monster.checkMonsterSpawnRules(type, level, reason, pos, random),
                 RegisterSpawnPlacementsEvent.Operation.REPLACE);
         event.register(RUST_EATER_BEETLE.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 (type, level, reason, pos, random) -> rustBeetleHabitat(level, pos) &&
@@ -140,12 +140,15 @@ public final class ModEntities {
      */
     private static boolean rustBeetleHabitat(net.minecraft.world.level.ServerLevelAccessor level, BlockPos pos) {
         if (underground(pos)) return isHoleCityBiome(level, pos);
-        if (pos.getY() < 55 || pos.getY() > 82) return false;
+        if (pos.getY() < 55 || pos.getY() > 188) return false;
         // Avoid fluids and unsupported locations, including standing in polluted water.
         if (!level.getFluidState(pos).isEmpty() || !level.getFluidState(pos.below()).isEmpty()) return false;
         return level.getBiome(pos).is(HoleBiomes.INDUSTRIAL)
                 || level.getBiome(pos).is(HoleBiomes.DERELICT)
-                || level.getBiome(pos).is(HoleBiomes.OUTSKIRTS);
+                || level.getBiome(pos).is(HoleBiomes.OUTSKIRTS)
+                || level.getBiome(pos).is(HoleBiomes.DEAD_TAIGA)
+                || level.getBiome(pos).is(HoleBiomes.IRON_BADLANDS)
+                || level.getBiome(pos).is(HoleBiomes.MOUNTAIN_RIM);
     }
 
     /** Y=49 municipal sewers do NOT use the undercity biome: the climate source transitions at Y=40. */
@@ -158,14 +161,19 @@ public final class ModEntities {
                 || level.getBiome(pos).is(HoleBiomes.DERELICT)
                 || level.getBiome(pos).is(HoleBiomes.GRAVEYARD)
                 || level.getBiome(pos).is(HoleBiomes.OUTSKIRTS)
-                || level.getBiome(pos).is(HoleBiomes.FROSTBITTEN_INDUSTRIAL);
+                || level.getBiome(pos).is(HoleBiomes.FROSTBITTEN_INDUSTRIAL)
+                || level.getBiome(pos).is(HoleBiomes.SNOWFIELDS)
+                || level.getBiome(pos).is(HoleBiomes.DEAD_TAIGA)
+                || level.getBiome(pos).is(HoleBiomes.DUST_BASIN)
+                || level.getBiome(pos).is(HoleBiomes.IRON_BADLANDS)
+                || level.getBiome(pos).is(HoleBiomes.MOUNTAIN_RIM);
     }
 
     /** Surface mobs remain local to the Hole, not generic vanilla biomes or the two other realms. */
     @SafeVarargs
     private static boolean surface(net.minecraft.world.level.ServerLevelAccessor level, BlockPos pos,
                                    net.minecraft.resources.ResourceKey<net.minecraft.world.level.biome.Biome>... biomes) {
-        if (pos.getY() < 55 || pos.getY() > 100) return false;
+        if (pos.getY() < 55 || pos.getY() > 188) return false;
         for (var biome : biomes) {
             if (level.getBiome(pos).is(biome)) return true;
         }

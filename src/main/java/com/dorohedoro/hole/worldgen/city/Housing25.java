@@ -133,10 +133,12 @@ final class Housing25 {
         if (b.width() >= 11) {
             // Small exterior porch light rather than a floating full-height street lantern.
             int lightX = center - 2;
-            c.set(lightX, GROUND_Y + 2, frontZ,
-                    c.hasAtmosphere28() ? ResidentialAtmosphere28.lightState(h) :
-                            Blocks.LANTERN.defaultBlockState().setValue(LanternBlock.HANGING, true));
-            c.set(lightX, GROUND_Y + 3, frontZ, Blocks.DEEPSLATE_TILE_SLAB);
+            if (!c.hasOccupiedInteriors35() || CityHash.range(h >>> 10, 4) == 0) {
+                c.set(lightX, GROUND_Y + 2, frontZ,
+                        c.hasAtmosphere28() ? ResidentialAtmosphere28.lightState(h) :
+                                Blocks.LANTERN.defaultBlockState().setValue(LanternBlock.HANGING, true));
+                c.set(lightX, GROUND_Y + 3, frontZ, Blocks.DEEPSLATE_TILE_SLAB);
+            }
             if (kind % 2 == 0) {
                 c.set(sideX, GROUND_Y + 1, frontZ, Blocks.BARREL);
                 c.set(otherSide, GROUND_Y + 1, frontZ, Blocks.FLOWER_POT);

@@ -163,6 +163,12 @@
         "weight": 5
       },
       {
+        "type": "minecraft:silverfish",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 12
+      },
+      {
         "type": "dorohedoro:sewer_roach",
         "maxCount": 2,
         "minCount": 1,
@@ -173,12 +179,6 @@
         "maxCount": 1,
         "minCount": 1,
         "weight": 7
-      },
-      {
-        "type": "minecraft:silverfish",
-        "maxCount": 3,
-        "minCount": 1,
-        "weight": 12
       },
       {
         "type": "dorohedoro:sewer_leech",
@@ -210,9 +210,9 @@
     "water_ambient": [
       {
         "type": "minecraft:salmon",
-        "maxCount": 3,
+        "weight": 12,
         "minCount": 2,
-        "weight": 12
+        "maxCount": 3
       }
     ],
     "water_creature": []
