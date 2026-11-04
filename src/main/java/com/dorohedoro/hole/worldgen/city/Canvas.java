@@ -289,7 +289,12 @@ public final class Canvas {
         // own sewer/gallery/cavern painter. Vanilla structures place later in FEATURES.
         if (protectsVanillaWrite(x, adjustedY, z)) return;
         if (isOceanCityWrite(x, adjustedY, z)) return;
-        chunk.setBlockState(cursor.set(x, adjustedY, z), state, false);
+        BlockState previous = chunk.setBlockState(cursor.set(x, adjustedY, z), state, false);
+        // A later write can replace a container. Its pending block entity must go with it, or the chunk
+        // logs "Invalid block entity" on load and the replacement block is left with stray data.
+        if (!state.hasBlockEntity() && previous != null && previous.hasBlockEntity()) {
+            chunk.removeBlockEntity(cursor);
+        }
         if (state.hasBlockEntity()) {
             CompoundTag tag = positioned(x, adjustedY, z);
             tag.putString("id", "DUMMY");

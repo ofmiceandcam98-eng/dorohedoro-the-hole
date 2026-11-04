@@ -121,7 +121,9 @@ public final class HoleQa {
             // Resolve the actual per-column grade BEFORE hashing: urban relief varies between
             // Y=64 and Y=75, and lots have flattened foundations. A global Y=64 hash
             // accidentally counts naturally generated, mineable soil and ore as city.
-            Rect area = new Rect(-radius * 16, -radius * 16, radius * 16 + 15, radius * 16 + 15);
+            ChunkPos centre = new ChunkPos(level.getSharedSpawnPos());
+            Rect area = new Rect(centre.getMinBlockX() - radius * 16, centre.getMinBlockZ() - radius * 16,
+                    centre.getMinBlockX() + radius * 16 + 15, centre.getMinBlockZ() + radius * 16 + 15);
             int[] expectedFeet = expectedCityFeet(plan, area);
             JsonObject rawY64Hashes = new JsonObject();
             List<ChunkPos> sorted = new ArrayList<>(positions);
@@ -157,12 +159,14 @@ public final class HoleQa {
 
         /** Generation order is the point of the determinism test: the same chunks are requested in opposite orders. */
         private List<ChunkPos> positions() {
+            // Fresh worlds start in a seed-chosen region, so measure around spawn rather than the origin.
+            ChunkPos centre = new ChunkPos(level.getSharedSpawnPos());
             List<ChunkPos> list = new ArrayList<>();
             for (int ring = 0; ring <= radius; ring++) {
                 for (int x = -ring; x <= ring; x++) {
                     for (int z = -ring; z <= ring; z++) {
                         if (Math.max(Math.abs(x), Math.abs(z)) == ring) {
-                            list.add(new ChunkPos(x, z));
+                            list.add(new ChunkPos(centre.x + x, centre.z + z));
                         }
                     }
                 }
