@@ -154,6 +154,9 @@ public final class HoleQa {
             // Phase 3: verify the separately registered, full dimensions actually load and produce surface chunks.
             checkRealm(RealmBiomes.SORCERERS_WORLD);
             checkRealm(RealmBiomes.HELL);
+            if (Boolean.getBoolean(PROPERTY + ".structures")) {
+                report.add("vanilla_structures", StructureQa.run(server, checks));
+            }
             write(area);
         }
 

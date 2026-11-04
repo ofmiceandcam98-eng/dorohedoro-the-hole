@@ -80,6 +80,7 @@ neoForge {
             systemProperty 'dorohedoro.qa.radius', project.findProperty('qa_radius') ?: '16'
             systemProperty 'dorohedoro.qa.order', project.findProperty('qa_order') ?: 'forward'
             systemProperty 'dorohedoro.qa.dump', project.findProperty('qa_dump') ?: ''
+            systemProperty 'dorohedoro.qa.structures', project.findProperty('qa_structures') ?: 'false'
             systemProperty 'java.awt.headless', 'true'
         }
 

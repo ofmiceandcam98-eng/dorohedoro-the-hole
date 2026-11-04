@@ -30,3 +30,32 @@ Seed 12345, radius 8, dedicated `qaServer` run:
 ## Status
 
 See below as it fills in.
+
+## Overnight findings (2026-11-04, about 05:00)
+
+- **Fixed:** barrel block entities left stale by a later write (`Canvas.set`). The log now has 0 `Invalid block entity` lines. Commit `3bbdfbf`.
+- **Fixed:** QA harness now centres on the randomized spawn, not the origin. Commit `3bbdfbf`.
+- **Pushed** branch `pass-70-neoforge-build`. Opened PR #1 into `gate-0-1-hole-world`. CI now runs on push and pull requests.
+- **3 seeds on a dedicated server (12345, 42, 8675309):** 0 ERROR lines and no crashes in the server logs.
+- **Spawn:** seed 8675309's planned spawn failed the QA `isAir` feet check. Added `WorldGuard.safeSpawn`, which searches for footing plus two blocks of open-sky headroom. On that seed the planned spot already passed the new check, so the feet block is probably non-colliding, like snow or a carpet. Not yet confirmed.
+- **Vanilla structures, seed 8675309, located and inspected by StructureQa:**
+  - Stronghold at 4992, 96 has at least 12 End portal frames.
+  - Ancient City at 5104, 96 has sculk shriekers.
+  - Trial chambers at 4688, 672 have trial spawners.
+  - Mineshaft at 4512, 816 has rails.
+- **Performance bug found:** searching for `minecraft:monument` stalled for more than 10 minutes, all inside `HoleBiomeSource.getNoiseBiome`, then `CoastalShelf66.distanceAt`, then `OceanRegions65.depthAt`. Cartographer explorer maps, buried-treasure maps and `/locate` use this same search, so the stall can freeze survival servers.
+- **Open:** 3 sewer checks at the origin crossing. Seed 42 is a hillside start where the ore and rock in-city checks fire, which may be natural terrain. The district-count check is too strict for small radii.
+
+## Next steps (resume here after a context reset)
+
+1. Read `/c/dev/p70-cache-run.txt`. It should show city hashes for seed 12345 unchanged against `/c/dev/report-12345-before-cache.json`, and monument and other search times. Then commit the OceanRegions65 cache, safeSpawn and StructureQa, and push.
+2. Client test: build the jar, install it to `C:\Users\Cam\Dorohedoro-Minecraft\mods` after backing up the old one to `old-jars`, launch through the Minecraft Launcher with computer-use, create a new world, and take real screenshots.
+3. CurseForge: mod project 1777423 (`dorohedoro-the-hole`). Check approval and upload the new jar as Alpha. Check whether a modpack project exists; on 2026-11-01 the account had none. Never create a duplicate.
+4. Write the debrief in `docs/OVERNIGHT_DEBRIEF_2026-11-04.md` and in chat.
+
+## CurseForge state (checked 2026-11-04, public profile noremacxxi)
+
+- The account owns exactly **1 project**: mod "Dorohedoro: The Hole", ID 1777423, slug `dorohedoro-the-hole`. It is **approved and public**, released 2026-11-01, with 17 downloads.
+- There is **no modpack project** on the account, so it was not created. That needs the owner's decision.
+- The author dashboard session expired. GitHub OAuth asked for a password, so I stopped. **The owner must sign in to CurseForge** before any upload.
+- CI on `pass-70-neoforge-build` passed: https://github.com/ofmiceandcam98-eng/dorohedoro-the-hole/actions/runs/41816727987
