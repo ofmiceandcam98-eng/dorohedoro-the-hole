@@ -15,7 +15,7 @@
       },
       {
         "state": {
-          "Name": "dorohedoro:sulfur_ore"
+          "Name": "dorohedoro:deepslate_sulfur_ore"
         },
         "target": {
           "predicate_type": "minecraft:tag_match",

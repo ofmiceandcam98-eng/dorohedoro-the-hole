@@ -2,8 +2,6 @@ package com.dorohedoro.hole.client.magic;
 
 import com.dorohedoro.hole.magic.SmokeNetwork;
 import com.dorohedoro.hole.magic.SmokeSkill;
-import com.dorohedoro.hole.client.ui.HoleUiTheme;
-import com.dorohedoro.hole.client.ui.SmokeSkillIcon;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
@@ -103,73 +101,25 @@ public final class SmokeClient {
             }else request("cast",i+":"+(FOCUSED[i]?"focused":"standard"));
         }
     }
-    /** Replace only vanilla hunger/hearts during survival play, never stack duplicate meters.
-     * Native armor/air/experience retain their existing Minecraft presentation.
-     * Guarded so Creative, Spectator and menus are not unexpectedly stripped. */
+    /** Hides the vanilla stat layers the Hole HUD replaces, so nothing is drawn twice. Survival and adventure only;
+     * creative, spectator and hidden-GUI views keep vanilla behaviour. Vehicle health and the jump meter stay vanilla. */
     private static void onVanillaHudLayer(RenderGuiLayerEvent.Pre e) {
         Minecraft mc=Minecraft.getInstance();
-        if(mc.player==null || mc.player.isCreative() || mc.player.isSpectator())return;
-        if(mc.options.hideGui)return;
-        if(e.getName().equals(VanillaGuiLayers.PLAYER_HEALTH)
-            || e.getName().equals(VanillaGuiLayers.FOOD_LEVEL))e.setCanceled(true);
+        if(!com.dorohedoro.hole.client.ui.HoleHud.replacesVanillaStats(mc))return;
+        var name=e.getName();
+        if(name.equals(VanillaGuiLayers.PLAYER_HEALTH)||name.equals(VanillaGuiLayers.FOOD_LEVEL)
+            ||name.equals(VanillaGuiLayers.ARMOR_LEVEL)||name.equals(VanillaGuiLayers.AIR_LEVEL))e.setCanceled(true);
+        if(com.dorohedoro.hole.client.ui.HoleHud.replacesVanillaExperience(mc)
+            &&(name.equals(VanillaGuiLayers.EXPERIENCE_BAR)||name.equals(VanillaGuiLayers.EXPERIENCE_LEVEL)))e.setCanceled(true);
+    }
+
+    /** The key currently bound to a technique slot, as the player set it in Controls. */
+    public static String keyLabel(int i){
+        String key=KEYS[i].getTranslatedKeyMessage().getString();
+        return key.length()>2?key.substring(0,2):key;
     }
 
     private static void renderHud(GuiGraphics g){
-        Minecraft mc=Minecraft.getInstance();
-        if(mc.player==null||mc.screen!=null||mc.options.hideGui||mc.player.isSpectator())return;
-        boolean smokeUser=!"none".equals(innate);
-        // No boxed panels or permanent text labels.  Icons + 4px meters only.
-        // Native heart/food stacks are hidden only where these replacement bars display.
-        int x=9,y=9;
-        if(!mc.player.isCreative()){
-            meter(g, 0, mc.player.getHealth(), mc.player.getMaxHealth(), x,y,104,0xFFD36B64);
-            meter(g, 1, mc.player.getFoodData().getFoodLevel(),20,x,y+12,104,0xFFD4AD68);
-            y+=24;
-        }
-        if(smokeUser)meter(g,2,smoke,maxSmoke,x,y,104,0xFF6FC1B2);
-        if(!smokeUser)return;
-        // Quick access only; the B pop-up contains names, costs and mastery.
-        int sy=y+22;
-        for(int i=0;i<3;i++){
-            int yy=sy+i*29;
-            SmokeSkill skill=SmokeSkill.fromId(slot(i));
-            int bg=FOCUSED[i]?0xFFBBA075:0xFF516660;
-            g.fill(x,yy,x+27,yy+27,bg);
-            g.fill(x+1,yy+1,x+26,yy+26,0xF0182729);
-            if(skill!=null){
-                SmokeSkillIcon.draw(g,skill,x+2,yy+2,23);
-                if(COOLDOWNS[i]>0){
-                    g.fill(x+2,yy+2,x+25,yy+25,0xB0091116);
-                    String seconds=Integer.toString((COOLDOWNS[i]+19)/20);
-                    g.drawCenteredString(mc.font,seconds,x+14,yy+10,0xFFFFFFFF);
-                }
-            }else{
-                g.drawCenteredString(mc.font,"-",x+14,yy+10,0xFF8D9B99);
-            }
-            g.drawString(mc.font,i==0?"Z":i==1?"X":"C",x+31,yy+9,0xFFE6E9E3);
-        }
-        if(!"none".equals(injury)){
-            // A single warning icon; full injury names remain in the Medical tab.
-            g.fill(x,sy+89,x+8,sy+97,0xFFDCA47C);
-            g.drawString(mc.font,"!",x+1,sy+88,0xFF202629);
-        }
-    }
-    private static void meter(GuiGraphics g,int kind,float value,float max,int x,int y,int width,int color){
-        int bx=x+14,by=y+3;int barWidth=width-14;
-        g.fill(bx,by,bx+barWidth,by+5,0xB00A1619);
-        int px=(int)Math.round(barWidth*Math.clamp(value/Math.max(1f,max),0f,1f));
-        if(px>0)g.fill(bx,by,bx+px,by+5,color);
-        // Tiny pixel icons, 9x9 with silhouettes that differ without labels.
-        if(kind==0){
-            g.fill(x+1,y+1,x+4,y+3,color);g.fill(x+6,y+1,x+9,y+3,color);
-            g.fill(x,y+3,x+10,y+6,color);g.fill(x+2,y+6,x+8,y+8,color);
-            g.fill(x+4,y+8,x+6,y+9,color);
-        }else if(kind==1){
-            g.fill(x+2,y+2,x+8,y+6,color);g.fill(x+1,y+3,x+9,y+5,color);
-            g.fill(x+5,y+6,x+7,y+8,color);g.fill(x+7,y+7,x+10,y+9,0xFFE9E4D3);
-        }else{
-            g.fill(x+5,y,x+8,y+3,color);g.fill(x+3,y+2,x+6,y+5,color);
-            g.fill(x+5,y+5,x+9,y+7,color);g.fill(x+2,y+7,x+6,y+9,color);
-        }
+        com.dorohedoro.hole.client.ui.HoleHud.render(g);
     }
 }

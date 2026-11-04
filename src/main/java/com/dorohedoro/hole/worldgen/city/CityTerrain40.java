@@ -75,7 +75,9 @@ public final class CityTerrain40 {
         // Keep all topography nonnegative: underground galleries and the safe
         // starting plaza use their existing reference heights.
         double cityGrade = broad + ridge + CityElevation.smoothOffset(plan.seed, x, z);
-        if (plan.settings.worldDetailVersion() >= 26) {
+        // Pass 71 (v53): no regional escarpments. Stepping streets and lots up a 60-block mountain made
+        // giant terraced stone pyramids, so new worlds keep only the gentle district-scale relief.
+        if (plan.settings.worldDetailVersion() >= 26 && plan.settings.worldDetailVersion() < 53) {
             HoleRegions42.Region region = plan.regionAt(x, z);
             double transition = plan.terrainBlendAt(x, z) * floodplain * spawn;
             // A mountain is a broad rock escarpment outside the Hole, not a
@@ -91,7 +93,8 @@ public final class CityTerrain40 {
                 cityGrade += field(plan.seed, 0x42F012L, x, z, 260, 9) * transition;
             }
         }
-        return Math.min(plan.settings.worldDetailVersion() >= 26 ? 106 : 36,
+        int cap = plan.settings.worldDetailVersion() >= 53 ? 24 : plan.settings.worldDetailVersion() >= 26 ? 106 : 36;
+        return Math.min(cap,
                 (int) Math.round(cityGrade * floodplain * spawn));
     }
 }

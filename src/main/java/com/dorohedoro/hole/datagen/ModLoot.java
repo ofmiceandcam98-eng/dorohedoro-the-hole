@@ -73,6 +73,10 @@ final class ModLoot {
             add(ModBlocks.OIL_SHALE_ORE.get(), createOreDrop(ModBlocks.OIL_SHALE_ORE.get(), ModItems.OIL_SHALE_CHUNK.get()));
             add(ModBlocks.SULFUR_ORE.get(), createOreDrop(ModBlocks.SULFUR_ORE.get(), ModItems.RAW_SULFUR.get()));
             add(ModBlocks.ROCK_SALT_ORE.get(), createOreDrop(ModBlocks.ROCK_SALT_ORE.get(), ModItems.ROCK_SALT.get()));
+            add(ModBlocks.DEEPSLATE_ZINC_ORE.get(), createOreDrop(ModBlocks.DEEPSLATE_ZINC_ORE.get(), ModItems.RAW_ZINC.get()));
+            add(ModBlocks.DEEPSLATE_OIL_SHALE_ORE.get(), createOreDrop(ModBlocks.DEEPSLATE_OIL_SHALE_ORE.get(), ModItems.OIL_SHALE_CHUNK.get()));
+            add(ModBlocks.DEEPSLATE_SULFUR_ORE.get(), createOreDrop(ModBlocks.DEEPSLATE_SULFUR_ORE.get(), ModItems.RAW_SULFUR.get()));
+            add(ModBlocks.DEEPSLATE_ROCK_SALT_ORE.get(), createOreDrop(ModBlocks.DEEPSLATE_ROCK_SALT_ORE.get(), ModItems.ROCK_SALT.get()));
             dropSelf(ModBlocks.REINFORCED_DOOR_FRAME.get());
             dropSelf(ModBlocks.ETCHED_GATE_STONE.get());
             dropSelf(ModBlocks.ARTIFICIAL_DOOR_CORE.get());

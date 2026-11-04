@@ -109,6 +109,9 @@ public final class Canvas {
                 : CityElevation.offset(seed, x, z);
     }
 
+    /** Pass 71: every tower storey furnished as a themed room. */
+    public boolean hasRoomDressing71() { return worldDetailVersion >= 53; }
+
     /** Pass 60: industrial loading approaches and connected workshop circulation. */
     public boolean hasFreightApproaches60() { return worldDetailVersion >= 43; }
 
@@ -269,6 +272,39 @@ public final class Canvas {
         return CityHash.of(seed, x, y, z);
     }
 
+    private long mixHash(Mix mix, int x, int y, int z) {
+        return mix.patchy() && worldDetailVersion >= 53 ? patchHash(x, y, z) : hash(x, y, z);
+    }
+
+    /**
+     * v53 ground: one material per irregular patch, about 3 to 6 blocks across, instead of a per-block checkerboard.
+     * The patches are cells around jittered points, and the lookup position wobbles by a block so edges are
+     * ragged, not straight lines. Pure absolute-coordinate math, so patches continue across chunk borders.
+     */
+    private long patchHash(int x, int y, int z) {
+        final int cell = 5;
+        long wobble = CityHash.of(seed, 0x9A7C4L, x, z);
+        int px = x + (int) (wobble & 3) - 1;
+        int pz = z + (int) ((wobble >>> 2) & 3) - 1;
+        int gx = Math.floorDiv(px, cell);
+        int gz = Math.floorDiv(pz, cell);
+        long best = 0;
+        int bestDistance = Integer.MAX_VALUE;
+        for (int dx = -1; dx <= 1; dx++) {
+            for (int dz = -1; dz <= 1; dz++) {
+                long h = CityHash.of(seed, 0x9A7C5L, gx + dx, gz + dz);
+                int fx = (gx + dx) * cell + CityHash.range(h, cell);
+                int fz = (gz + dz) * cell + CityHash.range(h >>> 16, cell);
+                int d = (px - fx) * (px - fx) + (pz - fz) * (pz - fz);
+                if (d < bestDistance) {
+                    bestDistance = d;
+                    best = h;
+                }
+            }
+        }
+        return CityHash.of(best, y);
+    }
+
     /** Suppress all custom write paths, including tile entity/NBT writes, near actual vanilla starts. */
     private boolean protectsVanillaWrite(int x, int adjustedY, int z) {
         return DeepDarkBuffer63.protects(worldDetailVersion, adjustedY, protectDeepDark63)
@@ -316,7 +352,7 @@ public final class Canvas {
 
     public void set(int x, int y, int z, Mix mix) {
         if (contains(x, z)) {
-            set(x, y, z, mix.pick(hash(x, y, z)));
+            set(x, y, z, mix.pick(mixHash(mix, x, y, z)));
         }
     }
 
@@ -358,7 +394,7 @@ public final class Canvas {
         for (int x = fromX; x <= toX; x++) {
             for (int z = fromZ; z <= toZ; z++) {
                 for (int y = y0; y <= y1; y++) {
-                    set(x, y, z, mix.pick(hash(x, y, z)));
+                    set(x, y, z, mix.pick(mixHash(mix, x, y, z)));
                 }
             }
         }

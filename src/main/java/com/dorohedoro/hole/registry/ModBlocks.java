@@ -51,6 +51,13 @@ public final class ModBlocks {
     public static final DeferredBlock<Block> ROCK_SALT_ORE = register("rock_salt_ore", () -> new Block(
             BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_WHITE).strength(2.6F, 4.5F)
                     .sound(SoundType.STONE).requiresCorrectToolForDrops()));
+    // Deepslate twins, like vanilla ores: harder, deepslate sounds, same drops.
+    public static final DeferredBlock<Block> DEEPSLATE_SULFUR_ORE = register("deepslate_sulfur_ore", () -> new Block(
+            BlockBehaviour.Properties.ofFullCopy(SULFUR_ORE.get()).mapColor(MapColor.DEEPSLATE).strength(4.5F, 5.0F)
+                    .sound(SoundType.DEEPSLATE)));
+    public static final DeferredBlock<Block> DEEPSLATE_ROCK_SALT_ORE = register("deepslate_rock_salt_ore", () -> new Block(
+            BlockBehaviour.Properties.ofFullCopy(ROCK_SALT_ORE.get()).mapColor(MapColor.DEEPSLATE).strength(4.5F, 5.0F)
+                    .sound(SoundType.DEEPSLATE)));
     public static final DeferredBlock<Block> LIMESTONE = register("limestone", () -> new Block(
             BlockBehaviour.Properties.of().mapColor(MapColor.SAND).strength(1.8F, 5.0F)
                     .sound(SoundType.STONE).requiresCorrectToolForDrops()));
@@ -63,6 +70,12 @@ public final class ModBlocks {
     public static final DeferredBlock<Block> OIL_SHALE_ORE = register("oil_shale_ore", () -> new Block(
             BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).strength(2.4F, 5.0F)
                     .sound(SoundType.STONE).requiresCorrectToolForDrops()));
+    public static final DeferredBlock<Block> DEEPSLATE_ZINC_ORE = register("deepslate_zinc_ore", () -> new Block(
+            BlockBehaviour.Properties.ofFullCopy(ZINC_ORE.get()).mapColor(MapColor.DEEPSLATE).strength(4.5F, 5.0F)
+                    .sound(SoundType.DEEPSLATE)));
+    public static final DeferredBlock<Block> DEEPSLATE_OIL_SHALE_ORE = register("deepslate_oil_shale_ore", () -> new Block(
+            BlockBehaviour.Properties.ofFullCopy(OIL_SHALE_ORE.get()).mapColor(MapColor.DEEPSLATE).strength(4.5F, 5.0F)
+                    .sound(SoundType.DEEPSLATE)));
     /** Galvanized sheet is a durable decorative/utility building material, not tier-breaking armor. */
     public static final DeferredBlock<Block> GALVANIZED_PLATING = register("galvanized_plating", () -> new Block(
             BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(3.5F, 8.0F)

@@ -29,7 +29,10 @@ public final class RustEaterBeetleEntity extends PathfinderMob {
     @Override protected void registerGoals() {
         goalSelector.addGoal(1, new FloatGoal(this));
         goalSelector.addGoal(2, new PanicGoal(this, 1.4D));
-        goalSelector.addGoal(3, new RandomStrollGoal(this, .98D));
+        // A rust eater follows anyone holding scrap metal.
+        goalSelector.addGoal(3, new net.minecraft.world.entity.ai.goal.TemptGoal(this, 1.1D,
+                net.minecraft.world.item.crafting.Ingredient.of(com.dorohedoro.hole.registry.ModItems.SCRAP_METAL.get()), false));
+        goalSelector.addGoal(4, new RandomStrollGoal(this, .98D));
         goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 5.0F));
     }
     @Override public void tick() { super.tick(); if (!level().isClientSide && brushCooldown>0) brushCooldown--; }
@@ -47,4 +50,10 @@ public final class RustEaterBeetleEntity extends PathfinderMob {
     }
     @Override public void addAdditionalSaveData(CompoundTag tag) { super.addAdditionalSaveData(tag); tag.putInt("BeetleBrushCooldown",brushCooldown); }
     @Override public void readAdditionalSaveData(CompoundTag tag) { super.readAdditionalSaveData(tag); brushCooldown=Math.max(0,Math.min(BRUSH_COOLDOWN,tag.getInt("BeetleBrushCooldown"))); }
+
+    // Sounds: vanilla events that fit the creature, instead of the generic hostile grunt.
+    @Override protected net.minecraft.sounds.SoundEvent getAmbientSound() { return net.minecraft.sounds.SoundEvents.ARMADILLO_AMBIENT; }
+    @Override protected net.minecraft.sounds.SoundEvent getHurtSound(net.minecraft.world.damagesource.DamageSource source) { return net.minecraft.sounds.SoundEvents.ARMADILLO_HURT; }
+    @Override protected net.minecraft.sounds.SoundEvent getDeathSound() { return net.minecraft.sounds.SoundEvents.ARMADILLO_DEATH; }
+    @Override protected void playStepSound(net.minecraft.core.BlockPos pos, net.minecraft.world.level.block.state.BlockState state) { playSound(net.minecraft.sounds.SoundEvents.ARMADILLO_STEP, 0.15F, 1.0F); }
 }

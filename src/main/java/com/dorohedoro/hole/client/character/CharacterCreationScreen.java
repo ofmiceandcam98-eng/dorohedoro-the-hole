@@ -113,10 +113,14 @@ public final class CharacterCreationScreen extends Screen {
     }
     @Override public boolean shouldCloseOnEsc(){return false;}
     @Override public void onClose(){}
-    @Override public void render(GuiGraphics g,int mx,int my,float partial){
-        // Draw the full panel first. Screen.render may apply Minecraft's
-        // background blur, so draw all QUESTION TEXT *after* super.render.
+    /** Frame geometry lives here, replacing vanilla's blurred background, so the iron window stays crisp. */
+    @Override public void renderBackground(GuiGraphics g,int mx,int my,float partial){
         HoleUiTheme.backdrop(g,width,height,panelX,panelY,panelW,panelH);
+        if(stage==Stage.ORIGIN){
+            int half=(panelW-36-12)/2;
+            HoleUiTheme.section(g,panelX+18,panelY+114,half,46);
+            HoleUiTheme.section(g,panelX+18+half+12,panelY+114,half,46);
+        }
         if(stage==Stage.QUIZ){
             int first=panelH>=318?110:(panelH>=265?91:75);
             HoleUiTheme.section(g,panelX+14,panelY+51,panelW-28,first-54);
@@ -124,12 +128,18 @@ public final class CharacterCreationScreen extends Screen {
             int progress=(panelW-32)*(page+1)/order.length;
             g.fill(panelX+16,panelY+panelH-15,panelX+16+progress,panelY+panelH-11,HoleUiTheme.ACCENT);
         }
+    }
+    @Override public void render(GuiGraphics g,int mx,int my,float partial){
         super.render(g,mx,my,partial);
-        g.drawCenteredString(font,"THE HOLE / CHARACTER ORIGIN",width/2,panelY+12,HoleUiTheme.TEXT);
+        g.drawCenteredString(font,"THE HOLE  /  CHARACTER ORIGIN",width/2,panelY+11,HoleUiTheme.ACCENT);
         switch(stage){
             case ORIGIN -> {
                 g.drawCenteredString(font,"Who are you in this city?",width/2,panelY+46,0xFF9EDDD0);
-                g.drawCenteredString(font,"Devilhood is an earned path.",width/2,panelY+150,0xFF9DADAF);
+                // What each choice actually means, under its button.
+                int half=(panelW-36-12)/2,left=panelX+18,right=left+half+12;
+                g.drawWordWrap(font,Component.literal("No smoke. Survive the Hole on skill, craft and nerve."),left+6,panelY+120,half-12,HoleUiTheme.TEXT);
+                g.drawWordWrap(font,Component.literal("Smoke flows from you. A personality test or fate picks your family, and it is permanent."),right+6,panelY+120,half-12,HoleUiTheme.TEXT);
+                g.drawCenteredString(font,"Devilhood is an earned path.",width/2,panelY+175,0xFF9DADAF);
             }
             case MODE -> {
                 g.drawCenteredString(font,"How will your innate smoke emerge?",width/2,panelY+52,0xFF9EDDD0);

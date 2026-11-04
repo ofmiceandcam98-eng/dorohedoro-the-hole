@@ -62,4 +62,11 @@ public final class GlowMothEntity extends Bat {
         super.readAdditionalSaveData(tag);
         scaleCooldown = Math.max(0, Math.min(SHEAR_COOLDOWN, tag.getInt("MothScaleCooldown")));
     }
+
+    // Sounds: vanilla events that fit the creature, instead of the generic hostile grunt.
+    @Override public net.minecraft.sounds.SoundEvent getAmbientSound() { return null; }
+    @Override protected net.minecraft.sounds.SoundEvent getHurtSound(net.minecraft.world.damagesource.DamageSource source) { return net.minecraft.sounds.SoundEvents.BAT_HURT; }
+    @Override protected net.minecraft.sounds.SoundEvent getDeathSound() { return net.minecraft.sounds.SoundEvents.BAT_DEATH; }
+    @Override public float getVoicePitch() { return super.getVoicePitch() * 1.5F; }
+    @Override protected float getSoundVolume() { return 0.4F; }
 }

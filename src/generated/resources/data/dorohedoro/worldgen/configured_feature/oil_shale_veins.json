@@ -15,7 +15,7 @@
       },
       {
         "state": {
-          "Name": "dorohedoro:oil_shale_ore"
+          "Name": "dorohedoro:deepslate_oil_shale_ore"
         },
         "target": {
           "predicate_type": "minecraft:tag_match",

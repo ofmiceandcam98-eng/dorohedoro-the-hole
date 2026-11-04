@@ -15,7 +15,7 @@
       },
       {
         "state": {
-          "Name": "dorohedoro:rock_salt_ore"
+          "Name": "dorohedoro:deepslate_rock_salt_ore"
         },
         "target": {
           "predicate_type": "minecraft:tag_match",

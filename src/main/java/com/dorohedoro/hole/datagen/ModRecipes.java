@@ -191,6 +191,47 @@ final class ModRecipes extends RecipeProvider {
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.SLIME_BALL, 2)
                 .requires(ModItems.SEWER_SEALANT.get()).requires(ModItems.LEECH_SUCKER.get())
                 .unlockedBy("has_sealant", has(ModItems.SEWER_SEALANT.get())).save(output, id("slime_from_sealant"));
+
+        // Every creature part has a use. These two consumables existed with no way to make them.
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ModItems.ANTIDOTE_POULTICE.get(), 2)
+                .requires(ModItems.SPORE_SAC.get()).requires(ModItems.LEECH_MUCUS.get()).requires(ModItems.FUNGAL_MEMBRANE.get())
+                .unlockedBy("has_spore_sac", has(ModItems.SPORE_SAC.get())).save(output, id("antidote_poultice"));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.TOOLS, ModItems.EMPTY_SMOKE_FLASK.get())
+                .requires(Items.GLASS_BOTTLE).requires(Items.IRON_NUGGET)
+                .unlockedBy("has_bottle", has(Items.GLASS_BOTTLE)).save(output, id("empty_smoke_flask"));
+        // Tar burns like coal (see the furnace_fuels data map) and lights torches like it.
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.TORCH, 4)
+                .pattern("T").pattern("S")
+                .define('T', ModItems.COAGULATED_TAR.get()).define('S', Items.STICK)
+                .unlockedBy("has_tar", has(ModItems.COAGULATED_TAR.get())).save(output, id("torch_from_tar"));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.LEATHER, 2)
+                .requires(ModItems.DENSE_HIDE.get())
+                .unlockedBy("has_hide", has(ModItems.DENSE_HIDE.get())).save(output, id("leather_from_dense_hide"));
+        // Cooked limbs are food, but nothing made them. They cook like vanilla meat.
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.SEVERED_LEFT_ARM.get()), RecipeCategory.FOOD, ModItems.COOKED_LEFT_ARM.get(), 0.35F, 200)
+                .unlockedBy("has_left_arm", has(ModItems.SEVERED_LEFT_ARM.get())).save(output, id("cooked_left_arm"));
+        SimpleCookingRecipeBuilder.smoking(Ingredient.of(ModItems.SEVERED_LEFT_ARM.get()), RecipeCategory.FOOD, ModItems.COOKED_LEFT_ARM.get(), 0.35F, 100)
+                .unlockedBy("has_left_arm", has(ModItems.SEVERED_LEFT_ARM.get())).save(output, id("cooked_left_arm_from_smoking"));
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.SEVERED_LEFT_ARM.get()), RecipeCategory.FOOD, ModItems.COOKED_LEFT_ARM.get(), 0.35F, 600)
+                .unlockedBy("has_left_arm", has(ModItems.SEVERED_LEFT_ARM.get())).save(output, id("cooked_left_arm_from_campfire"));
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.SEVERED_RIGHT_ARM.get()), RecipeCategory.FOOD, ModItems.COOKED_RIGHT_ARM.get(), 0.35F, 200)
+                .unlockedBy("has_right_arm", has(ModItems.SEVERED_RIGHT_ARM.get())).save(output, id("cooked_right_arm"));
+        SimpleCookingRecipeBuilder.smoking(Ingredient.of(ModItems.SEVERED_RIGHT_ARM.get()), RecipeCategory.FOOD, ModItems.COOKED_RIGHT_ARM.get(), 0.35F, 100)
+                .unlockedBy("has_right_arm", has(ModItems.SEVERED_RIGHT_ARM.get())).save(output, id("cooked_right_arm_from_smoking"));
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.SEVERED_RIGHT_ARM.get()), RecipeCategory.FOOD, ModItems.COOKED_RIGHT_ARM.get(), 0.35F, 600)
+                .unlockedBy("has_right_arm", has(ModItems.SEVERED_RIGHT_ARM.get())).save(output, id("cooked_right_arm_from_campfire"));
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.SEVERED_LEFT_LEG.get()), RecipeCategory.FOOD, ModItems.COOKED_LEFT_LEG.get(), 0.35F, 200)
+                .unlockedBy("has_left_leg", has(ModItems.SEVERED_LEFT_LEG.get())).save(output, id("cooked_left_leg"));
+        SimpleCookingRecipeBuilder.smoking(Ingredient.of(ModItems.SEVERED_LEFT_LEG.get()), RecipeCategory.FOOD, ModItems.COOKED_LEFT_LEG.get(), 0.35F, 100)
+                .unlockedBy("has_left_leg", has(ModItems.SEVERED_LEFT_LEG.get())).save(output, id("cooked_left_leg_from_smoking"));
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.SEVERED_LEFT_LEG.get()), RecipeCategory.FOOD, ModItems.COOKED_LEFT_LEG.get(), 0.35F, 600)
+                .unlockedBy("has_left_leg", has(ModItems.SEVERED_LEFT_LEG.get())).save(output, id("cooked_left_leg_from_campfire"));
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.SEVERED_RIGHT_LEG.get()), RecipeCategory.FOOD, ModItems.COOKED_RIGHT_LEG.get(), 0.35F, 200)
+                .unlockedBy("has_right_leg", has(ModItems.SEVERED_RIGHT_LEG.get())).save(output, id("cooked_right_leg"));
+        SimpleCookingRecipeBuilder.smoking(Ingredient.of(ModItems.SEVERED_RIGHT_LEG.get()), RecipeCategory.FOOD, ModItems.COOKED_RIGHT_LEG.get(), 0.35F, 100)
+                .unlockedBy("has_right_leg", has(ModItems.SEVERED_RIGHT_LEG.get())).save(output, id("cooked_right_leg_from_smoking"));
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.SEVERED_RIGHT_LEG.get()), RecipeCategory.FOOD, ModItems.COOKED_RIGHT_LEG.get(), 0.35F, 600)
+                .unlockedBy("has_right_leg", has(ModItems.SEVERED_RIGHT_LEG.get())).save(output, id("cooked_right_leg_from_campfire"));
     }
 
     private static ResourceLocation id(String path) {

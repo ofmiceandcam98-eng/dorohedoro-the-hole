@@ -68,16 +68,22 @@ final class Landmarks {
         // live at the rim. No universal high-brightness street grid is added.
         c.fill(x - 5, STREET_Y, z - 5, x + 5, STREET_Y, z + 5, Blocks.CRACKED_STONE_BRICKS);
         int north = r.z0() + 2;
-        c.set(x - 8, GROUND_Y, north, Blocks.CRAFTING_TABLE);
-        c.facing(x - 6, GROUND_Y, north, Direction.SOUTH, Blocks.FURNACE);
-        c.barrel(x - 4, GROUND_Y, north, "starter_cache");
-        c.set(x - 2, GROUND_Y, north, Blocks.CAULDRON);
-        c.set(x, GROUND_Y, north, Blocks.SMOKER);
-        c.set(x + 2, GROUND_Y, north, Blocks.COMPOSTER);
-        c.set(x + 4, GROUND_Y, north, Blocks.CRAFTING_TABLE);
-        // Harvestable shelter-repair wood for regions without live trees.
-        c.fill(x + 7, GROUND_Y, north, x + 7, GROUND_Y + 2, north, Blocks.SPRUCE_LOG);
-        c.set(x + 7, GROUND_Y + 3, north, Blocks.SPRUCE_SLAB);
+        if (c.hasRoomDressing71()) {
+            // v53: just the supply barrel beside the sign. Its loot already holds logs, stone tools, coal and torches,
+            // so the old line of loose workstations and the log pillar on open ground only looked like clutter.
+            c.barrel(x + 7, GROUND_Y, north, "starter_cache");
+        } else {
+            c.set(x - 8, GROUND_Y, north, Blocks.CRAFTING_TABLE);
+            c.facing(x - 6, GROUND_Y, north, Direction.SOUTH, Blocks.FURNACE);
+            c.barrel(x - 4, GROUND_Y, north, "starter_cache");
+            c.set(x - 2, GROUND_Y, north, Blocks.CAULDRON);
+            c.set(x, GROUND_Y, north, Blocks.SMOKER);
+            c.set(x + 2, GROUND_Y, north, Blocks.COMPOSTER);
+            c.set(x + 4, GROUND_Y, north, Blocks.CRAFTING_TABLE);
+            // Harvestable shelter-repair wood for regions without live trees.
+            c.fill(x + 7, GROUND_Y, north, x + 7, GROUND_Y + 2, north, Blocks.SPRUCE_LOG);
+            c.set(x + 7, GROUND_Y + 3, north, Blocks.SPRUCE_SLAB);
+        }
         String name = switch (region) {
             case SNOWFIELDS -> "FROST DEPOT";
             case DEAD_TAIGA -> "DEADWOOD OUTPOST";

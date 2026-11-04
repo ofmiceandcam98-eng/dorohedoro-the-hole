@@ -15,14 +15,13 @@ public final class HoleMenuButton extends AbstractButton {
     }
     @Override public void onPress() {if(active)action.run();}
     @Override protected void renderWidget(GuiGraphics g,int mx,int my,float partial) {
-        boolean hot=isHoveredOrFocused();
+        boolean hot=active&&isHoveredOrFocused();
         int x=getX(),y=getY(),w=getWidth(),h=getHeight();
-        g.fill(x,y,x+w,y+h,hot?0xFF79C6B6:0xFF435B5C);
-        g.fill(x+1,y+1,x+w-1,y+h-1,hot?0xFF344D50:0xFF26373B);
-        if(hot)g.fill(x+2,y+2,x+5,y+h-2,0xFF7BE6D3);
+        g.blitSprite(!active?HoleUiTheme.BUTTON_DISABLED:hot?HoleUiTheme.BUTTON_HOVER:HoleUiTheme.BUTTON,x,y,w,h);
         var f=Minecraft.getInstance().font;
-        String label=HoleUiTheme.fit(f,getMessage().getString(),Math.max(4,w-11));
-        g.drawCenteredString(f,label,x+w/2,y+(h-8)/2,active?HoleUiTheme.TEXT:HoleUiTheme.MUTED);
+        String label=HoleUiTheme.fit(f,getMessage().getString(),Math.max(4,w-10));
+        int color=!active?0xFF6E7A78:hot?0xFFFFFFFF:HoleUiTheme.TEXT;
+        g.drawString(f,label,x+(w-f.width(label))/2,y+(h-8)/2,color,true);
     }
 
     @Override

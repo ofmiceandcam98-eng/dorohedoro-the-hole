@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_left_arm": {
+      "conditions": {
+        "items": [
+          {
+            "items": "dorohedoro:severed_left_arm"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "dorohedoro:cooked_left_arm_from_smoking"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_left_arm"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "dorohedoro:cooked_left_arm_from_smoking"
+    ]
+  }
+}

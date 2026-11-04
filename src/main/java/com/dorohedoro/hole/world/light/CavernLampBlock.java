@@ -56,7 +56,8 @@ public final class CavernLampBlock extends Block implements SimpleWaterloggedBlo
         BlockState first = mounted(clicked, water);
         if (first.canSurvive(context.getLevel(), context.getClickedPos())) return first;
         for (Direction dir : dirs) {
-            BlockState candidate = mounted(dir, water);
+            // Looking toward a support means the lamp faces away from it.
+            BlockState candidate = mounted(dir.getOpposite(), water);
             if (candidate.canSurvive(context.getLevel(), context.getClickedPos())) return candidate;
         }
         return null;
@@ -97,10 +98,11 @@ public final class CavernLampBlock extends Block implements SimpleWaterloggedBlo
     public VoxelShape getShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext context) {
         if (!state.getValue(WALL)) return state.getValue(HANGING) ? CEILING : FLOOR;
         return switch (state.getValue(FACING)) {
-            case NORTH -> NORTH;
-            case SOUTH -> SOUTH;
-            case EAST -> EAST;
-            case WEST -> WEST;
+            // FACING points away from the wall, so the bracket reaches the opposite side.
+            case NORTH -> SOUTH;
+            case SOUTH -> NORTH;
+            case EAST -> WEST;
+            case WEST -> EAST;
             default -> FLOOR;
         };
     }

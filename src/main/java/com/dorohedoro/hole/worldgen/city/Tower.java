@@ -73,6 +73,9 @@ final class Tower {
         if (c.hasUrbanFabric()) UrbanFabric25.roof(c, box, top, hash, roof);
         if (c.hasOccupiedDetail39()) OccupiedRoofs39.decorate(c, box, floors, hash, roof);
         if (c.hasSkyline40()) Skyline40.rooftop(c, box, floors, hash, roof);
+        if (c.hasRoomDressing71()) RoomDressing71.dress(c, box, interior, floors, hash);
+        // Last, so no decoration pass above can block a flight.
+        keepStairsWalkable(c, interior, floors, style.stairs());
     }
 
     private static void corners(Canvas c, Rect box, int top, Style style) {
@@ -91,8 +94,29 @@ final class Tower {
         for (int i = 0; i < STOREY; i++) {
             c.stair(x + i, floorY + 1 + i, z, Direction.EAST, stairs);
         }
-        // Headroom through the slab above: the last step sits in the slab, the two before it need it gone.
-        c.fill(x + STOREY - 3, floorY + STOREY, z, x + STOREY - 2, floorY + STOREY, z, Blocks.AIR);
+        // Headroom through the slab above: the last step sits in the slab, the three before it need it gone.
+        c.fill(x, floorY + STOREY, z, x + STOREY - 2, floorY + STOREY, z, Blocks.AIR);
+    }
+
+    /**
+     * Re-asserts every flight after all decoration. A player moving between steps is half a block up, with their
+     * head 2.3 blocks above the lower step while still overlapping its column. So each step needs three clear
+     * blocks above it, not two. Before this, the slab over the first step stopped players going up or down.
+     * The bottom approach and the top landing are kept clear too, so furniture can't plug either end.
+     */
+    private static void keepStairsWalkable(Canvas c, Rect interior, int floors, Block stairs) {
+        int x = interior.x0() + 1;
+        int z = interior.z0();
+        for (int k = 0; k < floors; k++) {
+            int floorY = STREET_Y + k * STOREY;
+            for (int i = 0; i < STOREY; i++) {
+                int step = floorY + 1 + i;
+                c.stair(x + i, step, z, Direction.EAST, stairs);
+                c.fill(x + i, step + 1, z, x + i, step + 3, z, Blocks.AIR);
+            }
+            c.fill(x - 1, floorY + 1, z, x - 1, floorY + 2, z, Blocks.AIR);
+            c.fill(x + STOREY, floorY + STOREY + 1, z, x + STOREY, floorY + STOREY + 2, z, Blocks.AIR);
+        }
     }
 
     private static void windows(Canvas c, Rect box, int floorY, boolean ground, Style style, long hash) {

@@ -34,6 +34,11 @@ base {
     archivesName = mod_id
 }
 
+// The release jar is named like the CurseForge file list: "Dorohedoro The Hole-BETA0.2.jar".
+tasks.named('jar') {
+    archiveFileName = "${release_title}-${release_channel}${release_number}.jar"
+}
+
 // Mojang ships Java 21 to end users in 1.21.1, so mods should target Java 21.
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
@@ -78,6 +83,8 @@ neoForge {
             gameDirectory = project.file('runs/qaclient')
             systemProperty 'dorohedoro.clientqa', 'true'
             systemProperty 'dorohedoro.clientqa.seed', project.findProperty('qa_seed') ?: '8675309'
+            // A 1600x900 window gives GUI scale 3, close to what players see, so HUD screenshots are representative.
+            programArguments.addAll('--width', '1600', '--height', '900')
         }
 
         qaServer {

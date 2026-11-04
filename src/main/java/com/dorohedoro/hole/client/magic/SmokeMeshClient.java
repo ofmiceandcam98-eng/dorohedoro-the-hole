@@ -135,9 +135,6 @@ public final class SmokeMeshClient {
         // Fetch each consumer right before drawing into it. In 1.21 asking the buffer source for a new render
         // type ends the previous shared batch, so consumers fetched up front were closed by the time smoke used
         // them, which crashed the client with "Not building!" whenever two or more magic types were on screen.
-        // Fetch each consumer right before drawing into it. In 1.21, asking the buffer source for a new render
-        // type ends the previous shared batch, so consumers fetched up front were already closed when smoke used
-        // them. That crashed the client with "Not building!" while magic effects were on screen.
         Iterator<Cue> it=EVENTS.iterator();
         while(it.hasNext()) {
             Cue c=it.next();

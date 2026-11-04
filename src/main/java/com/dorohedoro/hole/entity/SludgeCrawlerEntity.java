@@ -29,7 +29,8 @@ public final class SludgeCrawlerEntity extends Monster {
         goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.0D, false));
         goalSelector.addGoal(5, new RandomStrollGoal(this, .88D));
         goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 7.0F));
-        targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true));
+        targetSelector.addGoal(1, new net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal(this).setAlertOthers());
+        targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
     }
     @Override public boolean doHurtTarget(Entity target) {
         boolean hit = super.doHurtTarget(target);
@@ -38,4 +39,11 @@ public final class SludgeCrawlerEntity extends Monster {
         }
         return hit;
     }
+
+    // Sounds: vanilla events that fit the creature, instead of the generic hostile grunt.
+    @Override protected net.minecraft.sounds.SoundEvent getAmbientSound() { return null; }
+    @Override protected net.minecraft.sounds.SoundEvent getHurtSound(net.minecraft.world.damagesource.DamageSource source) { return net.minecraft.sounds.SoundEvents.SLIME_HURT; }
+    @Override protected net.minecraft.sounds.SoundEvent getDeathSound() { return net.minecraft.sounds.SoundEvents.SLIME_DEATH; }
+    @Override protected void playStepSound(net.minecraft.core.BlockPos pos, net.minecraft.world.level.block.state.BlockState state) { playSound(net.minecraft.sounds.SoundEvents.SLIME_SQUISH, 0.25F, 1.0F); }
+    @Override public float getVoicePitch() { return super.getVoicePitch() * 0.8F; }
 }

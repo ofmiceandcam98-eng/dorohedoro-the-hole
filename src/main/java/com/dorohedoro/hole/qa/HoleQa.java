@@ -149,6 +149,7 @@ public final class HoleQa {
             checkConnectivity(plan, area, expectedFeet);
             census(chunks, area, plan);
             checkFluids(chunks);
+            checkStairFlights(chunks);
             checkCityMaterials(chunks, area, expectedFeet);
             if (plan.settings.sewerUnderworld()) checkSewerUnderworld(plan);
             // Phase 3: verify the separately registered, full dimensions actually load and produce surface chunks.
@@ -396,10 +397,11 @@ public final class HoleQa {
             BlockPos plannedSpawn = plan.spawnPoint();
             check("spawn_matches_planned_start", spawn.equals(plannedSpawn),
                     "actual=" + spawn.toShortString() + " expected=" + plannedSpawn.toShortString());
-            boolean feet = level.getBlockState(spawn).isAir();
+            BlockState feetState = level.getBlockState(spawn);
+            boolean feet = passable(feetState);
             boolean head = level.getBlockState(spawn.above()).isAir();
             boolean floor = level.getBlockState(spawn.below()).isFaceSturdy(level, spawn.below(), net.minecraft.core.Direction.UP);
-            check("spawn_standable", feet && head && floor, "feet=" + feet + " head=" + head + " floor=" + floor);
+            check("spawn_standable", feet && head && floor, "feet=" + feet + " (" + feetState.getBlock().getDescriptionId() + ") head=" + head + " floor=" + floor);
             boolean roofless = level.canSeeSky(spawn);
             check("spawn_open_sky", roofless, String.valueOf(roofless));
         }
@@ -433,7 +435,10 @@ public final class HoleQa {
         private static boolean passable(BlockState state) {
             return (state.isAir() || state.is(BlockTags.RAILS) || state.is(BlockTags.DOORS) || state.is(BlockTags.TRAPDOORS)
                     || state.is(BlockTags.WOOL_CARPETS) || state.is(Blocks.LADDER) || state.is(BlockTags.SAPLINGS) || state.is(BlockTags.FLOWERS)
-                    || state.is(BlockTags.CROPS) || state.is(Blocks.SHORT_GRASS)) && state.getFluidState().isEmpty();
+                    || state.is(BlockTags.CROPS) || state.is(Blocks.SHORT_GRASS)
+                    // A thin snow layer is walked over like carpet; snowy districts are covered in it.
+                    || (state.is(Blocks.SNOW) && state.getValue(net.minecraft.world.level.block.SnowLayerBlock.LAYERS) <= 2))
+                    && state.getFluidState().isEmpty();
         }
 
         /**
@@ -685,6 +690,56 @@ public final class HoleQa {
         }
 
         /** Water that is not a source block above the sewers means a canal or pipe is leaking. */
+        /**
+         * Every four-step building flight must be climbable both ways. A player moving between steps is half a block
+         * up with their head 2.3 blocks above the lower step, so each step needs three blocks of empty collision
+         * above it. A block there is what trapped players on stairs before Pass 71.
+         */
+        private void checkStairFlights(Map<ChunkPos, LevelChunk> chunks) {
+            int flights = 0;
+            int blocked = 0;
+            JsonArray samples = new JsonArray();
+            BlockPos.MutableBlockPos cursor = new BlockPos.MutableBlockPos();
+            for (LevelChunk chunk : chunks.values()) {
+                ChunkPos pos = chunk.getPos();
+                for (int x = pos.getMinBlockX(); x <= pos.getMaxBlockX(); x++) {
+                    for (int z = pos.getMinBlockZ(); z <= pos.getMaxBlockZ(); z++) {
+                        for (int y = 60; y <= 220; y++) {
+                            var first = level.getBlockState(cursor.set(x, y, z));
+                            if (!(first.getBlock() instanceof net.minecraft.world.level.block.StairBlock)
+                                    || first.getValue(net.minecraft.world.level.block.StairBlock.HALF) != net.minecraft.world.level.block.state.properties.Half.BOTTOM) {
+                                continue;
+                            }
+                            var facing = first.getValue(net.minecraft.world.level.block.StairBlock.FACING);
+                            boolean flight = true;
+                            for (int i = 1; i < 4 && flight; i++) {
+                                var step = level.getBlockState(cursor.set(x + i * facing.getStepX(), y + i, z + i * facing.getStepZ()));
+                                flight = step.getBlock() instanceof net.minecraft.world.level.block.StairBlock
+                                        && step.getValue(net.minecraft.world.level.block.StairBlock.FACING) == facing
+                                        && step.getValue(net.minecraft.world.level.block.StairBlock.HALF) == net.minecraft.world.level.block.state.properties.Half.BOTTOM;
+                            }
+                            if (!flight) continue;
+                            flights++;
+                            boolean clear = true;
+                            for (int i = 0; i < 4 && clear; i++) {
+                                for (int up = 1; up <= 3 && clear; up++) {
+                                    cursor.set(x + i * facing.getStepX(), y + i + up, z + i * facing.getStepZ());
+                                    clear = level.getBlockState(cursor).getCollisionShape(level, cursor).isEmpty();
+                                }
+                            }
+                            if (!clear) {
+                                blocked++;
+                                if (samples.size() < 12) samples.add(x + "," + y + "," + z + " " + facing + " blocked at " + cursor.toShortString()
+                                        + " by " + net.minecraft.core.registries.BuiltInRegistries.BLOCK.getKey(level.getBlockState(cursor).getBlock()));
+                            }
+                        }
+                    }
+                }
+            }
+            report.add("blocked_stair_samples", samples);
+            check("stair_flights_walkable", flights > 0 && blocked == 0, blocked + " blocked of " + flights + " flights");
+        }
+
         private void checkFluids(Map<ChunkPos, LevelChunk> chunks) {
             int flowing = 0;
             for (LevelChunk chunk : chunks.values()) {

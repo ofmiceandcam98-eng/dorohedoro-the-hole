@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_right_arm": {
+      "conditions": {
+        "items": [
+          {
+            "items": "dorohedoro:severed_right_arm"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "dorohedoro:cooked_right_arm"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_right_arm"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "dorohedoro:cooked_right_arm"
+    ]
+  }
+}

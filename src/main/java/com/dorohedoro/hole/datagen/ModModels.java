@@ -16,6 +16,26 @@ final class ModModels {
             super(output, Dorohedoro.MOD_ID, files);
         }
 
+        /** Ores are vanilla stone or deepslate with one of our mineral overlays on top, like vanilla ores. */
+        private void ores() {
+            ore(ModBlocks.SULFUR_ORE.get(), "stone", "sulfur");
+            ore(ModBlocks.DEEPSLATE_SULFUR_ORE.get(), "deepslate", "sulfur");
+            ore(ModBlocks.ROCK_SALT_ORE.get(), "stone", "rock_salt");
+            ore(ModBlocks.DEEPSLATE_ROCK_SALT_ORE.get(), "deepslate", "rock_salt");
+            ore(ModBlocks.ZINC_ORE.get(), "stone", "zinc");
+            ore(ModBlocks.DEEPSLATE_ZINC_ORE.get(), "deepslate", "zinc");
+            ore(ModBlocks.OIL_SHALE_ORE.get(), "stone", "oil_shale");
+            ore(ModBlocks.DEEPSLATE_OIL_SHALE_ORE.get(), "deepslate", "oil_shale");
+        }
+
+        private void ore(net.minecraft.world.level.block.Block block, String base, String mineral) {
+            String name = net.minecraft.core.registries.BuiltInRegistries.BLOCK.getKey(block).getPath();
+            simpleBlockWithItem(block, models().withExistingParent(name, modLoc("block/ore_overlay"))
+                    .texture("base", mcLoc("block/" + base))
+                    .texture("overlay", modLoc("block/ore/" + mineral))
+                    .renderType("cutout"));
+        }
+
         @Override
         protected void registerStatesAndModels() {
             simpleBlockWithItem(ModBlocks.INDUSTRIAL_DEBRIS.get(), cubeAll(ModBlocks.INDUSTRIAL_DEBRIS.get()));
@@ -23,12 +43,9 @@ final class ModModels {
             simpleBlockWithItem(ModBlocks.HELL_ROCK.get(), cubeAll(ModBlocks.HELL_ROCK.get()));
             simpleBlockWithItem(ModBlocks.ASH_SOIL.get(), cubeAll(ModBlocks.ASH_SOIL.get()));
             simpleBlockWithItem(ModBlocks.SEWER_BRICKWORK.get(), cubeAll(ModBlocks.SEWER_BRICKWORK.get()));
-            simpleBlockWithItem(ModBlocks.SULFUR_ORE.get(), cubeAll(ModBlocks.SULFUR_ORE.get()));
-            simpleBlockWithItem(ModBlocks.ROCK_SALT_ORE.get(), cubeAll(ModBlocks.ROCK_SALT_ORE.get()));
+            ores();
             simpleBlockWithItem(ModBlocks.LIMESTONE.get(), cubeAll(ModBlocks.LIMESTONE.get()));
             simpleBlockWithItem(ModBlocks.CHITIN_PLATING.get(), cubeAll(ModBlocks.CHITIN_PLATING.get()));
-            simpleBlockWithItem(ModBlocks.ZINC_ORE.get(), cubeAll(ModBlocks.ZINC_ORE.get()));
-            simpleBlockWithItem(ModBlocks.OIL_SHALE_ORE.get(), cubeAll(ModBlocks.OIL_SHALE_ORE.get()));
             simpleBlockWithItem(ModBlocks.GALVANIZED_PLATING.get(), cubeAll(ModBlocks.GALVANIZED_PLATING.get()));
             simpleBlockWithItem(ModBlocks.SMOKE_STAINED_CONCRETE.get(), cubeAll(ModBlocks.SMOKE_STAINED_CONCRETE.get()));
             simpleBlockWithItem(ModBlocks.WATER_DAMAGED_PLASTER.get(), cubeAll(ModBlocks.WATER_DAMAGED_PLASTER.get()));

@@ -37,15 +37,15 @@ final class HoleMineralFeatures {
 
     static void configuredFeatures(BootstrapContext<ConfiguredFeature<?, ?>> ctx) {
         ctx.register(SULFUR, new ConfiguredFeature<>(Feature.ORE,
-                oreBothStoneTypes(ModBlocks.SULFUR_ORE.get().defaultBlockState(), 7)));
+                oreBothStoneTypes(ModBlocks.SULFUR_ORE.get().defaultBlockState(), ModBlocks.DEEPSLATE_SULFUR_ORE.get().defaultBlockState(), 7)));
         ctx.register(SALT, new ConfiguredFeature<>(Feature.ORE,
-                oreBothStoneTypes(ModBlocks.ROCK_SALT_ORE.get().defaultBlockState(), 10)));
+                oreBothStoneTypes(ModBlocks.ROCK_SALT_ORE.get().defaultBlockState(), ModBlocks.DEEPSLATE_ROCK_SALT_ORE.get().defaultBlockState(), 10)));
         ctx.register(LIMESTONE, new ConfiguredFeature<>(Feature.ORE,
-                oreBothStoneTypes(ModBlocks.LIMESTONE.get().defaultBlockState(), 18)));
+                oreBothStoneTypes(ModBlocks.LIMESTONE.get().defaultBlockState(), ModBlocks.LIMESTONE.get().defaultBlockState(), 18)));
         ctx.register(ZINC, new ConfiguredFeature<>(Feature.ORE,
-                oreBothStoneTypes(ModBlocks.ZINC_ORE.get().defaultBlockState(), 7)));
+                oreBothStoneTypes(ModBlocks.ZINC_ORE.get().defaultBlockState(), ModBlocks.DEEPSLATE_ZINC_ORE.get().defaultBlockState(), 7)));
         ctx.register(OIL_SHALE, new ConfiguredFeature<>(Feature.ORE,
-                oreBothStoneTypes(ModBlocks.OIL_SHALE_ORE.get().defaultBlockState(), 9)));
+                oreBothStoneTypes(ModBlocks.OIL_SHALE_ORE.get().defaultBlockState(), ModBlocks.DEEPSLATE_OIL_SHALE_ORE.get().defaultBlockState(), 9)));
     }
 
     static void placedFeatures(BootstrapContext<PlacedFeature> ctx) {
@@ -56,10 +56,12 @@ final class HoleMineralFeatures {
         place(ctx, OIL_SHALE_PLACED, OIL_SHALE, 5, -24, 38);
     }
 
-    private static OreConfiguration oreBothStoneTypes(net.minecraft.world.level.block.state.BlockState state, int size) {
+    /** Stone is replaced by the stone ore and deepslate by its deepslate twin, as vanilla does. */
+    private static OreConfiguration oreBothStoneTypes(net.minecraft.world.level.block.state.BlockState state,
+            net.minecraft.world.level.block.state.BlockState deepslate, int size) {
         return new OreConfiguration(List.of(
                 OreConfiguration.target(new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES), state),
-                OreConfiguration.target(new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES), state)), size);
+                OreConfiguration.target(new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES), deepslate)), size);
     }
 
     private static void place(BootstrapContext<PlacedFeature> ctx, ResourceKey<PlacedFeature> key,

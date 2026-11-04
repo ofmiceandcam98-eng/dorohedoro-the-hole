@@ -73,6 +73,8 @@ public final class ModDataGen {
                     ModBlocks.SULFUR_ORE.get(), ModBlocks.ROCK_SALT_ORE.get(),
                     ModBlocks.LIMESTONE.get(), ModBlocks.CHITIN_PLATING.get(),
                     ModBlocks.ZINC_ORE.get(), ModBlocks.OIL_SHALE_ORE.get(),
+                    ModBlocks.DEEPSLATE_SULFUR_ORE.get(), ModBlocks.DEEPSLATE_ROCK_SALT_ORE.get(),
+                    ModBlocks.DEEPSLATE_ZINC_ORE.get(), ModBlocks.DEEPSLATE_OIL_SHALE_ORE.get(),
                     ModBlocks.GALVANIZED_PLATING.get(), ModBlocks.CAVERN_LAMP.get(),
                     ModBlocks.SMOKE_STAINED_CONCRETE.get(), ModBlocks.WATER_DAMAGED_PLASTER.get(), ModBlocks.SOOT_BLACKENED_BRICK.get(), ModBlocks.PATCHWORK_MASONRY.get(), ModBlocks.RUSTED_INDUSTRIAL_SHEET.get(), ModBlocks.SEEPAGE_BRICK.get());
             tag(BlockTags.MINEABLE_WITH_SHOVEL).add(ModBlocks.ASH_SOIL.get());

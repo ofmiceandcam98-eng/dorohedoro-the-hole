@@ -32,10 +32,20 @@ public final class SewerRoachEntity extends Monster {
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(1, new FloatGoal(this));
-        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.1D, false));
+        // Roaches pounce like spiders before biting.
+        this.goalSelector.addGoal(2, new net.minecraft.world.entity.ai.goal.LeapAtTargetGoal(this, 0.35F));
+        this.goalSelector.addGoal(3, new MeleeAttackGoal(this, 1.1D, false));
         this.goalSelector.addGoal(5, new RandomStrollGoal(this, 0.75D));
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
-        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true));
+        this.targetSelector.addGoal(1, new net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal(this).setAlertOthers());
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
     }
+
+    // Sounds: vanilla events that fit the creature, instead of the generic hostile grunt.
+    @Override protected net.minecraft.sounds.SoundEvent getAmbientSound() { return net.minecraft.sounds.SoundEvents.SILVERFISH_AMBIENT; }
+    @Override protected net.minecraft.sounds.SoundEvent getHurtSound(net.minecraft.world.damagesource.DamageSource source) { return net.minecraft.sounds.SoundEvents.SILVERFISH_HURT; }
+    @Override protected net.minecraft.sounds.SoundEvent getDeathSound() { return net.minecraft.sounds.SoundEvents.SILVERFISH_DEATH; }
+    @Override protected void playStepSound(net.minecraft.core.BlockPos pos, net.minecraft.world.level.block.state.BlockState state) { playSound(net.minecraft.sounds.SoundEvents.SILVERFISH_STEP, 0.15F, 1.0F); }
+    @Override public float getVoicePitch() { return super.getVoicePitch() * 0.75F; }
 }

@@ -29,6 +29,15 @@ public final class CavernBurrowerEntity extends Monster {
         goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.0D, false));
         goalSelector.addGoal(5, new RandomStrollGoal(this, .85D));
         goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 7.0F));
-        targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true));
+        targetSelector.addGoal(1, new net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal(this).setAlertOthers());
+        targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
     }
+
+    // Sounds: vanilla events that fit the creature, instead of the generic hostile grunt.
+    @Override protected net.minecraft.sounds.SoundEvent getAmbientSound() { return net.minecraft.sounds.SoundEvents.HOGLIN_AMBIENT; }
+    @Override protected net.minecraft.sounds.SoundEvent getHurtSound(net.minecraft.world.damagesource.DamageSource source) { return net.minecraft.sounds.SoundEvents.HOGLIN_HURT; }
+    @Override protected net.minecraft.sounds.SoundEvent getDeathSound() { return net.minecraft.sounds.SoundEvents.HOGLIN_DEATH; }
+    @Override protected void playStepSound(net.minecraft.core.BlockPos pos, net.minecraft.world.level.block.state.BlockState state) { playSound(net.minecraft.sounds.SoundEvents.GRAVEL_STEP, 0.3F, 1.0F); }
+    @Override public float getVoicePitch() { return super.getVoicePitch() * 1.15F; }
+    @Override protected float getSoundVolume() { return 0.7F; }
 }
