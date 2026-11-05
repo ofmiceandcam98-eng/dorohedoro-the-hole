@@ -388,7 +388,32 @@ public final class HoleQa {
                     ? CityTerrain40.offset(plan, cx + 5, cz + 5) : 0;
             BlockPos chamber = new BlockPos(cx + 5, -30 + relief, cz + 5);
             BlockPos floor = new BlockPos(cx + 5, -37 + relief, cz + 5);
-            sewerCheck(plan, "sewer_deep_chamber_carved", chamber, level.getBlockState(chamber).isAir());
+            // Open space a player can stand in: vanilla lush caves grow grass and moss carpet on carved floors.
+            sewerCheck(plan, "sewer_deep_chamber_carved", chamber, level.getBlockState(chamber).getCollisionShape(level, chamber).isEmpty()
+                    && level.getFluidState(chamber).isEmpty());
+            // How much of the guaranteed starter cavern exists at all: its brick floor sits at y -37 across the ellipse.
+            int floorBricks = 0, columns = 0, protectedFloor = 0;
+            int version = plan.settings.worldDetailVersion();
+            for (int x = cx - 18; x <= cx + 18; x++) for (int z = cz - 18; z <= cz + 18; z++) {
+                int r = plan.settings.terrainRelief() ? CityTerrain40.offset(plan, x, z) : 0;
+                // Safe core only: the real outline varies by up to 10% and per-crossing radii are larger.
+                if ((x - cx) * (x - cx) / 121.0 + (z - cz) * (z - cz) / 100.0 > 0.85) continue;
+                columns++;
+                var b = level.getBlockState(new BlockPos(x, -37 + r, z));
+                BlockPos above = new BlockPos(x, -36 + r, z);
+                // Present: the brick floor, a sewer floor laid over it by a branch tunnel, or open space above the floor.
+                if (b.is(net.minecraft.world.level.block.Blocks.DEEPSLATE_BRICKS) || b.is(net.minecraft.world.level.block.Blocks.CRACKED_DEEPSLATE_BRICKS)
+                        || b.is(com.dorohedoro.hole.registry.ModBlocks.SEWER_BRICKWORK.get())
+                        || level.getBlockState(above).getCollisionShape(level, above).isEmpty()) floorBricks++;
+                else {
+                    var boxes = com.dorohedoro.hole.worldgen.city.VanillaStructureLookup64.forChunk(level.structureManager(), new net.minecraft.world.level.ChunkPos(new BlockPos(x, 0, z)), version);
+                    boolean dark = com.dorohedoro.hole.worldgen.city.DeepDarkBuffer63.protects(version, -37 + r, plan.protectsDeepDarkNearChunk(x & ~15, z & ~15));
+                    if (dark || com.dorohedoro.hole.worldgen.city.VanillaStructureBuffer64.protects(version, x, -37 + r, z, boxes)) protectedFloor++;
+                }
+            }
+            int missing = columns - floorBricks - protectedFloor;
+            report.addProperty("starter_cavern_floor", floorBricks + " present, " + protectedFloor + " left to vanilla structures, " + missing + " missing, of " + columns + " core columns at crossing " + cx + "," + cz);
+            check("sewer_starter_cavern_complete", missing == 0, floorBricks + " present + " + protectedFloor + " protected of " + columns);
             check("sewer_chamber_supported", !level.getBlockState(floor).isAir(), floor.toShortString());
             int drainRelief = plan.settings.terrainRelief()
                     ? CityTerrain40.offset(plan, cx, cz + 10) : 0;
