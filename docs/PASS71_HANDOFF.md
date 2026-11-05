@@ -450,3 +450,21 @@ smithing tables, looms, stonecutters and composters.
   12 enterable, 0 ERROR lines. The client run has 0 errors and 0 exceptions.
 - **Still open from the review:** the Cavern Burrower model is plain (just a body, head and four paws) and needs a
   proper redesign with the owner's input. The HUD, menus, items, blocks and ores passed review.
+
+## 13. Pass 75: Cavern Burrower redesign (2026-11-04)
+
+The owner asked for the Burrower, the weakest mob in the Pass 74 review, to be "something from Dorohedoro". It is
+now **a sorcerer's failed experiment that crawled into the sewers**. The design is original, not a specific
+character:
+- a stitched gray-mauve body with cross-stitched seams;
+- a cracked bone-white mask strapped over its face, with dark eyeholes, a breathing grille and a crack;
+- rusted gray sewer-iron plates riveted to its back;
+- oversized rusted claws with pale tips, and a short tail.
+
+- **Generator:** `tools/ui/gen-burrower.mjs` holds one cube list and writes both
+  `client/entity/CavernBurrowerModel.java` and the 128x64 texture (vanilla texel density; the old one was 512x256).
+  **Edit the generator, not the model file.**
+- **Animation:** diagonal-pair gait, tail sway, the head tracks its target, and a lunge on attack. The hitbox,
+  behavior and sounds are unchanged.
+- **Verified:** real client, front, side, back and above, with no missing faces, holes or UV errors, 0 errors and 0
+  exceptions. Shots are in `docs/evidence/pass75/`.
