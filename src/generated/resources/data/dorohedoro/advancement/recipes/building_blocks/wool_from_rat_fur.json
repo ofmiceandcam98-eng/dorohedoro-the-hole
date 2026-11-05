@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_rat_fur": {
+      "conditions": {
+        "items": [
+          {
+            "items": "dorohedoro:rat_fur"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "dorohedoro:wool_from_rat_fur"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_rat_fur"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "dorohedoro:wool_from_rat_fur"
+    ]
+  }
+}

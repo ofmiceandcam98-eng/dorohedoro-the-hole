@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "dorohedoro:sw_city",
+    "dorohedoro:sw_city_edge",
+    "dorohedoro:sw_farmland",
+    "dorohedoro:sw_woodland",
+    "dorohedoro:sw_hydra_forest",
+    "dorohedoro:sw_blight",
+    "dorohedoro:sw_waters",
+    "dorohedoro:sw_caves"
+  ]
+}

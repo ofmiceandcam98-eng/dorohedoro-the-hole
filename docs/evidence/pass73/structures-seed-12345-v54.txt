@@ -1,0 +1,31 @@
+Seed 12345, world_detail_version 54, QA_STRUCTURES=true bash tools/qa-world.sh 12345 6
+
+minecraft:stronghold              verified   pos 2384, 0, -3888  dist 1833  20 ms  marker minecraft:end_portal_frame x12
+minecraft:ancient_city            verified   pos 4016, 0, -3024  dist 253  0 ms  marker minecraft:sculk_shrieker x1
+minecraft:trial_chambers          verified   pos 3312, 0, -3808  dist 1138  187 ms  marker minecraft:trial_spawner x1
+minecraft:mineshaft               verified   pos 3856, 0, -2928  dist 113  0 ms  marker minecraft:rail x1
+minecraft:monument                verified   pos 6896, 0, -1280  dist 3392  27 ms  marker minecraft:prismarine x1
+minecraft:shipwreck               found      pos 6384, 0, -1104  dist 3040  197 ms
+minecraft:ocean_ruin_cold         found      pos 6512, 0, -1264  dist 3063  180 ms
+minecraft:ocean_ruin_warm         not found within 100 chunks pos undefined  dist undefined  0 ms
+minecraft:desert_pyramid          found      pos 3312, 0, -2848  dist 559  1 ms
+minecraft:jungle_pyramid          found      pos 2288, 0, -3856  dist 1894  0 ms
+minecraft:igloo                   found      pos 2400, 0, -1776  dist 1801  20 ms
+minecraft:trail_ruins             found      pos 2192, 0, -3952  dist 2027  14 ms
+minecraft:mansion                 found      pos 4064, 0, -5056  dist 2248  45 ms
+minecraft:pillager_outpost        found      pos 4192, 0, -2752  dist 327  16 ms
+minecraft:village_plains          found      pos 4064, 0, -2544  dist 333  4 ms
+minecraft:village_desert          found      pos 3392, 0, -3728  dist 1030  1 ms
+minecraft:village_savanna         found      pos 3840, 0, -3152  dist 337  0 ms
+minecraft:village_snowy           found      pos 2240, 0, -2000  dist 1823  139 ms
+minecraft:village_taiga           found      pos 2352, 0, -3648  dist 1731  15 ms
+minecraft:ruined_portal           found      pos 3568, 0, -2848  dist 304  24 ms
+minecraft:swamp_hut               found      pos 3744, 0, -1888  dist 936  12 ms
+minecraft:buried_treasure         not found within 100 chunks pos undefined  dist undefined  911 ms
+minecraft:fortress                verified   pos 112, 0, 672  dist 681  178 ms  marker minecraft:nether_bricks x1
+minecraft:bastion_remnant         found      pos 192, 0, 320  dist 373  0 ms
+minecraft:end_city                verified   pos 992, 0, 384  dist 1063  197 ms  marker minecraft:purpur_block x1
+
+PASS structure_precheck_matches_vanilla_monument: 441 candidates, 0 mismatches; vanilla 3843 ms, with precheck 2 ms
+PASS structure_precheck_matches_vanilla_desert_pyramid: 441 candidates, 0 mismatches; vanilla 56 ms, with precheck 3 ms
+PASS structure_precheck_matches_vanilla_jungle_pyramid: 441 candidates, 0 mismatches; vanilla 73 ms, with precheck 46 ms

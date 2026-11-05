@@ -2,7 +2,7 @@
   "carvers": {},
   "downfall": 0.6,
   "effects": {
-    "fog_color": 3028016,
+    "fog_color": 5858141,
     "foliage_color": 4477501,
     "grass_color": 5201992,
     "mood_sound": {
@@ -11,7 +11,7 @@
       "sound": "minecraft:ambient.cave",
       "tick_delay": 6000
     },
-    "sky_color": 2501416,
+    "sky_color": 7964545,
     "water_color": 3493951,
     "water_fog_color": 1186836
   },
@@ -54,7 +54,12 @@
       "minecraft:ore_lapis_buried",
       "minecraft:ore_copper",
       "minecraft:underwater_magma",
-      "minecraft:ore_emerald"
+      "minecraft:ore_emerald",
+      "dorohedoro:sulfur_veins",
+      "dorohedoro:rock_salt_veins",
+      "dorohedoro:limestone_pockets",
+      "dorohedoro:zinc_veins",
+      "dorohedoro:oil_shale_veins"
     ],
     [
       "minecraft:ore_infested"
@@ -78,6 +83,18 @@
         "maxCount": 8,
         "minCount": 8,
         "weight": 10
+      },
+      {
+        "type": "dorohedoro:scrap_rat",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 30
+      },
+      {
+        "type": "dorohedoro:glow_moth",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 18
       }
     ],
     "axolotls": [
@@ -88,7 +105,14 @@
         "weight": 4
       }
     ],
-    "creature": [],
+    "creature": [
+      {
+        "type": "dorohedoro:rust_eater_beetle",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 18
+      }
+    ],
     "misc": [],
     "monster": [
       {
@@ -138,6 +162,36 @@
         "maxCount": 1,
         "minCount": 1,
         "weight": 5
+      },
+      {
+        "type": "dorohedoro:sewer_roach",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 65
+      },
+      {
+        "type": "dorohedoro:sewer_leech",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 22
+      },
+      {
+        "type": "dorohedoro:sludge_crawler",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 14
+      },
+      {
+        "type": "dorohedoro:cavern_burrower",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 7
+      },
+      {
+        "type": "dorohedoro:spore_crawler",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 14
       }
     ],
     "underground_water_creature": [

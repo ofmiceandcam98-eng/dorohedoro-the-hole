@@ -1,0 +1,865 @@
+{
+  "mob": "sludge_crawler",
+  "class": "SludgeCrawler",
+  "texture_size": [
+    512,
+    256
+  ],
+  "groups": {
+    "body": [
+      {
+        "name": "sludge_stratum_0",
+        "xyz": [
+          -5.0,
+          -5.3,
+          -5
+        ],
+        "dim": [
+          10.0,
+          1.2,
+          2.0
+        ],
+        "material": "sludge_sheen",
+        "uv": [
+          2,
+          2
+        ]
+      },
+      {
+        "name": "sludge_stratum_1",
+        "xyz": [
+          -4.6,
+          -5.7,
+          -3
+        ],
+        "dim": [
+          9.2,
+          1.2,
+          2.0
+        ],
+        "material": "sludge_ooze",
+        "uv": [
+          30,
+          2
+        ]
+      },
+      {
+        "name": "sludge_stratum_2",
+        "xyz": [
+          -5.0,
+          -6.1,
+          -1
+        ],
+        "dim": [
+          10.0,
+          1.2,
+          2.0
+        ],
+        "material": "sludge_sheen",
+        "uv": [
+          58,
+          2
+        ]
+      },
+      {
+        "name": "sludge_stratum_3",
+        "xyz": [
+          -4.6,
+          -5.3,
+          1
+        ],
+        "dim": [
+          9.2,
+          1.2,
+          2.0
+        ],
+        "material": "sludge_ooze",
+        "uv": [
+          86,
+          2
+        ]
+      },
+      {
+        "name": "sludge_stratum_4",
+        "xyz": [
+          -5.0,
+          -5.7,
+          3
+        ],
+        "dim": [
+          10.0,
+          1.2,
+          2.0
+        ],
+        "material": "sludge_sheen",
+        "uv": [
+          114,
+          2
+        ]
+      },
+      {
+        "name": "sludge_stratum_5",
+        "xyz": [
+          -4.6,
+          -6.1,
+          5
+        ],
+        "dim": [
+          9.2,
+          1.2,
+          2.0
+        ],
+        "material": "sludge_ooze",
+        "uv": [
+          142,
+          2
+        ]
+      },
+      {
+        "name": "sludged_plate_0",
+        "xyz": [
+          -5.1,
+          -5.1,
+          -4.5
+        ],
+        "dim": [
+          10.2,
+          0.8,
+          1.95
+        ],
+        "material": "sludge_body",
+        "uv": [
+          170,
+          2
+        ]
+      },
+      {
+        "name": "sludged_plate_1",
+        "xyz": [
+          -4.95,
+          -5.45,
+          -2.85
+        ],
+        "dim": [
+          9.9,
+          0.8,
+          1.95
+        ],
+        "material": "sludge_ooze",
+        "uv": [
+          200,
+          2
+        ]
+      },
+      {
+        "name": "sludged_plate_2",
+        "xyz": [
+          -4.8,
+          -5.8,
+          -1.2
+        ],
+        "dim": [
+          9.6,
+          0.8,
+          1.95
+        ],
+        "material": "sludge_body",
+        "uv": [
+          228,
+          2
+        ]
+      },
+      {
+        "name": "sludged_plate_3",
+        "xyz": [
+          -4.65,
+          -5.1,
+          0.45
+        ],
+        "dim": [
+          9.3,
+          0.8,
+          1.95
+        ],
+        "material": "sludge_ooze",
+        "uv": [
+          256,
+          2
+        ]
+      },
+      {
+        "name": "sludged_plate_4",
+        "xyz": [
+          -4.5,
+          -5.45,
+          2.1
+        ],
+        "dim": [
+          9.0,
+          0.8,
+          1.95
+        ],
+        "material": "sludge_body",
+        "uv": [
+          284,
+          2
+        ]
+      },
+      {
+        "name": "sludged_plate_5",
+        "xyz": [
+          -4.35,
+          -5.8,
+          3.75
+        ],
+        "dim": [
+          8.7,
+          0.8,
+          1.95
+        ],
+        "material": "sludge_ooze",
+        "uv": [
+          310,
+          2
+        ]
+      },
+      {
+        "name": "sludged_plate_6",
+        "xyz": [
+          -4.2,
+          -5.1,
+          5.4
+        ],
+        "dim": [
+          8.4,
+          0.8,
+          1.95
+        ],
+        "material": "sludge_body",
+        "uv": [
+          336,
+          2
+        ]
+      },
+      {
+        "name": "organic_sludge_slope_0",
+        "xyz": [
+          -4.7,
+          -4.85,
+          -6.0
+        ],
+        "dim": [
+          9.4,
+          5.0,
+          3.1
+        ],
+        "material": "sludge_ooze",
+        "uv": [
+          362,
+          2
+        ]
+      },
+      {
+        "name": "organic_sludge_slope_1",
+        "xyz": [
+          -5.0,
+          -4.5,
+          -3.55
+        ],
+        "dim": [
+          10.0,
+          5.5,
+          3.1
+        ],
+        "material": "sludge_body",
+        "uv": [
+          394,
+          2
+        ]
+      },
+      {
+        "name": "organic_sludge_slope_2",
+        "xyz": [
+          -5.3,
+          -4.85,
+          -1.1
+        ],
+        "dim": [
+          10.6,
+          5.0,
+          3.1
+        ],
+        "material": "sludge_ooze",
+        "uv": [
+          426,
+          2
+        ]
+      },
+      {
+        "name": "organic_sludge_slope_3",
+        "xyz": [
+          -5.0,
+          -4.5,
+          1.35
+        ],
+        "dim": [
+          10.0,
+          5.5,
+          3.1
+        ],
+        "material": "sludge_body",
+        "uv": [
+          460,
+          2
+        ]
+      },
+      {
+        "name": "organic_sludge_slope_4",
+        "xyz": [
+          -4.7,
+          -4.85,
+          3.8
+        ],
+        "dim": [
+          9.4,
+          5.0,
+          3.1
+        ],
+        "material": "sludge_ooze",
+        "uv": [
+          2,
+          16
+        ]
+      }
+    ],
+    "tentacle_l": [
+      {
+        "name": "limb_base",
+        "xyz": [
+          -7,
+          -2,
+          -2
+        ],
+        "dim": [
+          3,
+          3,
+          6
+        ],
+        "material": "sludge_tentacle",
+        "uv": [
+          34,
+          16
+        ]
+      },
+      {
+        "name": "limb_tip",
+        "xyz": [
+          -8.6,
+          -0.2,
+          -4
+        ],
+        "dim": [
+          3,
+          3,
+          7
+        ],
+        "material": "sludge_ooze",
+        "uv": [
+          56,
+          16
+        ]
+      },
+      {
+        "name": "arm_striation_0",
+        "xyz": [
+          -8.8,
+          -0.9,
+          -3.5
+        ],
+        "dim": [
+          1.1,
+          0.36,
+          5.1
+        ],
+        "material": "sludge_sheen",
+        "uv": [
+          80,
+          16
+        ]
+      },
+      {
+        "name": "arm_striation_1",
+        "xyz": [
+          -8.8,
+          -0.08,
+          -3.5
+        ],
+        "dim": [
+          1.1,
+          0.36,
+          5.1
+        ],
+        "material": "sludge_sheen",
+        "uv": [
+          100,
+          16
+        ]
+      },
+      {
+        "name": "arm_striation_2",
+        "xyz": [
+          -8.8,
+          0.74,
+          -3.5
+        ],
+        "dim": [
+          1.1,
+          0.36,
+          5.1
+        ],
+        "material": "sludge_sheen",
+        "uv": [
+          120,
+          16
+        ]
+      }
+    ],
+    "tentacle_r": [
+      {
+        "name": "limb_base",
+        "xyz": [
+          4,
+          -2,
+          -2
+        ],
+        "dim": [
+          3,
+          3,
+          6
+        ],
+        "material": "sludge_tentacle",
+        "uv": [
+          140,
+          16
+        ]
+      },
+      {
+        "name": "limb_tip",
+        "xyz": [
+          6,
+          -0.2,
+          -4
+        ],
+        "dim": [
+          3,
+          3,
+          7
+        ],
+        "material": "sludge_ooze",
+        "uv": [
+          162,
+          16
+        ]
+      },
+      {
+        "name": "arm_striation_0",
+        "xyz": [
+          7.1,
+          -0.9,
+          -3.5
+        ],
+        "dim": [
+          1.1,
+          0.36,
+          5.1
+        ],
+        "material": "sludge_sheen",
+        "uv": [
+          186,
+          16
+        ]
+      },
+      {
+        "name": "arm_striation_1",
+        "xyz": [
+          7.1,
+          -0.08,
+          -3.5
+        ],
+        "dim": [
+          1.1,
+          0.36,
+          5.1
+        ],
+        "material": "sludge_sheen",
+        "uv": [
+          206,
+          16
+        ]
+      },
+      {
+        "name": "arm_striation_2",
+        "xyz": [
+          7.1,
+          0.74,
+          -3.5
+        ],
+        "dim": [
+          1.1,
+          0.36,
+          5.1
+        ],
+        "material": "sludge_sheen",
+        "uv": [
+          226,
+          16
+        ]
+      }
+    ],
+    "head": [
+      {
+        "name": "visage",
+        "xyz": [
+          -4,
+          -4,
+          -5.5
+        ],
+        "dim": [
+          8,
+          5,
+          4
+        ],
+        "material": "sludge_body",
+        "uv": [
+          246,
+          16
+        ]
+      },
+      {
+        "name": "eye_-1",
+        "xyz": [
+          -2.9,
+          -2.5,
+          -6.1
+        ],
+        "dim": [
+          1.2,
+          1.2,
+          0.8
+        ],
+        "material": "sludge_eye",
+        "uv": [
+          274,
+          16
+        ]
+      },
+      {
+        "name": "eye_1",
+        "xyz": [
+          1.8,
+          -2.5,
+          -6.1
+        ],
+        "dim": [
+          1.2,
+          1.2,
+          0.8
+        ],
+        "material": "sludge_eye",
+        "uv": [
+          284,
+          16
+        ]
+      },
+      {
+        "name": "mouth",
+        "xyz": [
+          -2.3,
+          -0.5,
+          -6.3
+        ],
+        "dim": [
+          4.6,
+          1.0,
+          0.8
+        ],
+        "material": "sludge_ooze",
+        "uv": [
+          294,
+          16
+        ]
+      },
+      {
+        "name": "oozing_tooth_0",
+        "xyz": [
+          -2.1,
+          0.0,
+          -6.85
+        ],
+        "dim": [
+          0.6,
+          0.85,
+          0.48
+        ],
+        "material": "sludge_sheen",
+        "uv": [
+          310,
+          16
+        ]
+      },
+      {
+        "name": "oozing_tooth_1",
+        "xyz": [
+          -1.0,
+          0.0,
+          -6.85
+        ],
+        "dim": [
+          0.6,
+          0.85,
+          0.48
+        ],
+        "material": "sludge_sheen",
+        "uv": [
+          318,
+          16
+        ]
+      },
+      {
+        "name": "oozing_tooth_2",
+        "xyz": [
+          0.1,
+          0.0,
+          -6.85
+        ],
+        "dim": [
+          0.6,
+          0.85,
+          0.48
+        ],
+        "material": "sludge_sheen",
+        "uv": [
+          326,
+          16
+        ]
+      },
+      {
+        "name": "oozing_tooth_3",
+        "xyz": [
+          1.2,
+          0.0,
+          -6.85
+        ],
+        "dim": [
+          0.6,
+          0.85,
+          0.48
+        ],
+        "material": "sludge_sheen",
+        "uv": [
+          334,
+          16
+        ]
+      }
+    ],
+    "drip_0": [
+      {
+        "name": "drip_0",
+        "xyz": [
+          -4.0,
+          0,
+          -4
+        ],
+        "dim": [
+          0.7,
+          1.4,
+          0.7
+        ],
+        "material": "sludge_ooze",
+        "uv": [
+          342,
+          16
+        ]
+      }
+    ],
+    "drip_1": [
+      {
+        "name": "drip_1",
+        "xyz": [
+          -2.5,
+          0,
+          0
+        ],
+        "dim": [
+          0.7,
+          1.9,
+          0.7
+        ],
+        "material": "sludge_ooze",
+        "uv": [
+          350,
+          16
+        ]
+      }
+    ],
+    "drip_2": [
+      {
+        "name": "drip_2",
+        "xyz": [
+          -1.0,
+          0,
+          4
+        ],
+        "dim": [
+          0.7,
+          2.4,
+          0.7
+        ],
+        "material": "sludge_ooze",
+        "uv": [
+          358,
+          16
+        ]
+      }
+    ],
+    "drip_3": [
+      {
+        "name": "drip_3",
+        "xyz": [
+          0.5,
+          0,
+          -4
+        ],
+        "dim": [
+          0.7,
+          1.4,
+          0.7
+        ],
+        "material": "sludge_ooze",
+        "uv": [
+          366,
+          16
+        ]
+      }
+    ],
+    "drip_4": [
+      {
+        "name": "drip_4",
+        "xyz": [
+          2.0,
+          0,
+          0
+        ],
+        "dim": [
+          0.7,
+          1.9,
+          0.7
+        ],
+        "material": "sludge_ooze",
+        "uv": [
+          374,
+          16
+        ]
+      }
+    ],
+    "drip_5": [
+      {
+        "name": "drip_5",
+        "xyz": [
+          3.5,
+          0,
+          4
+        ],
+        "dim": [
+          0.7,
+          2.4,
+          0.7
+        ],
+        "material": "sludge_ooze",
+        "uv": [
+          382,
+          16
+        ]
+      }
+    ]
+  },
+  "animations": {
+    "body.y": "19.150F + motion * (0.20F + 0.28F * Mth.cos(limbSwing * 1.72F)) + Mth.sin(ageInTicks * 0.11F) * 0.055F",
+    "body.z": "0.680F - motion * 0.65F * Mth.sin(limbSwing * 0.86F)",
+    "body.xRot": "Mth.sin(ageInTicks * 0.14F) * 0.045F + motion * Mth.sin(limbSwing * 1.72F) * 0.115F + recoil * 0.10F",
+    "body.zRot": "Mth.sin(ageInTicks * 0.12F) * 0.035F + motion * Mth.sin(limbSwing * 0.86F) * 0.13F",
+    "head.xRot": "Mth.sin(ageInTicks * 0.17F) * 0.055F + motion * Mth.sin(limbSwing * 1.72F - 0.8F) * 0.11F - attack * 0.42F",
+    "head.yRot": "Mth.sin(ageInTicks * 0.08F) * 0.075F + motion * Mth.sin(limbSwing * 0.86F - 1.1F) * 0.11F",
+    "head.y": "19.50F + motion * 0.20F * Mth.sin(limbSwing * 1.72F - 0.7F)",
+    "tentacle_l.xRot": "Mth.sin(ageInTicks * 0.26F + 0.30F) * 0.13F + motion * Mth.sin(limbSwing * 1.72F - 0.60F) * 0.49F - attack * 0.65F",
+    "tentacle_l.yRot": "1 * (0.14F + motion * Mth.sin(limbSwing * 0.86F - 0.7F) * 0.27F)",
+    "tentacle_l.zRot": "1 * motion * Mth.cos(limbSwing * 1.72F - 0.8F) * 0.11F",
+    "tentacle_r.xRot": "Mth.sin(ageInTicks * 0.26F + 2.90F) * 0.13F + motion * Mth.sin(limbSwing * 1.72F - 1.80F) * 0.49F - attack * 0.65F",
+    "tentacle_r.yRot": "-1 * (0.14F + motion * Mth.sin(limbSwing * 0.86F - 0.7F) * 0.27F)",
+    "tentacle_r.zRot": "-1 * motion * Mth.cos(limbSwing * 1.72F - 0.8F) * 0.11F",
+    "drip_0.xRot": "motion * Mth.sin(limbSwing * 1.72F - 0.000F) * 0.16F + Mth.sin(ageInTicks * 0.17F + 0.000F) * 0.04F",
+    "drip_0.zRot": "Mth.sin(ageInTicks * 0.19F - 0.000F) * (0.06F + motion * 0.10F)",
+    "drip_1.xRot": "motion * Mth.sin(limbSwing * 1.72F - 0.380F) * 0.16F + Mth.sin(ageInTicks * 0.17F + 0.570F) * 0.04F",
+    "drip_1.zRot": "Mth.sin(ageInTicks * 0.19F - 0.510F) * (0.06F + motion * 0.10F)",
+    "drip_2.xRot": "motion * Mth.sin(limbSwing * 1.72F - 0.760F) * 0.16F + Mth.sin(ageInTicks * 0.17F + 1.140F) * 0.04F",
+    "drip_2.zRot": "Mth.sin(ageInTicks * 0.19F - 1.020F) * (0.06F + motion * 0.10F)",
+    "drip_3.xRot": "motion * Mth.sin(limbSwing * 1.72F - 1.140F) * 0.16F + Mth.sin(ageInTicks * 0.17F + 1.710F) * 0.04F",
+    "drip_3.zRot": "Mth.sin(ageInTicks * 0.19F - 1.530F) * (0.06F + motion * 0.10F)",
+    "drip_4.xRot": "motion * Mth.sin(limbSwing * 1.72F - 1.520F) * 0.16F + Mth.sin(ageInTicks * 0.17F + 2.280F) * 0.04F",
+    "drip_4.zRot": "Mth.sin(ageInTicks * 0.19F - 2.040F) * (0.06F + motion * 0.10F)",
+    "drip_5.xRot": "motion * Mth.sin(limbSwing * 1.72F - 1.900F) * 0.16F + Mth.sin(ageInTicks * 0.17F + 2.850F) * 0.04F",
+    "drip_5.zRot": "Mth.sin(ageInTicks * 0.19F - 2.550F) * (0.06F + motion * 0.10F)"
+  },
+  "part_pivots": {
+    "body": [
+      0,
+      -1.85,
+      0.68
+    ],
+    "tentacle_l": [
+      -4,
+      -1.7,
+      0.0
+    ],
+    "tentacle_r": [
+      4,
+      -1.7,
+      0.0
+    ],
+    "head": [
+      0,
+      -1.5,
+      -2.0
+    ],
+    "drip_0": [
+      -3.65,
+      -0.2,
+      -3.65
+    ],
+    "drip_1": [
+      -2.15,
+      -0.2,
+      0.35
+    ],
+    "drip_2": [
+      -0.65,
+      -0.2,
+      4.35
+    ],
+    "drip_3": [
+      0.85,
+      -0.2,
+      -3.65
+    ],
+    "drip_4": [
+      2.35,
+      -0.2,
+      0.35
+    ],
+    "drip_5": [
+      3.85,
+      -0.2,
+      4.35
+    ]
+  }
+}

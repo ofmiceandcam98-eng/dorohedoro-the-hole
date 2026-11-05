@@ -1,0 +1,2335 @@
+{
+  "mob": "scrap_rat",
+  "class": "ScrapRat",
+  "texture_size": [
+    512,
+    256
+  ],
+  "groups": {
+    "body": [
+      {
+        "name": "belly",
+        "xyz": [
+          -3.2,
+          -0.1,
+          -3
+        ],
+        "dim": [
+          6.4,
+          1.1,
+          8.7
+        ],
+        "material": "rat_light",
+        "uv": [
+          2,
+          2
+        ]
+      },
+      {
+        "name": "lower_fur_-1_0",
+        "xyz": [
+          -3.698,
+          -0.25,
+          -3.1
+        ],
+        "dim": [
+          0.62,
+          1.2,
+          1.0
+        ],
+        "material": "rat_fur",
+        "uv": [
+          38,
+          2
+        ]
+      },
+      {
+        "name": "lower_fur_1_0",
+        "xyz": [
+          3.251,
+          -0.25,
+          -3.1
+        ],
+        "dim": [
+          0.62,
+          1.2,
+          1.0
+        ],
+        "material": "rat_fur",
+        "uv": [
+          46,
+          2
+        ]
+      },
+      {
+        "name": "lower_fur_-1_1",
+        "xyz": [
+          -3.698,
+          -0.25,
+          -1.65
+        ],
+        "dim": [
+          0.62,
+          1.2,
+          1.0
+        ],
+        "material": "rat_fur",
+        "uv": [
+          54,
+          2
+        ]
+      },
+      {
+        "name": "lower_fur_1_1",
+        "xyz": [
+          3.251,
+          -0.25,
+          -1.65
+        ],
+        "dim": [
+          0.62,
+          1.2,
+          1.0
+        ],
+        "material": "rat_fur",
+        "uv": [
+          62,
+          2
+        ]
+      },
+      {
+        "name": "lower_fur_-1_2",
+        "xyz": [
+          -3.698,
+          -0.25,
+          -0.2
+        ],
+        "dim": [
+          0.62,
+          1.2,
+          1.0
+        ],
+        "material": "rat_fur",
+        "uv": [
+          70,
+          2
+        ]
+      },
+      {
+        "name": "lower_fur_1_2",
+        "xyz": [
+          3.251,
+          -0.25,
+          -0.2
+        ],
+        "dim": [
+          0.62,
+          1.2,
+          1.0
+        ],
+        "material": "rat_fur",
+        "uv": [
+          78,
+          2
+        ]
+      },
+      {
+        "name": "lower_fur_-1_3",
+        "xyz": [
+          -3.698,
+          -0.25,
+          1.25
+        ],
+        "dim": [
+          0.62,
+          1.2,
+          1.0
+        ],
+        "material": "rat_fur",
+        "uv": [
+          86,
+          2
+        ]
+      },
+      {
+        "name": "lower_fur_1_3",
+        "xyz": [
+          3.251,
+          -0.25,
+          1.25
+        ],
+        "dim": [
+          0.62,
+          1.2,
+          1.0
+        ],
+        "material": "rat_fur",
+        "uv": [
+          94,
+          2
+        ]
+      },
+      {
+        "name": "lower_fur_-1_4",
+        "xyz": [
+          -3.698,
+          -0.25,
+          2.7
+        ],
+        "dim": [
+          0.62,
+          1.2,
+          1.0
+        ],
+        "material": "rat_fur",
+        "uv": [
+          102,
+          2
+        ]
+      },
+      {
+        "name": "lower_fur_1_4",
+        "xyz": [
+          3.251,
+          -0.25,
+          2.7
+        ],
+        "dim": [
+          0.62,
+          1.2,
+          1.0
+        ],
+        "material": "rat_fur",
+        "uv": [
+          110,
+          2
+        ]
+      },
+      {
+        "name": "lower_fur_-1_5",
+        "xyz": [
+          -3.698,
+          -0.25,
+          4.15
+        ],
+        "dim": [
+          0.62,
+          1.2,
+          1.0
+        ],
+        "material": "rat_fur",
+        "uv": [
+          118,
+          2
+        ]
+      },
+      {
+        "name": "lower_fur_1_5",
+        "xyz": [
+          3.251,
+          -0.25,
+          4.15
+        ],
+        "dim": [
+          0.62,
+          1.2,
+          1.0
+        ],
+        "material": "rat_fur",
+        "uv": [
+          126,
+          2
+        ]
+      },
+      {
+        "name": "lower_fur_-1_6",
+        "xyz": [
+          -3.698,
+          -0.25,
+          5.6
+        ],
+        "dim": [
+          0.62,
+          1.2,
+          1.0
+        ],
+        "material": "rat_fur",
+        "uv": [
+          134,
+          2
+        ]
+      },
+      {
+        "name": "lower_fur_1_6",
+        "xyz": [
+          3.251,
+          -0.25,
+          5.6
+        ],
+        "dim": [
+          0.62,
+          1.2,
+          1.0
+        ],
+        "material": "rat_fur",
+        "uv": [
+          142,
+          2
+        ]
+      },
+      {
+        "name": "body_pelt_0",
+        "xyz": [
+          -3.674,
+          -5.422,
+          -4.7
+        ],
+        "dim": [
+          7.349,
+          6.122,
+          2.4
+        ],
+        "material": "rat_dark",
+        "uv": [
+          150,
+          2
+        ]
+      },
+      {
+        "name": "layered_fur_0_-1_0",
+        "xyz": [
+          -3.994,
+          -5.2,
+          -4.42
+        ],
+        "dim": [
+          0.65,
+          0.95,
+          1.2
+        ],
+        "material": "rat_light",
+        "uv": [
+          176,
+          2
+        ]
+      },
+      {
+        "name": "layered_fur_0_-1_1",
+        "xyz": [
+          -3.994,
+          -4.0,
+          -4.17
+        ],
+        "dim": [
+          0.65,
+          0.95,
+          1.2
+        ],
+        "material": "rat_fur",
+        "uv": [
+          186,
+          2
+        ]
+      },
+      {
+        "name": "layered_fur_0_-1_2",
+        "xyz": [
+          -3.994,
+          -2.8,
+          -3.92
+        ],
+        "dim": [
+          0.65,
+          0.95,
+          1.2
+        ],
+        "material": "rat_fur",
+        "uv": [
+          196,
+          2
+        ]
+      },
+      {
+        "name": "layered_fur_0_1_0",
+        "xyz": [
+          3.234,
+          -5.2,
+          -4.42
+        ],
+        "dim": [
+          0.65,
+          0.95,
+          1.2
+        ],
+        "material": "rat_light",
+        "uv": [
+          206,
+          2
+        ]
+      },
+      {
+        "name": "layered_fur_0_1_1",
+        "xyz": [
+          3.234,
+          -4.0,
+          -4.17
+        ],
+        "dim": [
+          0.65,
+          0.95,
+          1.2
+        ],
+        "material": "rat_fur",
+        "uv": [
+          216,
+          2
+        ]
+      },
+      {
+        "name": "layered_fur_0_1_2",
+        "xyz": [
+          3.234,
+          -2.8,
+          -3.92
+        ],
+        "dim": [
+          0.65,
+          0.95,
+          1.2
+        ],
+        "material": "rat_fur",
+        "uv": [
+          226,
+          2
+        ]
+      },
+      {
+        "name": "body_pelt_1",
+        "xyz": [
+          -4.076,
+          -5.867,
+          -2.85
+        ],
+        "dim": [
+          8.151,
+          6.567,
+          2.4
+        ],
+        "material": "rat_fur",
+        "uv": [
+          236,
+          2
+        ]
+      },
+      {
+        "name": "layered_fur_1_-1_0",
+        "xyz": [
+          -4.396,
+          -5.2,
+          -2.57
+        ],
+        "dim": [
+          0.65,
+          0.95,
+          1.2
+        ],
+        "material": "rat_fur",
+        "uv": [
+          264,
+          2
+        ]
+      },
+      {
+        "name": "layered_fur_1_-1_1",
+        "xyz": [
+          -4.396,
+          -4.0,
+          -2.32
+        ],
+        "dim": [
+          0.65,
+          0.95,
+          1.2
+        ],
+        "material": "rat_fur",
+        "uv": [
+          274,
+          2
+        ]
+      },
+      {
+        "name": "layered_fur_1_-1_2",
+        "xyz": [
+          -4.396,
+          -2.8,
+          -2.07
+        ],
+        "dim": [
+          0.65,
+          0.95,
+          1.2
+        ],
+        "material": "rat_light",
+        "uv": [
+          284,
+          2
+        ]
+      },
+      {
+        "name": "layered_fur_1_1_0",
+        "xyz": [
+          3.636,
+          -5.2,
+          -2.57
+        ],
+        "dim": [
+          0.65,
+          0.95,
+          1.2
+        ],
+        "material": "rat_fur",
+        "uv": [
+          294,
+          2
+        ]
+      },
+      {
+        "name": "layered_fur_1_1_1",
+        "xyz": [
+          3.636,
+          -4.0,
+          -2.32
+        ],
+        "dim": [
+          0.65,
+          0.95,
+          1.2
+        ],
+        "material": "rat_fur",
+        "uv": [
+          304,
+          2
+        ]
+      },
+      {
+        "name": "layered_fur_1_1_2",
+        "xyz": [
+          3.636,
+          -2.8,
+          -2.07
+        ],
+        "dim": [
+          0.65,
+          0.95,
+          1.2
+        ],
+        "material": "rat_light",
+        "uv": [
+          314,
+          2
+        ]
+      },
+      {
+        "name": "backlight_fur_1",
+        "xyz": [
+          -2.445,
+          -6.667,
+          -2.75
+        ],
+        "dim": [
+          4.891,
+          0.45,
+          1.3
+        ],
+        "material": "rat_light",
+        "uv": [
+          324,
+          2
+        ]
+      },
+      {
+        "name": "body_pelt_2",
+        "xyz": [
+          -4.333,
+          -6.141,
+          -1.0
+        ],
+        "dim": [
+          8.666,
+          6.841,
+          2.4
+        ],
+        "material": "rat_dark",
+        "uv": [
+          342,
+          2
+        ]
+      },
+      {
+        "name": "layered_fur_2_-1_0",
+        "xyz": [
+          -4.653,
+          -5.2,
+          -0.72
+        ],
+        "dim": [
+          0.65,
+          0.95,
+          1.2
+        ],
+        "material": "rat_fur",
+        "uv": [
+          370,
+          2
+        ]
+      },
+      {
+        "name": "layered_fur_2_-1_1",
+        "xyz": [
+          -4.653,
+          -4.0,
+          -0.47
+        ],
+        "dim": [
+          0.65,
+          0.95,
+          1.2
+        ],
+        "material": "rat_light",
+        "uv": [
+          380,
+          2
+        ]
+      },
+      {
+        "name": "layered_fur_2_-1_2",
+        "xyz": [
+          -4.653,
+          -2.8,
+          -0.22
+        ],
+        "dim": [
+          0.65,
+          0.95,
+          1.2
+        ],
+        "material": "rat_fur",
+        "uv": [
+          390,
+          2
+        ]
+      },
+      {
+        "name": "layered_fur_2_1_0",
+        "xyz": [
+          3.893,
+          -5.2,
+          -0.72
+        ],
+        "dim": [
+          0.65,
+          0.95,
+          1.2
+        ],
+        "material": "rat_fur",
+        "uv": [
+          400,
+          2
+        ]
+      },
+      {
+        "name": "layered_fur_2_1_1",
+        "xyz": [
+          3.893,
+          -4.0,
+          -0.47
+        ],
+        "dim": [
+          0.65,
+          0.95,
+          1.2
+        ],
+        "material": "rat_light",
+        "uv": [
+          410,
+          2
+        ]
+      },
+      {
+        "name": "layered_fur_2_1_2",
+        "xyz": [
+          3.893,
+          -2.8,
+          -0.22
+        ],
+        "dim": [
+          0.65,
+          0.95,
+          1.2
+        ],
+        "material": "rat_fur",
+        "uv": [
+          420,
+          2
+        ]
+      },
+      {
+        "name": "body_pelt_3",
+        "xyz": [
+          -4.396,
+          -6.189,
+          0.85
+        ],
+        "dim": [
+          8.792,
+          6.889,
+          2.4
+        ],
+        "material": "rat_fur",
+        "uv": [
+          430,
+          2
+        ]
+      },
+      {
+        "name": "layered_fur_3_-1_0",
+        "xyz": [
+          -4.716,
+          -5.2,
+          1.13
+        ],
+        "dim": [
+          0.65,
+          0.95,
+          1.2
+        ],
+        "material": "rat_light",
+        "uv": [
+          458,
+          2
+        ]
+      },
+      {
+        "name": "layered_fur_3_-1_1",
+        "xyz": [
+          -4.716,
+          -4.0,
+          1.38
+        ],
+        "dim": [
+          0.65,
+          0.95,
+          1.2
+        ],
+        "material": "rat_fur",
+        "uv": [
+          468,
+          2
+        ]
+      },
+      {
+        "name": "layered_fur_3_-1_2",
+        "xyz": [
+          -4.716,
+          -2.8,
+          1.63
+        ],
+        "dim": [
+          0.65,
+          0.95,
+          1.2
+        ],
+        "material": "rat_fur",
+        "uv": [
+          478,
+          2
+        ]
+      },
+      {
+        "name": "layered_fur_3_1_0",
+        "xyz": [
+          3.956,
+          -5.2,
+          1.13
+        ],
+        "dim": [
+          0.65,
+          0.95,
+          1.2
+        ],
+        "material": "rat_light",
+        "uv": [
+          488,
+          2
+        ]
+      },
+      {
+        "name": "layered_fur_3_1_1",
+        "xyz": [
+          3.956,
+          -4.0,
+          1.38
+        ],
+        "dim": [
+          0.65,
+          0.95,
+          1.2
+        ],
+        "material": "rat_fur",
+        "uv": [
+          498,
+          2
+        ]
+      },
+      {
+        "name": "layered_fur_3_1_2",
+        "xyz": [
+          3.956,
+          -2.8,
+          1.63
+        ],
+        "dim": [
+          0.65,
+          0.95,
+          1.2
+        ],
+        "material": "rat_fur",
+        "uv": [
+          2,
+          17
+        ]
+      },
+      {
+        "name": "backlight_fur_3",
+        "xyz": [
+          -2.637,
+          -6.989,
+          0.95
+        ],
+        "dim": [
+          5.275,
+          0.45,
+          1.3
+        ],
+        "material": "rat_light",
+        "uv": [
+          12,
+          17
+        ]
+      },
+      {
+        "name": "body_pelt_4",
+        "xyz": [
+          -4.251,
+          -6.001,
+          2.7
+        ],
+        "dim": [
+          8.503,
+          6.701,
+          2.4
+        ],
+        "material": "rat_dark",
+        "uv": [
+          32,
+          17
+        ]
+      },
+      {
+        "name": "layered_fur_4_-1_0",
+        "xyz": [
+          -4.571,
+          -5.2,
+          2.98
+        ],
+        "dim": [
+          0.65,
+          0.95,
+          1.2
+        ],
+        "material": "rat_fur",
+        "uv": [
+          60,
+          17
+        ]
+      },
+      {
+        "name": "layered_fur_4_-1_1",
+        "xyz": [
+          -4.571,
+          -4.0,
+          3.23
+        ],
+        "dim": [
+          0.65,
+          0.95,
+          1.2
+        ],
+        "material": "rat_fur",
+        "uv": [
+          70,
+          17
+        ]
+      },
+      {
+        "name": "layered_fur_4_-1_2",
+        "xyz": [
+          -4.571,
+          -2.8,
+          3.48
+        ],
+        "dim": [
+          0.65,
+          0.95,
+          1.2
+        ],
+        "material": "rat_light",
+        "uv": [
+          80,
+          17
+        ]
+      },
+      {
+        "name": "layered_fur_4_1_0",
+        "xyz": [
+          3.811,
+          -5.2,
+          2.98
+        ],
+        "dim": [
+          0.65,
+          0.95,
+          1.2
+        ],
+        "material": "rat_fur",
+        "uv": [
+          90,
+          17
+        ]
+      },
+      {
+        "name": "layered_fur_4_1_1",
+        "xyz": [
+          3.811,
+          -4.0,
+          3.23
+        ],
+        "dim": [
+          0.65,
+          0.95,
+          1.2
+        ],
+        "material": "rat_fur",
+        "uv": [
+          100,
+          17
+        ]
+      },
+      {
+        "name": "layered_fur_4_1_2",
+        "xyz": [
+          3.811,
+          -2.8,
+          3.48
+        ],
+        "dim": [
+          0.65,
+          0.95,
+          1.2
+        ],
+        "material": "rat_light",
+        "uv": [
+          110,
+          17
+        ]
+      },
+      {
+        "name": "body_pelt_5",
+        "xyz": [
+          -3.928,
+          -5.615,
+          4.55
+        ],
+        "dim": [
+          7.857,
+          6.315,
+          2.4
+        ],
+        "material": "rat_fur",
+        "uv": [
+          120,
+          17
+        ]
+      },
+      {
+        "name": "layered_fur_5_-1_0",
+        "xyz": [
+          -4.248,
+          -5.2,
+          4.83
+        ],
+        "dim": [
+          0.65,
+          0.95,
+          1.2
+        ],
+        "material": "rat_fur",
+        "uv": [
+          146,
+          17
+        ]
+      },
+      {
+        "name": "layered_fur_5_-1_1",
+        "xyz": [
+          -4.248,
+          -4.0,
+          5.08
+        ],
+        "dim": [
+          0.65,
+          0.95,
+          1.2
+        ],
+        "material": "rat_light",
+        "uv": [
+          156,
+          17
+        ]
+      },
+      {
+        "name": "layered_fur_5_-1_2",
+        "xyz": [
+          -4.248,
+          -2.8,
+          5.33
+        ],
+        "dim": [
+          0.65,
+          0.95,
+          1.2
+        ],
+        "material": "rat_fur",
+        "uv": [
+          166,
+          17
+        ]
+      },
+      {
+        "name": "layered_fur_5_1_0",
+        "xyz": [
+          3.488,
+          -5.2,
+          4.83
+        ],
+        "dim": [
+          0.65,
+          0.95,
+          1.2
+        ],
+        "material": "rat_fur",
+        "uv": [
+          176,
+          17
+        ]
+      },
+      {
+        "name": "layered_fur_5_1_1",
+        "xyz": [
+          3.488,
+          -4.0,
+          5.08
+        ],
+        "dim": [
+          0.65,
+          0.95,
+          1.2
+        ],
+        "material": "rat_light",
+        "uv": [
+          186,
+          17
+        ]
+      },
+      {
+        "name": "layered_fur_5_1_2",
+        "xyz": [
+          3.488,
+          -2.8,
+          5.33
+        ],
+        "dim": [
+          0.65,
+          0.95,
+          1.2
+        ],
+        "material": "rat_fur",
+        "uv": [
+          196,
+          17
+        ]
+      },
+      {
+        "name": "backlight_fur_5",
+        "xyz": [
+          -2.357,
+          -6.415,
+          4.65
+        ],
+        "dim": [
+          4.714,
+          0.45,
+          1.3
+        ],
+        "material": "rat_light",
+        "uv": [
+          206,
+          17
+        ]
+      },
+      {
+        "name": "body_pelt_6",
+        "xyz": [
+          -3.491,
+          -5.108,
+          6.4
+        ],
+        "dim": [
+          6.982,
+          5.808,
+          2.4
+        ],
+        "material": "rat_dark",
+        "uv": [
+          224,
+          17
+        ]
+      },
+      {
+        "name": "layered_fur_6_-1_0",
+        "xyz": [
+          -3.811,
+          -5.2,
+          6.68
+        ],
+        "dim": [
+          0.65,
+          0.95,
+          1.2
+        ],
+        "material": "rat_light",
+        "uv": [
+          248,
+          17
+        ]
+      },
+      {
+        "name": "layered_fur_6_-1_1",
+        "xyz": [
+          -3.811,
+          -4.0,
+          6.93
+        ],
+        "dim": [
+          0.65,
+          0.95,
+          1.2
+        ],
+        "material": "rat_fur",
+        "uv": [
+          258,
+          17
+        ]
+      },
+      {
+        "name": "layered_fur_6_-1_2",
+        "xyz": [
+          -3.811,
+          -2.8,
+          7.18
+        ],
+        "dim": [
+          0.65,
+          0.95,
+          1.2
+        ],
+        "material": "rat_fur",
+        "uv": [
+          268,
+          17
+        ]
+      },
+      {
+        "name": "layered_fur_6_1_0",
+        "xyz": [
+          3.051,
+          -5.2,
+          6.68
+        ],
+        "dim": [
+          0.65,
+          0.95,
+          1.2
+        ],
+        "material": "rat_light",
+        "uv": [
+          278,
+          17
+        ]
+      },
+      {
+        "name": "layered_fur_6_1_1",
+        "xyz": [
+          3.051,
+          -4.0,
+          6.93
+        ],
+        "dim": [
+          0.65,
+          0.95,
+          1.2
+        ],
+        "material": "rat_fur",
+        "uv": [
+          288,
+          17
+        ]
+      },
+      {
+        "name": "layered_fur_6_1_2",
+        "xyz": [
+          3.051,
+          -2.8,
+          7.18
+        ],
+        "dim": [
+          0.65,
+          0.95,
+          1.2
+        ],
+        "material": "rat_fur",
+        "uv": [
+          298,
+          17
+        ]
+      }
+    ],
+    "head": [
+      {
+        "name": "cheek_l",
+        "xyz": [
+          -3.5,
+          -0.5,
+          -7.6
+        ],
+        "dim": [
+          2,
+          2.8,
+          3
+        ],
+        "material": "rat_light",
+        "uv": [
+          308,
+          17
+        ]
+      },
+      {
+        "name": "cheek_r",
+        "xyz": [
+          1.5,
+          -0.5,
+          -7.6
+        ],
+        "dim": [
+          2,
+          2.8,
+          3
+        ],
+        "material": "rat_light",
+        "uv": [
+          322,
+          17
+        ]
+      },
+      {
+        "name": "snout",
+        "xyz": [
+          -1.8,
+          -1.4,
+          -12.8
+        ],
+        "dim": [
+          3.6,
+          2.3,
+          4
+        ],
+        "material": "rat_light",
+        "uv": [
+          336,
+          17
+        ]
+      },
+      {
+        "name": "nose",
+        "xyz": [
+          -0.8,
+          -0.9,
+          -13.4
+        ],
+        "dim": [
+          1.6,
+          1.2,
+          1.0
+        ],
+        "material": "rat_pink",
+        "uv": [
+          356,
+          17
+        ]
+      },
+      {
+        "name": "ear_-1",
+        "xyz": [
+          -4.2,
+          -7.4,
+          -7.1
+        ],
+        "dim": [
+          2.8,
+          3.5,
+          1.5
+        ],
+        "material": "rat_pink",
+        "uv": [
+          366,
+          17
+        ]
+      },
+      {
+        "name": "inner_ear_-1",
+        "xyz": [
+          -3.7,
+          -7,
+          -7.65
+        ],
+        "dim": [
+          1.8,
+          2.2,
+          0.65
+        ],
+        "material": "rat_inner",
+        "uv": [
+          380,
+          17
+        ]
+      },
+      {
+        "name": "eye_-1",
+        "xyz": [
+          -3.3,
+          -3.1,
+          -8.6
+        ],
+        "dim": [
+          1.2,
+          1.15,
+          1.4
+        ],
+        "material": "rat_eye",
+        "uv": [
+          390,
+          17
+        ]
+      },
+      {
+        "name": "whisker_-1_0",
+        "xyz": [
+          -5.2,
+          0.1,
+          -13.3
+        ],
+        "dim": [
+          3.4,
+          0.35,
+          0.4
+        ],
+        "material": "rat_whisker",
+        "uv": [
+          402,
+          17
+        ]
+      },
+      {
+        "name": "whisker_-1_1",
+        "xyz": [
+          -5.2,
+          0.75,
+          -13.3
+        ],
+        "dim": [
+          3.4,
+          0.35,
+          0.4
+        ],
+        "material": "rat_whisker",
+        "uv": [
+          416,
+          17
+        ]
+      },
+      {
+        "name": "ear_1",
+        "xyz": [
+          1.4,
+          -7.4,
+          -7.1
+        ],
+        "dim": [
+          2.8,
+          3.5,
+          1.5
+        ],
+        "material": "rat_pink",
+        "uv": [
+          430,
+          17
+        ]
+      },
+      {
+        "name": "inner_ear_1",
+        "xyz": [
+          1.9,
+          -7,
+          -7.65
+        ],
+        "dim": [
+          1.8,
+          2.2,
+          0.65
+        ],
+        "material": "rat_inner",
+        "uv": [
+          444,
+          17
+        ]
+      },
+      {
+        "name": "eye_1",
+        "xyz": [
+          2.1,
+          -3.1,
+          -8.6
+        ],
+        "dim": [
+          1.2,
+          1.15,
+          1.4
+        ],
+        "material": "rat_eye",
+        "uv": [
+          454,
+          17
+        ]
+      },
+      {
+        "name": "whisker_1_0",
+        "xyz": [
+          1.8,
+          0.1,
+          -13.3
+        ],
+        "dim": [
+          3.4,
+          0.35,
+          0.4
+        ],
+        "material": "rat_whisker",
+        "uv": [
+          466,
+          17
+        ]
+      },
+      {
+        "name": "whisker_1_1",
+        "xyz": [
+          1.8,
+          0.75,
+          -13.3
+        ],
+        "dim": [
+          3.4,
+          0.35,
+          0.4
+        ],
+        "material": "rat_whisker",
+        "uv": [
+          480,
+          17
+        ]
+      },
+      {
+        "name": "ear_highlight_-1",
+        "xyz": [
+          -3.55,
+          -7.25,
+          -7.9
+        ],
+        "dim": [
+          1.4,
+          0.65,
+          0.58
+        ],
+        "material": "rat_inner",
+        "uv": [
+          494,
+          17
+        ]
+      },
+      {
+        "name": "cheek_fur_-1",
+        "xyz": [
+          -3.95,
+          -1.1,
+          -7.5
+        ],
+        "dim": [
+          1.3,
+          1.5,
+          2.5
+        ],
+        "material": "rat_light",
+        "uv": [
+          2,
+          31
+        ]
+      },
+      {
+        "name": "iris_glint_-1",
+        "xyz": [
+          -3.45,
+          -3.2,
+          -8.0
+        ],
+        "dim": [
+          0.37,
+          0.35,
+          0.45
+        ],
+        "material": "rat_whisker",
+        "uv": [
+          16,
+          31
+        ]
+      },
+      {
+        "name": "whisker_fan_-1_0",
+        "xyz": [
+          -6.3,
+          -0.6,
+          -14.5
+        ],
+        "dim": [
+          3.0,
+          0.22,
+          0.34
+        ],
+        "material": "rat_whisker",
+        "uv": [
+          24,
+          31
+        ]
+      },
+      {
+        "name": "whisker_fan_-1_1",
+        "xyz": [
+          -6.3,
+          0.05,
+          -14.18
+        ],
+        "dim": [
+          3.0,
+          0.22,
+          0.34
+        ],
+        "material": "rat_whisker",
+        "uv": [
+          36,
+          31
+        ]
+      },
+      {
+        "name": "whisker_fan_-1_2",
+        "xyz": [
+          -6.3,
+          0.7,
+          -13.86
+        ],
+        "dim": [
+          3.0,
+          0.22,
+          0.34
+        ],
+        "material": "rat_whisker",
+        "uv": [
+          48,
+          31
+        ]
+      },
+      {
+        "name": "ear_highlight_1",
+        "xyz": [
+          2.05,
+          -7.25,
+          -7.9
+        ],
+        "dim": [
+          1.4,
+          0.65,
+          0.58
+        ],
+        "material": "rat_inner",
+        "uv": [
+          60,
+          31
+        ]
+      },
+      {
+        "name": "cheek_fur_1",
+        "xyz": [
+          2.55,
+          -1.1,
+          -7.5
+        ],
+        "dim": [
+          1.3,
+          1.5,
+          2.5
+        ],
+        "material": "rat_light",
+        "uv": [
+          70,
+          31
+        ]
+      },
+      {
+        "name": "iris_glint_1",
+        "xyz": [
+          2.35,
+          -3.2,
+          -8.0
+        ],
+        "dim": [
+          0.37,
+          0.35,
+          0.45
+        ],
+        "material": "rat_whisker",
+        "uv": [
+          84,
+          31
+        ]
+      },
+      {
+        "name": "whisker_fan_1_0",
+        "xyz": [
+          3.3,
+          -0.6,
+          -14.5
+        ],
+        "dim": [
+          3.0,
+          0.22,
+          0.34
+        ],
+        "material": "rat_whisker",
+        "uv": [
+          92,
+          31
+        ]
+      },
+      {
+        "name": "whisker_fan_1_1",
+        "xyz": [
+          3.3,
+          0.05,
+          -14.18
+        ],
+        "dim": [
+          3.0,
+          0.22,
+          0.34
+        ],
+        "material": "rat_whisker",
+        "uv": [
+          104,
+          31
+        ]
+      },
+      {
+        "name": "whisker_fan_1_2",
+        "xyz": [
+          3.3,
+          0.7,
+          -13.86
+        ],
+        "dim": [
+          3.0,
+          0.22,
+          0.34
+        ],
+        "material": "rat_whisker",
+        "uv": [
+          116,
+          31
+        ]
+      },
+      {
+        "name": "nose_tip",
+        "xyz": [
+          -0.82,
+          -1.2,
+          -14.2
+        ],
+        "dim": [
+          1.65,
+          1.25,
+          0.85
+        ],
+        "material": "rat_pink",
+        "uv": [
+          128,
+          31
+        ]
+      },
+      {
+        "name": "muzzle_tip",
+        "xyz": [
+          -1.2,
+          -0.5,
+          -13.6
+        ],
+        "dim": [
+          2.4,
+          0.85,
+          1
+        ],
+        "material": "rat_light",
+        "uv": [
+          138,
+          31
+        ]
+      },
+      {
+        "name": "tapered_skull",
+        "xyz": [
+          -3.1,
+          -4.4,
+          -9.7
+        ],
+        "dim": [
+          6.2,
+          4.5,
+          5.4
+        ],
+        "material": "rat_fur",
+        "uv": [
+          150,
+          31
+        ]
+      },
+      {
+        "name": "forehead",
+        "xyz": [
+          -2.5,
+          -5.0,
+          -10.6
+        ],
+        "dim": [
+          5.0,
+          2.35,
+          3.9
+        ],
+        "material": "rat_dark",
+        "uv": [
+          180,
+          31
+        ]
+      },
+      {
+        "name": "lower_jaw",
+        "xyz": [
+          -2.4,
+          0.14,
+          -12.0
+        ],
+        "dim": [
+          4.8,
+          1.05,
+          3.3
+        ],
+        "material": "rat_light",
+        "uv": [
+          202,
+          31
+        ]
+      },
+      {
+        "name": "whisker_root",
+        "xyz": [
+          -1.4,
+          -0.25,
+          -13.8
+        ],
+        "dim": [
+          2.8,
+          0.8,
+          1.6
+        ],
+        "material": "rat_light",
+        "uv": [
+          224,
+          31
+        ]
+      }
+    ],
+    "paw_l_0": [
+      {
+        "name": "thigh",
+        "xyz": [
+          -4.0,
+          -0.8,
+          -3
+        ],
+        "dim": [
+          1.5,
+          3.3,
+          2.4
+        ],
+        "material": "rat_fur",
+        "uv": [
+          238,
+          31
+        ]
+      },
+      {
+        "name": "foot",
+        "xyz": [
+          -4.2,
+          2.7,
+          -4
+        ],
+        "dim": [
+          2.1,
+          1,
+          3.5
+        ],
+        "material": "rat_pink",
+        "uv": [
+          252,
+          31
+        ]
+      },
+      {
+        "name": "toe_0",
+        "xyz": [
+          -4.55,
+          3.55,
+          -4.0
+        ],
+        "dim": [
+          0.42,
+          0.45,
+          1.3
+        ],
+        "material": "rat_pink",
+        "uv": [
+          270,
+          31
+        ]
+      },
+      {
+        "name": "toe_1",
+        "xyz": [
+          -4.07,
+          3.55,
+          -4.12
+        ],
+        "dim": [
+          0.42,
+          0.45,
+          1.3
+        ],
+        "material": "rat_pink",
+        "uv": [
+          280,
+          31
+        ]
+      },
+      {
+        "name": "toe_2",
+        "xyz": [
+          -3.59,
+          3.55,
+          -4.24
+        ],
+        "dim": [
+          0.42,
+          0.45,
+          1.3
+        ],
+        "material": "rat_pink",
+        "uv": [
+          290,
+          31
+        ]
+      }
+    ],
+    "paw_l_1": [
+      {
+        "name": "thigh",
+        "xyz": [
+          -4.0,
+          -0.8,
+          5
+        ],
+        "dim": [
+          1.5,
+          3.3,
+          2.4
+        ],
+        "material": "rat_dark",
+        "uv": [
+          300,
+          31
+        ]
+      },
+      {
+        "name": "foot",
+        "xyz": [
+          -4.2,
+          2.7,
+          4
+        ],
+        "dim": [
+          2.1,
+          1,
+          3.5
+        ],
+        "material": "rat_pink",
+        "uv": [
+          314,
+          31
+        ]
+      },
+      {
+        "name": "toe_0",
+        "xyz": [
+          -4.55,
+          3.55,
+          4.1
+        ],
+        "dim": [
+          0.42,
+          0.45,
+          1.3
+        ],
+        "material": "rat_pink",
+        "uv": [
+          332,
+          31
+        ]
+      },
+      {
+        "name": "toe_1",
+        "xyz": [
+          -4.07,
+          3.55,
+          3.98
+        ],
+        "dim": [
+          0.42,
+          0.45,
+          1.3
+        ],
+        "material": "rat_pink",
+        "uv": [
+          342,
+          31
+        ]
+      },
+      {
+        "name": "toe_2",
+        "xyz": [
+          -3.59,
+          3.55,
+          3.86
+        ],
+        "dim": [
+          0.42,
+          0.45,
+          1.3
+        ],
+        "material": "rat_pink",
+        "uv": [
+          352,
+          31
+        ]
+      }
+    ],
+    "paw_r_0": [
+      {
+        "name": "thigh",
+        "xyz": [
+          2.5,
+          -0.8,
+          -3
+        ],
+        "dim": [
+          1.5,
+          3.3,
+          2.4
+        ],
+        "material": "rat_fur",
+        "uv": [
+          362,
+          31
+        ]
+      },
+      {
+        "name": "foot",
+        "xyz": [
+          2.3,
+          2.7,
+          -4
+        ],
+        "dim": [
+          2.1,
+          1,
+          3.5
+        ],
+        "material": "rat_pink",
+        "uv": [
+          376,
+          31
+        ]
+      },
+      {
+        "name": "toe_0",
+        "xyz": [
+          2.55,
+          3.55,
+          -4.0
+        ],
+        "dim": [
+          0.42,
+          0.45,
+          1.3
+        ],
+        "material": "rat_pink",
+        "uv": [
+          394,
+          31
+        ]
+      },
+      {
+        "name": "toe_1",
+        "xyz": [
+          3.03,
+          3.55,
+          -4.12
+        ],
+        "dim": [
+          0.42,
+          0.45,
+          1.3
+        ],
+        "material": "rat_pink",
+        "uv": [
+          404,
+          31
+        ]
+      },
+      {
+        "name": "toe_2",
+        "xyz": [
+          3.51,
+          3.55,
+          -4.24
+        ],
+        "dim": [
+          0.42,
+          0.45,
+          1.3
+        ],
+        "material": "rat_pink",
+        "uv": [
+          414,
+          31
+        ]
+      }
+    ],
+    "paw_r_1": [
+      {
+        "name": "thigh",
+        "xyz": [
+          2.5,
+          -0.8,
+          5
+        ],
+        "dim": [
+          1.5,
+          3.3,
+          2.4
+        ],
+        "material": "rat_dark",
+        "uv": [
+          424,
+          31
+        ]
+      },
+      {
+        "name": "foot",
+        "xyz": [
+          2.3,
+          2.7,
+          4
+        ],
+        "dim": [
+          2.1,
+          1,
+          3.5
+        ],
+        "material": "rat_pink",
+        "uv": [
+          438,
+          31
+        ]
+      },
+      {
+        "name": "toe_0",
+        "xyz": [
+          2.55,
+          3.55,
+          4.1
+        ],
+        "dim": [
+          0.42,
+          0.45,
+          1.3
+        ],
+        "material": "rat_pink",
+        "uv": [
+          456,
+          31
+        ]
+      },
+      {
+        "name": "toe_1",
+        "xyz": [
+          3.03,
+          3.55,
+          3.98
+        ],
+        "dim": [
+          0.42,
+          0.45,
+          1.3
+        ],
+        "material": "rat_pink",
+        "uv": [
+          466,
+          31
+        ]
+      },
+      {
+        "name": "toe_2",
+        "xyz": [
+          3.51,
+          3.55,
+          3.86
+        ],
+        "dim": [
+          0.42,
+          0.45,
+          1.3
+        ],
+        "material": "rat_pink",
+        "uv": [
+          476,
+          31
+        ]
+      }
+    ],
+    "tail_0": [
+      {
+        "name": "tail_segment",
+        "xyz": [
+          -0.85,
+          -1.0,
+          6.5
+        ],
+        "dim": [
+          1.7,
+          1.6,
+          4
+        ],
+        "material": "rat_pink",
+        "uv": [
+          486,
+          31
+        ]
+      }
+    ],
+    "tail_1": [
+      {
+        "name": "tail_segment",
+        "xyz": [
+          -0.85,
+          -0.75,
+          9.9
+        ],
+        "dim": [
+          1.4,
+          1.32,
+          4
+        ],
+        "material": "rat_pink",
+        "uv": [
+          2,
+          46
+        ]
+      }
+    ],
+    "tail_2": [
+      {
+        "name": "tail_segment",
+        "xyz": [
+          -0.85,
+          -0.5,
+          13.3
+        ],
+        "dim": [
+          1.1,
+          1.04,
+          4
+        ],
+        "material": "rat_pink",
+        "uv": [
+          18,
+          46
+        ]
+      }
+    ],
+    "tail_3": [
+      {
+        "name": "tail_segment",
+        "xyz": [
+          -0.85,
+          -0.25,
+          16.7
+        ],
+        "dim": [
+          0.8,
+          0.76,
+          4
+        ],
+        "material": "rat_pink",
+        "uv": [
+          34,
+          46
+        ]
+      },
+      {
+        "name": "tail_raised_tip",
+        "xyz": [
+          -0.38,
+          -2.1,
+          17.2
+        ],
+        "dim": [
+          0.72,
+          2.2,
+          1.25
+        ],
+        "material": "rat_inner",
+        "uv": [
+          48,
+          46
+        ]
+      }
+    ]
+  },
+  "animations": {
+    "paw_l_0.xRot": "Mth.sin(limbSwing * 1.88F + 0.0000F) * motion * 0.56F",
+    "paw_r_0.xRot": "Mth.sin(limbSwing * 1.88F + 3.1416F) * motion * 0.56F",
+    "paw_l_1.xRot": "Mth.sin(limbSwing * 1.88F + 3.1416F) * motion * 0.56F",
+    "paw_r_1.xRot": "Mth.sin(limbSwing * 1.88F + 6.2832F) * motion * 0.56F",
+    "tail_0.yRot": "Mth.sin(ageInTicks * 0.17F - 0.000F) * 0.080F + Mth.sin(limbSwing * 0.91F - 0.000F) * motion * 0.11F",
+    "tail_0.xRot": "Mth.sin(ageInTicks * 0.11F + 0.000F) * 0.06F",
+    "tail_1.yRot": "Mth.sin(ageInTicks * 0.17F - 0.370F) * 0.115F + Mth.sin(limbSwing * 0.91F - 0.450F) * motion * 0.11F",
+    "tail_1.xRot": "Mth.sin(ageInTicks * 0.11F + 0.400F) * 0.06F",
+    "tail_2.yRot": "Mth.sin(ageInTicks * 0.17F - 0.740F) * 0.150F + Mth.sin(limbSwing * 0.91F - 0.900F) * motion * 0.11F",
+    "tail_2.xRot": "Mth.sin(ageInTicks * 0.11F + 0.800F) * 0.06F",
+    "tail_3.yRot": "Mth.sin(ageInTicks * 0.17F - 1.110F) * 0.185F + Mth.sin(limbSwing * 0.91F - 1.350F) * motion * 0.11F",
+    "tail_3.xRot": "Mth.sin(ageInTicks * 0.11F + 1.200F) * 0.06F",
+    "head.xRot": "-0.07F + Mth.sin(ageInTicks * 0.35F) * (0.10F - motion * 0.07F) - attack * 0.19F",
+    "head.yRot": "Mth.sin(ageInTicks * 0.07F) * 0.16F * (1.0F - motion * 0.65F)",
+    "body.xRot": "Mth.sin(limbSwing * 3.75F) * motion * 0.07F + recoil * 0.14F",
+    "paw_l_0.y": "20.400F - Math.max(0.0F, Mth.sin(limbSwing * 1.88F + 0.0000F)) * motion * 0.92F",
+    "paw_l_1.y": "20.400F - Math.max(0.0F, Mth.sin(limbSwing * 1.88F + 3.1416F)) * motion * 0.92F",
+    "paw_r_0.y": "20.400F - Math.max(0.0F, Mth.sin(limbSwing * 1.88F + 3.1416F)) * motion * 0.92F",
+    "paw_r_1.y": "20.400F - Math.max(0.0F, Mth.sin(limbSwing * 1.88F + 6.2832F)) * motion * 0.92F"
+  },
+  "part_pivots": {
+    "body": [
+      0,
+      -2.99,
+      2.05
+    ],
+    "head": [
+      0,
+      -2.55,
+      -4.8
+    ],
+    "paw_l_0": [
+      -2.1,
+      -0.6,
+      -2.37
+    ],
+    "paw_l_1": [
+      -2.1,
+      -0.6,
+      5.68
+    ],
+    "paw_r_0": [
+      2.3,
+      -0.6,
+      -2.37
+    ],
+    "paw_r_1": [
+      2.3,
+      -0.6,
+      5.68
+    ],
+    "tail_0": [
+      0.0,
+      -0.2,
+      6.5
+    ],
+    "tail_1": [
+      -0.15,
+      -0.09,
+      9.9
+    ],
+    "tail_2": [
+      -0.3,
+      0.02,
+      13.3
+    ],
+    "tail_3": [
+      -0.26,
+      -0.8,
+      16.7
+    ]
+  }
+}

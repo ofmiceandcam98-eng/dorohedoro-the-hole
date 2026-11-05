@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "B": {
+      "item": "dorohedoro:sewer_sealant"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "Z": {
+      "item": "dorohedoro:zinc_ingot"
+    }
+  },
+  "pattern": [
+    "ZIZ",
+    "IBI",
+    "ZIZ"
+  ],
+  "result": {
+    "count": 4,
+    "id": "dorohedoro:galvanized_plating"
+  }
+}

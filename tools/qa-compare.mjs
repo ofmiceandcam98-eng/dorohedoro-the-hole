@@ -11,5 +11,10 @@ function diff(key) {
   return bad.length;
 }
 const city = diff('chunk_hashes');
-const full = diff('chunk_hashes_full');
+if (a.chunk_hashes_y64_raw && b.chunk_hashes_y64_raw) {
+  // Informational: legacy fixed-Y=64 hash includes buried vanilla geology.
+  diff('chunk_hashes_y64_raw');
+}
+diff('chunk_hashes_full');
+// Only city/infrastructure order differences fail the determinism test.
 process.exit(city ? 1 : 0);

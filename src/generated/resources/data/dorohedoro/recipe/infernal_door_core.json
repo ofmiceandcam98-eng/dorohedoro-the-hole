@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:bone_block"
+    },
+    "C": {
+      "item": "dorohedoro:preserved_smoke_conduit"
+    },
+    "R": {
+      "item": "dorohedoro:etched_gate_stone"
+    },
+    "S": {
+      "item": "dorohedoro:devil_sigil"
+    }
+  },
+  "pattern": [
+    "BSB",
+    "RCR",
+    "BSB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "dorohedoro:infernal_door_core"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "B": {
+      "item": "minecraft:bone_block"
+    },
+    "R": {
+      "item": "minecraft:redstone_block"
+    },
+    "S": {
+      "item": "minecraft:stone_bricks"
+    }
+  },
+  "pattern": [
+    "BSB",
+    "SRS",
+    "BSB"
+  ],
+  "result": {
+    "count": 4,
+    "id": "dorohedoro:etched_gate_stone"
+  }
+}

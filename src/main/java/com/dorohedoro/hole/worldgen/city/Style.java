@@ -51,6 +51,60 @@ record Style(Mix wall, Mix trim, Mix floor, Block stairs, Block door, Block glas
             Mix.of(Blocks.DARK_OAK_PLANKS, 2, Blocks.CRIMSON_PLANKS, 1),
             Blocks.DARK_OAK_STAIRS, Blocks.CRIMSON_DOOR, Blocks.PURPLE_STAINED_GLASS_PANE, Blocks.PURPLE_BED, Blocks.CRIMSON_WALL_SIGN, Blocks.DARK_OAK_FENCE);
 
+    // Extra muted, original Hole palettes. All use crafted/decorative states above road level
+    // so vanilla ore replacement cannot generate stone ores in building facades.
+    static final Style PATCHWORK = new Style(
+            Mix.of(Blocks.TERRACOTTA, 3, Blocks.BROWN_TERRACOTTA, 2, Blocks.MUD_BRICKS, 3, Blocks.CRACKED_STONE_BRICKS, 1),
+            Mix.of(Blocks.DARK_OAK_PLANKS, 3, Blocks.STRIPPED_SPRUCE_LOG, 1),
+            Mix.of(Blocks.SPRUCE_PLANKS, 4, Blocks.PACKED_MUD, 1),
+            Blocks.SPRUCE_STAIRS, Blocks.DARK_OAK_DOOR, Blocks.GRAY_STAINED_GLASS_PANE,
+            Blocks.BROWN_BED, Blocks.SPRUCE_WALL_SIGN, Blocks.SPRUCE_FENCE);
+
+    static final Style PLASTER = new Style(
+            Mix.of(Blocks.WHITE_TERRACOTTA, 2, Blocks.LIGHT_GRAY_TERRACOTTA, 5, Blocks.TERRACOTTA, 2, Blocks.GRAY_TERRACOTTA, 1),
+            Mix.of(Blocks.POLISHED_ANDESITE, 2, Blocks.STONE_BRICKS, 1),
+            Mix.of(Blocks.SPRUCE_PLANKS, 4, Blocks.SMOOTH_STONE, 1),
+            Blocks.STONE_BRICK_STAIRS, Blocks.SPRUCE_DOOR, Blocks.LIGHT_GRAY_STAINED_GLASS_PANE,
+            Blocks.GRAY_BED, Blocks.SPRUCE_WALL_SIGN, Blocks.SPRUCE_FENCE);
+
+    static final Style SHEET_METAL = new Style(
+            Mix.of(Blocks.WAXED_EXPOSED_CUT_COPPER, 2, Blocks.GRAY_TERRACOTTA, 3,
+                    Blocks.POLISHED_BLACKSTONE_BRICKS, 2, ModBlocks.RUSTED_PLATING.get(), 3),
+            Mix.of(Blocks.WAXED_WEATHERED_CUT_COPPER, 2, Blocks.IRON_BLOCK, 1),
+            Mix.of(Blocks.POLISHED_BLACKSTONE, 2, Blocks.SPRUCE_PLANKS, 3),
+            Blocks.DARK_OAK_STAIRS, Blocks.DARK_OAK_DOOR, Blocks.BROWN_STAINED_GLASS_PANE,
+            Blocks.GRAY_BED, Blocks.DARK_OAK_WALL_SIGN, Blocks.IRON_BARS);
+
+    static Style forDistrict(District district, long hash, boolean detailed) {
+        if (!detailed) return forDistrict(district, hash);
+        int roll = CityHash.range(hash >>> 13, 7);
+        return switch (district) {
+            case RESIDENTIAL -> switch (roll) {
+                case 0, 1 -> PATCHWORK;
+                case 2 -> PLASTER;
+                case 3, 4 -> BRICK;
+                default -> CONCRETE;
+            };
+            case MARKET -> switch (roll) {
+                case 0 -> SHEET_METAL;
+                case 1, 2 -> PLASTER;
+                case 3 -> PATCHWORK;
+                case 4 -> CONCRETE;
+                default -> BRICK;
+            };
+            case INDUSTRIAL -> switch (roll) {
+                case 0, 1, 2 -> SHEET_METAL;
+                case 3, 4 -> SOOT;
+                case 5 -> RUST;
+                default -> PATCHWORK;
+            };
+            case WATERFRONT -> roll < 3 ? SHEET_METAL : roll == 3 ? PLASTER : RUST;
+            case DERELICT -> roll < 3 ? PATCHWORK : roll < 5 ? SOOT : PLASTER;
+            case GRAVEYARD -> roll < 3 ? SOOT : roll < 5 ? PLASTER : PATCHWORK;
+            case OUTSKIRTS -> roll < 3 ? PATCHWORK : roll < 5 ? PLASTER : RUST;
+        };
+    }
+
     static Style forDistrict(District district, long hash) {
         return switch (district) {
             case RESIDENTIAL -> CityHash.range(hash, 3) == 0 ? CONCRETE : BRICK;

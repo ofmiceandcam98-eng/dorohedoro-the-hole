@@ -1,0 +1,17 @@
+entity_id,classification,canon_status,lore_reference,prototype_health,prototype_melee,prototype_speed,player_interaction,reward_use,implementation_status
+kikurage,unique_named_companion,canon,https://dorohedoro.fandom.com/wiki/Kikurage,24,0,0.22,explicit_supervised_resurrection,white_smoke_research_and_stabilizers,blueprint_only
+jonson,unique_named_ally,canon,https://dorohedoro.fandom.com/wiki/Jonson,90,8,0.32,trust_based_loyalty_and_sneaker_repair,pest_detector_and_cosmetics,blueprint_only
+hole_entity,optional_world_event_boss,canon,https://dorohedoro.fandom.com/wiki/Hole,1000,15,0.18,optional_lake_encounter,refuse_filters_and_anchors,blueprint_only
+hole_zombie,event_species,canon,https://dorohedoro.fandom.com/wiki/Night_of_the_Living_Dead,32,4,0.24,annual_night_event_and_tag_redemption,exterminator_rewards,blueprint_only
+sorcerer_generic,faction_species,canon,https://dorohedoro.fandom.com/wiki/Magic_Users,30,5,0.25,trade_faction_and_single_innate_magic,smoke_flasks_masks_medical_supplies,blueprint_only
+devil_unique,unique_named_faction,canon,https://dorohedoro.fandom.com/wiki/Devils,300,15,0.30,mask_commissions_and_devils_exam,mask_seals_and_hell_access,blueprint_only
+gyoza_fairy,unique_named_ambient,canon,https://dorohedoro.fandom.com/wiki/The_Gyoza_Fairy,10,0,0.27,gyoza_cooking_blessing,recipe_and_food_bonus,blueprint_only
+guragura,unique_named_devil,canon,https://dorohedoro.fandom.com/wiki/GuraGura,250,11,0.31,shin_companion_event,devil_hound_cosmetics,blueprint_only
+sewer_roach,original_fauna,adaptation,https://dorohedoro.fandom.com/wiki/Jonson,18,3,0.26,combat_or_exploration,chitin_and_antenna_gear,source_integrated_runtime_unverified
+scrap_rat,original_fauna,adaptation,,10,1,0.29,passive_scavenging,food_fur_and_wool,source_integrated_runtime_unverified
+sewer_leech,original_fauna,adaptation,,26,3,0.17,water_predator,salves_and_adhesives,source_integrated_runtime_unverified
+glow_moth,original_fauna,adaptation,,8,0,0.26,nonlethal_shearing,night_vision_lamps_and_silk,source_integrated_runtime_unverified
+sludge_crawler,original_fauna,adaptation,,28,4,0.24,combat_hazard,slime_tar_and_sealants,source_integrated_runtime_unverified
+rust_eater_beetle,original_fauna,adaptation,,16,2,0.27,nonlethal_brush_and_surface_spawning,recycling_plating,source_integrated_runtime_unverified
+cavern_burrower,original_fauna,adaptation,,44,6,0.23,heavy_cave_encounter,mining_claws_and_hide,source_integrated_runtime_unverified
+spore_crawler,original_fauna,adaptation,,22,3,0.30,poison_spores,antidotes_and_mushroom_farming,source_integrated_runtime_unverified

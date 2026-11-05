@@ -1,0 +1,2591 @@
+{
+  "mob": "sewer_roach",
+  "class": "SewerRoach",
+  "texture_size": [
+    512,
+    256
+  ],
+  "groups": {
+    "body": [
+      {
+        "name": "pronotum",
+        "xyz": [
+          -5,
+          -6,
+          -9
+        ],
+        "dim": [
+          10,
+          3,
+          5
+        ],
+        "material": "roach_high",
+        "uv": [
+          2,
+          2
+        ]
+      },
+      {
+        "name": "underside",
+        "xyz": [
+          -4,
+          -2,
+          -6
+        ],
+        "dim": [
+          8,
+          2,
+          14
+        ],
+        "material": "roach_dark",
+        "uv": [
+          36,
+          2
+        ]
+      },
+      {
+        "name": "body_ring_0",
+        "xyz": [
+          -3.664,
+          -5.4,
+          -5.0
+        ],
+        "dim": [
+          7.328,
+          4.7,
+          2.4
+        ],
+        "material": "roach_dark",
+        "uv": [
+          84,
+          2
+        ]
+      },
+      {
+        "name": "cuticle_plate_l_0",
+        "xyz": [
+          -4.164,
+          -6.85,
+          -5.0
+        ],
+        "dim": [
+          4.004,
+          1.2,
+          2.1
+        ],
+        "material": "roach_high",
+        "uv": [
+          110,
+          2
+        ]
+      },
+      {
+        "name": "cuticle_plate_r_0",
+        "xyz": [
+          0.15,
+          -6.85,
+          -5.0
+        ],
+        "dim": [
+          4.014,
+          1.2,
+          2.1
+        ],
+        "material": "roach_shell",
+        "uv": [
+          130,
+          2
+        ]
+      },
+      {
+        "name": "plate_rim_l_0",
+        "xyz": [
+          -4.284,
+          -6.9,
+          -5.0
+        ],
+        "dim": [
+          0.66,
+          0.55,
+          1.85
+        ],
+        "material": "roach_edge",
+        "uv": [
+          150,
+          2
+        ]
+      },
+      {
+        "name": "plate_rim_r_0",
+        "xyz": [
+          3.684,
+          -6.9,
+          -5.0
+        ],
+        "dim": [
+          0.66,
+          0.55,
+          1.85
+        ],
+        "material": "roach_edge",
+        "uv": [
+          160,
+          2
+        ]
+      },
+      {
+        "name": "wing_vein_l_0",
+        "xyz": [
+          -2.964,
+          -7.08,
+          -4.65
+        ],
+        "dim": [
+          0.52,
+          0.26,
+          1.55
+        ],
+        "material": "roach_edge",
+        "uv": [
+          170,
+          2
+        ]
+      },
+      {
+        "name": "wing_vein_r_0",
+        "xyz": [
+          2.364,
+          -7.08,
+          -4.65
+        ],
+        "dim": [
+          0.52,
+          0.26,
+          1.55
+        ],
+        "material": "roach_edge",
+        "uv": [
+          180,
+          2
+        ]
+      },
+      {
+        "name": "body_ring_1",
+        "xyz": [
+          -4.204,
+          -5.4,
+          -3.25
+        ],
+        "dim": [
+          8.408,
+          4.7,
+          2.4
+        ],
+        "material": "roach_shell",
+        "uv": [
+          190,
+          2
+        ]
+      },
+      {
+        "name": "cuticle_plate_l_1",
+        "xyz": [
+          -4.704,
+          -6.85,
+          -3.25
+        ],
+        "dim": [
+          4.544,
+          1.2,
+          2.1
+        ],
+        "material": "roach_shell",
+        "uv": [
+          218,
+          2
+        ]
+      },
+      {
+        "name": "cuticle_plate_r_1",
+        "xyz": [
+          0.15,
+          -6.85,
+          -3.25
+        ],
+        "dim": [
+          4.554,
+          1.2,
+          2.1
+        ],
+        "material": "roach_high",
+        "uv": [
+          238,
+          2
+        ]
+      },
+      {
+        "name": "plate_rim_l_1",
+        "xyz": [
+          -4.824,
+          -6.9,
+          -3.25
+        ],
+        "dim": [
+          0.66,
+          0.55,
+          1.85
+        ],
+        "material": "roach_edge",
+        "uv": [
+          258,
+          2
+        ]
+      },
+      {
+        "name": "plate_rim_r_1",
+        "xyz": [
+          4.224,
+          -6.9,
+          -3.25
+        ],
+        "dim": [
+          0.66,
+          0.55,
+          1.85
+        ],
+        "material": "roach_edge",
+        "uv": [
+          268,
+          2
+        ]
+      },
+      {
+        "name": "body_ring_2",
+        "xyz": [
+          -4.744,
+          -5.4,
+          -1.5
+        ],
+        "dim": [
+          9.488,
+          4.7,
+          2.4
+        ],
+        "material": "roach_dark",
+        "uv": [
+          278,
+          2
+        ]
+      },
+      {
+        "name": "cuticle_plate_l_2",
+        "xyz": [
+          -5.244,
+          -6.85,
+          -1.5
+        ],
+        "dim": [
+          5.084,
+          1.2,
+          2.1
+        ],
+        "material": "roach_high",
+        "uv": [
+          308,
+          2
+        ]
+      },
+      {
+        "name": "cuticle_plate_r_2",
+        "xyz": [
+          0.15,
+          -6.85,
+          -1.5
+        ],
+        "dim": [
+          5.094,
+          1.2,
+          2.1
+        ],
+        "material": "roach_shell",
+        "uv": [
+          330,
+          2
+        ]
+      },
+      {
+        "name": "plate_rim_l_2",
+        "xyz": [
+          -5.364,
+          -6.9,
+          -1.5
+        ],
+        "dim": [
+          0.66,
+          0.55,
+          1.85
+        ],
+        "material": "roach_edge",
+        "uv": [
+          352,
+          2
+        ]
+      },
+      {
+        "name": "plate_rim_r_2",
+        "xyz": [
+          4.764,
+          -6.9,
+          -1.5
+        ],
+        "dim": [
+          0.66,
+          0.55,
+          1.85
+        ],
+        "material": "roach_edge",
+        "uv": [
+          362,
+          2
+        ]
+      },
+      {
+        "name": "wing_vein_l_2",
+        "xyz": [
+          -4.044,
+          -7.08,
+          -1.15
+        ],
+        "dim": [
+          0.52,
+          0.26,
+          1.55
+        ],
+        "material": "roach_edge",
+        "uv": [
+          372,
+          2
+        ]
+      },
+      {
+        "name": "wing_vein_r_2",
+        "xyz": [
+          3.444,
+          -7.08,
+          -1.15
+        ],
+        "dim": [
+          0.52,
+          0.26,
+          1.55
+        ],
+        "material": "roach_edge",
+        "uv": [
+          382,
+          2
+        ]
+      },
+      {
+        "name": "body_ring_3",
+        "xyz": [
+          -5.284,
+          -5.4,
+          0.25
+        ],
+        "dim": [
+          10.568,
+          4.7,
+          2.4
+        ],
+        "material": "roach_shell",
+        "uv": [
+          392,
+          2
+        ]
+      },
+      {
+        "name": "cuticle_plate_l_3",
+        "xyz": [
+          -5.784,
+          -6.85,
+          0.25
+        ],
+        "dim": [
+          5.624,
+          1.2,
+          2.1
+        ],
+        "material": "roach_shell",
+        "uv": [
+          424,
+          2
+        ]
+      },
+      {
+        "name": "cuticle_plate_r_3",
+        "xyz": [
+          0.15,
+          -6.85,
+          0.25
+        ],
+        "dim": [
+          5.634,
+          1.2,
+          2.1
+        ],
+        "material": "roach_high",
+        "uv": [
+          446,
+          2
+        ]
+      },
+      {
+        "name": "plate_rim_l_3",
+        "xyz": [
+          -5.904,
+          -6.9,
+          0.25
+        ],
+        "dim": [
+          0.66,
+          0.55,
+          1.85
+        ],
+        "material": "roach_edge",
+        "uv": [
+          468,
+          2
+        ]
+      },
+      {
+        "name": "plate_rim_r_3",
+        "xyz": [
+          5.304,
+          -6.9,
+          0.25
+        ],
+        "dim": [
+          0.66,
+          0.55,
+          1.85
+        ],
+        "material": "roach_edge",
+        "uv": [
+          478,
+          2
+        ]
+      },
+      {
+        "name": "body_ring_4",
+        "xyz": [
+          -5.176,
+          -5.4,
+          2.0
+        ],
+        "dim": [
+          10.352,
+          4.7,
+          2.4
+        ],
+        "material": "roach_dark",
+        "uv": [
+          2,
+          22
+        ]
+      },
+      {
+        "name": "cuticle_plate_l_4",
+        "xyz": [
+          -5.676,
+          -6.85,
+          2.0
+        ],
+        "dim": [
+          5.516,
+          1.2,
+          2.1
+        ],
+        "material": "roach_high",
+        "uv": [
+          34,
+          22
+        ]
+      },
+      {
+        "name": "cuticle_plate_r_4",
+        "xyz": [
+          0.15,
+          -6.85,
+          2.0
+        ],
+        "dim": [
+          5.526,
+          1.2,
+          2.1
+        ],
+        "material": "roach_shell",
+        "uv": [
+          56,
+          22
+        ]
+      },
+      {
+        "name": "plate_rim_l_4",
+        "xyz": [
+          -5.796,
+          -6.9,
+          2.0
+        ],
+        "dim": [
+          0.66,
+          0.55,
+          1.85
+        ],
+        "material": "roach_edge",
+        "uv": [
+          78,
+          22
+        ]
+      },
+      {
+        "name": "plate_rim_r_4",
+        "xyz": [
+          5.196,
+          -6.9,
+          2.0
+        ],
+        "dim": [
+          0.66,
+          0.55,
+          1.85
+        ],
+        "material": "roach_edge",
+        "uv": [
+          88,
+          22
+        ]
+      },
+      {
+        "name": "wing_vein_l_4",
+        "xyz": [
+          -4.476,
+          -7.08,
+          2.35
+        ],
+        "dim": [
+          0.52,
+          0.26,
+          1.55
+        ],
+        "material": "roach_edge",
+        "uv": [
+          98,
+          22
+        ]
+      },
+      {
+        "name": "wing_vein_r_4",
+        "xyz": [
+          3.876,
+          -7.08,
+          2.35
+        ],
+        "dim": [
+          0.52,
+          0.26,
+          1.55
+        ],
+        "material": "roach_edge",
+        "uv": [
+          108,
+          22
+        ]
+      },
+      {
+        "name": "body_ring_5",
+        "xyz": [
+          -4.636,
+          -5.4,
+          3.75
+        ],
+        "dim": [
+          9.272,
+          4.7,
+          2.4
+        ],
+        "material": "roach_shell",
+        "uv": [
+          118,
+          22
+        ]
+      },
+      {
+        "name": "cuticle_plate_l_5",
+        "xyz": [
+          -5.136,
+          -6.85,
+          3.75
+        ],
+        "dim": [
+          4.976,
+          1.2,
+          2.1
+        ],
+        "material": "roach_shell",
+        "uv": [
+          148,
+          22
+        ]
+      },
+      {
+        "name": "cuticle_plate_r_5",
+        "xyz": [
+          0.15,
+          -6.85,
+          3.75
+        ],
+        "dim": [
+          4.986,
+          1.2,
+          2.1
+        ],
+        "material": "roach_high",
+        "uv": [
+          168,
+          22
+        ]
+      },
+      {
+        "name": "plate_rim_l_5",
+        "xyz": [
+          -5.256,
+          -6.9,
+          3.75
+        ],
+        "dim": [
+          0.66,
+          0.55,
+          1.85
+        ],
+        "material": "roach_edge",
+        "uv": [
+          188,
+          22
+        ]
+      },
+      {
+        "name": "plate_rim_r_5",
+        "xyz": [
+          4.656,
+          -6.9,
+          3.75
+        ],
+        "dim": [
+          0.66,
+          0.55,
+          1.85
+        ],
+        "material": "roach_edge",
+        "uv": [
+          198,
+          22
+        ]
+      },
+      {
+        "name": "body_ring_6",
+        "xyz": [
+          -4.096,
+          -5.4,
+          5.5
+        ],
+        "dim": [
+          8.192,
+          4.7,
+          2.4
+        ],
+        "material": "roach_dark",
+        "uv": [
+          208,
+          22
+        ]
+      },
+      {
+        "name": "cuticle_plate_l_6",
+        "xyz": [
+          -4.596,
+          -6.85,
+          5.5
+        ],
+        "dim": [
+          4.436,
+          1.2,
+          2.1
+        ],
+        "material": "roach_high",
+        "uv": [
+          236,
+          22
+        ]
+      },
+      {
+        "name": "cuticle_plate_r_6",
+        "xyz": [
+          0.15,
+          -6.85,
+          5.5
+        ],
+        "dim": [
+          4.446,
+          1.2,
+          2.1
+        ],
+        "material": "roach_shell",
+        "uv": [
+          256,
+          22
+        ]
+      },
+      {
+        "name": "plate_rim_l_6",
+        "xyz": [
+          -4.716,
+          -6.9,
+          5.5
+        ],
+        "dim": [
+          0.66,
+          0.55,
+          1.85
+        ],
+        "material": "roach_edge",
+        "uv": [
+          276,
+          22
+        ]
+      },
+      {
+        "name": "plate_rim_r_6",
+        "xyz": [
+          4.116,
+          -6.9,
+          5.5
+        ],
+        "dim": [
+          0.66,
+          0.55,
+          1.85
+        ],
+        "material": "roach_edge",
+        "uv": [
+          286,
+          22
+        ]
+      },
+      {
+        "name": "wing_vein_l_6",
+        "xyz": [
+          -3.396,
+          -7.08,
+          5.85
+        ],
+        "dim": [
+          0.52,
+          0.26,
+          1.55
+        ],
+        "material": "roach_edge",
+        "uv": [
+          296,
+          22
+        ]
+      },
+      {
+        "name": "wing_vein_r_6",
+        "xyz": [
+          2.796,
+          -7.08,
+          5.85
+        ],
+        "dim": [
+          0.52,
+          0.26,
+          1.55
+        ],
+        "material": "roach_edge",
+        "uv": [
+          306,
+          22
+        ]
+      },
+      {
+        "name": "body_ring_7",
+        "xyz": [
+          -3.556,
+          -5.4,
+          7.25
+        ],
+        "dim": [
+          7.112,
+          4.7,
+          2.4
+        ],
+        "material": "roach_shell",
+        "uv": [
+          316,
+          22
+        ]
+      },
+      {
+        "name": "cuticle_plate_l_7",
+        "xyz": [
+          -4.056,
+          -6.85,
+          7.25
+        ],
+        "dim": [
+          3.896,
+          1.2,
+          2.1
+        ],
+        "material": "roach_shell",
+        "uv": [
+          342,
+          22
+        ]
+      },
+      {
+        "name": "cuticle_plate_r_7",
+        "xyz": [
+          0.15,
+          -6.85,
+          7.25
+        ],
+        "dim": [
+          3.906,
+          1.2,
+          2.1
+        ],
+        "material": "roach_high",
+        "uv": [
+          360,
+          22
+        ]
+      },
+      {
+        "name": "plate_rim_l_7",
+        "xyz": [
+          -4.176,
+          -6.9,
+          7.25
+        ],
+        "dim": [
+          0.66,
+          0.55,
+          1.85
+        ],
+        "material": "roach_edge",
+        "uv": [
+          378,
+          22
+        ]
+      },
+      {
+        "name": "plate_rim_r_7",
+        "xyz": [
+          3.576,
+          -6.9,
+          7.25
+        ],
+        "dim": [
+          0.66,
+          0.55,
+          1.85
+        ],
+        "material": "roach_edge",
+        "uv": [
+          388,
+          22
+        ]
+      }
+    ],
+    "head": [
+      {
+        "name": "cranium",
+        "xyz": [
+          -4,
+          -5,
+          -9.3
+        ],
+        "dim": [
+          8,
+          5,
+          5
+        ],
+        "material": "roach_dark",
+        "uv": [
+          398,
+          22
+        ]
+      },
+      {
+        "name": "face_plate",
+        "xyz": [
+          -4.5,
+          -5.7,
+          -9.8
+        ],
+        "dim": [
+          9,
+          2,
+          3.2
+        ],
+        "material": "roach_high",
+        "uv": [
+          428,
+          22
+        ]
+      },
+      {
+        "name": "snout",
+        "xyz": [
+          -2.5,
+          -2,
+          -10.7
+        ],
+        "dim": [
+          5,
+          2,
+          2.3
+        ],
+        "material": "roach_mouth",
+        "uv": [
+          458,
+          22
+        ]
+      },
+      {
+        "name": "eye_-1",
+        "xyz": [
+          -4.4,
+          -3.8,
+          -10.1
+        ],
+        "dim": [
+          1.3,
+          1.1,
+          1.1
+        ],
+        "material": "roach_eye",
+        "uv": [
+          478,
+          22
+        ]
+      },
+      {
+        "name": "mandible_-1",
+        "xyz": [
+          -3.0,
+          -0.8,
+          -11.3
+        ],
+        "dim": [
+          1.2,
+          2.1,
+          3.5
+        ],
+        "material": "roach_mouth",
+        "uv": [
+          490,
+          22
+        ]
+      },
+      {
+        "name": "eye_1",
+        "xyz": [
+          3.2,
+          -3.8,
+          -10.1
+        ],
+        "dim": [
+          1.3,
+          1.1,
+          1.1
+        ],
+        "material": "roach_eye",
+        "uv": [
+          2,
+          36
+        ]
+      },
+      {
+        "name": "mandible_1",
+        "xyz": [
+          1.8,
+          -0.8,
+          -11.3
+        ],
+        "dim": [
+          1.2,
+          2.1,
+          3.5
+        ],
+        "material": "roach_mouth",
+        "uv": [
+          14,
+          36
+        ]
+      },
+      {
+        "name": "eye_front_-1",
+        "xyz": [
+          -4.5,
+          -3.95,
+          -10.4
+        ],
+        "dim": [
+          1.1,
+          1.65,
+          0.7
+        ],
+        "material": "roach_eye",
+        "uv": [
+          30,
+          36
+        ]
+      },
+      {
+        "name": "eye_shadow_-1",
+        "xyz": [
+          -4.7,
+          -4.15,
+          -9.75
+        ],
+        "dim": [
+          1.15,
+          1.8,
+          0.45
+        ],
+        "material": "roach_dark",
+        "uv": [
+          40,
+          36
+        ]
+      },
+      {
+        "name": "mouth_taster_-1_0",
+        "xyz": [
+          -1.95,
+          -0.2,
+          -11.0
+        ],
+        "dim": [
+          0.45,
+          0.42,
+          1.4
+        ],
+        "material": "roach_mouth",
+        "uv": [
+          50,
+          36
+        ]
+      },
+      {
+        "name": "mouth_taster_-1_1",
+        "xyz": [
+          -1.95,
+          0.08,
+          -11.35
+        ],
+        "dim": [
+          0.45,
+          0.42,
+          1.4
+        ],
+        "material": "roach_mouth",
+        "uv": [
+          60,
+          36
+        ]
+      },
+      {
+        "name": "mouth_taster_-1_2",
+        "xyz": [
+          -1.95,
+          0.36,
+          -11.7
+        ],
+        "dim": [
+          0.45,
+          0.42,
+          1.4
+        ],
+        "material": "roach_mouth",
+        "uv": [
+          70,
+          36
+        ]
+      },
+      {
+        "name": "mouth_taster_-1_3",
+        "xyz": [
+          -1.95,
+          0.64,
+          -12.05
+        ],
+        "dim": [
+          0.45,
+          0.42,
+          1.4
+        ],
+        "material": "roach_mouth",
+        "uv": [
+          80,
+          36
+        ]
+      },
+      {
+        "name": "eye_front_1",
+        "xyz": [
+          3.5,
+          -3.95,
+          -10.4
+        ],
+        "dim": [
+          1.1,
+          1.65,
+          0.7
+        ],
+        "material": "roach_eye",
+        "uv": [
+          90,
+          36
+        ]
+      },
+      {
+        "name": "eye_shadow_1",
+        "xyz": [
+          3.6,
+          -4.15,
+          -9.75
+        ],
+        "dim": [
+          1.15,
+          1.8,
+          0.45
+        ],
+        "material": "roach_dark",
+        "uv": [
+          100,
+          36
+        ]
+      },
+      {
+        "name": "mouth_taster_1_0",
+        "xyz": [
+          1.05,
+          -0.2,
+          -11.0
+        ],
+        "dim": [
+          0.45,
+          0.42,
+          1.4
+        ],
+        "material": "roach_mouth",
+        "uv": [
+          110,
+          36
+        ]
+      },
+      {
+        "name": "mouth_taster_1_1",
+        "xyz": [
+          1.05,
+          0.08,
+          -11.35
+        ],
+        "dim": [
+          0.45,
+          0.42,
+          1.4
+        ],
+        "material": "roach_mouth",
+        "uv": [
+          120,
+          36
+        ]
+      },
+      {
+        "name": "mouth_taster_1_2",
+        "xyz": [
+          1.05,
+          0.36,
+          -11.7
+        ],
+        "dim": [
+          0.45,
+          0.42,
+          1.4
+        ],
+        "material": "roach_mouth",
+        "uv": [
+          130,
+          36
+        ]
+      },
+      {
+        "name": "mouth_taster_1_3",
+        "xyz": [
+          1.05,
+          0.64,
+          -12.05
+        ],
+        "dim": [
+          0.45,
+          0.42,
+          1.4
+        ],
+        "material": "roach_mouth",
+        "uv": [
+          140,
+          36
+        ]
+      },
+      {
+        "name": "frontal_shield",
+        "xyz": [
+          -4.2,
+          -6.3,
+          -9.4
+        ],
+        "dim": [
+          8.4,
+          0.92,
+          3.6
+        ],
+        "material": "roach_high",
+        "uv": [
+          150,
+          36
+        ]
+      },
+      {
+        "name": "frontal_shield_edge",
+        "xyz": [
+          -4.4,
+          -6.35,
+          -10.55
+        ],
+        "dim": [
+          8.8,
+          0.45,
+          0.45
+        ],
+        "material": "roach_edge",
+        "uv": [
+          180,
+          36
+        ]
+      },
+      {
+        "name": "mouth_lower_plate",
+        "xyz": [
+          -3.05,
+          -0.1,
+          -11.55
+        ],
+        "dim": [
+          6.1,
+          0.6,
+          1.05
+        ],
+        "material": "roach_dark",
+        "uv": [
+          204,
+          36
+        ]
+      },
+      {
+        "name": "mandible_spike_-1_0",
+        "xyz": [
+          -3.15,
+          -0.05,
+          -12.5
+        ],
+        "dim": [
+          0.75,
+          0.6,
+          1.35
+        ],
+        "material": "roach_mouth",
+        "uv": [
+          226,
+          36
+        ]
+      },
+      {
+        "name": "mandible_spike_-1_1",
+        "xyz": [
+          -2.8,
+          -0.05,
+          -13.35
+        ],
+        "dim": [
+          0.75,
+          0.6,
+          1.35
+        ],
+        "material": "roach_mouth",
+        "uv": [
+          236,
+          36
+        ]
+      },
+      {
+        "name": "mandible_spike_1_0",
+        "xyz": [
+          2.25,
+          -0.05,
+          -12.5
+        ],
+        "dim": [
+          0.75,
+          0.6,
+          1.35
+        ],
+        "material": "roach_mouth",
+        "uv": [
+          246,
+          36
+        ]
+      },
+      {
+        "name": "mandible_spike_1_1",
+        "xyz": [
+          2.6,
+          -0.05,
+          -13.35
+        ],
+        "dim": [
+          0.75,
+          0.6,
+          1.35
+        ],
+        "material": "roach_mouth",
+        "uv": [
+          256,
+          36
+        ]
+      }
+    ],
+    "antenna_l": [
+      {
+        "name": "base",
+        "xyz": [
+          -2.8,
+          -5,
+          -11.0
+        ],
+        "dim": [
+          1,
+          1.1,
+          4
+        ],
+        "material": "roach_dark",
+        "uv": [
+          266,
+          36
+        ]
+      },
+      {
+        "name": "stem",
+        "xyz": [
+          -3.8,
+          -5.2,
+          -17.0
+        ],
+        "dim": [
+          1,
+          1,
+          7
+        ],
+        "material": "roach_legs",
+        "uv": [
+          280,
+          36
+        ]
+      },
+      {
+        "name": "tip",
+        "xyz": [
+          -4.7,
+          -5.1,
+          -21.3
+        ],
+        "dim": [
+          0.8,
+          0.8,
+          5
+        ],
+        "material": "roach_edge",
+        "uv": [
+          300,
+          36
+        ]
+      },
+      {
+        "name": "feeler_-1_0",
+        "xyz": [
+          -4.0,
+          -4.7,
+          -16.7
+        ],
+        "dim": [
+          0.7,
+          0.64,
+          2.5
+        ],
+        "material": "roach_edge",
+        "uv": [
+          316,
+          36
+        ]
+      },
+      {
+        "name": "feeler_-1_1",
+        "xyz": [
+          -4.6,
+          -4.48,
+          -18.7
+        ],
+        "dim": [
+          0.59,
+          0.55,
+          2.5
+        ],
+        "material": "roach_legs",
+        "uv": [
+          328,
+          36
+        ]
+      },
+      {
+        "name": "feeler_-1_2",
+        "xyz": [
+          -5.2,
+          -4.26,
+          -20.7
+        ],
+        "dim": [
+          0.48,
+          0.46,
+          2.5
+        ],
+        "material": "roach_edge",
+        "uv": [
+          340,
+          36
+        ]
+      },
+      {
+        "name": "feeler_-1_3",
+        "xyz": [
+          -5.8,
+          -4.04,
+          -22.7
+        ],
+        "dim": [
+          0.37,
+          0.37,
+          2.5
+        ],
+        "material": "roach_legs",
+        "uv": [
+          352,
+          36
+        ]
+      }
+    ],
+    "antenna_r": [
+      {
+        "name": "base",
+        "xyz": [
+          1.8,
+          -5,
+          -11.0
+        ],
+        "dim": [
+          1,
+          1.1,
+          4
+        ],
+        "material": "roach_dark",
+        "uv": [
+          364,
+          36
+        ]
+      },
+      {
+        "name": "stem",
+        "xyz": [
+          2.8,
+          -5.2,
+          -17.0
+        ],
+        "dim": [
+          1,
+          1,
+          7
+        ],
+        "material": "roach_legs",
+        "uv": [
+          378,
+          36
+        ]
+      },
+      {
+        "name": "tip",
+        "xyz": [
+          3.9,
+          -5.1,
+          -21.3
+        ],
+        "dim": [
+          0.8,
+          0.8,
+          5
+        ],
+        "material": "roach_edge",
+        "uv": [
+          398,
+          36
+        ]
+      },
+      {
+        "name": "feeler_1_0",
+        "xyz": [
+          3.4,
+          -4.7,
+          -16.7
+        ],
+        "dim": [
+          0.7,
+          0.64,
+          2.5
+        ],
+        "material": "roach_edge",
+        "uv": [
+          414,
+          36
+        ]
+      },
+      {
+        "name": "feeler_1_1",
+        "xyz": [
+          4.0,
+          -4.48,
+          -18.7
+        ],
+        "dim": [
+          0.59,
+          0.55,
+          2.5
+        ],
+        "material": "roach_legs",
+        "uv": [
+          426,
+          36
+        ]
+      },
+      {
+        "name": "feeler_1_2",
+        "xyz": [
+          4.6,
+          -4.26,
+          -20.7
+        ],
+        "dim": [
+          0.48,
+          0.46,
+          2.5
+        ],
+        "material": "roach_edge",
+        "uv": [
+          438,
+          36
+        ]
+      },
+      {
+        "name": "feeler_1_3",
+        "xyz": [
+          5.2,
+          -4.04,
+          -22.7
+        ],
+        "dim": [
+          0.37,
+          0.37,
+          2.5
+        ],
+        "material": "roach_legs",
+        "uv": [
+          450,
+          36
+        ]
+      }
+    ],
+    "leg_l_0": [
+      {
+        "name": "coxa",
+        "xyz": [
+          -9.5,
+          -1.7,
+          -7
+        ],
+        "dim": [
+          5,
+          1.6,
+          2
+        ],
+        "material": "roach_dark",
+        "uv": [
+          462,
+          36
+        ]
+      },
+      {
+        "name": "femur",
+        "xyz": [
+          -11.8,
+          -0.6,
+          -7.2
+        ],
+        "dim": [
+          3.3,
+          1.5,
+          2
+        ],
+        "material": "roach_legs",
+        "uv": [
+          480,
+          36
+        ]
+      },
+      {
+        "name": "tibia",
+        "xyz": [
+          -12.4,
+          0.3,
+          -7.2
+        ],
+        "dim": [
+          1.2,
+          4.3,
+          1.5
+        ],
+        "material": "roach_edge",
+        "uv": [
+          496,
+          36
+        ]
+      },
+      {
+        "name": "tarsus",
+        "xyz": [
+          -12.6,
+          4.2,
+          -7.6
+        ],
+        "dim": [
+          1.7,
+          0.8,
+          2.3
+        ],
+        "material": "roach_dark",
+        "uv": [
+          2,
+          48
+        ]
+      },
+      {
+        "name": "spiny_tibia_0",
+        "xyz": [
+          -12.2,
+          1.1,
+          -7.5
+        ],
+        "dim": [
+          1,
+          0.47,
+          0.85
+        ],
+        "material": "roach_edge",
+        "uv": [
+          16,
+          48
+        ]
+      },
+      {
+        "name": "spiny_tibia_1",
+        "xyz": [
+          -12.3,
+          1.95,
+          -7.5
+        ],
+        "dim": [
+          1,
+          0.47,
+          0.85
+        ],
+        "material": "roach_edge",
+        "uv": [
+          24,
+          48
+        ]
+      },
+      {
+        "name": "spiny_tibia_2",
+        "xyz": [
+          -12.4,
+          2.8,
+          -7.5
+        ],
+        "dim": [
+          1,
+          0.47,
+          0.85
+        ],
+        "material": "roach_edge",
+        "uv": [
+          32,
+          48
+        ]
+      },
+      {
+        "name": "segmented_tarsus",
+        "xyz": [
+          -12.35,
+          4.5,
+          -8.0
+        ],
+        "dim": [
+          1.2,
+          0.5,
+          3.1
+        ],
+        "material": "roach_legs",
+        "uv": [
+          40,
+          48
+        ]
+      }
+    ],
+    "leg_l_1": [
+      {
+        "name": "coxa",
+        "xyz": [
+          -9.5,
+          -1.7,
+          -1
+        ],
+        "dim": [
+          5,
+          1.6,
+          2
+        ],
+        "material": "roach_dark",
+        "uv": [
+          56,
+          48
+        ]
+      },
+      {
+        "name": "femur",
+        "xyz": [
+          -11.8,
+          -0.6,
+          -1.2
+        ],
+        "dim": [
+          3.3,
+          1.5,
+          2
+        ],
+        "material": "roach_legs",
+        "uv": [
+          74,
+          48
+        ]
+      },
+      {
+        "name": "tibia",
+        "xyz": [
+          -12.4,
+          0.3,
+          -1.2
+        ],
+        "dim": [
+          1.2,
+          4.3,
+          1.5
+        ],
+        "material": "roach_edge",
+        "uv": [
+          90,
+          48
+        ]
+      },
+      {
+        "name": "tarsus",
+        "xyz": [
+          -12.6,
+          4.2,
+          -1.6
+        ],
+        "dim": [
+          1.7,
+          0.8,
+          2.3
+        ],
+        "material": "roach_dark",
+        "uv": [
+          102,
+          48
+        ]
+      },
+      {
+        "name": "spiny_tibia_0",
+        "xyz": [
+          -12.2,
+          1.1,
+          -1.5
+        ],
+        "dim": [
+          1,
+          0.47,
+          0.85
+        ],
+        "material": "roach_edge",
+        "uv": [
+          116,
+          48
+        ]
+      },
+      {
+        "name": "spiny_tibia_1",
+        "xyz": [
+          -12.3,
+          1.95,
+          -1.5
+        ],
+        "dim": [
+          1,
+          0.47,
+          0.85
+        ],
+        "material": "roach_edge",
+        "uv": [
+          124,
+          48
+        ]
+      },
+      {
+        "name": "spiny_tibia_2",
+        "xyz": [
+          -12.4,
+          2.8,
+          -1.5
+        ],
+        "dim": [
+          1,
+          0.47,
+          0.85
+        ],
+        "material": "roach_edge",
+        "uv": [
+          132,
+          48
+        ]
+      },
+      {
+        "name": "segmented_tarsus",
+        "xyz": [
+          -12.35,
+          4.5,
+          -2.0
+        ],
+        "dim": [
+          1.2,
+          0.5,
+          3.1
+        ],
+        "material": "roach_legs",
+        "uv": [
+          140,
+          48
+        ]
+      }
+    ],
+    "leg_l_2": [
+      {
+        "name": "coxa",
+        "xyz": [
+          -9.5,
+          -1.7,
+          5
+        ],
+        "dim": [
+          5,
+          1.6,
+          2
+        ],
+        "material": "roach_dark",
+        "uv": [
+          156,
+          48
+        ]
+      },
+      {
+        "name": "femur",
+        "xyz": [
+          -11.8,
+          -0.6,
+          4.8
+        ],
+        "dim": [
+          3.3,
+          1.5,
+          2
+        ],
+        "material": "roach_legs",
+        "uv": [
+          174,
+          48
+        ]
+      },
+      {
+        "name": "tibia",
+        "xyz": [
+          -12.4,
+          0.3,
+          4.8
+        ],
+        "dim": [
+          1.2,
+          4.3,
+          1.5
+        ],
+        "material": "roach_edge",
+        "uv": [
+          190,
+          48
+        ]
+      },
+      {
+        "name": "tarsus",
+        "xyz": [
+          -12.6,
+          4.2,
+          4.4
+        ],
+        "dim": [
+          1.7,
+          0.8,
+          2.3
+        ],
+        "material": "roach_dark",
+        "uv": [
+          202,
+          48
+        ]
+      },
+      {
+        "name": "spiny_tibia_0",
+        "xyz": [
+          -12.2,
+          1.1,
+          4.5
+        ],
+        "dim": [
+          1,
+          0.47,
+          0.85
+        ],
+        "material": "roach_edge",
+        "uv": [
+          216,
+          48
+        ]
+      },
+      {
+        "name": "spiny_tibia_1",
+        "xyz": [
+          -12.3,
+          1.95,
+          4.5
+        ],
+        "dim": [
+          1,
+          0.47,
+          0.85
+        ],
+        "material": "roach_edge",
+        "uv": [
+          224,
+          48
+        ]
+      },
+      {
+        "name": "spiny_tibia_2",
+        "xyz": [
+          -12.4,
+          2.8,
+          4.5
+        ],
+        "dim": [
+          1,
+          0.47,
+          0.85
+        ],
+        "material": "roach_edge",
+        "uv": [
+          232,
+          48
+        ]
+      },
+      {
+        "name": "segmented_tarsus",
+        "xyz": [
+          -12.35,
+          4.5,
+          4.0
+        ],
+        "dim": [
+          1.2,
+          0.5,
+          3.1
+        ],
+        "material": "roach_legs",
+        "uv": [
+          240,
+          48
+        ]
+      }
+    ],
+    "leg_r_0": [
+      {
+        "name": "coxa",
+        "xyz": [
+          4.4,
+          -1.7,
+          -7
+        ],
+        "dim": [
+          5,
+          1.6,
+          2
+        ],
+        "material": "roach_dark",
+        "uv": [
+          256,
+          48
+        ]
+      },
+      {
+        "name": "femur",
+        "xyz": [
+          7.800000000000001,
+          -0.6,
+          -7.2
+        ],
+        "dim": [
+          3.3,
+          1.5,
+          2
+        ],
+        "material": "roach_legs",
+        "uv": [
+          274,
+          48
+        ]
+      },
+      {
+        "name": "tibia",
+        "xyz": [
+          10.3,
+          0.3,
+          -7.2
+        ],
+        "dim": [
+          1.2,
+          4.3,
+          1.5
+        ],
+        "material": "roach_edge",
+        "uv": [
+          290,
+          48
+        ]
+      },
+      {
+        "name": "tarsus",
+        "xyz": [
+          9.9,
+          4.2,
+          -7.6
+        ],
+        "dim": [
+          1.7,
+          0.8,
+          2.3
+        ],
+        "material": "roach_dark",
+        "uv": [
+          302,
+          48
+        ]
+      },
+      {
+        "name": "spiny_tibia_0",
+        "xyz": [
+          11.1,
+          1.1,
+          -7.5
+        ],
+        "dim": [
+          1,
+          0.47,
+          0.85
+        ],
+        "material": "roach_edge",
+        "uv": [
+          316,
+          48
+        ]
+      },
+      {
+        "name": "spiny_tibia_1",
+        "xyz": [
+          11.2,
+          1.95,
+          -7.5
+        ],
+        "dim": [
+          1,
+          0.47,
+          0.85
+        ],
+        "material": "roach_edge",
+        "uv": [
+          324,
+          48
+        ]
+      },
+      {
+        "name": "spiny_tibia_2",
+        "xyz": [
+          11.3,
+          2.8,
+          -7.5
+        ],
+        "dim": [
+          1,
+          0.47,
+          0.85
+        ],
+        "material": "roach_edge",
+        "uv": [
+          332,
+          48
+        ]
+      },
+      {
+        "name": "segmented_tarsus",
+        "xyz": [
+          10.95,
+          4.5,
+          -8.0
+        ],
+        "dim": [
+          1.2,
+          0.5,
+          3.1
+        ],
+        "material": "roach_legs",
+        "uv": [
+          340,
+          48
+        ]
+      }
+    ],
+    "leg_r_1": [
+      {
+        "name": "coxa",
+        "xyz": [
+          4.4,
+          -1.7,
+          -1
+        ],
+        "dim": [
+          5,
+          1.6,
+          2
+        ],
+        "material": "roach_dark",
+        "uv": [
+          356,
+          48
+        ]
+      },
+      {
+        "name": "femur",
+        "xyz": [
+          7.800000000000001,
+          -0.6,
+          -1.2
+        ],
+        "dim": [
+          3.3,
+          1.5,
+          2
+        ],
+        "material": "roach_legs",
+        "uv": [
+          374,
+          48
+        ]
+      },
+      {
+        "name": "tibia",
+        "xyz": [
+          10.3,
+          0.3,
+          -1.2
+        ],
+        "dim": [
+          1.2,
+          4.3,
+          1.5
+        ],
+        "material": "roach_edge",
+        "uv": [
+          390,
+          48
+        ]
+      },
+      {
+        "name": "tarsus",
+        "xyz": [
+          9.9,
+          4.2,
+          -1.6
+        ],
+        "dim": [
+          1.7,
+          0.8,
+          2.3
+        ],
+        "material": "roach_dark",
+        "uv": [
+          402,
+          48
+        ]
+      },
+      {
+        "name": "spiny_tibia_0",
+        "xyz": [
+          11.1,
+          1.1,
+          -1.5
+        ],
+        "dim": [
+          1,
+          0.47,
+          0.85
+        ],
+        "material": "roach_edge",
+        "uv": [
+          416,
+          48
+        ]
+      },
+      {
+        "name": "spiny_tibia_1",
+        "xyz": [
+          11.2,
+          1.95,
+          -1.5
+        ],
+        "dim": [
+          1,
+          0.47,
+          0.85
+        ],
+        "material": "roach_edge",
+        "uv": [
+          424,
+          48
+        ]
+      },
+      {
+        "name": "spiny_tibia_2",
+        "xyz": [
+          11.3,
+          2.8,
+          -1.5
+        ],
+        "dim": [
+          1,
+          0.47,
+          0.85
+        ],
+        "material": "roach_edge",
+        "uv": [
+          432,
+          48
+        ]
+      },
+      {
+        "name": "segmented_tarsus",
+        "xyz": [
+          10.95,
+          4.5,
+          -2.0
+        ],
+        "dim": [
+          1.2,
+          0.5,
+          3.1
+        ],
+        "material": "roach_legs",
+        "uv": [
+          440,
+          48
+        ]
+      }
+    ],
+    "leg_r_2": [
+      {
+        "name": "coxa",
+        "xyz": [
+          4.4,
+          -1.7,
+          5
+        ],
+        "dim": [
+          5,
+          1.6,
+          2
+        ],
+        "material": "roach_dark",
+        "uv": [
+          456,
+          48
+        ]
+      },
+      {
+        "name": "femur",
+        "xyz": [
+          7.800000000000001,
+          -0.6,
+          4.8
+        ],
+        "dim": [
+          3.3,
+          1.5,
+          2
+        ],
+        "material": "roach_legs",
+        "uv": [
+          474,
+          48
+        ]
+      },
+      {
+        "name": "tibia",
+        "xyz": [
+          10.3,
+          0.3,
+          4.8
+        ],
+        "dim": [
+          1.2,
+          4.3,
+          1.5
+        ],
+        "material": "roach_edge",
+        "uv": [
+          490,
+          48
+        ]
+      },
+      {
+        "name": "tarsus",
+        "xyz": [
+          9.9,
+          4.2,
+          4.4
+        ],
+        "dim": [
+          1.7,
+          0.8,
+          2.3
+        ],
+        "material": "roach_dark",
+        "uv": [
+          2,
+          59
+        ]
+      },
+      {
+        "name": "spiny_tibia_0",
+        "xyz": [
+          11.1,
+          1.1,
+          4.5
+        ],
+        "dim": [
+          1,
+          0.47,
+          0.85
+        ],
+        "material": "roach_edge",
+        "uv": [
+          16,
+          59
+        ]
+      },
+      {
+        "name": "spiny_tibia_1",
+        "xyz": [
+          11.2,
+          1.95,
+          4.5
+        ],
+        "dim": [
+          1,
+          0.47,
+          0.85
+        ],
+        "material": "roach_edge",
+        "uv": [
+          24,
+          59
+        ]
+      },
+      {
+        "name": "spiny_tibia_2",
+        "xyz": [
+          11.3,
+          2.8,
+          4.5
+        ],
+        "dim": [
+          1,
+          0.47,
+          0.85
+        ],
+        "material": "roach_edge",
+        "uv": [
+          32,
+          59
+        ]
+      },
+      {
+        "name": "segmented_tarsus",
+        "xyz": [
+          10.95,
+          4.5,
+          4.0
+        ],
+        "dim": [
+          1.2,
+          0.5,
+          3.1
+        ],
+        "material": "roach_legs",
+        "uv": [
+          40,
+          59
+        ]
+      }
+    ]
+  },
+  "animations": {
+    "leg_l_0.zRot": "-1 * (Mth.sin(limbSwing * 2.15F + 0.0000F) * motion * 0.48F + attack * 0.16F)",
+    "leg_l_0.xRot": "Mth.cos(limbSwing * 2.15F + 0.0000F) * motion * 0.22F",
+    "leg_l_1.zRot": "-1 * (Mth.sin(limbSwing * 2.15F + 3.1416F) * motion * 0.48F + attack * 0.16F)",
+    "leg_l_1.xRot": "Mth.cos(limbSwing * 2.15F + 3.1416F) * motion * 0.22F",
+    "leg_l_2.zRot": "-1 * (Mth.sin(limbSwing * 2.15F + 0.0000F) * motion * 0.48F + attack * 0.16F)",
+    "leg_l_2.xRot": "Mth.cos(limbSwing * 2.15F + 0.0000F) * motion * 0.22F",
+    "leg_r_0.zRot": "1 * (Mth.sin(limbSwing * 2.15F + 3.1416F) * motion * 0.48F + attack * 0.16F)",
+    "leg_r_0.xRot": "Mth.cos(limbSwing * 2.15F + 3.1416F) * motion * 0.22F",
+    "leg_r_1.zRot": "1 * (Mth.sin(limbSwing * 2.15F + 0.0000F) * motion * 0.48F + attack * 0.16F)",
+    "leg_r_1.xRot": "Mth.cos(limbSwing * 2.15F + 0.0000F) * motion * 0.22F",
+    "leg_r_2.zRot": "1 * (Mth.sin(limbSwing * 2.15F + 3.1416F) * motion * 0.48F + attack * 0.16F)",
+    "leg_r_2.xRot": "Mth.cos(limbSwing * 2.15F + 3.1416F) * motion * 0.22F",
+    "antenna_l.yRot": "Mth.sin(ageInTicks * 0.21F) * 0.30F + attack * 0.34F",
+    "antenna_r.yRot": "-Mth.sin(ageInTicks * 0.19F + 0.8F) * 0.28F - attack * 0.34F",
+    "head.xRot": "attack * -0.32F + recoil * 0.14F",
+    "head.yRot": "Mth.sin(ageInTicks * 0.07F) * 0.085F",
+    "body.xRot": "Mth.sin(limbSwing * 2.15F) * motion * 0.045F + recoil * 0.09F",
+    "leg_l_0.y": "19.500F - Math.max(0.0F, Mth.sin(limbSwing * 2.15F + 0.0000F)) * motion * 0.75F",
+    "leg_l_1.y": "19.500F - Math.max(0.0F, Mth.sin(limbSwing * 2.15F + 3.1416F)) * motion * 0.75F",
+    "leg_l_2.y": "19.500F - Math.max(0.0F, Mth.sin(limbSwing * 2.15F + 0.0000F)) * motion * 0.75F",
+    "leg_r_0.y": "19.500F - Math.max(0.0F, Mth.sin(limbSwing * 2.15F + 3.1416F)) * motion * 0.75F",
+    "leg_r_1.y": "19.500F - Math.max(0.0F, Mth.sin(limbSwing * 2.15F + 0.0000F)) * motion * 0.75F",
+    "leg_r_2.y": "19.500F - Math.max(0.0F, Mth.sin(limbSwing * 2.15F + 3.1416F)) * motion * 0.75F"
+  },
+  "part_pivots": {
+    "body": [
+      0,
+      -3.54,
+      0.33
+    ],
+    "head": [
+      0,
+      -2.52,
+      -4.8
+    ],
+    "antenna_l": [
+      -3.8,
+      -4.44,
+      -7.0
+    ],
+    "antenna_r": [
+      3.69,
+      -4.44,
+      -7.0
+    ],
+    "leg_l_0": [
+      -4.5,
+      -1.5,
+      -6.45
+    ],
+    "leg_l_1": [
+      -4.5,
+      -1.5,
+      -0.45
+    ],
+    "leg_l_2": [
+      -4.5,
+      -1.5,
+      5.55
+    ],
+    "leg_r_0": [
+      4.4,
+      -1.5,
+      -6.45
+    ],
+    "leg_r_1": [
+      4.4,
+      -1.5,
+      -0.45
+    ],
+    "leg_r_2": [
+      4.4,
+      -1.5,
+      5.55
+    ]
+  }
+}

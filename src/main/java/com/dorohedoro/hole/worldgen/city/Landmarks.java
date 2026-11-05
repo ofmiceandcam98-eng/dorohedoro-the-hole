@@ -31,13 +31,76 @@ final class Landmarks {
         int rim = r.z0();
         c.set(r.centerX() - 3, GROUND_Y, rim, Blocks.CRAFTING_TABLE);
         c.facing(r.centerX() - 2, GROUND_Y, rim, Direction.SOUTH, Blocks.FURNACE);
-        c.chest(r.centerX() - 1, GROUND_Y, rim, Direction.SOUTH, "starter_cache");
-        c.chest(r.centerX(), GROUND_Y, rim, Direction.SOUTH, "starter_cache");
-        c.barrel(r.centerX() + 1, GROUND_Y, rim, "market");
+        // One useful starter supply container, rather than a conspicuous
+        // line of treasure chests on the square in new worlds.
+        if (c.hasOccupiedInteriors35()) {
+            c.barrel(r.centerX() - 1, GROUND_Y, rim, "starter_cache");
+            c.set(r.centerX(), GROUND_Y, rim, Blocks.SPRUCE_SLAB);
+            c.set(r.centerX() + 1, GROUND_Y, rim, Blocks.COMPOSTER);
+        } else {
+            c.chest(r.centerX() - 1, GROUND_Y, rim, Direction.SOUTH, "starter_cache");
+            c.chest(r.centerX(), GROUND_Y, rim, Direction.SOUTH, "starter_cache");
+            c.barrel(r.centerX() + 1, GROUND_Y, rim, "market");
+        }
         c.set(r.centerX() + 2, GROUND_Y, rim, Blocks.CRAFTING_TABLE);
         c.fill(r.centerX() + 3, GROUND_Y, rim, r.centerX() + 3, GROUND_Y + 1, rim, Blocks.SPRUCE_LOG);
         c.set(r.centerX() + 3, GROUND_Y + 2, rim, Blocks.SPRUCE_PLANKS);
         c.sign(r.centerX() + 3, GROUND_Y + 1, rim + 1, Direction.SOUTH, Blocks.SPRUCE_WALL_SIGN, "THE HOLE", "Food: Hungry Bug", "north of here", "Mines: road hatches");
+        if (c.hasOccupiedCommons43()) OccupiedCommons43.plaza(c, lot);
+    }
+
+    /** Pass 47: small provisioned landing in a real fringe neighborhood, not a downtown plaza copy. */
+    static void regionalLanding(Canvas c, Lot lot, HoleRegions42.Region region) {
+        Rect r = lot.rect();
+        // Useful mined materials, not a cosmetic recolor; the rest of the local
+        // neighborhood still expresses its existing biome's surface and ecology.
+        net.minecraft.world.level.block.Block surface = switch (region) {
+            case SNOWFIELDS -> Blocks.POLISHED_ANDESITE;
+            case DEAD_TAIGA -> Blocks.MOSSY_STONE_BRICKS;
+            case DUST_BASIN -> Blocks.SANDSTONE;
+            case IRON_BADLANDS -> Blocks.RED_SANDSTONE;
+            case MOUNTAIN_RIM -> Blocks.COBBLESTONE;
+            case CITY -> Blocks.CRACKED_STONE_BRICKS;
+        };
+        c.fill(r, STREET_Y, STREET_Y, surface);
+        int x = r.centerX(), z = r.centerZ();
+        // Spawn's central 9x9 area is flat, roofless, and unobstructed; supplies
+        // live at the rim. No universal high-brightness street grid is added.
+        c.fill(x - 5, STREET_Y, z - 5, x + 5, STREET_Y, z + 5, Blocks.CRACKED_STONE_BRICKS);
+        int north = r.z0() + 2;
+        if (c.hasRoomDressing71()) {
+            // v53: just the supply barrel beside the sign. Its loot already holds logs, stone tools, coal and torches,
+            // so the old line of loose workstations and the log pillar on open ground only looked like clutter.
+            c.barrel(x + 7, GROUND_Y, north, "starter_cache");
+        } else {
+            c.set(x - 8, GROUND_Y, north, Blocks.CRAFTING_TABLE);
+            c.facing(x - 6, GROUND_Y, north, Direction.SOUTH, Blocks.FURNACE);
+            c.barrel(x - 4, GROUND_Y, north, "starter_cache");
+            c.set(x - 2, GROUND_Y, north, Blocks.CAULDRON);
+            c.set(x, GROUND_Y, north, Blocks.SMOKER);
+            c.set(x + 2, GROUND_Y, north, Blocks.COMPOSTER);
+            c.set(x + 4, GROUND_Y, north, Blocks.CRAFTING_TABLE);
+            // Harvestable shelter-repair wood for regions without live trees.
+            c.fill(x + 7, GROUND_Y, north, x + 7, GROUND_Y + 2, north, Blocks.SPRUCE_LOG);
+            c.set(x + 7, GROUND_Y + 3, north, Blocks.SPRUCE_SLAB);
+        }
+        String name = switch (region) {
+            case SNOWFIELDS -> "FROST DEPOT";
+            case DEAD_TAIGA -> "DEADWOOD OUTPOST";
+            case DUST_BASIN -> "DUST STOP";
+            case IRON_BADLANDS -> "RUST CAMP";
+            case MOUNTAIN_RIM -> "RIDGE SHELTER";
+            case CITY -> "THE HOLE";
+        };
+        c.set(x + 8, GROUND_Y + 1, north, Blocks.BRICKS);
+        c.sign(x + 8, GROUND_Y + 1, north + 1, Direction.SOUTH,
+                Blocks.SPRUCE_WALL_SIGN, name, "BEDS TO EAST", "SEWERS BELOW", "THE HOLE");
+        // Very limited lamps mark the first-night supplies but preserve dark
+        // approaches and nocturnal mob spawning in surrounding streets.
+        for (int dx : new int[]{-10, 10}) {
+            c.fill(x + dx, GROUND_Y, z + 10, x + dx, GROUND_Y + 2, z + 10, Blocks.SPRUCE_FENCE);
+            c.set(x + dx, GROUND_Y + 3, z + 10, POST_LANTERN);
+        }
     }
 
     static void hungryBug(Canvas c, Lot lot) {
@@ -68,7 +131,7 @@ final class Landmarks {
                 Tower.lamp(cv, x, y, in.z1() - 3);
             }
             Tower.lamp(cv, in.centerX(), y, in.z0() + 3);
-        });
+        }, k -> false);
         // The open-all-hours storefront: glass across the plaza side, a yellow sign band, and a green awning.
         int front = box.z1();
         for (int x = box.x0() + 2; x <= box.x1() - 2; x++) {
@@ -102,7 +165,7 @@ final class Landmarks {
             cv.facing(in.x0(), y + 1, in.z0() + 5, Direction.EAST, Blocks.FURNACE);
             Tower.lamp(cv, in.centerX(), y, in.centerZ());
             Tower.lamp(cv, in.centerX(), y, in.z0() + 3);
-        });
+        }, k -> false);
     }
 
     static void hospital(Canvas c, Lot lot) {
@@ -115,7 +178,7 @@ final class Landmarks {
             for (int x = in.x0() + 6; x <= in.x1() - 6; x += 6) {
                 Tower.lamp(cv, x, y, in.z0() + 5);
             }
-        });
+        }, k -> false);
         int roof = STREET_Y + floors * Tower.STOREY + 1;
         LotPainter.redCross(c, box.centerX(), roof + 3, box.z1());
         c.fill(box.centerX(), roof, box.z1(), box.centerX(), roof + 1, box.z1(), Blocks.RED_CONCRETE);
@@ -140,7 +203,7 @@ final class Landmarks {
                     Tower.lamp(cv, x, y, z);
                 }
             }
-        });
+        }, k -> false);
         c.fill(box.x0() + 1, STREET_Y + floors * Tower.STOREY - 1, box.z1(), box.x1() - 1, STREET_Y + floors * Tower.STOREY - 1, box.z1(), Blocks.RED_TERRACOTTA);
     }
 
@@ -162,7 +225,7 @@ final class Landmarks {
             } else {
                 LotPainter.dwelling(cv, style, k, in, y);
             }
-        });
+        }, k -> false);
     }
 
     /** A bowl of dark water ringed by refuse. Kept shallow enough to clear the sewers, and sealed against leaks. */

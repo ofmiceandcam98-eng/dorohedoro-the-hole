@@ -11,11 +11,11 @@ Every entry says where it came from. Nothing here may be presented in game as ca
 | `adaptation` | Original gameplay invented for this mod. Never canon. |
 | `unverified` | Needs a source before it can be labelled. |
 
-## Source access
+## Source access — updated research pass
 
-The owner's listed Dorohedoro fan-wiki pages (Hell, Hydra Forest, Magic User Door, En Family Door, Magic, the Magic User World category) returned HTTP 402 to automated fetching on 2026-10-31, so **none of them were read**. No workaround was attempted. Those pages remain the first thing to check, by the owner pasting the text or in a browser session.
+The original direct Fandom page retrieval may be restricted, but indexed source content returned through public web search on **2026-10-31** for the [Magic](https://dorohedoro.fandom.com/wiki/Magic), [Magic Users](https://dorohedoro.fandom.com/wiki/Magic_Users), [Hell](https://dorohedoro.fandom.com/wiki/Hell), [Hydra Forest](https://dorohedoro.fandom.com/wiki/Hydra_Forest), [Kikurage](https://dorohedoro.fandom.com/wiki/Kikurage), [Jonson](https://dorohedoro.fandom.com/wiki/Jonson), [Hole](https://dorohedoro.fandom.com/wiki/Hole), and [Maitake](https://dorohedoro.fandom.com/wiki/Maitake) pages, among others. Those search excerpts are genuine fan-wiki citations; they are **not an independent verification of every wiki paragraph against Q Hayashida's original manga**. The complete researched implementation guidance with individual links lives in `docs/spec/DOROHEDORO_WORLD_AND_MECHANICS_MASTER_BLUEPRINT.md`.
 
-Reached instead: Wikipedia's [Dorohedoro](https://en.wikipedia.org/wiki/Dorohedoro) article, the [SF Encyclopedia entry](https://sf-encyclopedia.com/entry/dorohedoro), and the [Moegirl entry](https://zh.moegirl.org.cn/en/%E5%BC%82%E5%85%BD%E9%AD%94%E9%83%BD), through search summaries.
+**Corrections:** Maitake and Aitake are sorcerer twins, NOT canonical mushroom species. GuraGura is Shin's former dog and a Devil. Kikurage does not heal damaged flesh by resurrection; Hole rain is predominantly harmful to sorcerers, not universally lethal to all people. Kaiman's combat knives are mundane blades, and his resistance is a property of Kaiman himself. Distinguish original mod survival features from manga canon.
 
 ## Setting
 
@@ -27,8 +27,8 @@ Reached instead: Wikipedia's [Dorohedoro](https://en.wikipedia.org/wiki/Dorohedo
 | Sorcerers were made by Chidaruma, humans arose naturally | `sourced` | Wikipedia. Spoiler, keep out of default UI |
 | Devils rank above sorcerers in a caste-like order | `sourced` | Wikipedia |
 | En once survived in Hell for years by growing and eating a massive mushroom forest | `sourced` | Wikipedia. Spoiler |
-| Horn-shaped mountains, immense rock formations, caverns in Hell | `owner_spec` | Could not be confirmed by search |
-| Hydra Forest as a dense forest with Haru's cabin and Cross-Eyes structures | `owner_spec` | Could not be confirmed by search |
+| Horn-shaped mountains and barren Hell terrain | `sourced` | [Hell](https://dorohedoro.fandom.com/wiki/Hell); other geometric details are adaptation |
+| Hydra Forest, Haru's residence and Cross-Eyes operations | `sourced` | [Hydra Forest](https://dorohedoro.fandom.com/wiki/Hydra_Forest); plant textures and tree species are adaptation |
 | Mastema's mushroom-devastated region | `owner_spec` | Unverified |
 | Zagan City | `owner_spec` | Unverified |
 
@@ -42,9 +42,9 @@ Reached instead: Wikipedia's [Dorohedoro](https://en.wikipedia.org/wiki/Dorohedo
 | Kasukabe made a portal from sorcerers' skins, which Caiman and Nikaido use | `sourced` | Moegirl and Wikipedia summaries |
 | Haru is Kasukabe's estranged sorcerer wife, later a devil | `sourced` | Wikipedia. Spoiler |
 | Cross-Eyes members carry red cross tattoos on their eyelids | `sourced` | Wikipedia |
-| Each door's look reflects its owner | `owner_spec` | |
-| The En Family Door as a shared door for those who cannot make their own | `owner_spec` | |
-| Character-specific door motifs (Shin, Noi, En, Ebisu, Nikaido) | `owner_spec` | Listed as examples to research |
+| Each door's look reflects its owner | `sourced` | [Magic User Door](https://dorohedoro.fandom.com/wiki/Magic_User_Door) |
+| The En Family Door as a shared door for those who cannot make their own | `sourced` | [En Family Door](https://dorohedoro.fandom.com/wiki/En_Family_Door) |
+| Character-specific door motifs (Shin, Noi, En, Ebisu, Nikaido) | `sourced` | [Magic User Door](https://dorohedoro.fandom.com/wiki/Magic_User_Door) |
 
 ## Adaptations
 

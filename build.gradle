@@ -34,6 +34,11 @@ base {
     archivesName = mod_id
 }
 
+// The release jar is named like the CurseForge file list: "Dorohedoro The Hole-BETA0.2.jar".
+tasks.named('jar') {
+    archiveFileName = "${release_title}-${release_channel}${release_number}.jar"
+}
+
 // Mojang ships Java 21 to end users in 1.21.1, so mods should target Java 21.
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
@@ -72,6 +77,17 @@ neoForge {
         }
 
         // Headless world validation on a real dedicated server. Driven by tools/qa-world.sh.
+        // Unattended client test: creates a fresh world, takes screenshots, quits. See ClientQa.
+        qaClient {
+            client()
+            gameDirectory = project.file('runs/qaclient')
+            systemProperty 'dorohedoro.clientqa', 'true'
+            systemProperty 'dorohedoro.clientqa.seed', project.findProperty('qa_seed') ?: '8675309'
+            systemProperty 'dorohedoro.clientqa.visit', project.findProperty('qa_visit') ?: ''
+            // A 1600x900 window gives GUI scale 3, close to what players see, so HUD screenshots are representative.
+            programArguments.addAll('--width', '1600', '--height', '900')
+        }
+
         qaServer {
             server()
             gameDirectory = project.file(project.findProperty('qa_dir') ?: 'runs/qa/manual')
@@ -80,6 +96,7 @@ neoForge {
             systemProperty 'dorohedoro.qa.radius', project.findProperty('qa_radius') ?: '16'
             systemProperty 'dorohedoro.qa.order', project.findProperty('qa_order') ?: 'forward'
             systemProperty 'dorohedoro.qa.dump', project.findProperty('qa_dump') ?: ''
+            systemProperty 'dorohedoro.qa.structures', project.findProperty('qa_structures') ?: 'false'
             systemProperty 'java.awt.headless', 'true'
         }
 
@@ -197,4 +214,9 @@ idea {
         downloadSources = true
         downloadJavadoc = true
     }
+}
+
+// Files in src/main/resources win over generated copies of the same path.
+tasks.named('processResources', ProcessResources) {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }

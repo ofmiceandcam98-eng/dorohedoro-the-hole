@@ -1,0 +1,11 @@
+{
+  "type": "dorohedoro:sorcerers_world",
+  "generator": {
+    "type": "minecraft:noise",
+    "biome_source": {
+      "type": "dorohedoro:sorcerer_lands",
+      "frostbound_regions": true
+    },
+    "settings": "dorohedoro:sorcerers_world"
+  }
+}

@@ -17,6 +17,14 @@ public final class HoleBiomes {
     public static final ResourceKey<Biome> GRAVEYARD = key("hole_graveyard");
     public static final ResourceKey<Biome> OUTSKIRTS = key("hole_outskirts");
     public static final ResourceKey<Biome> UNDERCITY = key("hole_undercity");
+    public static final ResourceKey<Biome> FROSTBITTEN_INDUSTRIAL = key("hole_frostbitten_industrial");
+
+    // Pass 42: full F3-visible identities for the inhabited outskirts.
+    public static final ResourceKey<Biome> SNOWFIELDS = key("hole_snowfields");
+    public static final ResourceKey<Biome> DEAD_TAIGA = key("hole_dead_taiga");
+    public static final ResourceKey<Biome> DUST_BASIN = key("hole_dust_basin");
+    public static final ResourceKey<Biome> IRON_BADLANDS = key("hole_iron_badlands");
+    public static final ResourceKey<Biome> MOUNTAIN_RIM = key("hole_mountain_rim");
 
     private HoleBiomes() {}
 

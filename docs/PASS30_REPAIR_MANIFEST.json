@@ -1,0 +1,38 @@
+{
+  "base": "Pass29",
+  "modified_java": [
+    "Canvas.java",
+    "Housing25.java",
+    "CanalEcology24.java"
+  ],
+  "removed_shadow_resources": [
+    "src/main/resources/data/dorohedoro/loot_table/blocks/zinc_ore.json",
+    "src/main/resources/data/dorohedoro/loot_table/blocks/limestone.json",
+    "src/main/resources/data/dorohedoro/loot_table/blocks/cavern_lamp.json",
+    "src/main/resources/data/dorohedoro/loot_table/blocks/chitin_plating.json",
+    "src/main/resources/data/dorohedoro/loot_table/blocks/galvanized_plating.json",
+    "src/main/resources/data/dorohedoro/loot_table/blocks/sulfur_ore.json",
+    "src/main/resources/data/dorohedoro/loot_table/blocks/rock_salt_ore.json",
+    "src/main/resources/data/dorohedoro/loot_table/blocks/oil_shale_ore.json",
+    "src/main/resources/assets/dorohedoro/models/item/sewer_leech_spawn_egg.json",
+    "src/main/resources/assets/dorohedoro/models/item/spore_crawler_spawn_egg.json",
+    "src/main/resources/assets/dorohedoro/models/item/rust_eater_beetle_spawn_egg.json",
+    "src/main/resources/assets/dorohedoro/models/item/glow_moth_spawn_egg.json",
+    "src/main/resources/assets/dorohedoro/models/item/scrap_rat_spawn_egg.json",
+    "src/main/resources/assets/dorohedoro/models/item/cavern_burrower_spawn_egg.json",
+    "src/main/resources/assets/dorohedoro/models/item/sewer_roach_spawn_egg.json",
+    "src/main/resources/assets/dorohedoro/models/item/sludge_crawler_spawn_egg.json"
+  ],
+  "divergent_loot_tables_resolved": [
+    "src/main/resources/data/dorohedoro/loot_table/blocks/zinc_ore.json",
+    "src/main/resources/data/dorohedoro/loot_table/blocks/limestone.json",
+    "src/main/resources/data/dorohedoro/loot_table/blocks/cavern_lamp.json",
+    "src/main/resources/data/dorohedoro/loot_table/blocks/chitin_plating.json",
+    "src/main/resources/data/dorohedoro/loot_table/blocks/galvanized_plating.json",
+    "src/main/resources/data/dorohedoro/loot_table/blocks/sulfur_ore.json",
+    "src/main/resources/data/dorohedoro/loot_table/blocks/rock_salt_ore.json",
+    "src/main/resources/data/dorohedoro/loot_table/blocks/oil_shale_ore.json"
+  ],
+  "wrapper_jar_present": false,
+  "gradle_sha256_pinned": "72f44c9f8ebcb1af43838f45ee5c4aa9c5444898b3468ab3f4af7b6076c5bc3f"
+}

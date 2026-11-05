@@ -5,9 +5,23 @@
       "generator": {
         "type": "dorohedoro:hole",
         "biome_source": {
-          "type": "dorohedoro:hole_districts"
+          "type": "dorohedoro:hole_districts",
+          "winter_districts": true,
+          "frontier_biomes": true,
+          "climate_across_city": true,
+          "ocean_regions": true,
+          "coastal_shelves": true,
+          "ocean_monument_floors": true
         },
-        "settings": "dorohedoro:hole"
+        "settings": "dorohedoro:hole_sewers",
+        "city": {
+          "terrain_relief": true,
+          "sewer_underworld": true,
+          "sewer_cave_frequency": 30,
+          "sewer_cavern_version": 5,
+          "world_detail_version": 55,
+          "density": 0.97
+        }
       }
     },
     "minecraft:the_end": {

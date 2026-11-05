@@ -1,6 +1,34 @@
 {
   "values": [
     "dorohedoro:industrial_debris",
-    "dorohedoro:rusted_plating"
+    "dorohedoro:rusted_plating",
+    "dorohedoro:hell_rock",
+    "dorohedoro:sewer_brickwork",
+    "dorohedoro:reinforced_door_frame",
+    "dorohedoro:etched_gate_stone",
+    "dorohedoro:artificial_door_core",
+    "dorohedoro:infernal_door_core",
+    "dorohedoro:generated_door_frame",
+    "dorohedoro:generated_gate_stone",
+    "dorohedoro:generated_artificial_core",
+    "dorohedoro:generated_infernal_core",
+    "dorohedoro:sulfur_ore",
+    "dorohedoro:rock_salt_ore",
+    "dorohedoro:limestone",
+    "dorohedoro:chitin_plating",
+    "dorohedoro:zinc_ore",
+    "dorohedoro:oil_shale_ore",
+    "dorohedoro:deepslate_sulfur_ore",
+    "dorohedoro:deepslate_rock_salt_ore",
+    "dorohedoro:deepslate_zinc_ore",
+    "dorohedoro:deepslate_oil_shale_ore",
+    "dorohedoro:galvanized_plating",
+    "dorohedoro:cavern_lamp",
+    "dorohedoro:smoke_stained_concrete",
+    "dorohedoro:water_damaged_plaster",
+    "dorohedoro:soot_blackened_brick",
+    "dorohedoro:patchwork_masonry",
+    "dorohedoro:rusted_industrial_sheet",
+    "dorohedoro:seepage_brick"
   ]
 }

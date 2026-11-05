@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "cookingtime": 600,
+  "experience": 0.35,
+  "ingredient": {
+    "item": "dorohedoro:severed_left_arm"
+  },
+  "result": {
+    "id": "dorohedoro:cooked_left_arm"
+  }
+}

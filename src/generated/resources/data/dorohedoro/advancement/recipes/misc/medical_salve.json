@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_leech": {
+      "conditions": {
+        "items": [
+          {
+            "items": "dorohedoro:leech_mucus"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "dorohedoro:medical_salve"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_leech"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "dorohedoro:medical_salve"
+    ]
+  }
+}

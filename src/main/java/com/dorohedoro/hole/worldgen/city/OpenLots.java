@@ -49,6 +49,7 @@ final class OpenLots {
     }
 
     static void marketStalls(Canvas c, Lot lot) {
+        if (c.hasOccupiedCommons43()) { OccupiedCommons43.market(c, lot); return; }
         Rect r = lot.rect();
         Block[][] goods = {
                 {Blocks.HAY_BLOCK, Blocks.MELON},
@@ -74,7 +75,12 @@ final class OpenLots {
                 }
                 c.set(x + 1, GROUND_Y, z + 1, stock[0]);
                 c.set(x + 2, GROUND_Y, z + 1, stock[1]);
-                c.chest(x + 3, GROUND_Y, z + 1, Direction.SOUTH, "market");
+                if (!c.hasOccupiedInteriors35() || CityHash.range(h >>> 30, 11) == 0) {
+                    c.chest(x + 3, GROUND_Y, z + 1, Direction.SOUTH, "market");
+                } else {
+                    c.set(x + 3, GROUND_Y, z + 1,
+                            CityHash.range(h >>> 42, 2) == 0 ? Blocks.COMPOSTER : Blocks.SPRUCE_PLANKS);
+                }
             }
         }
     }
@@ -136,7 +142,8 @@ final class OpenLots {
         c.set(in.x1() - 1, GROUND_Y, in.z1(), Blocks.MELON);
         c.facing(box.x0() + 1, GROUND_Y + 3, box.z0() + 1, Direction.SOUTH, Blocks.BEE_NEST);
         c.set(in.x1() - 1, GROUND_Y, aisleZ + 1, Blocks.COMPOSTER);
-        c.chest(in.x0(), GROUND_Y, aisleZ, Direction.EAST, "nursery");
+        if (c.hasOccupiedInteriors35()) c.barrel(in.x0(), GROUND_Y, aisleZ, "nursery");
+        else c.chest(in.x0(), GROUND_Y, aisleZ, Direction.EAST, "nursery");
 
         // The door sits at the east end of the central aisle.
         c.door(box.x1(), GROUND_Y, aisleZ, Direction.WEST, Blocks.DARK_OAK_DOOR);
@@ -166,25 +173,59 @@ final class OpenLots {
         for (int x = in.x0(); x <= in.x1(); x += 2) {
             c.set(x, GROUND_Y, in.z0(), saplings[Math.floorMod(x, saplings.length)]);
         }
-        tree(c, in.x0() + 2, in.centerZ(), 5, Blocks.OAK_LOG, Blocks.OAK_LEAVES);
-        if (in.width() >= 11) {
-            tree(c, in.x1() - 2, in.centerZ(), 6, Blocks.BIRCH_LOG, Blocks.BIRCH_LEAVES);
+        if (c.hasSparseHoleTrees()) {
+            // A working urban nursery is a protected source of saplings, not an
+            // open-air orchard that contradicts the Hole's decayed streets.
+            // A small paneled canopy shelters the stock from polluted rain.
+            int shelterZ = in.z0();
+            int roofY = GROUND_Y + 4;
+            for (int x = in.x0(); x <= in.x1(); x++) {
+                for (int z = shelterZ; z <= Math.min(in.z1(), shelterZ + 2); z++) {
+                    c.set(x, roofY, z, Blocks.GLASS);
+                }
+            }
+            for (int x : new int[]{in.x0(), in.x1()}) {
+                for (int y = GROUND_Y; y < roofY; y++) {
+                    c.set(x, y, shelterZ, Blocks.IRON_BARS);
+                    c.set(x, y, Math.min(in.z1(), shelterZ + 2), Blocks.IRON_BARS);
+                }
+            }
+            // Salvaged wood is supplied by city ruins; seedlings provide an
+            // attainable renewable route to all vanilla tree-growing mechanics.
+            c.fill(in.centerX(), GROUND_Y, in.centerZ(), in.centerX(), GROUND_Y + 3, in.centerZ(), Blocks.STRIPPED_OAK_LOG);
+            c.set(in.centerX() + 1, GROUND_Y + 2, in.centerZ(),
+                    Blocks.STRIPPED_OAK_LOG.defaultBlockState().setValue(net.minecraft.world.level.block.RotatedPillarBlock.AXIS,
+                            net.minecraft.core.Direction.Axis.X));
+        } else {
+            tree(c, in.x0() + 2, in.centerZ(), 5, Blocks.OAK_LOG, Blocks.OAK_LEAVES);
+            if (in.width() >= 11) {
+                tree(c, in.x1() - 2, in.centerZ(), 6, Blocks.BIRCH_LOG, Blocks.BIRCH_LEAVES);
+            }
         }
-        c.chest(in.x1(), GROUND_Y, in.z1(), Direction.WEST, "nursery");
+        if (c.hasOccupiedInteriors35()) c.barrel(in.x1(), GROUND_Y, in.z1(), "nursery");
+        else c.chest(in.x1(), GROUND_Y, in.z1(), Direction.WEST, "nursery");
         c.set(in.x0(), GROUND_Y, in.z1(), Blocks.COMPOSTER);
     }
 
     static void park(Canvas c, Lot lot) {
         Rect r = lot.rect();
         soil(c, r);
+        if (c.hasSparseHoleTrees()) {
+            c.fill(r, STREET_Y, STREET_Y, Mix.of(Blocks.COARSE_DIRT, 6, Blocks.GRAVEL, 4,
+                    Blocks.PODZOL, 2, Blocks.GRASS_BLOCK, 1, Blocks.DIRT, 2));
+        }
         Block[][] trees = {{Blocks.OAK_LOG, Blocks.OAK_LEAVES}, {Blocks.BIRCH_LOG, Blocks.BIRCH_LEAVES}, {Blocks.SPRUCE_LOG, Blocks.SPRUCE_LEAVES}};
-        int count = 2 + r.area() / 180;
-        for (int i = 0; i < count; i++) {
-            long h = CityHash.mix(lot.hash() + i);
-            int x = r.x0() + 3 + CityHash.range(h, Math.max(1, r.width() - 6));
-            int z = r.z0() + 3 + CityHash.range(h >>> 16, Math.max(1, r.depth() - 6));
-            Block[] kind = trees[CityHash.range(h >>> 32, trees.length)];
-            tree(c, x, z, 5 + CityHash.range(h >>> 40, 3), kind[0], kind[1]);
+        if (c.hasSparseHoleTrees()) {
+            HoleTrees.park(c, lot);
+        } else {
+            int count = 2 + r.area() / 180;
+            for (int i = 0; i < count; i++) {
+                long h = CityHash.mix(lot.hash() + i);
+                int x = r.x0() + 3 + CityHash.range(h, Math.max(1, r.width() - 6));
+                int z = r.z0() + 3 + CityHash.range(h >>> 16, Math.max(1, r.depth() - 6));
+                Block[] kind = trees[CityHash.range(h >>> 32, trees.length)];
+                tree(c, x, z, 5 + CityHash.range(h >>> 40, 3), kind[0], kind[1]);
+            }
         }
         // A pond rimmed with sand and clay, which keeps both obtainable without digging canals.
         if (r.width() >= 14 && r.depth() >= 14) {
@@ -197,8 +238,16 @@ final class OpenLots {
         for (int x = r.x0() + 1; x <= r.x1() - 1; x += 2) {
             for (int z = r.z0() + 1; z <= r.z1() - 1; z += 2) {
                 long h = c.hash(x, GROUND_Y, z);
-                if (c.contains(x, z) && c.get(x, GROUND_Y, z).isAir() && c.get(x, STREET_Y, z).is(Blocks.GRASS_BLOCK) && CityHash.range(h, 5) == 0) {
-                    c.set(x, GROUND_Y, z, CityHash.range(h >>> 16, 4) == 0 ? Blocks.DANDELION : Blocks.SHORT_GRASS);
+                if (c.contains(x, z) && c.get(x, GROUND_Y, z).isAir()
+                        && (c.get(x, STREET_Y, z).is(Blocks.GRASS_BLOCK) || c.get(x, STREET_Y, z).is(Blocks.PODZOL))) {
+                    if (c.hasSparseHoleTrees()) {
+                        if (CityHash.range(h, 23) == 0)
+                            c.set(x, GROUND_Y, z, Blocks.DEAD_BUSH);
+                        else if (CityHash.range(h, 31) == 0)
+                            c.set(x, GROUND_Y, z, Blocks.SHORT_GRASS);
+                    } else if (CityHash.range(h, 5) == 0) {
+                        c.set(x, GROUND_Y, z, CityHash.range(h >>> 16, 4) == 0 ? Blocks.DANDELION : Blocks.SHORT_GRASS);
+                    }
                 }
             }
         }
@@ -209,6 +258,10 @@ final class OpenLots {
      * vegetation belongs. Most lots stay treeless, and even a living tree here is small and thin.
      */
     static void vacant(Canvas c, Lot lot) {
+        if (InhabitedCourts45.eligible(c, lot, false)) { InhabitedCourts45.paint(c, lot, false); return; }
+        // Only v22+ parcels with enough room for a graded perimeter become hills.
+        // A converted lot owns its own plants/soil so older trees are not buried.
+        if (Hillside37.vacant(c, lot)) return;
         Rect r = lot.rect();
         c.fill(r, STREET_Y - 1, STREET_Y - 1, Blocks.DIRT);
         c.fill(r, STREET_Y, STREET_Y, Mix.of(Blocks.COARSE_DIRT, 5, Blocks.DIRT, 3, Blocks.GRASS_BLOCK, 3, Blocks.GRAVEL, 1, Blocks.PODZOL, 1));
@@ -228,11 +281,15 @@ final class OpenLots {
                 }
             }
         }
-        int roll = CityHash.range(lot.hash() >>> 8, 10);
-        if (roll < 4) {
-            deadTree(c, r.centerX(), r.centerZ(), lot.hash());
-        } else if (roll == 4) {
-            tree(c, r.centerX(), r.centerZ(), 4, Blocks.OAK_LOG, Blocks.OAK_LEAVES);
+        if (c.hasSparseHoleTrees()) {
+            HoleTrees.vacant(c, lot);
+        } else {
+            int roll = CityHash.range(lot.hash() >>> 8, 10);
+            if (roll < 4) {
+                deadTree(c, r.centerX(), r.centerZ(), lot.hash());
+            } else if (roll == 4) {
+                tree(c, r.centerX(), r.centerZ(), 4, Blocks.OAK_LOG, Blocks.OAK_LEAVES);
+            }
         }
     }
 
@@ -280,10 +337,12 @@ final class OpenLots {
         }
         c.fenceRing(fence, GROUND_Y, Blocks.IRON_BARS, fence.centerX(), fence.z1());
         c.set(fence.centerX(), GROUND_Y + 1, fence.z1(), Blocks.AIR);
-        c.chest(fence.x1() - 1, GROUND_Y, fence.z1() - 1, Direction.WEST, "scrap");
+        if (c.hasOccupiedInteriors35()) c.barrel(fence.x1() - 1, GROUND_Y, fence.z1() - 1, "scrap");
+        else c.chest(fence.x1() - 1, GROUND_Y, fence.z1() - 1, Direction.WEST, "scrap");
     }
 
     static void rubble(Canvas c, Lot lot) {
+        if (InhabitedCourts45.eligible(c, lot, true)) { InhabitedCourts45.paint(c, lot, true); return; }
         Rect r = lot.rect();
         Rect shell = r.inset(1);
         Mix broken = Mix.of(Blocks.CRACKED_STONE_BRICKS, 3, Blocks.COBBLESTONE, 3, Blocks.MOSSY_COBBLESTONE, 1, Blocks.BRICKS, 2);
@@ -304,6 +363,7 @@ final class OpenLots {
         heap(c, shell.centerX() - 1, shell.centerZ(), Math.min(3, shell.width() / 4), broken);
         c.set(shell.x0() + 1, GROUND_Y, shell.z0() + 1, Blocks.RED_MUSHROOM);
         c.set(shell.x0() + 2, GROUND_Y, shell.z0() + 1, Blocks.BROWN_MUSHROOM);
+        if (c.hasSparseHoleTrees()) HoleTrees.rubble(c, lot);
     }
 
     static void cemetery(Canvas c, Lot lot) {
@@ -333,4 +393,145 @@ final class OpenLots {
             c.barrel(in.centerX(), GROUND_Y, in.z0(), "crypt");
         }
     }
+
+
+    static void communalCourt(Canvas c, Lot lot) {
+        Rect r = lot.rect();
+        c.fill(r, STREET_Y, STREET_Y, Mix.of(Blocks.PACKED_MUD, 4, Blocks.STONE_BRICKS, 2, Blocks.GRAVEL, 2));
+        Rect fence = r.inset(1);
+        c.fenceRing(fence, GROUND_Y, Blocks.SPRUCE_FENCE, fence.centerX(), fence.z1());
+        Rect in = fence.inset(2);
+        // Shared court: pump, seating, storage and laundry lines.
+        c.set(in.centerX(), GROUND_Y, in.centerZ(), Blocks.CAULDRON);
+        c.fill(in.centerX() - 1, GROUND_Y, in.centerZ(), in.centerX() + 1, GROUND_Y, in.centerZ(), Blocks.SMOOTH_STONE_SLAB);
+        for (int x : new int[]{in.x0() + 1, in.x1() - 1}) {
+            c.set(x, GROUND_Y, in.z0() + 1, Blocks.BARREL);
+            c.set(x, GROUND_Y, in.z1() - 1, Blocks.COMPOSTER);
+        }
+        for (int z : new int[]{in.z0() + 2, in.z1() - 2}) {
+            c.stair(in.x0() + 2, GROUND_Y, z, Direction.WEST, Blocks.SPRUCE_STAIRS);
+            c.stair(in.x1() - 2, GROUND_Y, z, Direction.EAST, Blocks.SPRUCE_STAIRS);
+        }
+        if (in.width() >= 8) {
+            for (int x : new int[]{in.x0() + 1, in.x1() - 1}) {
+                c.fill(x, GROUND_Y + 1, in.centerZ() - 2, x, GROUND_Y + 4, in.centerZ() - 2, Blocks.SPRUCE_FENCE);
+                c.fill(x, GROUND_Y + 4, in.centerZ() - 2, x, GROUND_Y + 4, in.centerZ() + 2, Blocks.CHAIN);
+            }
+        }
+        if (c.hasOccupiedInteriors35()) c.set(in.x1(), GROUND_Y, in.centerZ(), Blocks.LOOM);
+        else c.chest(in.x1(), GROUND_Y, in.centerZ(), Direction.WEST, "apartment");
+    }
+
+    static void bazaar(Canvas c, Lot lot) {
+        Rect r = lot.rect();
+        c.fill(r, STREET_Y, STREET_Y, Mix.of(Blocks.PACKED_MUD, 4, Blocks.BRICKS, 2, Blocks.GRAVEL, 2));
+        Rect in = r.inset(2);
+        Block[] cloth = {Blocks.RED_WOOL, Blocks.GREEN_WOOL, Blocks.YELLOW_WOOL, Blocks.ORANGE_WOOL};
+        for (int x = in.x0(); x <= in.x1() - 3; x += 5) {
+            for (int z = in.z0(); z <= in.z1() - 3; z += 5) {
+                c.fill(x, GROUND_Y, z, x + 2, GROUND_Y, z + 2,
+                        CityHash.range(c.hash(x, 0, z), 2) == 0 ? Blocks.BARREL : Blocks.COMPOSTER);
+                for (int dx : new int[]{0, 2}) for (int dz : new int[]{0, 2}) c.fill(x + dx, GROUND_Y + 1, z + dz, x + dx, GROUND_Y + 3, z + dz, Blocks.SPRUCE_FENCE);
+                Block awning = cloth[CityHash.range(c.hash(x, GROUND_Y, z), cloth.length)];
+                c.fill(x, GROUND_Y + 4, z, x + 2, GROUND_Y + 4, z + 2, awning);
+            }
+        }
+        c.set(r.centerX(), GROUND_Y, r.centerZ(), Blocks.CAMPFIRE);
+        c.sign(r.centerX(), GROUND_Y + 1, r.z1() - 1, Direction.SOUTH, Blocks.SPRUCE_WALL_SIGN, "MARKET", "COURT");
+    }
+
+    static void machineYard(Canvas c, Lot lot) {
+        Rect r = lot.rect();
+        Rect fence = r.inset(1);
+        c.fill(r, STREET_Y, STREET_Y, Mix.of(Blocks.COBBLED_DEEPSLATE, 3, Blocks.GRAVEL, 4, Blocks.POLISHED_BLACKSTONE, 2));
+        c.fenceRing(fence, GROUND_Y, Blocks.IRON_BARS, fence.centerX(), fence.z1());
+        Rect in = fence.inset(2);
+        // Gantry/crane silhouette.
+        int gx0 = in.x0() + 1, gx1 = Math.min(in.x1() - 1, in.x0() + 8), gz = in.centerZ();
+        c.fill(gx0, GROUND_Y, gz, gx0, GROUND_Y + 5, gz, Blocks.IRON_BARS);
+        c.fill(gx1, GROUND_Y, gz, gx1, GROUND_Y + 5, gz, Blocks.IRON_BARS);
+        c.fill(gx0, GROUND_Y + 5, gz, gx1, GROUND_Y + 5, gz, Blocks.WAXED_WEATHERED_CUT_COPPER);
+        c.fill((gx0 + gx1) / 2, GROUND_Y + 2, gz, (gx0 + gx1) / 2, GROUND_Y + 4, gz, Blocks.CHAIN);
+        c.set((gx0 + gx1) / 2, GROUND_Y + 1, gz, Blocks.CAULDRON);
+        for (int i = 0; i < 3; i++) {
+            long h = CityHash.mix(lot.hash() + i * 17L);
+            int x = in.x0() + 1 + CityHash.range(h, Math.max(1, in.width() - 2));
+            int z = in.z0() + 1 + CityHash.range(h >>> 16, Math.max(1, in.depth() - 2));
+            heap(c, x, z, 2 + CityHash.range(h >>> 32, 2), debris());
+        }
+        c.set(in.x1(), GROUND_Y, in.z1(), Blocks.SMITHING_TABLE);
+    }
+
+    static void canalDepot(Canvas c, Lot lot) {
+        Rect r = lot.rect();
+        c.fill(r, STREET_Y, STREET_Y, Mix.of(Blocks.GRAVEL, 4, Blocks.SPRUCE_PLANKS, 3, Blocks.COBBLESTONE, 2));
+        Rect in = r.inset(2);
+        int dockZ0 = in.z0() + 1;
+        int dockZ1 = Math.min(in.z1() - 2, dockZ0 + 4);
+        c.fill(in.x0(), STREET_Y - 1, dockZ0, in.x1(), STREET_Y, dockZ1, Blocks.WATER);
+        for (int x = in.x0(); x <= in.x1(); x += 3) {
+            c.fill(x, GROUND_Y, dockZ0 - 1, x, GROUND_Y + 2, dockZ0 - 1, Blocks.STRIPPED_SPRUCE_LOG);
+            c.set(x, GROUND_Y + 1, dockZ1 + 1, Blocks.BARREL);
+        }
+        for (int x = in.x0() + 1; x <= in.x1() - 1; x += 4) {
+            c.set(x, GROUND_Y, in.z1(), Blocks.BARREL);
+            c.set(x + 1, GROUND_Y, in.z1(),
+                    c.hasOccupiedInteriors35() ? Blocks.STRIPPED_SPRUCE_WOOD : Blocks.CHEST);
+        }
+        c.sign(in.centerX(), GROUND_Y + 1, r.z1() - 1, Direction.SOUTH, Blocks.SPRUCE_WALL_SIGN, "DOCK", "DEPOT");
+    }
+
+    static void ruinCourt(Canvas c, Lot lot) {
+        Rect r = lot.rect();
+        c.fill(r, STREET_Y, STREET_Y, Mix.of(Blocks.COARSE_DIRT, 4, Blocks.GRAVEL, 3, Blocks.CRACKED_STONE_BRICKS, 2));
+        Rect shell = r.inset(2);
+        c.walls(shell, GROUND_Y, GROUND_Y + 3, Mix.of(Blocks.CRACKED_STONE_BRICKS, 4, Blocks.BRICKS, 2, Blocks.COBBLESTONE, 2));
+        for (int x = shell.x0() + 1; x <= shell.x1() - 1; x += 3) {
+            if (Math.abs(x - shell.centerX()) <= 1) continue;
+            c.clear(new Rect(x, shell.z1(), x, shell.z1()), GROUND_Y + 1, GROUND_Y + 2);
+        }
+        c.fill(shell.centerX(), GROUND_Y, shell.centerZ() - 1, shell.centerX(), GROUND_Y + 3, shell.centerZ() + 1, Blocks.COBBLED_DEEPSLATE);
+        c.set(shell.centerX(), GROUND_Y + 4, shell.centerZ(), Blocks.COBWEB);
+        c.set(shell.x0() + 1, GROUND_Y, shell.z0() + 1, Blocks.HAY_BLOCK);
+        c.set(shell.x1() - 1, GROUND_Y, shell.z1() - 1, Blocks.CAULDRON);
+    }
+
+    static void burialGround(Canvas c, Lot lot) {
+        Rect r = lot.rect();
+        Rect fence = r.inset(1);
+        c.fill(r, STREET_Y, STREET_Y, Mix.of(Blocks.GRAVEL, 4, Blocks.CRACKED_STONE_BRICKS, 3, Blocks.MOSSY_COBBLESTONE, 1));
+        c.fenceRing(fence, GROUND_Y, Blocks.COBBLESTONE_WALL, fence.centerX(), fence.z1());
+        Rect in = fence.inset(2);
+        for (int x = in.x0(); x <= in.x1(); x += 3) {
+            for (int z = in.z0(); z <= in.z1(); z += 4) {
+                c.fill(x, GROUND_Y, z, x + 1, GROUND_Y, z + 1, Blocks.STONE_BRICKS);
+                c.set(x, GROUND_Y + 1, z, Blocks.COBBLESTONE_WALL);
+            }
+        }
+        c.fill(in.centerX(), GROUND_Y, in.centerZ() - 1, in.centerX(), GROUND_Y + 3, in.centerZ() + 1, Blocks.POLISHED_BLACKSTONE_BRICKS);
+        c.set(in.centerX(), GROUND_Y + 4, in.centerZ(), Blocks.SOUL_LANTERN);
+    }
+
+    static void fringeYard(Canvas c, Lot lot) {
+        Rect r = lot.rect();
+        c.fill(r, STREET_Y, STREET_Y, Mix.of(Blocks.COARSE_DIRT, 4, Blocks.PACKED_MUD, 3, Blocks.GRAVEL, 2));
+        Rect fence = r.inset(1);
+        c.fenceRing(fence, GROUND_Y, Blocks.SPRUCE_FENCE, fence.centerX(), fence.z1());
+        Rect in = fence.inset(1);
+        // A survival-facing fringe compound: one lean greenhouse, one small animal corner, one salvage corner.
+        Rect house = new Rect(in.x0(), in.z0(), Math.min(in.x0() + 5, in.x1()), Math.min(in.z0() + 6, in.z1()));
+        c.fill(house.x0(), GROUND_Y, house.z0(), house.x1(), GROUND_Y, house.z1(), Blocks.FARMLAND);
+        for (int x = house.x0(); x <= house.x1(); x++) for (int z = house.z0(); z <= house.z1(); z++) {
+            if ((x + z) % 3 != 0) c.set(x, GROUND_Y, z, Blocks.FARMLAND);
+            if ((x + z) % 3 == 0) c.set(x, GROUND_Y + 1, z, Blocks.WHEAT.defaultBlockState().setValue(CropBlock.AGE, 7));
+        }
+        for (int x : new int[]{house.x0(), house.x1()}) for (int z : new int[]{house.z0(), house.z1()}) c.fill(x, GROUND_Y + 1, z, x, GROUND_Y + 4, z, Blocks.SPRUCE_FENCE);
+        c.fill(house.x0(), GROUND_Y + 5, house.z0(), house.x1(), GROUND_Y + 5, house.z1(), Blocks.GLASS);
+        int penX0 = Math.max(in.x1() - 5, in.x0());
+        c.fill(penX0, GROUND_Y, in.z0(), in.x1(), GROUND_Y, Math.min(in.z0() + 4, in.z1()), Blocks.HAY_BLOCK);
+        c.set(in.x1(), GROUND_Y, in.z1(),
+                c.hasOccupiedInteriors35() ? Blocks.COMPOSTER : Blocks.CHEST);
+        c.fill(in.x1() - 2, GROUND_Y, in.z1() - 2, in.x1() - 1, GROUND_Y + 1, in.z1() - 1, Blocks.OAK_LOG);
+    }
+
 }

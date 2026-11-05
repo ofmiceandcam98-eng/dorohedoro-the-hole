@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.dorohedoro.hole.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "StructureCheckMixin",
+    "StructureMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

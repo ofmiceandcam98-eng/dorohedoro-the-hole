@@ -3,6 +3,8 @@ package com.dorohedoro.hole.registry;
 import com.dorohedoro.hole.Dorohedoro;
 import com.dorohedoro.hole.worldgen.HoleBiomeSource;
 import com.dorohedoro.hole.worldgen.HoleChunkGenerator;
+import com.dorohedoro.hole.worldgen.SorcererBiomeSource;
+import com.dorohedoro.hole.worldgen.HellBiomeSource;
 import com.mojang.serialization.MapCodec;
 import java.util.function.Supplier;
 import net.minecraft.core.registries.Registries;
@@ -22,6 +24,12 @@ public final class ModWorldgen {
             CHUNK_GENERATORS.register("hole", () -> HoleChunkGenerator.CODEC);
     public static final Supplier<MapCodec<HoleBiomeSource>> HOLE_BIOME_SOURCE =
             BIOME_SOURCES.register("hole_districts", () -> HoleBiomeSource.CODEC);
+
+    /** Both new realms use vanilla's noise chunk generator with independent terrain settings. */
+    public static final Supplier<MapCodec<SorcererBiomeSource>> SORCERER_LANDS =
+            BIOME_SOURCES.register("sorcerer_lands", () -> SorcererBiomeSource.CODEC);
+    public static final Supplier<MapCodec<HellBiomeSource>> HELL_REALMS =
+            BIOME_SOURCES.register("hell_realms", () -> HellBiomeSource.CODEC);
 
     private ModWorldgen() {}
 

@@ -1,0 +1,1 @@
+FULL SOURCE: User-provided Dorohedoro_The_Hole_Pass18_Fixed_Source.zip plus Pass19 lore buildings and Pass19.4 character flow. Fixed build.gradle and PortalCoreBlock preserved. See docs/PASS19_4_QUIZ_FATE_TIE_COMPLETE_SOURCE_HANDOFF.md.
