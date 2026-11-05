@@ -328,6 +328,57 @@ public final class HoleQa {
         }
 
         /** New-world sewers must be traversable and reach the built-in deep excavation chambers. */
+        /**
+         * A deep sewer check that knows about the Deep Dark buffer. Below y -24 in chunks near Deep Dark habitat the city
+         * writes nothing, on purpose, so vanilla Ancient Cities and sculk stay intact (DeepDarkBuffer63). Such a point is
+         * recorded as protected, with the block that is really there, instead of as a carving failure. Anywhere else
+         * the original condition must hold.
+         */
+        private void sewerCheck(CityPlan plan, String name, BlockPos pos, boolean carved) {
+            boolean nearDeepDark = plan.protectsDeepDarkNearChunk(pos.getX() & ~15, pos.getZ() & ~15);
+            boolean protectedHere = com.dorohedoro.hole.worldgen.city.DeepDarkBuffer63.protects(
+                    plan.settings.worldDetailVersion(), pos.getY(), nearDeepDark);
+            String block = net.minecraft.core.registries.BuiltInRegistries.BLOCK.getKey(level.getBlockState(pos).getBlock()).toString();
+            // The city also leaves vanilla underground structures alone (VanillaStructureBuffer64).
+            var boxes = com.dorohedoro.hole.worldgen.city.VanillaStructureLookup64.forChunk(level.structureManager(),
+                    new net.minecraft.world.level.ChunkPos(pos), plan.settings.worldDetailVersion());
+            boolean structureHere = com.dorohedoro.hole.worldgen.city.VanillaStructureBuffer64.protects(
+                    plan.settings.worldDetailVersion(), pos.getX(), pos.getY(), pos.getZ(), boxes);
+            String nearby = structuresNear(pos);
+            protectedHere |= structureHere;
+            String detail = pos.toShortString() + " block=" + block
+                    + (structureHere ? " (left to vanilla structure: " + nearby + ")" : protectedHere ? " (left to vanilla: Deep Dark buffer)" : carved ? "" : " (not carved, not protected; structures near: " + nearby + ")");
+            if (!carved && !protectedHere) detail += " column " + columnProfile(pos.getX(), pos.getZ(), pos.getY() - 12, pos.getY() + 8);
+            check(name, carved || protectedHere, detail);
+        }
+
+        /** Runs of identical blocks in one column, bottom to top, for diagnosing an uncarved sewer point. */
+        private String columnProfile(int x, int z, int y0, int y1) {
+            StringBuilder out = new StringBuilder();
+            String last = null;
+            int start = y0;
+            for (int y = y0; y <= y1 + 1; y++) {
+                String id = y > y1 ? null : net.minecraft.core.registries.BuiltInRegistries.BLOCK.getKey(level.getBlockState(new BlockPos(x, y, z)).getBlock()).getPath();
+                if (last != null && !last.equals(id)) {
+                    out.append(start).append(start == y - 1 ? "" : ".." + (y - 1)).append(" ").append(last).append("; ");
+                    start = y;
+                }
+                if (last == null || !last.equals(id)) start = last == null ? y0 : start;
+                last = id;
+            }
+            return out.toString();
+        }
+
+        /** Vanilla structure starts whose bounding boxes reach this chunk, for diagnosing uncarved sewer points. */
+        private String structuresNear(BlockPos pos) {
+            var registry = level.registryAccess().registryOrThrow(net.minecraft.core.registries.Registries.STRUCTURE);
+            java.util.List<String> names = new java.util.ArrayList<>();
+            for (var start : level.structureManager().startsForStructure(new net.minecraft.world.level.ChunkPos(pos), st -> true)) {
+                if (start.isValid()) names.add(String.valueOf(registry.getKey(start.getStructure())));
+            }
+            return names.isEmpty() ? "none" : String.join(",", names);
+        }
+
         private void checkSewerUnderworld(CityPlan plan) {
             // The starter arterial crossings are guaranteed to contain deep chambers.
             // Sample one crossing, rather than accidentally testing an unselected random site.
@@ -337,7 +388,7 @@ public final class HoleQa {
                     ? CityTerrain40.offset(plan, cx + 5, cz + 5) : 0;
             BlockPos chamber = new BlockPos(cx + 5, -30 + relief, cz + 5);
             BlockPos floor = new BlockPos(cx + 5, -37 + relief, cz + 5);
-            check("sewer_deep_chamber_carved", level.getBlockState(chamber).isAir(), chamber.toShortString());
+            sewerCheck(plan, "sewer_deep_chamber_carved", chamber, level.getBlockState(chamber).isAir());
             check("sewer_chamber_supported", !level.getBlockState(floor).isAir(), floor.toShortString());
             int drainRelief = plan.settings.terrainRelief()
                     ? CityTerrain40.offset(plan, cx, cz + 10) : 0;
@@ -353,15 +404,13 @@ public final class HoleQa {
                     ? CityTerrain40.offset(plan, branchX, linedZ) : 0;
             BlockPos linedPassage = new BlockPos(branchX, -35 + linedRelief, linedZ);
             BlockPos linedWall = new BlockPos(branchX + 2, -35 + linedRelief, linedZ);
-            check("sewer_branch_begins_lined", level.getBlockState(linedPassage).isAir()
-                            && level.getBlockState(linedWall).is(com.dorohedoro.hole.registry.ModBlocks.SEWER_BRICKWORK.get()),
-                    linedPassage.toShortString());
+            sewerCheck(plan, "sewer_branch_begins_lined", linedPassage, level.getBlockState(linedPassage).isAir()
+                    && level.getBlockState(linedWall).is(com.dorohedoro.hole.registry.ModBlocks.SEWER_BRICKWORK.get()));
             int caveZ = cz + dir * 59;
             int caveRelief = plan.settings.terrainRelief()
                     ? CityTerrain40.offset(plan, branchX, caveZ) : 0;
             BlockPos naturalCave = new BlockPos(branchX, -35 + caveRelief, caveZ);
-            check("sewer_selective_cave_destination", level.getBlockState(naturalCave).isAir(),
-                    naturalCave.toShortString());
+            sewerCheck(plan, "sewer_selective_cave_destination", naturalCave, level.getBlockState(naturalCave).isAir());
             if (plan.settings.sewerCavernVersion() == 1) {
                 boolean descent = true;
                 String failing = "";

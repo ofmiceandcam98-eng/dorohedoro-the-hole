@@ -454,3 +454,29 @@ smithing tables, looms, stonecutters and composters.
 ## 13. Pass 75: Cavern Burrower redesign, rejected and reverted (2026-11-05)
 
 A masked "failed sorcerer experiment" redesign (commit c8d25c5) was shown to the owner, who said it looked terrible and that they prefer the original. The original model and its 512x256 texture are restored exactly as of 337b70b, and the generator `tools/ui/gen-burrower.mjs` was removed. **Do not redesign existing mob art without first showing the owner a concept or mockup and getting approval.** The rejected attempt is still in history at c8d25c5 if it is ever wanted.
+
+## 14. Pass 76: cave and sewer verification, in progress (2026-11-05)
+
+`HoleQa.sewerCheck` now explains every deep sewer check. It records the real block, whether the Deep Dark buffer or a
+vanilla structure (`VanillaStructureBuffer64`) deliberately protects that point, which structure starts reach the
+chunk, and, for uncarved and unprotected points, a column profile.
+
+Seed 12345, starter crossing (street lines 0,0 at x 78, z 55):
+- `sewer_branch_begins_lined` (90,-35,47) and `sewer_selective_cave_destination` (90,-35,-4) were **not bugs**. A
+  vanilla **mineshaft** runs through both points, and the city deliberately leaves it intact. They now pass, with the
+  reason recorded.
+- **Not caused by the Deep Dark buffer:** none of the three points is in a Deep Dark-protected chunk. The earlier
+  guess was wrong.
+- **Real open gap: `sewer_deep_chamber_carved` (83,-30,60).** The column is untouched natural rock (deepslate to -32,
+  moss, short grass, then a lush cave's air). The guaranteed starter chamber from
+  `CityPainter.paintDeepExcavations` (fill -36 to the roof at -24..-27, deepslate-brick floor at -37) is absent.
+  QA says the point is not protected now. Leads:
+  1. Compare `VanillaStructureLookup64.forChunk` boxes at generation time (`buildSurface`) against QA time. The
+     mineshaft and pillager outpost starts reach this chunk; the mineshaft box may have covered y -36..-30 during
+     generation.
+  2. Check whether a later pass refills the chamber: galleries, `SewerCaveTransitions70`, or vanilla
+     `ORE`/lush-cave features overwriting air.
+  3. Then fix it. Either the chamber yields to the mineshaft on purpose (and QA should say so) or it must carve, in
+     which case gate any generation change behind v56.
+- **Still to do for priority 3:** real cave connections (do sewer cave branches open into noise caves?) and broader
+  vanilla structure protection checks across more seeds.
