@@ -52,23 +52,44 @@ final class RoomDressing71 {
         };
     }
 
+    /** v55: what lines the wall opposite the feature wall, so a big room reads as furnished, not bare. */
+    private static Piece[] secondRun(Theme theme) {
+        return switch (theme) {
+            case KITCHEN -> new Piece[] {Piece.BARRELS, Piece.BARREL, Piece.CHEST, Piece.NONE, Piece.BARRELS, Piece.SHELVES};
+            case DINER -> new Piece[] {Piece.SOFA, Piece.SIDE_TABLE, Piece.SOFA, Piece.NONE, Piece.SOFA, Piece.SIDE_TABLE};
+            case LIVING -> new Piece[] {Piece.SIDE_TABLE, Piece.NONE, Piece.SHELVES, Piece.SHELVES, Piece.NONE, Piece.LECTERN};
+            case BEDROOM -> new Piece[] {Piece.BED, Piece.SIDE_TABLE, Piece.NONE, Piece.BED, Piece.SIDE_TABLE, Piece.CHEST};
+            case WORKSHOP -> new Piece[] {Piece.BARRELS, Piece.CHEST, Piece.NONE, Piece.BARRELS, Piece.COUNTER, Piece.BARREL};
+            case STORAGE -> new Piece[] {Piece.BARRELS, Piece.BARRELS, Piece.CHEST, Piece.BARRELS, Piece.BARREL, Piece.CHEST};
+            case CLINIC -> new Piece[] {Piece.BED, Piece.NONE, Piece.BED, Piece.NONE, Piece.BED, Piece.COUNTER};
+            case SMOKE_DEN -> new Piece[] {Piece.SOFA, Piece.SOFA, Piece.SIDE_TABLE, Piece.NONE, Piece.SHELVES, Piece.SHELVES};
+        };
+    }
+
     private RoomDressing71() {}
 
-    static void dress(Canvas c, Rect box, Rect in, int floors, long hash) {
+    static void dress(Canvas c, Rect box, Rect in, int floors, long hash, java.util.function.IntPredicate storeys) {
         if (in.width() < 7 || in.depth() < 7) return;
         for (int k = 0; k < floors; k++) {
+            if (!storeys.test(k)) continue;
             int floorY = STREET_Y + k * Tower.STOREY;
             long h = CityHash.of(hash, 0x71D2E55L, k);
             Theme[] pool = k == 0 ? GROUND : UPPER;
-            Room room = new Room(box, in, floorY, pool[CityHash.range(h, pool.length)], h, CityHash.range(h >>> 20, 2) == 0);
-            featureWall(c, room);
+            Room room = new Room(box, in, floorY, pool[CityHash.range(h, pool.length)], h, CityHash.range(h >>> 20, 2) == 0,
+                    c.hasCuratedInteriors55());
+            featureWall(c, room, room.wallX(), room.into(), run(room.theme()));
+            // v55: the opposite wall carries its own run, and more themes get a centerpiece.
+            if (room.full()) {
+                featureWall(c, room, room.west() ? in.x1() : in.x0(), room.into().getOpposite(), secondRun(room.theme()));
+                centerpiece(c, room);
+            }
             tables(c, room);
             lights(c, room);
         }
     }
 
     /** One storey being furnished. {@code west} picks which side wall carries the furniture run. */
-    private record Room(Rect box, Rect in, int floorY, Theme theme, long hash, boolean west) {
+    private record Room(Rect box, Rect in, int floorY, Theme theme, long hash, boolean west, boolean full) {
         boolean reserved(int x, int z) {
             return z <= in.z0() + 1 || x == box.centerX() || z == in.centerZ();
         }
@@ -80,10 +101,7 @@ final class RoomDressing71 {
 
     // ---------------------------------------------------------------- the feature wall
 
-    private static void featureWall(Canvas c, Room r) {
-        Piece[] run = run(r.theme());
-        int x = r.wallX();
-        Direction into = r.into();
+    private static void featureWall(Canvas c, Room r, int x, Direction into, Piece[] run) {
         int k = 0;
         for (int z = r.in().z0() + 2; z <= r.in().z1() && k < 2 * run.length; z++) {
             if (r.reserved(x, z)) continue;
@@ -163,7 +181,8 @@ final class RoomDressing71 {
 
     /** One table with chairs in the open half of a living room, den or diner; two in a big diner. */
     private static void tables(Canvas c, Room r) {
-        if (r.theme() != Theme.LIVING && r.theme() != Theme.SMOKE_DEN && r.theme() != Theme.DINER) return;
+        boolean dining = r.full() && r.theme() == Theme.KITCHEN;
+        if (r.theme() != Theme.LIVING && r.theme() != Theme.SMOKE_DEN && r.theme() != Theme.DINER && !dining) return;
         Rect in = r.in();
         if (in.width() < 9 || in.depth() < 9) return;
         // Across the room from the feature wall, halfway between the doorway aisle and the far wall.
@@ -173,6 +192,41 @@ final class RoomDressing71 {
         for (int tz : rows) {
             if (nearAisle(r, tx, tz) || tz <= in.z0() + 3 || tz >= in.z1()) continue;
             table(c, r, tx, tz);
+        }
+    }
+
+    /** v55: a workbench, a crate stack or a rug in the open floor of rooms that have no table. */
+    private static void centerpiece(Canvas c, Room r) {
+        Rect in = r.in();
+        if (in.width() < 9 || in.depth() < 9) return;
+        int x = r.west() ? (r.box().centerX() + in.x1()) / 2 : (in.x0() + r.box().centerX()) / 2;
+        int z = (in.centerZ() + in.z1()) / 2;
+        if (nearAisle(r, x, z) || !indoorAir(c, x, r.floorY(), z)) return;
+        int y = r.floorY() + 1;
+        switch (r.theme()) {
+            case WORKSHOP -> {
+                // A two-block workbench with a lantern on it.
+                put(c, x, y, z, Blocks.WAXED_WEATHERED_CUT_COPPER.defaultBlockState());
+                put(c, x, y, z + 1, Blocks.WAXED_WEATHERED_CUT_COPPER.defaultBlockState());
+                put(c, x, y + 1, z, Blocks.LANTERN.defaultBlockState());
+            }
+            case STORAGE -> {
+                put(c, x, y, z, barrel());
+                put(c, x, y + 1, z, barrel());
+                put(c, x, y, z + 1, barrel());
+            }
+            case BEDROOM, CLINIC -> {
+                Block carpet = r.theme() == Theme.CLINIC ? Blocks.WHITE_CARPET : Blocks.GREEN_CARPET;
+                for (int dx = -1; dx <= 1; dx++) {
+                    for (int dz = -1; dz <= 1; dz++) {
+                        if (!r.reserved(x + dx, z + dz) && indoorAir(c, x + dx, r.floorY(), z + dz)) {
+                            put(c, x + dx, y, z + dz, carpet.defaultBlockState());
+                        }
+                    }
+                }
+            }
+            default -> {
+            }
         }
     }
 

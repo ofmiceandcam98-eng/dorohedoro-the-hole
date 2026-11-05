@@ -427,3 +427,26 @@ The owner chose to bring them back. **New worlds only**: `world_detail_version` 
 - **Release:** `Dorohedoro The Hole-BETA0.3.jar` (`0.3.0-beta`), because BETA 0.2 was already handed to the owner for
   upload.
 - **Still not investigated:** buried treasure and warm ocean ruins near spawn.
+
+## 12. Pass 74: curated interiors (v55, 2026-11-04)
+
+This is the quality review (priority 2). The owner's "random stuff in rooms" came from six older furnishing passes:
+`Housing25`, `ResidentialDetails26`, `ResidentialAtmosphere28`, `OccupiedInteriors35`, `RoomPurpose37` and
+`LivedInRooms39`. Every home ran all six before `RoomDressing71`, stacking crafting, fletching, cartography and
+smithing tables, looms, stonecutters and composters.
+
+- **v55, new worlds only** (`Canvas.hasCuratedInteriors55`):
+  - Home towers (tenements and apartments) skip all six older passes; `RoomDressing71` owns every storey.
+  - Shop towers keep their shop ground floor; only the flats above are curated (`Tower.build(..., k -> k > 0)`).
+  - Landmarks and clinic wards keep their own interiors (`k -> false`).
+- **Fuller rooms in v55:**
+  - The wall opposite the feature wall carries its own complementary run (`secondRun`): a pantry, diner booths, a
+    second row of beds, crates, or sofas and shelves.
+  - Kitchens get a dining table.
+  - Workshops get a copper workbench, storerooms a crate stack, and bedrooms and clinics a rug (`centerpiece`).
+- **Unchanged:** v53 and v54 worlds (BETA 0.2) dress exactly as before.
+- **Evidence:** before and after shots are in `docs/evidence/pass74/`.
+- **QA, seed 8675309:** only `resource_sugar_cane` fails; stairs 0 of 14 blocked, streets 100% reachable, lots 12 of
+  12 enterable, 0 ERROR lines. The client run has 0 errors and 0 exceptions.
+- **Still open from the review:** the Cavern Burrower model is plain (just a body, head and four paws) and needs a
+  proper redesign with the owner's input. The HUD, menus, items, blocks and ores passed review.

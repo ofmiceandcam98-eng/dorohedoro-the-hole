@@ -103,6 +103,8 @@ final class LotPainter {
         Tower.build(c, box, finalFloors, style, lot.hash(),
                 c.hasHousing29() ? HousingDetail29.chooseRoof(box, finalFloors, lot.hash(), roofFor(lot.hash())) : roofFor(lot.hash()),
                 (cv, k, in, y) -> {
+            // v55: RoomDressing71 owns the rooms. The older passes stacked workstations into every flat.
+            if (cv.hasCuratedInteriors55()) return;
             if (cv.hasHousing25() && Housing25.compact(box, finalFloors)) { Housing25.residence(cv, in, y, k, finalFloors, lot.hash()); if (cv.hasResidential26()) ResidentialDetails26.compact(cv, in, y, k, finalFloors, lot.hash()); }
             else {
                 dwelling(cv, style, k, in, y);
@@ -146,6 +148,8 @@ final class LotPainter {
         Tower.build(c, box, finalFloors, style, lot.hash(),
                 c.hasHousing29() ? HousingDetail29.chooseRoof(box, finalFloors, lot.hash(), roofFor(lot.hash())) : roofFor(lot.hash()),
                 (cv, k, in, y) -> {
+            // v55: RoomDressing71 owns the rooms. The older passes stacked workstations into every flat.
+            if (cv.hasCuratedInteriors55()) return;
             if (cv.hasHousing25() && Housing25.compact(box, finalFloors)) { Housing25.residence(cv, in, y, k, finalFloors, lot.hash()); if (cv.hasResidential26()) ResidentialDetails26.compact(cv, in, y, k, finalFloors, lot.hash()); }
             else {
                 dwelling(cv, style, k, in, y);
@@ -270,6 +274,8 @@ final class LotPainter {
         final int finalFloors = floors;
         Tower.build(c, box, finalFloors, style, lot.hash(), Tower.Roof.PLAIN, (cv, k, in, y) -> {
             if (k > 0) {
+                // v55: the flats above the shop get curated rooms (see the dress predicate below).
+                if (cv.hasCuratedInteriors55()) return;
                 if (cv.hasHousing25() && Housing25.compact(box, finalFloors)) { Housing25.residence(cv, in, y, k, finalFloors, lot.hash()); if (cv.hasResidential26()) ResidentialDetails26.compact(cv, in, y, k, finalFloors, lot.hash()); }
                 else dwelling(cv, style, k, in, y);
                 if (cv.hasAtmosphere28()) ResidentialAtmosphere28.residence(cv, in, y, k, lot.hash());
@@ -304,7 +310,7 @@ final class LotPainter {
                 cv.set(in.x1() - 3, y + 1, in.z1() - 4, Blocks.CRAFTING_TABLE);
             }
             Tower.lamp(cv, in.centerX(), y, in.centerZ());
-        });
+        }, k -> k > 0);
         // Pass 19 uses one muted, industrial awning instead of the original candy-striped cloth.
         if (!c.hasLoreArchitecture()) awning(c, box, lot.hash());
         if (c.hasWorldDetail()) WorldDetail.shopfront(c, box, lot.hash());
@@ -331,7 +337,7 @@ final class LotPainter {
         }
         int floors = 2 + CityHash.range(lot.hash(), 2);
         final int finalFloors = floors;
-        Tower.build(c, box, finalFloors, Style.CLEAN, lot.hash(), Tower.Roof.PLAIN, (cv, k, in, y) -> ward(cv, k, in, y));
+        Tower.build(c, box, finalFloors, Style.CLEAN, lot.hash(), Tower.Roof.PLAIN, (cv, k, in, y) -> ward(cv, k, in, y), k -> false);
         redCross(c, box.centerX(), GROUND_Y + floors * Tower.STOREY - 3, box.z1());
     }
 

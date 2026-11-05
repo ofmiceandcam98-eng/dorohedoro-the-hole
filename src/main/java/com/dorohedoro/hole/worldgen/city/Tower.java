@@ -37,6 +37,15 @@ final class Tower {
     }
 
     static void build(Canvas c, Rect box, int floors, Style style, long hash, Roof roof, Furnisher furnisher) {
+        build(c, box, floors, style, hash, roof, furnisher, k -> true);
+    }
+
+    /**
+     * @param dressStoreys in v55 worlds, the storeys {@link RoomDressing71} furnishes. Homes dress every storey; shops
+     *                     only the flats above the shop; landmarks and clinics none, because they have their own.
+     */
+    static void build(Canvas c, Rect box, int floors, Style style, long hash, Roof roof, Furnisher furnisher,
+                      java.util.function.IntPredicate dressStoreys) {
         int top = STREET_Y + floors * STOREY;
         Rect interior = box.inset(1);
 
@@ -73,7 +82,9 @@ final class Tower {
         if (c.hasUrbanFabric()) UrbanFabric25.roof(c, box, top, hash, roof);
         if (c.hasOccupiedDetail39()) OccupiedRoofs39.decorate(c, box, floors, hash, roof);
         if (c.hasSkyline40()) Skyline40.rooftop(c, box, floors, hash, roof);
-        if (c.hasRoomDressing71()) RoomDressing71.dress(c, box, interior, floors, hash);
+        if (c.hasRoomDressing71()) {
+            RoomDressing71.dress(c, box, interior, floors, hash, c.hasCuratedInteriors55() ? dressStoreys : k -> true);
+        }
         // Last, so no decoration pass above can block a flight.
         keepStairsWalkable(c, interior, floors, style.stairs());
     }

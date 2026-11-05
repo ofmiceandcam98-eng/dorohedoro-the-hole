@@ -131,7 +131,7 @@ final class Landmarks {
                 Tower.lamp(cv, x, y, in.z1() - 3);
             }
             Tower.lamp(cv, in.centerX(), y, in.z0() + 3);
-        });
+        }, k -> false);
         // The open-all-hours storefront: glass across the plaza side, a yellow sign band, and a green awning.
         int front = box.z1();
         for (int x = box.x0() + 2; x <= box.x1() - 2; x++) {
@@ -165,7 +165,7 @@ final class Landmarks {
             cv.facing(in.x0(), y + 1, in.z0() + 5, Direction.EAST, Blocks.FURNACE);
             Tower.lamp(cv, in.centerX(), y, in.centerZ());
             Tower.lamp(cv, in.centerX(), y, in.z0() + 3);
-        });
+        }, k -> false);
     }
 
     static void hospital(Canvas c, Lot lot) {
@@ -178,7 +178,7 @@ final class Landmarks {
             for (int x = in.x0() + 6; x <= in.x1() - 6; x += 6) {
                 Tower.lamp(cv, x, y, in.z0() + 5);
             }
-        });
+        }, k -> false);
         int roof = STREET_Y + floors * Tower.STOREY + 1;
         LotPainter.redCross(c, box.centerX(), roof + 3, box.z1());
         c.fill(box.centerX(), roof, box.z1(), box.centerX(), roof + 1, box.z1(), Blocks.RED_CONCRETE);
@@ -203,7 +203,7 @@ final class Landmarks {
                     Tower.lamp(cv, x, y, z);
                 }
             }
-        });
+        }, k -> false);
         c.fill(box.x0() + 1, STREET_Y + floors * Tower.STOREY - 1, box.z1(), box.x1() - 1, STREET_Y + floors * Tower.STOREY - 1, box.z1(), Blocks.RED_TERRACOTTA);
     }
 
@@ -225,7 +225,7 @@ final class Landmarks {
             } else {
                 LotPainter.dwelling(cv, style, k, in, y);
             }
-        });
+        }, k -> false);
     }
 
     /** A bowl of dark water ringed by refuse. Kept shallow enough to clear the sewers, and sealed against leaks. */

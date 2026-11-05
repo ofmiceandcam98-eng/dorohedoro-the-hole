@@ -109,6 +109,9 @@ public final class Canvas {
                 : CityElevation.offset(seed, x, z);
     }
 
+    /** Pass 74: homes use only the curated room layout; the six older furnishing passes are skipped. */
+    public boolean hasCuratedInteriors55() { return worldDetailVersion >= 55; }
+
     /** Pass 71: every tower storey furnished as a themed room. */
     public boolean hasRoomDressing71() { return worldDetailVersion >= 53; }
 
