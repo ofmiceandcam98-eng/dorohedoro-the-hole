@@ -451,20 +451,6 @@ smithing tables, looms, stonecutters and composters.
 - **Still open from the review:** the Cavern Burrower model is plain (just a body, head and four paws) and needs a
   proper redesign with the owner's input. The HUD, menus, items, blocks and ores passed review.
 
-## 13. Pass 75: Cavern Burrower redesign (2026-11-04)
+## 13. Pass 75: Cavern Burrower redesign, rejected and reverted (2026-11-05)
 
-The owner asked for the Burrower, the weakest mob in the Pass 74 review, to be "something from Dorohedoro". It is
-now **a sorcerer's failed experiment that crawled into the sewers**. The design is original, not a specific
-character:
-- a stitched gray-mauve body with cross-stitched seams;
-- a cracked bone-white mask strapped over its face, with dark eyeholes, a breathing grille and a crack;
-- rusted gray sewer-iron plates riveted to its back;
-- oversized rusted claws with pale tips, and a short tail.
-
-- **Generator:** `tools/ui/gen-burrower.mjs` holds one cube list and writes both
-  `client/entity/CavernBurrowerModel.java` and the 128x64 texture (vanilla texel density; the old one was 512x256).
-  **Edit the generator, not the model file.**
-- **Animation:** diagonal-pair gait, tail sway, the head tracks its target, and a lunge on attack. The hitbox,
-  behavior and sounds are unchanged.
-- **Verified:** real client, front, side, back and above, with no missing faces, holes or UV errors, 0 errors and 0
-  exceptions. Shots are in `docs/evidence/pass75/`.
+A masked "failed sorcerer experiment" redesign (commit c8d25c5) was shown to the owner, who said it looked terrible and that they prefer the original. The original model and its 512x256 texture are restored exactly as of 337b70b, and the generator `tools/ui/gen-burrower.mjs` was removed. **Do not redesign existing mob art without first showing the owner a concept or mockup and getting approval.** The rejected attempt is still in history at c8d25c5 if it is ever wanted.
