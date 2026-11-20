@@ -538,7 +538,11 @@ public final class HoleQa {
                     for (Lot lot : plan.lotsIn(new ChunkPos(cx, cz))) {
                         if (!seenLots.add(lot.hash())) continue;
                         Rect r = lot.rect();
-                        int lotFeet = CityPlan.GROUND_Y + CityTerrain40.offset(plan, r.centerX(), r.centerZ());
+                        // Same rule as Canvas.beginLot: since v25 a lot is graded to the street at the middle of its
+                        // south frontage, not its center. On slopes the two differ by several blocks.
+                        int lotFeet = CityPlan.GROUND_Y + (plan.settings.worldDetailVersion() >= 25
+                                ? CityTerrain40.offset(plan, r.centerX(), r.z1() + 1)
+                                : CityTerrain40.offset(plan, r.centerX(), r.centerZ()));
                         for (int x = Math.max(area.x0(), r.x0()); x <= Math.min(area.x1(), r.x1()); x++) {
                             for (int z = Math.max(area.z0(), r.z0()); z <= Math.min(area.z1(), r.z1()); z++) {
                                 feet[columnIndex(area, x, z)] = lotFeet;
