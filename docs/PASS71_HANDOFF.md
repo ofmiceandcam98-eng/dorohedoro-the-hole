@@ -482,3 +482,14 @@ city writes deliberately yielding to a **vanilla mineshaft** (`VanillaStructureB
   and `resource_sugar_cane` (snowy start).
 - **Still to do for priority 3:** real cave connections (do sewer cave branches open into noise caves?) and broader
   vanilla structure protection checks across more seeds.
+
+## 15. Pass 77: full test pass and the seed-42 lot false alarm (2026-11-20)
+
+- **Full suite run:** runData (reproduces the committed output exactly), build, server QA on seeds 12345 (with the
+  structure survey), 8675309 and 42, plus the real client tour (51 screenshots, 0 errors). Every vanilla structure is
+  found except warm ocean ruins and buried treasure near spawn on 12345, which were not investigated.
+- **"Buried warehouse door" on seed 42 was a QA bug.** `HoleQa` expected lot floors at the height of the lot center,
+  but since v25 the city grades lots to the street at the middle of the south frontage. Fixed in 9f3d9e3: lots are
+  17/17 on 42, 47/47 on 12345 and 12/12 on 8675309.
+- **Only known non-bugs remain:** `multiple_districts` (too strict at radius 6) and `resource_sugar_cane` (snowy
+  starts).
