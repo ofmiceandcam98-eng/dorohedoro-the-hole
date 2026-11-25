@@ -1,0 +1,236 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "dorohedoro_doors"
+	group: "0D0E0B0E00000001"
+	icon: {
+		id: "dorohedoro:artificial_door_core"
+	}
+	id: "0D0E0B0E03000000"
+	order_index: 2
+	quest_links: [ ]
+	quests: [
+		{
+			id: "0D0E0B0E03140000"
+			rewards: [
+				{
+					id: "0D0E0B0E03142000"
+					type: "xp"
+					xp: 30
+				}
+			]
+			shape: "gear"
+			tasks: [
+				{
+					id: "0D0E0B0E03141000"
+					item: {
+						count: 1
+						id: "dorohedoro:smoke_soaked_filter"
+					}
+					type: "item"
+				}
+			]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["0D0E0B0E03140000"]
+			id: "0D0E0B0E03150000"
+			rewards: [
+				{
+					id: "0D0E0B0E03152000"
+					item: {
+						count: 4
+						id: "minecraft:coal"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					count: 3L
+					id: "0D0E0B0E03151000"
+					item: {
+						count: 1
+						id: "dorohedoro:smoke_residue"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["0D0E0B0E03150000"]
+			id: "0D0E0B0E03160000"
+			rewards: [
+				{
+					id: "0D0E0B0E03162000"
+					item: {
+						count: 2
+						id: "minecraft:iron_ingot"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					id: "0D0E0B0E03161000"
+					item: {
+						count: 1
+						id: "dorohedoro:smoke_condenser"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["0D0E0B0E03150000"]
+			id: "0D0E0B0E03170000"
+			rewards: [
+				{
+					id: "0D0E0B0E03172000"
+					item: {
+						count: 6
+						id: "minecraft:bone_meal"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					id: "0D0E0B0E03171000"
+					item: {
+						count: 1
+						id: "dorohedoro:preserved_smoke_conduit"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"0D0E0B0E03160000"
+				"0D0E0B0E03170000"
+			]
+			id: "0D0E0B0E03180000"
+			rewards: [
+				{
+					id: "0D0E0B0E03182000"
+					type: "xp"
+					xp: 120
+				}
+			]
+			tasks: [
+				{
+					id: "0D0E0B0E03181000"
+					item: {
+						count: 1
+						id: "dorohedoro:artificial_door_core"
+					}
+					type: "item"
+				}
+				{
+					count: 13L
+					id: "0D0E0B0E03181100"
+					item: {
+						count: 1
+						id: "dorohedoro:reinforced_door_frame"
+					}
+					type: "item"
+				}
+				{
+					id: "0D0E0B0E03181200"
+					item: {
+						count: 1
+						id: "dorohedoro:door_activation_tool"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["0D0E0B0E03180000"]
+			id: "0D0E0B0E03190000"
+			rewards: [
+				{
+					id: "0D0E0B0E03192000"
+					type: "xp_levels"
+					xp_levels: 3
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					advancement: "dorohedoro:doors/artificial_door_opened"
+					criterion: ""
+					id: "0D0E0B0E03191000"
+					type: "advancement"
+				}
+			]
+			x: 8.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["0D0E0B0E03190000"]
+			icon: {
+				id: "minecraft:dark_oak_sapling"
+			}
+			id: "0D0E0B0E031A0000"
+			rewards: [
+				{
+					id: "0D0E0B0E031A2000"
+					item: {
+						count: 6
+						id: "minecraft:bread"
+					}
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					advancement: "dorohedoro:realms/entered_sorcerers_world"
+					criterion: ""
+					id: "0D0E0B0E031A1000"
+					type: "advancement"
+				}
+			]
+			x: 10.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["0D0E0B0E031A0000"]
+			icon: {
+				id: "minecraft:dark_oak_log"
+			}
+			id: "0D0E0B0E031B0000"
+			rewards: [
+				{
+					id: "0D0E0B0E031B2000"
+					item: {
+						count: 4
+						id: "minecraft:dark_oak_sapling"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					advancement: "dorohedoro:realms/hydra_forest"
+					criterion: ""
+					id: "0D0E0B0E031B1000"
+					type: "advancement"
+				}
+			]
+			x: 12.0d
+			y: 0.0d
+		}
+	]
+}

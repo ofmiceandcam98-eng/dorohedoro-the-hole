@@ -1,0 +1,227 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "dorohedoro_welcome"
+	group: "0D0E0B0E00000001"
+	icon: {
+		id: "dorohedoro:scrap_metal"
+	}
+	id: "0D0E0B0E01000000"
+	order_index: 0
+	quest_links: [ ]
+	quests: [
+		{
+			icon: {
+				id: "dorohedoro:salted_rat_ration"
+			}
+			id: "0D0E0B0E01010000"
+			rewards: [
+				{
+					id: "0D0E0B0E01012000"
+					item: {
+						count: 3
+						id: "dorohedoro:cooked_rat_meat"
+					}
+					type: "item"
+				}
+			]
+			shape: "gear"
+			tasks: [
+				{
+					advancement: "dorohedoro:origin/chosen"
+					criterion: ""
+					id: "0D0E0B0E01011000"
+					type: "advancement"
+				}
+			]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["0D0E0B0E01010000"]
+			icon: {
+				id: "dorohedoro:industrial_debris"
+			}
+			id: "0D0E0B0E01020000"
+			rewards: [
+				{
+					id: "0D0E0B0E01022000"
+					item: {
+						count: 8
+						id: "minecraft:torch"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					count: 8L
+					id: "0D0E0B0E01021000"
+					item: {
+						count: 1
+						id: "dorohedoro:scrap_metal"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["0D0E0B0E01020000"]
+			icon: {
+				id: "dorohedoro:raw_sulfur"
+			}
+			id: "0D0E0B0E01040000"
+			rewards: [
+				{
+					id: "0D0E0B0E01042000"
+					item: {
+						count: 4
+						id: "minecraft:bread"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					count: 4L
+					id: "0D0E0B0E01041000"
+					item: {
+						count: 1
+						id: "dorohedoro:raw_sulfur"
+					}
+					type: "item"
+				}
+				{
+					count: 4L
+					id: "0D0E0B0E01041100"
+					item: {
+						count: 1
+						id: "dorohedoro:rock_salt"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["0D0E0B0E01040000"]
+			id: "0D0E0B0E01050000"
+			rewards: [
+				{
+					id: "0D0E0B0E01052000"
+					item: {
+						count: 8
+						id: "minecraft:wheat_seeds"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					count: 2L
+					id: "0D0E0B0E01051000"
+					item: {
+						count: 1
+						id: "dorohedoro:salted_rat_ration"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["0D0E0B0E01020000"]
+			icon: {
+				id: "dorohedoro:brass_ingot"
+			}
+			id: "0D0E0B0E01060000"
+			rewards: [
+				{
+					id: "0D0E0B0E01062000"
+					item: {
+						count: 4
+						id: "minecraft:copper_ingot"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					count: 2L
+					id: "0D0E0B0E01061000"
+					item: {
+						count: 1
+						id: "dorohedoro:zinc_ingot"
+					}
+					type: "item"
+				}
+				{
+					count: 2L
+					id: "0D0E0B0E01061100"
+					item: {
+						count: 1
+						id: "dorohedoro:brass_ingot"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"0D0E0B0E01060000"
+				"0D0E0B0E020D0000"
+			]
+			id: "0D0E0B0E01070000"
+			rewards: [
+				{
+					id: "0D0E0B0E01072000"
+					type: "xp"
+					xp: 60
+				}
+			]
+			tasks: [
+				{
+					id: "0D0E0B0E01071000"
+					item: {
+						count: 1
+						id: "dorohedoro:cavern_lamp"
+					}
+					type: "item"
+				}
+			]
+			x: 8.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["0D0E0B0E01010000"]
+			icon: {
+				id: "dorohedoro:healing_smoke_flask"
+			}
+			id: "0D0E0B0E01080000"
+			optional: true
+			rewards: [
+				{
+					id: "0D0E0B0E01082000"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [
+				{
+					advancement: "dorohedoro:magic/first_technique"
+					criterion: ""
+					id: "0D0E0B0E01081000"
+					type: "advancement"
+				}
+			]
+			x: 2.0d
+			y: 2.0d
+		}
+	]
+}
