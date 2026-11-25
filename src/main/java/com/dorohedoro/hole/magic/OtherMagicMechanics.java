@@ -520,6 +520,7 @@ public final class OtherMagicMechanics {
             && level.clip(new ClipContext(caster.getEyePosition(), Vec3.atCenterOf(pos),
                 ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, caster)).getType() != HitResult.Type.BLOCK
             && caster.mayUseItemAt(pos, Direction.UP, new ItemStack(ModBlocks.CONDENSED_SMOKE_BARRIER.get()))
+            && com.dorohedoro.hole.world.BlockProtection.mayPlace(caster, level, pos)
             && level.getEntitiesOfClass(LivingEntity.class, new AABB(pos), LivingEntity::isAlive).isEmpty();
     }
 

@@ -196,7 +196,8 @@ public final class MushroomSpellVisuals {
                     !batch.world().getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) continue;
                 ServerPlayer owner = batch.world().getServer().getPlayerList().getPlayer(batch.casterId());
                 if (owner == null || !owner.mayUseItemAt(pos, Direction.UP,
-                        new ItemStack(step.state().getBlock()))) continue;
+                        new ItemStack(step.state().getBlock()))
+                        || !com.dorohedoro.hole.world.BlockProtection.mayPlace(owner, batch.world(), pos)) continue;
                 // Avoid encasing a moving player or mob during staged growth.
                 if (!(step.state().is(Blocks.BROWN_MUSHROOM) || step.state().is(Blocks.RED_MUSHROOM))
                     && !batch.world().getEntitiesOfClass(LivingEntity.class, new AABB(pos),
