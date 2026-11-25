@@ -13,7 +13,7 @@ public final class CharacterPlayerEvents {
         NeoForge.EVENT_BUS.addListener(CharacterPlayerEvents::onLogout);
     }
     private static void onJoin(PlayerEvent.PlayerLoggedInEvent e) {
-        if(e.getEntity() instanceof ServerPlayer player) { CharacterNetwork.begin(player); com.dorohedoro.hole.magic.SmokeNetwork.sync(player); com.dorohedoro.hole.magic.SmokeMeshNetwork.syncLimbs(player); }
+        if(e.getEntity() instanceof ServerPlayer player) { CharacterNetwork.begin(player); com.dorohedoro.hole.magic.SmokeNetwork.sync(player); com.dorohedoro.hole.magic.SmokeMeshNetwork.syncLimbs(player); com.dorohedoro.hole.progress.HoleAdvancements.awardOrigin(player); }
     }
     private static void onRespawn(PlayerEvent.PlayerRespawnEvent e) {
         if(e.getEntity() instanceof ServerPlayer player) { CharacterNetwork.begin(player); com.dorohedoro.hole.magic.SmokeNetwork.sync(player); com.dorohedoro.hole.magic.SmokeMeshNetwork.syncLimbs(player); }

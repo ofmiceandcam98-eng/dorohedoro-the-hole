@@ -157,6 +157,7 @@ public final class SmokeEngine {
             .withMastery(skill.id(),s.mastery().getOrDefault(skill.id(),0)+5)
             .gainExperience(12);
         update(p,s);
+        com.dorohedoro.hole.progress.HoleAdvancements.award(p, com.dorohedoro.hole.progress.HoleAdvancements.FIRST_TECHNIQUE);
     }
     private static boolean requiresMelee(SmokeSkill skill){return switch(skill){
         case SEVERING_TOUCH,TAIL_LASH,PRECISION_NERVE -> true;

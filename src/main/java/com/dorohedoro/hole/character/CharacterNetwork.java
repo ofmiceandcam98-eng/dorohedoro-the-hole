@@ -87,6 +87,7 @@ public final class CharacterNetwork {
         SESSIONS.remove(player.getUUID());
         PacketDistributor.sendToPlayer(player,new Decision(origin,magic));
         com.dorohedoro.hole.magic.SmokeNetwork.sync(player);
+        com.dorohedoro.hole.progress.HoleAdvancements.awardOrigin(player);
     }
     private static void handleSubmit(ServerPlayer player,Submit packet){
         if(player.getData(CharacterAttachments.PROFILE).selected()) {reject(player,"Character already created.");return;}

@@ -79,6 +79,8 @@ public final class LimbReattachmentService {
         }
         operator.sendSystemMessage(Component.literal("Reattachment completed for " +
             patient.getGameProfile().getName() + ".").withStyle(ChatFormatting.GREEN));
+        com.dorohedoro.hole.progress.HoleAdvancements.award(operator, com.dorohedoro.hole.progress.HoleAdvancements.LIMB_REATTACHED);
+        if (patient != operator) com.dorohedoro.hole.progress.HoleAdvancements.award(patient, com.dorohedoro.hole.progress.HoleAdvancements.LIMB_REATTACHED);
         return true;
     }
 
