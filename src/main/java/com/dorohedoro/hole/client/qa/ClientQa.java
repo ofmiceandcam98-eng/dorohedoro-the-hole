@@ -40,10 +40,13 @@ public final class ClientQa {
     /** Ticks to let a screen or HUD change settle. */
     private static final int UI_WAIT = 40;
 
+    /** Which script to run: the default city tour, or {@code ftb} for FtbClientQa. */
+    static final String MODE = System.getProperty("dorohedoro.clientqa.mode", "tour");
+
     private static int stage;
     private static int ticks;
     private static String lastScreen = "";
-    private static Vec3 home;
+    static Vec3 home;
 
     private ClientQa() {}
 
@@ -110,6 +113,10 @@ public final class ClientQa {
 
     private static void script(Minecraft mc) {
         int t = ticks;
+        if ("ftb".equals(MODE)) {
+            FtbClientQa.script(mc, t);
+            return;
+        }
         if (VISITS.length > 0) {
             visit(mc, t);
             return;
@@ -313,7 +320,7 @@ public final class ClientQa {
         return String.format(Locale.ROOT, "tp @a %.2f %.2f %.2f %.0f %.0f", home.x, home.y, home.z, yaw, pitch);
     }
 
-    private static void closeScreen(Minecraft mc) {
+    static void closeScreen(Minecraft mc) {
         if (mc.screen != null) {
             log("closing " + mc.screen.getClass().getSimpleName());
             mc.setScreen(null);
@@ -324,7 +331,7 @@ public final class ClientQa {
         if (mc.screen != null) mc.screen.keyPressed(key, 0, 0);
     }
 
-    private static void command(Minecraft mc, String command) {
+    static void command(Minecraft mc, String command) {
         IntegratedServer server = mc.getSingleplayerServer();
         if (server == null) {
             log("no integrated server for: " + command);
@@ -333,13 +340,13 @@ public final class ClientQa {
         server.execute(() -> server.getCommands().performPrefixedCommand(server.createCommandSourceStack(), command));
     }
 
-    private static void shot(Minecraft mc, String name) {
+    static void shot(Minecraft mc, String name) {
         String pos = mc.player == null ? "?" : mc.player.blockPosition().toShortString();
         Screenshot.grab(mc.gameDirectory, "qa-" + name + ".png", mc.getMainRenderTarget(),
                 message -> log("screenshot " + name + " at " + pos + ": " + message.getString()));
     }
 
-    private static void log(String message) {
+    static void log(String message) {
         Dorohedoro.LOGGER.info("CLIENTQA {}", message);
     }
 

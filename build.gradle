@@ -88,6 +88,17 @@ neoForge {
             programArguments.addAll('--width', '1600', '--height', '900')
         }
 
+        // The same unattended client with real FTB mods installed (tools/ftb-client.sh copies them into
+        // runs/qaclient-ftb/mods). Runs the FTB Quests, Ultimine and Chunks checks in FtbClientQa.
+        qaClientFtb {
+            client()
+            gameDirectory = project.file('runs/qaclient-ftb')
+            systemProperty 'dorohedoro.clientqa', 'true'
+            systemProperty 'dorohedoro.clientqa.mode', 'ftb'
+            systemProperty 'dorohedoro.clientqa.seed', project.findProperty('qa_seed') ?: '8675309'
+            programArguments.addAll('--width', '1600', '--height', '900')
+        }
+
         qaServer {
             server()
             gameDirectory = project.file(project.findProperty('qa_dir') ?: 'runs/qa/manual')

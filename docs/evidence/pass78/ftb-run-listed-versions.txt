@@ -1,0 +1,93 @@
+installed architectury-13.0.8-neoforge.jar
+installed ftb-library-neoforge-2101.1.33.jar
+installed ftb-teams-neoforge-2101.1.10.jar
+installed ftb-quests-neoforge-2101.1.27.jar
+installed ftb-chunks-neoforge-2101.1.20.jar
+installed ftb-ultimine-neoforge-2101.1.15.jar
+installed ftb-xmod-compat-neoforge-21.1.9.jar
+installed ftb-filter-system-neoforge-21.1.4.jar
+installed ftb-essentials-neoforge-2101.1.10.jar
+installed playernbtftb-1.0.1.1.jar
+10 jars installed
+gradle exit 0
+  screen -> TitleScreen
+  creating world clientqa-8675309 with the default preset
+  screen -> LevelLoadingScreen
+  screen -> CharacterCreationScreen
+  joined world at 4590, 79, 827
+  closing CharacterCreationScreen
+  mod architectury 13.0.8
+  mod ftblibrary 2101.1.33
+  mod ftbteams 2101.1.10
+  mod ftbquests 2101.1.27
+  mod ftbchunks 2101.1.20
+  mod ftbultimine 2101.1.15
+  mod ftbxmodcompat 21.1.9
+  mod ftbessentials 2101.1.10
+  mod ftbfiltersystem 21.1.4
+  mod playernbtftb 1.0.1.1
+  screen -> none
+  PASS quest_file_chapter_groups.snbt: .\config\ftbquests\quests\chapter_groups.snbt
+  PASS quest_file_chapters/dorohedoro_welcome.snbt: .\config\ftbquests\quests\chapters\dorohedoro_welcome.snbt
+  PASS quest_file_chapters/dorohedoro_streets.snbt: .\config\ftbquests\quests\chapters\dorohedoro_streets.snbt
+  PASS quest_file_chapters/dorohedoro_doors.snbt: .\config\ftbquests\quests\chapters\dorohedoro_doors.snbt
+  PASS quest_file_chapters/dorohedoro_hell.snbt: .\config\ftbquests\quests\chapters\dorohedoro_hell.snbt
+  PASS quest_file_lang/en_us.snbt: .\config\ftbquests\quests\lang\en_us.snbt
+  PASS quest_file_data.snbt: .\config\ftbquests\quests\data.snbt
+  screen -> ScreenWrapper
+  screen with the book open: dev.ftb.mods.ftblibrary.ui.ScreenWrapper
+  PASS quest_book_opens: dev.ftb.mods.ftblibrary.ui.ScreenWrapper
+  screenshot ftb-01-book at 4590, 79, 827: Saved screenshot as qa-ftb-01-book.png
+  closing ScreenWrapper
+  screen -> none
+  screen -> ScreenWrapper
+  screenshot ftb-02-book-progress at 4590, 79, 827: Saved screenshot as qa-ftb-02-book-progress.png
+  closing ScreenWrapper
+  screen -> none
+  mining one block of the first vein without the Ultimine key
+  PASS ultimine_control_without_key: 17 of 18 ore blocks left, expected 17
+  screenshot ftb-03-ultimine-outline at 4636, 230, 882: Saved screenshot as qa-ftb-03-ultimine-outline.png
+  mining one block of the second vein with the Ultimine key held
+  PASS ultimine_mines_mixed_vein: 0 of 18 ore blocks left, expected 0
+  screenshot ftb-04-ultimine-after at 4636, 230, 882: Saved screenshot as qa-ftb-04-ultimine-after.png
+  screenshot ftb-04b-ultimine-survival-outline at 4642, 230, 877: Saved screenshot as qa-ftb-04b-ultimine-survival-outline.png
+  PASS ultimine_survival_column: 0 of 3 ore blocks left
+  PASS ultimine_survival_drops: 3 raw zinc dropped or collected
+  rival team id qa_rivals#670d9aa9
+  PASS claim_blocks_mod_placement: inside the rival claim
+  PASS unclaimed_allows_mod_placement: outside any claim
+  PASS claim_blocks_explosion: 9 of 9 claimed stone blocks survived
+  PASS unclaimed_explosion_breaks: 8 of 9 unclaimed stone blocks survived
+  screenshot ftb-05-door-refused at 4798, 230, 876: Saved screenshot as qa-ftb-05-door-refused.png
+  PASS claim_blocks_door_far_end: door refused
+  own team Dev#380df991
+  PASS door_opens_into_own_claim: far end at 4798, 64, 875
+  screenshot ftb-06-door-open at 4798, 230, 877: Saved screenshot as qa-ftb-06-door-open.png
+  screen -> ReceivingLevelScreen
+  screen -> none
+  PASS door_travel_to_sorcerers_world: player is in dorohedoro:sorcerers_world at 4831, 74, 863
+  screenshot ftb-07-sorcerers-world-far-end at 4831, 74, 863: Saved screenshot as qa-ftb-07-sorcerers-world-far-end.png
+  screen -> ReceivingLevelScreen
+  screen -> none
+  PASS door_travel_back_to_hole: player is in minecraft:overworld at 4798, 230, 877
+  screen -> ScreenWrapper
+  screenshot ftb-08-book-after-door at 4798, 230, 877: Saved screenshot as qa-ftb-08-book-after-door.png
+  closing ScreenWrapper
+  progress world C:\dev\dorohedoro-the-hole\runs\qaclient-ftb\saves\clientqa-8675309
+  screen -> none
+  tour complete, quitting
+errors: 0  exceptions: 2
+  PASS quest 1:1 (0D0E0B0E01010000) completed
+  PASS quest 1:2 (0D0E0B0E01020000) completed
+  PASS quest 1:4 (0D0E0B0E01040000) completed
+  PASS quest 3:20 (0D0E0B0E03140000) completed
+  PASS quest 3:21 (0D0E0B0E03150000) completed
+  PASS quest 3:22 (0D0E0B0E03160000) completed
+  PASS quest 3:23 (0D0E0B0E03170000) completed
+  PASS quest 3:24 (0D0E0B0E03180000) completed
+  PASS quest 3:25 (0D0E0B0E03190000) completed
+  PASS quest 3:26 (0D0E0B0E031A0000) completed
+  PASS quest 3:27 (0D0E0B0E031B0000) not completed
+  PASS quest 4:36 (0D0E0B0E04240000) not completed
+  10 Dorohedoro quests completed in total
+done
