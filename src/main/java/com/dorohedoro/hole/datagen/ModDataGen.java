@@ -19,6 +19,13 @@ import net.minecraft.tags.BiomeTags;
 import net.minecraft.tags.BlockTags;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import com.dorohedoro.hole.registry.ModItems;
+import java.util.function.Supplier;
+import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.data.tags.TagsProvider;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -51,7 +58,10 @@ public final class ModDataGen {
         generator.addProvider(event.includeServer(), entries);
         generator.addProvider(event.includeServer(), ModLoot.provider(output, event.getLookupProvider()));
         generator.addProvider(event.includeServer(), new ModRecipes(output, event.getLookupProvider()));
-        generator.addProvider(event.includeServer(), new HoleBlockTags(output, event.getLookupProvider(), event.getExistingFileHelper()));
+        HoleBlockTags blockTags = new HoleBlockTags(output, event.getLookupProvider(), event.getExistingFileHelper());
+        generator.addProvider(event.includeServer(), blockTags);
+        generator.addProvider(event.includeServer(), new HoleItemTags(output, event.getLookupProvider(),
+                blockTags.contentsGetter(), event.getExistingFileHelper()));
         generator.addProvider(event.includeClient(), new ModModels.Blocks(output, event.getExistingFileHelper()));
         generator.addProvider(event.includeClient(), new ModModels.Items(output, event.getExistingFileHelper()));
         generator.addProvider(event.includeServer(),
@@ -78,6 +88,62 @@ public final class ModDataGen {
                     ModBlocks.GALVANIZED_PLATING.get(), ModBlocks.CAVERN_LAMP.get(),
                     ModBlocks.SMOKE_STAINED_CONCRETE.get(), ModBlocks.WATER_DAMAGED_PLASTER.get(), ModBlocks.SOOT_BLACKENED_BRICK.get(), ModBlocks.PATCHWORK_MASONRY.get(), ModBlocks.RUSTED_INDUSTRIAL_SHEET.get(), ModBlocks.SEEPAGE_BRICK.get());
             tag(BlockTags.MINEABLE_WITH_SHOVEL).add(ModBlocks.ASH_SOIL.get());
+
+            // Convention ore tags. FTB Ultimine treats everything under c:ores/* as one vein by default, so a vein that
+            // crosses from stone into deepslate is mined in one go, and other mods (JEI, EMI, ore finders) see these
+            // as ores.
+            for (OreTag ore : OreTag.values()) {
+                tag(ore.block).add(ore.stone.get(), ore.deepslate.get());
+                tag(Tags.Blocks.ORES).addTag(ore.block);
+                tag(Tags.Blocks.ORES_IN_GROUND_STONE).add(ore.stone.get());
+                tag(Tags.Blocks.ORES_IN_GROUND_DEEPSLATE).add(ore.deepslate.get());
+            }
+        }
+    }
+
+    /** Each mod ore with its block and item convention tags, {@code c:ores/<name>}. */
+    enum OreTag {
+        SULFUR("sulfur", ModBlocks.SULFUR_ORE, ModBlocks.DEEPSLATE_SULFUR_ORE),
+        SALT("salt", ModBlocks.ROCK_SALT_ORE, ModBlocks.DEEPSLATE_ROCK_SALT_ORE),
+        ZINC("zinc", ModBlocks.ZINC_ORE, ModBlocks.DEEPSLATE_ZINC_ORE),
+        OIL_SHALE("oil_shale", ModBlocks.OIL_SHALE_ORE, ModBlocks.DEEPSLATE_OIL_SHALE_ORE);
+
+        final TagKey<Block> block;
+        final TagKey<Item> item;
+        final Supplier<? extends Block> stone, deepslate;
+
+        OreTag(String name, Supplier<? extends Block> stone, Supplier<? extends Block> deepslate) {
+            this.block = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("c", "ores/" + name));
+            this.item = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "ores/" + name));
+            this.stone = stone;
+            this.deepslate = deepslate;
+        }
+    }
+
+    /** Item twins of the ore tags, plus the metal convention tags other mods look up. */
+    private static final class HoleItemTags extends ItemTagsProvider {
+        HoleItemTags(PackOutput output, CompletableFuture<HolderLookup.Provider> lookup,
+                CompletableFuture<TagsProvider.TagLookup<Block>> blocks, ExistingFileHelper files) {
+            super(output, lookup, blocks, Dorohedoro.MOD_ID, files);
+        }
+
+        @Override
+        protected void addTags(HolderLookup.Provider provider) {
+            for (OreTag ore : OreTag.values()) {
+                copy(ore.block, ore.item);
+                tag(Tags.Items.ORES).addTag(ore.item);
+            }
+            copy(Tags.Blocks.ORES_IN_GROUND_STONE, Tags.Items.ORES_IN_GROUND_STONE);
+            copy(Tags.Blocks.ORES_IN_GROUND_DEEPSLATE, Tags.Items.ORES_IN_GROUND_DEEPSLATE);
+            tag(itemTag("raw_materials/zinc")).add(ModItems.RAW_ZINC.get());
+            tag(Tags.Items.RAW_MATERIALS).addTag(itemTag("raw_materials/zinc"));
+            tag(itemTag("ingots/zinc")).add(ModItems.ZINC_INGOT.get());
+            tag(itemTag("ingots/brass")).add(ModItems.BRASS_INGOT.get());
+            tag(Tags.Items.INGOTS).addTag(itemTag("ingots/zinc")).addTag(itemTag("ingots/brass"));
+        }
+
+        private static TagKey<Item> itemTag(String path) {
+            return TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", path));
         }
     }
 
