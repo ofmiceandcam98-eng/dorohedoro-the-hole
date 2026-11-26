@@ -226,6 +226,12 @@ final class ModLoot {
                     entry(Items.LEATHER_CHESTPLATE, 5, 1, 1), entry(Items.IRON_HELMET, 2, 1, 1), entry(Items.CLOCK, 3, 1, 1), entry(Items.COMPASS, 3, 1, 1),
                     entry(Items.MAP, 3, 1, 1), entry(Items.SPYGLASS, 2, 1, 1), entry(Items.DIAMOND, 1, 1, 1), entry(Items.EMERALD, 4, 1, 3),
                     entry(Items.BOOK, 5, 1, 3), entry(Items.WHITE_BANNER, 3, 1, 1), entry(Items.TOTEM_OF_UNDYING, 1, 1, 1), entry(Items.MUSIC_DISC_CAT, 1, 1, 1));
+            // A Cross-Eye camp's supply barrels: what a gang living rough keeps, and the smoke goods they deal in.
+            table(out, "cross_eyes_camp", 3, 5,
+                    entry(ModItems.SCRAP_METAL.get(), 10, 2, 5), entry(Items.IRON_NUGGET, 8, 2, 6), entry(Items.BREAD, 6, 1, 3),
+                    entry(ModItems.COOKED_RAT_MEAT.get(), 6, 1, 3), entry(Items.ARROW, 4, 2, 6), entry(Items.GOLD_NUGGET, 3, 1, 4),
+                    entry(ModItems.SMOKE_SOAKED_FILTER.get(), 6, 1, 2), entry(ModItems.SMOKE_RESIDUE.get(), 3, 1, 1),
+                    entry(Items.EMERALD, 3, 1, 2), entry(Items.IRON_INGOT, 2, 1, 2), entry(ModItems.DEVIL_SIGIL.get(), 1, 1, 1));
             table(out, "lab", 3, 5,
                     entry(Items.GLASS_BOTTLE, 8, 1, 3), entry(Items.BLAZE_POWDER, 2, 1, 1), entry(Items.NETHER_WART, 3, 1, 2), entry(Items.SPIDER_EYE, 5, 1, 2),
                     entry(Items.FERMENTED_SPIDER_EYE, 3, 1, 1), entry(Items.ENDER_PEARL, 1, 1, 1), entry(Items.GHAST_TEAR, 1, 1, 1), entry(Items.BOOK, 5, 1, 3),

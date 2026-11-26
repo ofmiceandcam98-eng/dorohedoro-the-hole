@@ -66,6 +66,10 @@ public final class ModEntities {
             "ash_snowball", () -> EntityType.Builder.<com.dorohedoro.hole.hazard.AshSnowball>of(com.dorohedoro.hole.hazard.AshSnowball::new, MobCategory.MISC)
                     .sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build("dorohedoro:ash_snowball"));
 
+    public static final DeferredHolder<EntityType<?>, EntityType<com.dorohedoro.hole.entity.CrossEyesEntity>> CROSS_EYES = ENTITIES.register(
+            "cross_eyes", () -> EntityType.Builder.of(com.dorohedoro.hole.entity.CrossEyesEntity::new, MobCategory.MONSTER)
+                    .sized(0.6F, 1.95F).eyeHeight(1.62F).clientTrackingRange(10).build("dorohedoro:cross_eyes"));
+
     private ModEntities() {}
 
     public static void register(IEventBus modBus) {
@@ -83,6 +87,7 @@ public final class ModEntities {
         event.put(RUST_EATER_BEETLE.get(), RustEaterBeetleEntity.attributes().build());
         event.put(CAVERN_BURROWER.get(), CavernBurrowerEntity.attributes().build());
         event.put(SPORE_CRAWLER.get(), SporeCrawlerEntity.attributes().build());
+        event.put(CROSS_EYES.get(), com.dorohedoro.hole.entity.CrossEyesEntity.attributes().build());
     }
 
     private static void spawns(RegisterSpawnPlacementsEvent event) {

@@ -81,6 +81,8 @@ final class ModModels {
             simpleBlock(ModBlocks.GENERATED_ARTIFICIAL_CORE.get(), cubeAll(ModBlocks.GENERATED_ARTIFICIAL_CORE.get()));
             simpleBlock(ModBlocks.GENERATED_INFERNAL_CORE.get(), cubeAll(ModBlocks.GENERATED_INFERNAL_CORE.get()));
             hazards();
+            // The camp marker is never drawn; an empty model with a dirt particle keeps the model loader quiet.
+            simpleBlock(ModBlocks.CAMP_MARKER.get(), models().getBuilder("camp_marker").texture("particle", mcLoc("block/dirt")));
             var surfaceModel = cubeAll(ModBlocks.PORTAL_SURFACE.get());
             getVariantBuilder(ModBlocks.PORTAL_SURFACE.get()).forAllStates(state ->
                     net.neoforged.neoforge.client.model.generators.ConfiguredModel.builder().modelFile(surfaceModel).build());
@@ -129,6 +131,7 @@ final class ModModels {
             // The ash snowball model is hand-written: the vanilla snowball, tinted ash gray.
             // Preserve native spawn-egg overlay and NeoForge tint behavior; no fixed baked PNG.
             withExistingParent("sewer_roach_spawn_egg", "minecraft:item/template_spawn_egg");
+            withExistingParent("cross_eyes_spawn_egg", "minecraft:item/template_spawn_egg");
             withExistingParent("scrap_rat_spawn_egg", "minecraft:item/template_spawn_egg");
             withExistingParent("sewer_leech_spawn_egg", "minecraft:item/template_spawn_egg");
             withExistingParent("glow_moth_spawn_egg", "minecraft:item/template_spawn_egg");

@@ -173,5 +173,19 @@
   "message.dorohedoro.toxin.rain": "The Hole's rain stings sorcerer skin. Get under a roof, or wear a helmet.",
   "message.dorohedoro.toxin.ash_snowball": "That snowball was full of soot.",
   "message.dorohedoro.toxin.generic": "The Hole's air is getting into your lungs. Find shelter.",
-  "hud.dorohedoro.toxin": "Toxin"
+  "hud.dorohedoro.toxin": "Toxin",
+  "entity.dorohedoro.cross_eyes": "Cross-Eyes Member",
+  "item.dorohedoro.cross_eyes_spawn_egg": "Cross-Eyes Member Spawn Egg",
+  "block.dorohedoro.camp_marker": "Camp Marker",
+  "standing.dorohedoro.hated": "Hated",
+  "standing.dorohedoro.disliked": "Disliked",
+  "standing.dorohedoro.neutral": "Neutral",
+  "standing.dorohedoro.liked": "Liked",
+  "standing.dorohedoro.trusted": "Trusted",
+  "message.dorohedoro.standing.residents": "The Hole's residents now regard you as: %s",
+  "message.dorohedoro.standing.cross_eyes": "The Cross-Eyes now regard you as: %s",
+  "message.dorohedoro.standing.refused": "The resident turns away. They won't trade with someone they hate.",
+  "message.dorohedoro.cross_eyes.no_deal": "They won't deal with you. Tribute in emeralds might change their minds.",
+  "message.dorohedoro.cross_eyes.enough_today": "They've taken enough of your emeralds today.",
+  "message.dorohedoro.cross_eyes.tribute": "The gang pockets your emerald."
 }

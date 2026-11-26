@@ -118,7 +118,7 @@ public final class CityPainter {
             Backstreets43.paint(canvas, plan, xLines, zLines, currentLots);
         for (Lot lot : currentLots) {
             LotPainter.paint(canvas, plan, lot);
-            if (plan.settings.worldDetailVersion() >= 26) RegionalSurface42.openLot(canvas, plan, lot);
+            if (plan.settings.worldDetailVersion() >= 26 && !CrossEyeCamp56.eligible(canvas, plan, lot)) RegionalSurface42.openLot(canvas, plan, lot);
         }
         if (canvas.hasWorldDetail()) {
             WorldDetail.streetFixtures(canvas, plan, xLines, zLines);

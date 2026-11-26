@@ -171,6 +171,11 @@ public final class ModBlocks {
                     .replaceable().lightLevel(state -> GlowMothLightBlock.LIGHT_LEVEL)
                     .noLootTable().strength(0.0F)));
 
+    /** Hidden under a Cross-Eye camp's floor until the gang arrives; no item, no drops, never seen. */
+    public static final DeferredBlock<com.dorohedoro.hole.world.CampMarkerBlock> CAMP_MARKER = BLOCKS.register("camp_marker",
+            ignored -> new com.dorohedoro.hole.world.CampMarkerBlock(BlockBehaviour.Properties.of().mapColor(MapColor.DIRT)
+                    .strength(0.5F).sound(SoundType.GRAVEL).noOcclusion().noLootTable()));
+
     private ModBlocks() {}
 
     private static <T extends Block> DeferredBlock<T> register(String name, Supplier<T> block) {

@@ -121,6 +121,10 @@ public final class ClientQa {
             HazardClientQa.script(mc, t);
             return;
         }
+        if ("crosseyes".equals(MODE)) {
+            CrossEyesClientQa.script(mc, t);
+            return;
+        }
         if (VISITS.length > 0) {
             visit(mc, t);
             return;

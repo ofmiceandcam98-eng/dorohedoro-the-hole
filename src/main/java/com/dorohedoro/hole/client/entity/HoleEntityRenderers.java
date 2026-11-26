@@ -23,6 +23,7 @@ public final class HoleEntityRenderers {
         event.registerEntityRenderer(ModEntities.CAVERN_BURROWER.get(), CavernBurrowerRenderer::new);
         event.registerEntityRenderer(ModEntities.SPORE_CRAWLER.get(), SporeCrawlerRenderer::new);
         event.registerEntityRenderer(ModEntities.ASH_SNOWBALL.get(), net.minecraft.client.renderer.entity.ThrownItemRenderer::new);
+        event.registerEntityRenderer(ModEntities.CROSS_EYES.get(), CrossEyesRenderer::new);
     }
 
     private static void layers(EntityRenderersEvent.RegisterLayerDefinitions event) {
@@ -34,5 +35,6 @@ public final class HoleEntityRenderers {
         event.registerLayerDefinition(RustEaterBeetleModel.LAYER, RustEaterBeetleModel::createBodyLayer);
         event.registerLayerDefinition(CavernBurrowerModel.LAYER, CavernBurrowerModel::createBodyLayer);
         event.registerLayerDefinition(SporeCrawlerModel.LAYER, SporeCrawlerModel::createBodyLayer);
+        event.registerLayerDefinition(CrossEyesRenderer.LAYER, CrossEyesRenderer::createBodyLayer);
     }
 }

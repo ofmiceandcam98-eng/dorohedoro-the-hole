@@ -38,6 +38,7 @@ public final class Dorohedoro {
         com.dorohedoro.hole.character.CharacterPlayerEvents.register();
         com.dorohedoro.hole.hazard.ModEffects.register(modBus);
         com.dorohedoro.hole.hazard.ToxinExposure.register(modBus);
+        com.dorohedoro.hole.faction.FactionStanding.register(modBus);
         if (FMLEnvironment.dist == Dist.CLIENT) {
             com.dorohedoro.hole.client.HoleAtmosphere.register(modBus);
             com.dorohedoro.hole.client.HazardColors.register(modBus);

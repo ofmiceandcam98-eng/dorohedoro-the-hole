@@ -173,6 +173,9 @@ public final class ModItems {
     public static final DeferredItem<DeferredSpawnEggItem> CAVERN_BURROWER_SPAWN_EGG = ITEMS.register(
             "cavern_burrower_spawn_egg", () -> new DeferredSpawnEggItem(
                     ModEntities.CAVERN_BURROWER, 0x4D5353, 0xA98A66, new Item.Properties()));
+    public static final DeferredItem<DeferredSpawnEggItem> CROSS_EYES_SPAWN_EGG = ITEMS.register(
+            "cross_eyes_spawn_egg", () -> new DeferredSpawnEggItem(
+                    ModEntities.CROSS_EYES, 0x2A2B30, 0xB3241F, new Item.Properties()));
     public static final DeferredItem<DeferredSpawnEggItem> SPORE_CRAWLER_SPAWN_EGG = ITEMS.register(
             "spore_crawler_spawn_egg", () -> new DeferredSpawnEggItem(
                     ModEntities.SPORE_CRAWLER, 0x534364, 0xADC681, new Item.Properties()));
