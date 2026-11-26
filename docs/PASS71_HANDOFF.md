@@ -554,5 +554,9 @@ of §5 (deferred) is lifted by that request.
   - `doors`: 8 of 8
   - `realms`: Hell passes. The Sorcerers' World Hydra Forest check fails because the realm's v1 surface rule places no
     soil (bare stone), so trees cannot grow.
-- **Sorcerers' World terrain is owned by branch `sorcerers-world/towns`** (session "Sorcerers' World integration
-  brief"). It moves new worlds to vanilla Overworld generation. This branch keeps v1 for now.
+- **Sorcerers' World:** `sorcerers-world/towns` is merged.
+  - New worlds use vanilla Overworld terrain and biomes through `SorcererVanillaBiomeSource`, with no rain
+    (`SorcererWeatherMixin`) and no vanilla villages or outposts (`SorcererStructureFilterMixin`).
+  - Settlements are the `sorcerer_settlement` structure: 16 building types, including the community-built Exchange.
+  - Old saves keep v1.
+  - Full details: `docs/sorcerers-world/CLAUDE_HANDOFF.md`. Settlement QA: `bash tools/qa-sorcerers.sh <seed>`.

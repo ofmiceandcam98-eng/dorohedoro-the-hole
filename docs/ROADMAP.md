@@ -8,7 +8,7 @@ The phase order comes from `docs/spec/SANDBOX_DIRECTIVE.md`. Status values are `
 | --- | --- | --- |
 | 1 | Project audit | Done, see `docs/PROJECT_AUDIT.md` |
 | 2 | Hole sandbox foundation | **client_verified, server_verified** (city at world_detail_version 56; server QA on seeds 8675309, 12345 and 42 in Pass 78). Continuing |
-| 3 | Sorcerers' World and Hell generation | Hell: **client_verified** (Pass 78: biomes, no rain, ores, Hell Rock mines and drops). Sorcerers' World: generates and never rains, but its terrain on this branch is bare stone (its surface rule places no soil). Being rebuilt on vanilla Overworld generation on branch `sorcerers-world/towns` |
+| 3 | Sorcerers' World and Hell generation | Hell: **client_verified** (Pass 78: biomes, no rain, ores, Hell Rock mines and drops). Sorcerers' World: new worlds use vanilla Overworld terrain and biomes (old saves keep v1). Never rains. Settlements (cities, towns, hamlets, rare capitals) with 16 building types, including the community-built Exchange. Server QA verified on two seeds; seen in the client. See `docs/sorcerers-world/` |
 | 4 | Portals | Artificial Door, Devil Gate, Smoke Door, Door Linking Key, return travel and door reopening: **client_verified** (Pass 78, `-Pqa_mode=doors`, 8 of 8). En Family Door: **planned** |
 | 5 | Resources, crafting, wood sources, gyoza | Planned |
 | 6 | Structures, NPCs, trading, environment | Partly implemented: Cross-Eye camps, faction standing and villager trades are **client_verified** (Pass 78) |
@@ -36,7 +36,7 @@ First batch when started: audit supported FTB versions for NeoForge 1.21.1, then
 
 ## Phase 3 and 4 status
 
-See `docs/PHASE3_REALMS_IMPLEMENTATION.md` for the realm definitions. Pass 78 verified Hell and the portals in the real client (`-Pqa_mode=realms`, `-Pqa_mode=doors`); the Sorcerers' World terrain is being redone on vanilla generation on branch `sorcerers-world/towns`.
+See `docs/PHASE3_REALMS_IMPLEMENTATION.md` for the realm definitions. Pass 78 verified Hell and the portals in the real client (`-Pqa_mode=realms`, `-Pqa_mode=doors`); the Sorcerers' World moved to vanilla generation and gained settlements in the merge of `sorcerers-world/towns` (see `docs/sorcerers-world/CLAUDE_HANDOFF.md`).
 
 ### Phase 2.5: sewer–cave hybrid
 

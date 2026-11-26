@@ -37,14 +37,22 @@ import net.neoforged.neoforge.network.PacketDistributor;
 final class RealmsClientQa {
     private RealmsClientQa() {}
 
-    private record Stop(String dimension, String biome) {}
+    /** A biome to find and photograph. {@code biome} is a full id; Hell biomes are the mod's own. */
+    private record Stop(String dimension, String biome) {
+        String name() {
+            return biome.substring(biome.indexOf(':') + 1);
+        }
+    }
 
+    /**
+     * New Sorcerers' Worlds use vanilla Overworld terrain and biomes (owner's direction, 2026-11-26), with vanilla dark
+     * forest standing in for the Hydra Forest. Hell keeps its own biomes.
+     */
     private static final List<Stop> STOPS = List.of(
-            new Stop("sorcerers_world", "sw_city"), new Stop("sorcerers_world", "sw_farmland"),
-            new Stop("sorcerers_world", "sw_woodland"), new Stop("sorcerers_world", "sw_hydra_forest"),
-            new Stop("sorcerers_world", "sw_blight"), new Stop("sorcerers_world", "sw_frostbound_highlands"),
-            new Stop("sorcerers_world", "sw_waters"),
-            new Stop("hell", "hell_wastes"), new Stop("hell", "hell_horns"), new Stop("hell", "hell_soul_flats"));
+            new Stop("sorcerers_world", "minecraft:plains"), new Stop("sorcerers_world", "minecraft:forest"),
+            new Stop("sorcerers_world", "minecraft:dark_forest"), new Stop("sorcerers_world", "minecraft:snowy_plains"),
+            new Stop("hell", "dorohedoro:hell_wastes"), new Stop("hell", "dorohedoro:hell_horns"),
+            new Stop("hell", "dorohedoro:hell_soul_flats"));
     private static final int STEP = 420;
     private static final int TOUR = 80;
     private static final int CHECKS = TOUR + STOPS.size() * STEP;
@@ -99,35 +107,43 @@ final class RealmsClientQa {
                 server(mc, (server, player) -> {
                     ServerLevel level = server.getLevel(key(stop.dimension));
                     if (level == null) return;
-                    ResourceKey<Biome> biome = ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath("dorohedoro", stop.biome));
+                    ResourceKey<Biome> biome = ResourceKey.create(Registries.BIOME, ResourceLocation.parse(stop.biome));
                     var hit = level.findClosestBiome3d(h -> h.is(biome), new BlockPos(n * 400, 80, 0), 4000, 32, 64);
                     if (hit == null) {
-                        check("biome_found_" + stop.biome, false, "none within 4000 blocks");
+                        check("biome_found_" + stop.dimension + "_" + stop.name(), false, "none within 4000 blocks");
                         found[n] = null;
                         return;
                     }
                     BlockPos p = hit.getFirst();
                     int y = level.getChunk(p.getX() >> 4, p.getZ() >> 4).getHeight(Heightmap.Types.MOTION_BLOCKING, p.getX() & 15, p.getZ() & 15) + 1;
                     found[n] = new BlockPos(p.getX(), y, p.getZ());
-                    check("biome_found_" + stop.biome, true, found[n].toShortString());
+                    check("biome_found_" + stop.dimension + "_" + stop.name(), true, found[n].toShortString());
                 });
             } else if (k == 10 && found[n] != null) {
                 BlockPos p = found[n];
                 int above = stop.dimension.equals("hell") ? 18 : 34;
                 command(mc, String.format(Locale.ROOT, "execute in dorohedoro:%s run tp @a %d %d %d 30 32",
                         stop.dimension, p.getX() - 12, p.getY() + above, p.getZ() - 20));
-            } else if (k == STEP - 20 && found[n] != null) shot(mc, "realm-" + (n < 9 ? "0" : "") + (n + 1) + "-" + stop.biome);
+            } else if (k == STEP - 20 && found[n] != null) shot(mc, "realm-" + (n < 9 ? "0" : "") + (n + 1) + "-" + stop.name());
         }
         // Checks that need the player standing in the realm.
         else if (t == CHECKS) {
-            int hydra = STOPS.indexOf(new Stop("sorcerers_world", "sw_hydra_forest"));
+            // The weather itself, long after /weather rain: it rains in the Hole, and must not in the Sorcerers' World.
+            server(mc, (server, player) -> {
+                ServerLevel sw = server.getLevel(key("sorcerers_world"));
+                if (sw == null) return;
+                boolean holeRain = server.overworld().isRaining();
+                check("realm_dry_while_hole_rains_sorcerers_world", holeRain && !sw.isRaining() && sw.getRainLevel(1F) == 0F,
+                        "Hole raining " + holeRain + ", here raining " + sw.isRaining() + ", rain level " + sw.getRainLevel(1F));
+            });
+            int hydra = STOPS.indexOf(new Stop("sorcerers_world", "minecraft:dark_forest"));
             server(mc, (server, player) -> {
                 if (found[hydra] == null) return;
                 ServerLevel level = server.getLevel(key("sorcerers_world"));
                 int logs = count(level, found[hydra], 24, 50, 140, Blocks.DARK_OAK_LOG, Blocks.OAK_LOG, Blocks.SPRUCE_LOG, Blocks.BIRCH_LOG);
                 check("hydra_forest_has_trees", logs >= 20, logs + " logs within 24 blocks");
             });
-            int wastes = STOPS.indexOf(new Stop("hell", "hell_wastes"));
+            int wastes = STOPS.indexOf(new Stop("hell", "dorohedoro:hell_wastes"));
             server(mc, (server, player) -> {
                 if (found[wastes] == null) return;
                 ServerLevel hell = server.getLevel(key("hell"));
@@ -139,7 +155,7 @@ final class RealmsClientQa {
                 check("hell_is_hell_rock", rock >= 200, rock + " Hell Rock blocks just under the surface");
             });
         } else if (t == CHECKS + 20) {
-            int wastes = STOPS.indexOf(new Stop("hell", "hell_wastes"));
+            int wastes = STOPS.indexOf(new Stop("hell", "dorohedoro:hell_wastes"));
             if (found[wastes] == null) return;
             BlockPos c = found[wastes];
             command(mc, "gamemode survival @a");
