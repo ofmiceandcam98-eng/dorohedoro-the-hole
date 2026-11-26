@@ -96,7 +96,8 @@ final class RegionalSurface42 {
             // Natural snow can accumulate where nothing blocks it, not on all roads.
             int x = area.x1() - 2, z = area.z0() + 2;
             if (c.get(x, CityPlan.GROUND_Y, z).isAir()) {
-                c.set(x, CityPlan.GROUND_Y, z, Blocks.SNOW.defaultBlockState().setValue(SnowLayerBlock.LAYERS, 2));
+                c.set(x, CityPlan.GROUND_Y, z, (c.hasColdHazards56() ? com.dorohedoro.hole.registry.ModBlocks.ASH_SNOW.get() : Blocks.SNOW)
+                        .defaultBlockState().setValue(SnowLayerBlock.LAYERS, 2));
             }
         }
         if (region == HoleRegions42.Region.MOUNTAIN_RIM && lot.type() == LotType.RUBBLE) {

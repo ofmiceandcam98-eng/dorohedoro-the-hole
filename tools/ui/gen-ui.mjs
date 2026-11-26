@@ -228,6 +228,9 @@ const ICONS = {
   air: [['...OOO...', '..OBBBO..', '.OBWBBBO.', '.OBBBBBO.', '.OBBBBBO.', '.OBBBBDO.', '..OBBDO..', '...OOO...', '.........'],
     { O: '#183453', B: '#5aa0e0', W: '#e8f6ff', D: '#2f6aa8' }],
   // A severed arm with stitches: you have an untreated injury.
+  // A drop of toxic sludge: Hole Toxin exposure is building up.
+  toxin: [['....O....', '...OGO...', '..OGWGO..', '.OGWGGGO.', '.OGGGGDO.', 'OGGBGGDDO', 'OGGGGDDDO', '.OGGDDDO.', '..OOOOO..'],
+    { O: '#1d2408', G: '#8fa33a', W: '#dbe8a2', D: '#5b6a1f', B: '#c8d77a' }],
   injury: [['......OO.', '.....OSSO', '....OSSO.', '...OSSO..', '..OSWSO..', '.OSSOO...', 'ORRSO....', 'ORRO.....', '.OO......'],
     { O: '#2b0c08', S: '#d9a77f', W: '#e8dcc4', R: '#b8221f' }],
 };

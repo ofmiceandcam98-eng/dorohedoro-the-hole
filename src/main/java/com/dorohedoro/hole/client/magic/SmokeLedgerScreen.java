@@ -24,7 +24,7 @@ import org.lwjgl.glfw.GLFW;
  */
 public final class SmokeLedgerScreen extends Screen {
     private enum Tab {
-        STATUS("Status", "status", "Who you are in the Hole: origin, smoke, rank and condition.", false),
+        STATUS("Status", "status", "Who you are in the Hole: origin, smoke, rank, condition and standing.", false),
         TECHNIQUES("Techniques", "techniques", "Practice your family's smoke techniques and equip them to your keys.", true),
         LOADOUTS("Loadouts", "loadouts", "Nine quick-cast sets of three techniques. R cycles them, Shift+R goes back.", true),
         BODY("Body", "body", "Your wounds and severed limbs, and what will put you back together.", false);
@@ -314,6 +314,18 @@ public final class SmokeLedgerScreen extends Screen {
         }
         boolean hurt = !"none".equals(SmokeClient.injury);
         row(g, "Condition", hurt ? SmokeClient.injury : "Whole", cx, ry, cw, hurt ? HoleUiTheme.WARNING : HoleUiTheme.ACCENT);
+        ry += 19;
+        // How the Hole's residents and the Cross-Eyes regard you. Changes are announced as they happen.
+        int half = (cw - 3) / 2;
+        standing(g, "Residents", com.dorohedoro.hole.faction.FactionStanding.clientResidents, cx, ry, half);
+        standing(g, "Cross-Eyes", com.dorohedoro.hole.faction.FactionStanding.clientCrossEyes, cx + half + 3, ry, cw - half - 3);
+    }
+
+    private void standing(GuiGraphics g, String label, int value, int x, int ry, int w) {
+        String band = com.dorohedoro.hole.faction.FactionStanding.band(value);
+        String word = net.minecraft.client.resources.language.I18n.get("standing.dorohedoro." + band);
+        int color = value <= -20 ? HoleUiTheme.WARNING : value >= 20 ? HoleUiTheme.ACCENT : HoleUiTheme.TEXT;
+        row(g, label, word + " (" + (value > 0 ? "+" : "") + value + ")", x, ry, w, color);
     }
 
     private void techniques(GuiGraphics g, int cx, int cw) {

@@ -27,6 +27,8 @@ final class LotPainter {
         try {
             c.fill(lot.rect(), STREET_Y - (c.hasMacroRelief40() ? 9 : 3), STREET_Y, c.hasDistrictIdentity() ? DistrictIdentity18.lotGround(lot.district()) : YARD);
             if (c.hasLoreArchitecture()) LoreArchitecture19.foundation(c, lot);
+            // v56: a rare vacant or rubble lot is a Cross-Eye camp instead, and gets none of the yard decoration below.
+            boolean camp = CrossEyeCamp56.eligible(c, plan, lot);
             switch (lot.type()) {
             case PLAZA -> {
                 if (plan.isRegionalStartingPlaza(lot)) Landmarks.regionalLanding(c, lot, plan.regionAt(lot.rect().centerX(), lot.rect().centerZ()));
@@ -58,10 +60,11 @@ final class LotPainter {
             case NURSERY -> OpenLots.nursery(c, lot);
             case PARK -> OpenLots.park(c, lot);
             case JUNKYARD -> OpenLots.junkyard(c, lot);
-            case RUBBLE -> OpenLots.rubble(c, lot);
-            case VACANT -> OpenLots.vacant(c, lot);
+            case RUBBLE -> { if (camp) CrossEyeCamp56.paint(c, lot); else OpenLots.rubble(c, lot); }
+            case VACANT -> { if (camp) CrossEyeCamp56.paint(c, lot); else OpenLots.vacant(c, lot); }
             case CEMETERY -> OpenLots.cemetery(c, lot);
             }
+            if (camp) return;
             if (c.hasWorldDetail()) {
                 WorldDetail.lotYard(c, lot);
                 DerelictBuildings.decorate(c, plan, lot);

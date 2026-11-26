@@ -24,6 +24,8 @@ public final class HoleAdvancements {
     public static final String ARTIFICIAL_DOOR_OPENED = "doors/artificial_door_opened";
     public static final String DEVIL_GATE_OPENED = "doors/devil_gate_opened";
     public static final String TRAVELED_BY_DOOR = "doors/traveled_by_door";
+    public static final String SMOKE_DOOR_OPENED = "doors/smoke_door_opened";
+    public static final String DOORS_LINKED = "doors/doors_linked";
     public static final String RETURNED_FROM_HELL = "realms/returned_from_hell";
 
     private HoleAdvancements() {}

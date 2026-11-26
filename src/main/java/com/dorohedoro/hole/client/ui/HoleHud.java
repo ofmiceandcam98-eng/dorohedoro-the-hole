@@ -100,6 +100,12 @@ public final class HoleHud {
             chip(g, font, "injury", "!", cx, below);
             cx += 32;
         }
+        // Hole Toxin exposure, as a percentage, while there is any.
+        int toxin = com.dorohedoro.hole.hazard.ToxinExposure.clientExposure;
+        if (stats && toxin > 0) {
+            chip(g, font, "toxin", (toxin + 9) / 10 + "%", cx, below, 40);
+            cx += 42;
+        }
         if (cx > x) below += 13;
 
         if (sorcerer) slots(g, font, x, below + 2);
@@ -179,9 +185,18 @@ public final class HoleHud {
     }
 
     private static void chip(GuiGraphics g, Font font, String icon, String text, int x, int y) {
-        g.blitSprite(CHIP, x, y, 30, 11);
+        chip(g, font, icon, text, x, y, 30);
+    }
+
+    private static void chip(GuiGraphics g, Font font, String icon, String text, int x, int y, int width) {
+        g.blitSprite(CHIP, x, y, width, 11);
         g.blitSprite(sprite("hud/icon_" + icon), x + 2, y + 1, 9, 9);
-        g.drawString(font, text, x + 13, y + 2, icon.equals("injury") ? 0xFFF2A77C : 0xFFE6E9E3, true);
+        int color = switch (icon) {
+            case "injury" -> 0xFFF2A77C;
+            case "toxin" -> 0xFFC8D77A;
+            default -> 0xFFE6E9E3;
+        };
+        g.drawString(font, text, x + 13, y + 2, color, true);
     }
 
     private static void slots(GuiGraphics g, Font font, int x, int y) {

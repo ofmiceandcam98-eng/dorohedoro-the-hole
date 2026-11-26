@@ -66,6 +66,9 @@ public final class ModItems {
             () -> new com.dorohedoro.hole.item.AntidotePoulticeItem(new Item.Properties().stacksTo(16)
                     .food(new FoodProperties.Builder().nutrition(0).saturationModifier(0.0F).alwaysEdible().build())));
     public static final DeferredItem<Item> SEWER_SEALANT = ITEMS.registerSimpleItem("sewer_sealant");
+    /** Thrown like a snowball: slows what it hits and carries Hole Toxin. Four make an Ash-Snow block. */
+    public static final DeferredItem<com.dorohedoro.hole.hazard.AshSnowball.ItemType> ASH_SNOWBALL = ITEMS.register("ash_snowball",
+            () -> new com.dorohedoro.hole.hazard.AshSnowball.ItemType(new Item.Properties().stacksTo(16)));
     public static final DeferredItem<SewerEchoProbeItem> SEWER_ECHO_PROBE = ITEMS.register("sewer_echo_probe",
             () -> new SewerEchoProbeItem(new Item.Properties().stacksTo(1).durability(64)));
     /** Recovered from smoke-stained machinery and abandoned laboratories; furnace processing yields usable residue. */
@@ -170,6 +173,9 @@ public final class ModItems {
     public static final DeferredItem<DeferredSpawnEggItem> CAVERN_BURROWER_SPAWN_EGG = ITEMS.register(
             "cavern_burrower_spawn_egg", () -> new DeferredSpawnEggItem(
                     ModEntities.CAVERN_BURROWER, 0x4D5353, 0xA98A66, new Item.Properties()));
+    public static final DeferredItem<DeferredSpawnEggItem> CROSS_EYES_SPAWN_EGG = ITEMS.register(
+            "cross_eyes_spawn_egg", () -> new DeferredSpawnEggItem(
+                    ModEntities.CROSS_EYES, 0x2A2B30, 0xB3241F, new Item.Properties()));
     public static final DeferredItem<DeferredSpawnEggItem> SPORE_CRAWLER_SPAWN_EGG = ITEMS.register(
             "spore_crawler_spawn_egg", () -> new DeferredSpawnEggItem(
                     ModEntities.SPORE_CRAWLER, 0x534364, 0xADC681, new Item.Properties()));

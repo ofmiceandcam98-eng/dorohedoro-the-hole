@@ -109,6 +109,15 @@ public final class Canvas {
                 : CityElevation.offset(seed, x, z);
     }
 
+    /** Pass 78: Ash-Snow drifts and Sludge-Ice floes in cold districts. */
+    public boolean hasColdHazards56() { return worldDetailVersion >= 56; }
+
+    /** Pass 78: Cross-Eye gang camps. */
+    public boolean hasCrossEyeCamps56() { return worldDetailVersion >= 56; }
+
+    /** The v53 ground patch a position belongs to: ragged cells 3 to 6 blocks across, continuous across chunks. */
+    public long patchCell(int x, int y, int z) { return patchHash(x, y, z); }
+
     /** Pass 74: homes use only the curated room layout; the six older furnishing passes are skipped. */
     public boolean hasCuratedInteriors55() { return worldDetailVersion >= 55; }
 

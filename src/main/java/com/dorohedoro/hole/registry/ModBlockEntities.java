@@ -14,6 +14,8 @@ public final class ModBlockEntities {
             BlockEntityType.Builder.of(PortalCoreBlockEntity::new,
                     ModBlocks.ARTIFICIAL_DOOR_CORE.get(), ModBlocks.INFERNAL_DOOR_CORE.get(),
                     ModBlocks.GENERATED_ARTIFICIAL_CORE.get(), ModBlocks.GENERATED_INFERNAL_CORE.get()).build(null));
+    public static final Supplier<BlockEntityType<com.dorohedoro.hole.world.CampMarkerBlock.Entity>> CAMP_MARKER = TYPES.register("camp_marker", () ->
+            BlockEntityType.Builder.of(com.dorohedoro.hole.world.CampMarkerBlock.Entity::new, ModBlocks.CAMP_MARKER.get()).build(null));
     private ModBlockEntities() {}
     public static void register(IEventBus bus) { TYPES.register(bus); }
 }

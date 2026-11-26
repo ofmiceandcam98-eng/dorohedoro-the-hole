@@ -77,6 +77,7 @@ final class ModLoot {
             add(ModBlocks.DEEPSLATE_OIL_SHALE_ORE.get(), createOreDrop(ModBlocks.DEEPSLATE_OIL_SHALE_ORE.get(), ModItems.OIL_SHALE_CHUNK.get()));
             add(ModBlocks.DEEPSLATE_SULFUR_ORE.get(), createOreDrop(ModBlocks.DEEPSLATE_SULFUR_ORE.get(), ModItems.RAW_SULFUR.get()));
             add(ModBlocks.DEEPSLATE_ROCK_SALT_ORE.get(), createOreDrop(ModBlocks.DEEPSLATE_ROCK_SALT_ORE.get(), ModItems.ROCK_SALT.get()));
+            hazards();
             dropSelf(ModBlocks.REINFORCED_DOOR_FRAME.get());
             dropSelf(ModBlocks.ETCHED_GATE_STONE.get());
             dropSelf(ModBlocks.ARTIFICIAL_DOOR_CORE.get());
@@ -86,6 +87,40 @@ final class ModLoot {
                     .withPool(LootPool.lootPool().when(LootItemRandomChanceCondition.randomChance(0.25F)).add(item(Items.IRON_NUGGET, 1, 2)))
                     .withPool(LootPool.lootPool().when(LootItemRandomChanceCondition.randomChance(0.16F))
                             .add(item(ModItems.SMOKE_SOAKED_FILTER.get(), 1, 1))));
+        }
+
+        /**
+         * Ash-Snow drops like vanilla snow: one ash snowball per layer, or the layers themselves with Silk Touch (the
+         * full block at eight). The Ash-Snow block drops four snowballs; Sludge-Ice, like ice, only drops with Silk
+         * Touch and otherwise melts into water.
+         */
+        private void hazards() {
+            Block ash = ModBlocks.ASH_SNOW.get();
+            add(ash, LootTable.lootTable().withPool(LootPool.lootPool()
+                    .when(net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition.entityPresent(
+                            net.minecraft.world.level.storage.loot.LootContext.EntityTarget.THIS))
+                    .add(net.minecraft.world.level.storage.loot.entries.AlternativesEntry.alternatives(
+                            net.minecraft.world.level.storage.loot.entries.AlternativesEntry.alternatives(
+                                    net.minecraft.world.level.block.SnowLayerBlock.LAYERS.getPossibleValues(), layers ->
+                                            LootItem.lootTableItem(ModItems.ASH_SNOWBALL.get())
+                                                    .when(layersAre(ash, layers))
+                                                    .apply(SetItemCountFunction.setCount(net.minecraft.world.level.storage.loot.providers.number.ConstantValue.exactly(layers))))
+                                    .when(doesNotHaveSilkTouch()),
+                            net.minecraft.world.level.storage.loot.entries.AlternativesEntry.alternatives(
+                                    net.minecraft.world.level.block.SnowLayerBlock.LAYERS.getPossibleValues(), layers -> layers == 8
+                                            ? LootItem.lootTableItem(ModBlocks.ASH_SNOW_BLOCK.get())
+                                            : LootItem.lootTableItem(ash)
+                                                    .apply(SetItemCountFunction.setCount(net.minecraft.world.level.storage.loot.providers.number.ConstantValue.exactly(layers)))
+                                                    .when(layersAre(ash, layers)))))));
+            add(ModBlocks.ASH_SNOW_BLOCK.get(), block -> createSingleItemTableWithSilkTouch(block, ModItems.ASH_SNOWBALL.get(),
+                    net.minecraft.world.level.storage.loot.providers.number.ConstantValue.exactly(4.0F)));
+            dropWhenSilkTouch(ModBlocks.SLUDGE_ICE.get());
+        }
+
+        private static net.minecraft.world.level.storage.loot.predicates.LootItemCondition.Builder layersAre(Block block, int layers) {
+            return net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
+                    .setProperties(net.minecraft.advancements.critereon.StatePropertiesPredicate.Builder.properties()
+                            .hasProperty(net.minecraft.world.level.block.SnowLayerBlock.LAYERS, layers));
         }
 
         @Override
@@ -191,6 +226,12 @@ final class ModLoot {
                     entry(Items.LEATHER_CHESTPLATE, 5, 1, 1), entry(Items.IRON_HELMET, 2, 1, 1), entry(Items.CLOCK, 3, 1, 1), entry(Items.COMPASS, 3, 1, 1),
                     entry(Items.MAP, 3, 1, 1), entry(Items.SPYGLASS, 2, 1, 1), entry(Items.DIAMOND, 1, 1, 1), entry(Items.EMERALD, 4, 1, 3),
                     entry(Items.BOOK, 5, 1, 3), entry(Items.WHITE_BANNER, 3, 1, 1), entry(Items.TOTEM_OF_UNDYING, 1, 1, 1), entry(Items.MUSIC_DISC_CAT, 1, 1, 1));
+            // A Cross-Eye camp's supply barrels: what a gang living rough keeps, and the smoke goods they deal in.
+            table(out, "cross_eyes_camp", 3, 5,
+                    entry(ModItems.SCRAP_METAL.get(), 10, 2, 5), entry(Items.IRON_NUGGET, 8, 2, 6), entry(Items.BREAD, 6, 1, 3),
+                    entry(ModItems.COOKED_RAT_MEAT.get(), 6, 1, 3), entry(Items.ARROW, 4, 2, 6), entry(Items.GOLD_NUGGET, 3, 1, 4),
+                    entry(ModItems.SMOKE_SOAKED_FILTER.get(), 6, 1, 2), entry(ModItems.SMOKE_RESIDUE.get(), 3, 1, 1),
+                    entry(Items.EMERALD, 3, 1, 2), entry(Items.IRON_INGOT, 2, 1, 2), entry(ModItems.DEVIL_SIGIL.get(), 1, 1, 1));
             table(out, "lab", 3, 5,
                     entry(Items.GLASS_BOTTLE, 8, 1, 3), entry(Items.BLAZE_POWDER, 2, 1, 1), entry(Items.NETHER_WART, 3, 1, 2), entry(Items.SPIDER_EYE, 5, 1, 2),
                     entry(Items.FERMENTED_SPIDER_EYE, 3, 1, 1), entry(Items.ENDER_PEARL, 1, 1, 1), entry(Items.GHAST_TEAR, 1, 1, 1), entry(Items.BOOK, 5, 1, 3),

@@ -44,6 +44,7 @@ public final class SmokeNetwork {
         try{
             switch(pkt.action()){
                 case "status" -> sync(player);
+                case "door" -> com.dorohedoro.hole.portal.SmokeDoors.open(player);
                 case "preset" -> SmokeEngine.preset(player,Integer.parseInt(pkt.argument()));
                 case "train" -> SmokeEngine.practice(player,pkt.argument());
                 case "equip" -> {

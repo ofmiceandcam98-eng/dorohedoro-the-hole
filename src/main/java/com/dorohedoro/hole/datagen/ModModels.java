@@ -16,6 +16,23 @@ final class ModModels {
             super(output, Dorohedoro.MOD_ID, files);
         }
 
+        /**
+         * Ash-Snow and Sludge-Ice are vanilla snow and ice under a tint (client/HazardColors); their models are hand-written
+         * in src/main/resources (they reference vanilla textures and vanilla's snow-layer shapes). A full stack of eight
+         * layers shows the Ash-Snow block, exactly as vanilla snow does.
+         */
+        private void hazards() {
+            var ashBlock = models().getExistingFile(modLoc("block/ash_snow_block"));
+            simpleBlockWithItem(ModBlocks.ASH_SNOW_BLOCK.get(), ashBlock);
+            getVariantBuilder(ModBlocks.ASH_SNOW.get()).forAllStates(state -> {
+                int layers = state.getValue(net.minecraft.world.level.block.SnowLayerBlock.LAYERS);
+                var model = layers == 8 ? ashBlock : models().getExistingFile(modLoc("block/ash_snow_height" + layers * 2));
+                return net.neoforged.neoforge.client.model.generators.ConfiguredModel.builder().modelFile(model).build();
+            });
+            itemModels().withExistingParent("ash_snow", modLoc("block/ash_snow_height2"));
+            simpleBlockWithItem(ModBlocks.SLUDGE_ICE.get(), models().getExistingFile(modLoc("block/sludge_ice")));
+        }
+
         /** Ores are vanilla stone or deepslate with one of our mineral overlays on top, like vanilla ores. */
         private void ores() {
             ore(ModBlocks.SULFUR_ORE.get(), "stone", "sulfur");
@@ -64,6 +81,9 @@ final class ModModels {
             simpleBlock(ModBlocks.GENERATED_GATE_STONE.get(), cubeAll(ModBlocks.GENERATED_GATE_STONE.get()));
             simpleBlock(ModBlocks.GENERATED_ARTIFICIAL_CORE.get(), cubeAll(ModBlocks.GENERATED_ARTIFICIAL_CORE.get()));
             simpleBlock(ModBlocks.GENERATED_INFERNAL_CORE.get(), cubeAll(ModBlocks.GENERATED_INFERNAL_CORE.get()));
+            hazards();
+            // The camp marker is never drawn; an empty model with a dirt particle keeps the model loader quiet.
+            simpleBlock(ModBlocks.CAMP_MARKER.get(), models().getBuilder("camp_marker").texture("particle", mcLoc("block/dirt")));
             var surfaceModel = cubeAll(ModBlocks.PORTAL_SURFACE.get());
             getVariantBuilder(ModBlocks.PORTAL_SURFACE.get()).forAllStates(state ->
                     net.neoforged.neoforge.client.model.generators.ConfiguredModel.builder().modelFile(surfaceModel).build());
@@ -109,8 +129,10 @@ final class ModModels {
             basicItem(ModItems.DOOR_LINKING_KEY.get());
             basicItem(ModItems.DEVIL_SIGIL.get());
             basicItem(ModItems.RITUAL_TOOL.get());
+            // The ash snowball model is hand-written: the vanilla snowball, tinted ash gray.
             // Preserve native spawn-egg overlay and NeoForge tint behavior; no fixed baked PNG.
             withExistingParent("sewer_roach_spawn_egg", "minecraft:item/template_spawn_egg");
+            withExistingParent("cross_eyes_spawn_egg", "minecraft:item/template_spawn_egg");
             withExistingParent("scrap_rat_spawn_egg", "minecraft:item/template_spawn_egg");
             withExistingParent("sewer_leech_spawn_egg", "minecraft:item/template_spawn_egg");
             withExistingParent("glow_moth_spawn_egg", "minecraft:item/template_spawn_egg");

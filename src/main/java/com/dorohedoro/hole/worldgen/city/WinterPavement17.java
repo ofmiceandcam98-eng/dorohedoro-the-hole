@@ -11,7 +11,9 @@ final class WinterPavement17 {
     private WinterPavement17() {}
     static void paint(Canvas canvas, CityPlan plan) {
         if (!canvas.hasColdDistricts()) return;
-        BlockState dusting = Blocks.SNOW.defaultBlockState().setValue(SnowLayerBlock.LAYERS, 1);
+        // v56: the dusting on cold pavements is Ash-Snow, soot settled out of the smog.
+        BlockState dusting = (canvas.hasColdHazards56() ? com.dorohedoro.hole.registry.ModBlocks.ASH_SNOW.get() : Blocks.SNOW)
+                .defaultBlockState().setValue(SnowLayerBlock.LAYERS, 1);
         for (int x=canvas.minX; x<=canvas.maxX; x++) {
             for (int z=canvas.minZ; z<=canvas.maxZ; z++) {
                 if (!plan.isColdDistrict(x,z)) continue;

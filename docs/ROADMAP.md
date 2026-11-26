@@ -1,4 +1,52 @@
-# CURRENT HANDOFF — PASS 18 / DISTRICT VISUAL IDENTITY (2026-10-31)
+# Roadmap (status as of Pass 78, 2026-11-26)
+
+The current handoff is `docs/PASS71_HANDOFF.md`. Older checkpoint notes are under History at the end of this file.
+
+The phase order comes from `docs/spec/SANDBOX_DIRECTIVE.md`. Status values are `planned`, `implemented`, `build_verified`, `gametest_verified`, `client_verified` and `server_verified`. Evidence for anything past `implemented` is in `docs/TEST_RESULTS.md`.
+
+| Phase | Scope | Status |
+| --- | --- | --- |
+| 1 | Project audit | Done, see `docs/PROJECT_AUDIT.md` |
+| 2 | Hole sandbox foundation | **client_verified, server_verified** (city at world_detail_version 56; server QA on seeds 8675309, 12345 and 42 in Pass 78). Continuing |
+| 3 | Sorcerers' World and Hell generation | Hell: **client_verified** (Pass 78: biomes, no rain, ores, Hell Rock mines and drops). Sorcerers' World: generates and never rains, but its terrain on this branch is bare stone (its surface rule places no soil). Being rebuilt on vanilla Overworld generation on branch `sorcerers-world/towns` |
+| 4 | Portals | Artificial Door, Devil Gate, Smoke Door, Door Linking Key, return travel and door reopening: **client_verified** (Pass 78, `-Pqa_mode=doors`, 8 of 8). En Family Door: **planned** |
+| 5 | Resources, crafting, wood sources, gyoza | Planned |
+| 6 | Structures, NPCs, trading, environment | Partly implemented: Cross-Eye camps, faction standing and villager trades are **client_verified** (Pass 78) |
+| 7 | Combat, magic, masks, hostile sorcerers | In progress through the queued magic system (see `docs/PASS71_HANDOFF.md`) |
+| 8 | Optimization and full survival testing | Planned |
+| Deferred | Ash-Snow, Sludge-Ice, environmental poisoning, Cross-Eye camps, faction/villager overhaul | **Implemented and client_verified** (Pass 78, `docs/PASS78_DEFERRED_FEATURES.md`) |
+| Deferred | FTB Quests integration | **Implemented and client_verified** with the real FTB mods (Pass 78, `docs/FTB_QUESTS_INTEGRATION.md`) |
+| Queued | Complete magic system. Expands Phase 7 | In progress |
+
+## Queued: complete magic system
+
+Added at the owner's request on 2026-10-31. The full requirements are in `docs/spec/MAGIC_SYSTEM_DIRECTIVE.md`. It expands Phase 7 of this roadmap with its own 12 internal phases: lore audit, sorcerer biology, magic engine, six first types (Mushroom, Healing, Dismemberment, Reptile Transformation, Destruction, Dispelling), world interaction, smoke economy and equipment, mastery, doors, NPCs and environment, rare powers, FTB Quests, verification.
+
+Ordering conflict to settle: that directive puts magical doors at its Phase 8, while the sandbox directive puts portals at Phase 4. The Artificial Door and Devil Gate need no magic, so they stay at Phase 4. The Smoke Door needs smoke, so it should ship with sorcerer biology, on the shared portal backend.
+
+## FTB Quests integration
+
+Added at the owner's request on 2026-10-31 and built in Pass 78 (first batch: 30 quests in 4 chapters; see `docs/FTB_QUESTS_INTEGRATION.md`). The full requirements are in `docs/spec/FTB_QUESTS_DIRECTIVE.md`.
+
+It is an optional guide and achievement layer on the real FTB Quests mod. It must never gate recipes, dimensions, portals, trading or abilities, so it does not conflict with the no-quests sandbox rule.
+
+Dependencies: it references real registry IDs, so it needs Phases 3 to 5 in place first (dimensions, biomes, portal blocks and items, gyoza, scrap wood). Its custom portal triggers need the Phase 4 events to exist.
+
+First batch when started: audit supported FTB versions for NeoForge 1.21.1, then 20 to 30 tested quests covering survival, farming, industry, smoke materials, Artificial Door construction, dimension travel, forests and Hell. Later batches grow to about 150 to 200 quests across 15 chapters.
+
+## Phase 3 and 4 status
+
+See `docs/PHASE3_REALMS_IMPLEMENTATION.md` for the realm definitions. Pass 78 verified Hell and the portals in the real client (`-Pqa_mode=realms`, `-Pqa_mode=doors`); the Sorcerers' World terrain is being redone on vanilla generation on branch `sorcerers-world/towns`.
+
+### Phase 2.5: sewer–cave hybrid
+
+Source-integrated: shallow connected sewers and flood infrastructure, ordinary natural caves below Y=24, deliberately rare long branches into caverns. **Mining and Minecraft vanilla resource progression must remain intact.** Status is `implemented` only; see `docs/SEWER_UNDERWORLD.md`. Verify in actual Minecraft before closing this work item. Do not regress to the previous cave-suppression design.
+
+## History: older checkpoint notes
+
+These are earlier handoffs, kept for the record. Their "not verified" warnings are superseded by the statuses above.
+
+### Pass 18 handoff / DISTRICT VISUAL IDENTITY (2026-10-31)
 
 **Source checkpoint, NOT a verified playable release.** The user has approved continuing visual/world-generation work, but has **not approved** overall city quality. Fresh worlds use `world_detail_version: 7` with optional winter districts retained from Pass 17. Existing world versions 0–6 must remain backwards compatible; NEVER switch an existing save to version 7.
 
@@ -42,51 +90,10 @@ Offline static scripts passed: world detail 25/25, irregular city 54/54, interio
 
 Native NeoForge entity registration, models/animation and textures for an original Sewer Cockroach and Scrap Rat; thematic loot and concrete survival uses. Mineable sulfur, rock salt and limestone; chitin masonry; 10 item sprites, resources and generated data. **Offline-only:** 93/93 content cross-checks, 58 Java files parse. Gradle cannot download distribution here; no compiled/runtime proof. Full details and exact QA instructions in `docs/FAUNA_AND_MINERAL_BATCH_01.md`. Proceed with on-PC `runData`, `build`, `runClient`, `runServer` and cross-client verification before calling playable. The current 30% sewer-to-cave layout, deep mining, original Hole atmosphere and portal work are preserved. FTB Quests remain deferred.
 
-# Cavern traversal extension (source-only checkpoint, 2026-10-31)
+### Cavern traversal extension (source-only checkpoint, 2026-10-31)
 
 Added larger deterministic cave destinations and a graded entry walk to the cavern floor; 30% junction frequency unchanged. Saved `sewer_cavern_version` preserves existing saves' old geometry. Vanilla deep mining is unchanged. Requires real NeoForge build, client, and server traversal verification before advancing phase status. See `docs/SEWER_CAVERN_TRAVERSAL.md`.
 
-# Sewer frequency update (2026-10-31)
+### Sewer frequency update (2026-10-31)
 
 The source now targets **30%** of arterial sewer intersections for long cave-leading routes (previously ~9%); 18% are inspection branches and ~52% remain ordinary sewers. Saved generator field keeps the old selection for existing worlds. This is **source integrated / offline tested only**, not verified in-game. No changes to vanilla mining or cave noise.
-
-# Roadmap
-
-The phase order comes from `docs/spec/SANDBOX_DIRECTIVE.md`. Status values are `planned`, `implemented`, `build_verified`, `gametest_verified`, `client_verified` and `server_verified`. Evidence for anything past `implemented` is in `docs/TEST_RESULTS.md`.
-
-| Phase | Scope | Status |
-| --- | --- | --- |
-| 1 | Project audit | Done, see `docs/PROJECT_AUDIT.md` |
-| 2 | Hole sandbox foundation | In progress |
-| 3 | Sorcerers' World and Hell generation | **Source integrated; awaiting NeoForge build, server and client QA** |
-| 4 | Portals: Artificial Door / Devil Gate backend, Smoke Door and En Family Door remaining | Source-integrated (partial); no NeoForge build/client verification |
-| 5 | Resources, crafting, wood sources, gyoza | Planned |
-| 6 | Structures, NPCs, trading, environment | Planned |
-| 7 | Combat, magic, masks, hostile sorcerers | Planned |
-| 8 | Optimization and full survival testing | Planned |
-| Deferred | FTB Quests integration, see below | **Not started, on hold until the owner asks** |
-| Queued | Complete magic system, see below. Expands Phase 7 | **Not started** |
-
-## Queued: complete magic system
-
-Added at the owner's request on 2026-10-31. The full requirements are in `docs/spec/MAGIC_SYSTEM_DIRECTIVE.md`. It expands Phase 7 of this roadmap with its own 12 internal phases: lore audit, sorcerer biology, magic engine, six first types (Mushroom, Healing, Dismemberment, Reptile Transformation, Destruction, Dispelling), world interaction, smoke economy and equipment, mastery, doors, NPCs and environment, rare powers, FTB Quests, verification.
-
-Ordering conflict to settle: that directive puts magical doors at its Phase 8, while the sandbox directive puts portals at Phase 4. The Artificial Door and Devil Gate need no magic, so they stay at Phase 4. The Smoke Door needs smoke, so it should ship with sorcerer biology, on the shared portal backend.
-
-## Deferred: FTB Quests integration
-
-Added at the owner's request on 2026-10-31 with the instruction **not to start yet**. The full requirements are in `docs/spec/FTB_QUESTS_DIRECTIVE.md`.
-
-It is an optional guide and achievement layer on the real FTB Quests mod. It must never gate recipes, dimensions, portals, trading or abilities, so it does not conflict with the no-quests sandbox rule.
-
-Dependencies: it references real registry IDs, so it needs Phases 3 to 5 in place first (dimensions, biomes, portal blocks and items, gyoza, scrap wood). Its custom portal triggers need the Phase 4 events to exist.
-
-First batch when started: audit supported FTB versions for NeoForge 1.21.1, then 20 to 30 tested quests covering survival, farming, industry, smoke materials, Artificial Door construction, dimension travel, forests and Hell. Later batches grow to about 150 to 200 quests across 15 chapters.
-
-## Phase 3 handoff from this session
-
-See `docs/PHASE3_REALMS_IMPLEMENTATION.md`. Biome/dimension definitions have been added to active sources with offline structural validation. Phase 4 portals remain blocked on real-world verification of the two dimensions.
-
-### Phase 2.5: sewer–cave hybrid
-
-Source-integrated: shallow connected sewers and flood infrastructure, ordinary natural caves below Y=24, deliberately rare long branches into caverns. **Mining and Minecraft vanilla resource progression must remain intact.** Status is `implemented` only; see `docs/SEWER_UNDERWORLD.md`. Verify in actual Minecraft before closing this work item. Do not regress to the previous cave-suppression design.

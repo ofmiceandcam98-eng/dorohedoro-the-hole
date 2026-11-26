@@ -522,3 +522,37 @@ of §5 (deferred) is lifted by that request.
 - **Pack review (from the owner's ZIP):** no crash or error mentions this mod. The 2,369 errors in the pack's log all
   come from Villager Recruits' arrow cleaner meeting Sable (Create Aeronautics). `AllowArrowCleaning = false` in
   `recruits-server.toml` would stop them; that is a pack setting for the owner to decide.
+
+## 17. Pass 78: deferred features and Phases 3 and 4 (2026-11-26)
+
+- **Owner rules added this pass** (also in §5's spirit):
+  - New things start from the vanilla texture they resemble and should look like Mojang added them. Models reference
+    vanilla textures; nothing vanilla is copied into the jar.
+  - The Sorcerers' World stays clean: no smog, ash, toxin, Ash-Snow, Sludge-Ice or camps there.
+  - The Sorcerers' World may simply use base Minecraft generation, as long as it matches the integration brief.
+- **Deferred features built** (full notes in `docs/PASS78_DEFERRED_FEATURES.md`), worldgen behind
+  `world_detail_version` 56:
+  - Ash-Snow and Sludge-Ice: vanilla snow and ice, tinted by `client/HazardColors`. The ash snowball is the vanilla
+    snowball, tinted.
+  - Hole Toxin exposure and effect, Overworld only.
+  - Cross-Eye camps and the Cross-Eyes. Members wear eight vanilla default skins (all but Steve). Over them, an
+    overlay adds the canon red cross tattooed through each eye, plus a scarf, an armband and a back cross.
+  - Faction standing (residents, Cross-Eyes) with villager price shifts and Hole trades.
+- **Phase 4:**
+  - Smoke Door: sorcerers of rank 5 or higher press V. Costs 120 smoke, lasts 90 seconds, then a 60-second cooldown.
+    Works between the Hole and the Sorcerers' World only.
+  - The Door Linking Key links two hand-built doors.
+  - A built door whose far end was destroyed opens a new one.
+  - Players now arrive facing away from the far door (the item still open in §16 is fixed).
+  - **En Family Door: not started.**
+- **Height bug fixed:** `Level.getHeight` reports the world bottom for unloaded chunks. That was the real cause of the
+  door far-end failures in §16. Use `PortalService.surfaceY`, which loads the chunk.
+- **Real-client tests** (`./gradlew runQaClient -Pqa_mode=<mode>`; delete `runs/qaclient/saves/clientqa-8675309`
+  first):
+  - `hazards`
+  - `crosseyes`: 12 of 12
+  - `doors`: 8 of 8
+  - `realms`: Hell passes. The Sorcerers' World Hydra Forest check fails because the realm's v1 surface rule places no
+    soil (bare stone), so trees cannot grow.
+- **Sorcerers' World terrain is owned by branch `sorcerers-world/towns`** (session "Sorcerers' World integration
+  brief"). It moves new worlds to vanilla Overworld generation. This branch keeps v1 for now.
