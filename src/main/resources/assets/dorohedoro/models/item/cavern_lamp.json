@@ -1,3 +1,6 @@
 {
-  "parent": "dorohedoro:block/cavern_lamp_standing"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "dorohedoro:item/cavern_lamp"
+  }
 }

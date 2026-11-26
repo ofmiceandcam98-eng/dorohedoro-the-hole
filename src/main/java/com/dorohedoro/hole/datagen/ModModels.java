@@ -32,7 +32,8 @@ final class ModModels {
             String name = net.minecraft.core.registries.BuiltInRegistries.BLOCK.getKey(block).getPath();
             simpleBlockWithItem(block, models().withExistingParent(name, modLoc("block/ore_overlay"))
                     .texture("base", mcLoc("block/" + base))
-                    .texture("overlay", modLoc("block/ore/" + mineral))
+                    // Deepslate gets its own overlay: a re-arranged grain layout rimmed in deepslate's shade.
+                    .texture("overlay", modLoc("block/ore/" + mineral + ("deepslate".equals(base) ? "_deepslate" : "")))
                     .renderType("cutout"));
         }
 

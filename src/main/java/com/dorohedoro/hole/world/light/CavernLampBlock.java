@@ -34,10 +34,10 @@ public final class CavernLampBlock extends Block implements SimpleWaterloggedBlo
 
     private static final VoxelShape FLOOR = box(5, 0, 5, 11, 11, 11);
     private static final VoxelShape CEILING = box(5, 5, 5, 11, 16, 11);
-    private static final VoxelShape NORTH = box(5, 4, 0, 11, 13, 11);
-    private static final VoxelShape SOUTH = box(5, 4, 5, 11, 13, 16);
-    private static final VoxelShape EAST = box(5, 4, 5, 16, 13, 11);
-    private static final VoxelShape WEST = box(0, 4, 5, 11, 13, 11);
+    private static final VoxelShape NORTH = box(5, 3, 0, 11, 13, 11);
+    private static final VoxelShape SOUTH = box(5, 3, 5, 11, 13, 16);
+    private static final VoxelShape EAST = box(5, 3, 5, 16, 13, 11);
+    private static final VoxelShape WEST = box(0, 3, 5, 11, 13, 11);
 
     public CavernLampBlock(BlockBehaviour.Properties properties) {
         super(properties);

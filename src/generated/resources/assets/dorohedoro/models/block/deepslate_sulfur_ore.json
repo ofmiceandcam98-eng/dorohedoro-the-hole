@@ -3,6 +3,6 @@
   "render_type": "minecraft:cutout",
   "textures": {
     "base": "minecraft:block/deepslate",
-    "overlay": "dorohedoro:block/ore/sulfur"
+    "overlay": "dorohedoro:block/ore/sulfur_deepslate"
   }
 }
