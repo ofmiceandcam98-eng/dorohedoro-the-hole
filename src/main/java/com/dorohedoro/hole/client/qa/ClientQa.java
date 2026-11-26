@@ -310,6 +310,10 @@ public final class ClientQa {
         String[] p = VISITS[n].split(":");
         String name = p[0];
         int x = Integer.parseInt(p[1]), z = Integer.parseInt(p[2]);
+        if (name.startsWith("sw")) {
+            visitSorcerers(mc, name, p, k);
+            return;
+        }
         boolean sea = name.contains("monument");
         // Pyramid pieces start at the chunk corner and span about 21 blocks; the monument centers on chunk cell 9.
         int cx = x + (sea ? 9 : 10), cz = z + (sea ? 9 : 10);
@@ -318,6 +322,25 @@ public final class ClientQa {
         else if (k == VISIT_WAIT + 1) command(mc, String.format(Locale.ROOT, "tp @a %d %d %d 180 %d", cx, sea ? 48 : 92,
                 cz + (sea ? 48 : 30), sea ? 4 : 18));
         else if (k == VISIT_WAIT + 140) shot(mc, "visit-" + name + "-close");
+    }
+
+    /**
+     * Sorcerers' World views. {@code sw-name:x:z:y} gives a settlement overview from above and a street view;
+     * {@code swin-name:x:z:y:yaw} gives one shot standing at a spot (inside a building), looking along {@code yaw}.
+     */
+    private static void visitSorcerers(Minecraft mc, String name, String[] p, int k) {
+        int x = Integer.parseInt(p[1]), z = Integer.parseInt(p[2]), y = Integer.parseInt(p[3]);
+        String in = "execute in dorohedoro:sorcerers_world run ";
+        if (name.startsWith("swin")) {
+            float yaw = Float.parseFloat(p[4]);
+            if (k == 0) command(mc, in + String.format(Locale.ROOT, "tp @a %.1f %d %.1f %.0f 12", x + 0.5, y, z + 0.5, yaw));
+            else if (k == VISIT_WAIT) shot(mc, "visit-" + name);
+            return;
+        }
+        if (k == 0) command(mc, in + String.format(Locale.ROOT, "tp @a %d %d %d 180 40", x, y + 70, z + 80));
+        else if (k == VISIT_WAIT) shot(mc, "visit-" + name + "-high");
+        else if (k == VISIT_WAIT + 1) command(mc, in + String.format(Locale.ROOT, "tp @a %d %d %d 180 14", x, y + 6, z + 24));
+        else if (k == VISIT_WAIT + 140) shot(mc, "visit-" + name + "-street");
     }
 
     private static String tpHome(float yaw, float pitch) {

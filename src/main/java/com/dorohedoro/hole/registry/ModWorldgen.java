@@ -28,6 +28,9 @@ public final class ModWorldgen {
     /** Both new realms use vanilla's noise chunk generator with independent terrain settings. */
     public static final Supplier<MapCodec<SorcererBiomeSource>> SORCERER_LANDS =
             BIOME_SOURCES.register("sorcerer_lands", () -> SorcererBiomeSource.CODEC);
+    /** New Sorcerers' World: vanilla overworld biomes behind a marker type (see SorcererVanillaBiomeSource). */
+    public static final Supplier<MapCodec<com.dorohedoro.hole.worldgen.SorcererVanillaBiomeSource>> SORCERER_VANILLA =
+            BIOME_SOURCES.register("sorcerer_vanilla", () -> com.dorohedoro.hole.worldgen.SorcererVanillaBiomeSource.CODEC);
     public static final Supplier<MapCodec<HellBiomeSource>> HELL_REALMS =
             BIOME_SOURCES.register("hell_realms", () -> HellBiomeSource.CODEC);
 
@@ -36,5 +39,7 @@ public final class ModWorldgen {
     public static void register(IEventBus modBus) {
         CHUNK_GENERATORS.register(modBus);
         BIOME_SOURCES.register(modBus);
+        // Sorcerers' World cities, towns and hamlets.
+        com.dorohedoro.hole.worldgen.sorcerer.SorcererStructures.register(modBus);
     }
 }

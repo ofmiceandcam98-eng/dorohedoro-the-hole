@@ -5,7 +5,10 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "StructureCheckMixin",
-    "StructureMixin"
+    "StructureMixin",
+    "SorcererWeatherMixin",
+    "SettlementFeatureGuardMixin",
+    "SorcererStructureFilterMixin"
   ],
   "injectors": {
     "defaultRequire": 1

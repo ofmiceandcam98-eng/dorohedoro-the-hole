@@ -3,9 +3,12 @@
   "generator": {
     "type": "minecraft:noise",
     "biome_source": {
-      "type": "dorohedoro:sorcerer_lands",
-      "frostbound_regions": true
+      "type": "dorohedoro:sorcerer_vanilla",
+      "delegate": {
+        "type": "minecraft:multi_noise",
+        "preset": "minecraft:overworld"
+      }
     },
-    "settings": "dorohedoro:sorcerers_world"
+    "settings": "minecraft:overworld"
   }
 }

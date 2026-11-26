@@ -155,6 +155,8 @@ public final class HoleQa {
             // Phase 3: verify the separately registered, full dimensions actually load and produce surface chunks.
             checkRealm(RealmBiomes.SORCERERS_WORLD);
             checkRealm(RealmBiomes.HELL);
+            // Sorcerers' World cities, towns and hamlets: placement, entrances, rooms, roads, determinism hashes.
+            report.add("sorcerer_settlements", SorcererTownQa.run(server, order, this::check));
             if (Boolean.getBoolean(PROPERTY + ".structures")) {
                 report.add("vanilla_structures", StructureQa.run(server, checks));
             }
@@ -319,7 +321,10 @@ public final class HoleQa {
                     surfaceColumns++;
                 }
                 if (realm.getBiome(new BlockPos(x, Math.min(y, realm.getMaxBuildHeight() - 1), z))
-                        .unwrapKey().map(k -> "dorohedoro".equals(k.location().getNamespace())).orElse(false)) {
+                        .unwrapKey().map(k -> "dorohedoro".equals(k.location().getNamespace())
+                                // New Sorcerers' Worlds use vanilla overworld biomes (owner's direction, 2026-11-26).
+                                || (realmKey == RealmBiomes.SORCERERS_WORLD && "minecraft".equals(k.location().getNamespace())))
+                        .orElse(false)) {
                     validBiomes++;
                 }
             }

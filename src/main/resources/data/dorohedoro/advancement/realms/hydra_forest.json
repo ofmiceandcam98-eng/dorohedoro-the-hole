@@ -9,7 +9,11 @@
             "entity": "this",
             "predicate": {
               "location": {
-                "biomes": "dorohedoro:sw_hydra_forest"
+                "biomes": [
+                  "dorohedoro:sw_hydra_forest",
+                  "minecraft:dark_forest"
+                ],
+                "dimension": "dorohedoro:sorcerers_world"
               }
             }
           }
