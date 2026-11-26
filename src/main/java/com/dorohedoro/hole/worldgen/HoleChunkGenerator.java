@@ -4,6 +4,8 @@ import com.dorohedoro.hole.worldgen.city.CityPainter;
 import com.dorohedoro.hole.worldgen.city.CityPlan;
 import com.dorohedoro.hole.worldgen.city.CityPopulator;
 import com.dorohedoro.hole.worldgen.city.CitySettings;
+import com.dorohedoro.hole.worldgen.city.OceanBathymetry65;
+import com.dorohedoro.hole.worldgen.city.VanillaStructureLookup64;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Holder;
@@ -65,7 +67,19 @@ public final class HoleChunkGenerator extends NoiseBasedChunkGenerator {
     @Override
     public void buildSurface(WorldGenRegion region, StructureManager structureManager, RandomState random, ChunkAccess chunk) {
         super.buildSurface(region, structureManager, random, chunk);
-        CityPainter.paint(plan(region.getSeed(), random), chunk);
+        CityPlan cityPlan = plan(region.getSeed(), random);
+        if (citySettings.worldDetailVersion() >= 46) {
+            var protectedStructures = VanillaStructureLookup64.forChunk(structureManager, chunk.getPos(),
+                    citySettings.worldDetailVersion());
+            CityPainter.paint(cityPlan, chunk, protectedStructures);
+            // Newly generated v47 oceans supersede paved city surface only in genuine sea columns.
+            // Vanilla structures then generate normally in their selected ocean biomes.
+            if (citySettings.worldDetailVersion() >= 47) {
+                OceanBathymetry65.paint(cityPlan, chunk, protectedStructures);
+            }
+        } else {
+            CityPainter.paint(cityPlan, chunk);
+        }
     }
 
     /** Carvers run after the surface step and would gouge the city, so all caves come from the noise router. */

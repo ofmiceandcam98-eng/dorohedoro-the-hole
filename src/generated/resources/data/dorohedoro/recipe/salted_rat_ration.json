@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "dorohedoro:cooked_rat_meat"
+    },
+    {
+      "item": "dorohedoro:rock_salt"
+    },
+    {
+      "item": "minecraft:bread"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "dorohedoro:salted_rat_ration"
+  }
+}

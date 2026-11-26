@@ -1,0 +1,222 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "dorohedoro_streets"
+	group: "0D0E0B0E00000001"
+	icon: {
+		id: "dorohedoro:sewer_brickwork"
+	}
+	id: "0D0E0B0E02000000"
+	order_index: 1
+	quest_links: [ ]
+	quests: [
+		{
+			icon: {
+				id: "dorohedoro:sewer_brickwork"
+			}
+			id: "0D0E0B0E020A0000"
+			rewards: [
+				{
+					id: "0D0E0B0E020A2000"
+					item: {
+						count: 16
+						id: "minecraft:torch"
+					}
+					type: "item"
+				}
+			]
+			shape: "gear"
+			tasks: [
+				{
+					advancement: "dorohedoro:hole/undercity"
+					criterion: ""
+					id: "0D0E0B0E020A1000"
+					type: "advancement"
+				}
+			]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["0D0E0B0E020A0000"]
+			id: "0D0E0B0E020B0000"
+			rewards: [
+				{
+					id: "0D0E0B0E020B2000"
+					item: {
+						count: 3
+						id: "minecraft:cooked_beef"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					entity: "dorohedoro:sewer_roach"
+					id: "0D0E0B0E020B1000"
+					type: "kill"
+					value: 5L
+				}
+			]
+			x: 2.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["0D0E0B0E020B0000"]
+			id: "0D0E0B0E020C0000"
+			rewards: [
+				{
+					id: "0D0E0B0E020C2000"
+					type: "xp"
+					xp: 60
+				}
+			]
+			tasks: [
+				{
+					id: "0D0E0B0E020C1000"
+					item: {
+						count: 1
+						id: "dorohedoro:sewer_echo_probe"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["0D0E0B0E020A0000"]
+			icon: {
+				id: "dorohedoro:luminous_scale"
+			}
+			id: "0D0E0B0E020D0000"
+			rewards: [
+				{
+					id: "0D0E0B0E020D2000"
+					item: {
+						count: 8
+						id: "minecraft:glass_pane"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					count: 2L
+					id: "0D0E0B0E020D1000"
+					item: {
+						count: 1
+						id: "dorohedoro:luminous_scale"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["0D0E0B0E020D0000"]
+			id: "0D0E0B0E020E0000"
+			rewards: [
+				{
+					id: "0D0E0B0E020E2000"
+					item: {
+						count: 2
+						id: "minecraft:honey_bottle"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					id: "0D0E0B0E020E1000"
+					item: {
+						count: 1
+						id: "dorohedoro:medical_salve"
+					}
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["0D0E0B0E020E0000"]
+			id: "0D0E0B0E020F0000"
+			rewards: [
+				{
+					id: "0D0E0B0E020F2000"
+					type: "xp"
+					xp: 80
+				}
+			]
+			tasks: [
+				{
+					id: "0D0E0B0E020F1000"
+					item: {
+						count: 1
+						id: "dorohedoro:antidote_poultice"
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["0D0E0B0E020C0000"]
+			icon: {
+				id: "minecraft:brewing_stand"
+			}
+			id: "0D0E0B0E02100000"
+			rewards: [
+				{
+					id: "0D0E0B0E02102000"
+					item: {
+						count: 6
+						id: "minecraft:glass_bottle"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					advancement: "minecraft:nether/brew_potion"
+					criterion: ""
+					id: "0D0E0B0E02101000"
+					type: "advancement"
+				}
+			]
+			x: 6.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"0D0E0B0E020F0000"
+				"0D0E0B0E02100000"
+			]
+			icon: {
+				id: "dorohedoro:surgical_reattachment_kit"
+			}
+			id: "0D0E0B0E02110000"
+			optional: true
+			rewards: [
+				{
+					id: "0D0E0B0E02112000"
+					type: "xp"
+					xp: 100
+				}
+			]
+			tasks: [
+				{
+					advancement: "dorohedoro:medicine/limb_reattached"
+					criterion: ""
+					id: "0D0E0B0E02111000"
+					type: "advancement"
+				}
+			]
+			x: 8.0d
+			y: 0.0d
+		}
+	]
+}

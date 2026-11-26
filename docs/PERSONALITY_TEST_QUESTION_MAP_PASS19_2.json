@@ -1,0 +1,429 @@
+{
+  "version": "19.2",
+  "questions": [
+    {
+      "id": "q01",
+      "prompt": "A stranger collapses outside your door. You...",
+      "options": [
+        {
+          "text": "Treat their injuries before asking questions.",
+          "primary": "HEALING",
+          "secondary": "PROTECTION",
+          "primary_points": 3,
+          "secondary_points": 1
+        },
+        {
+          "text": "Stand guard so nobody can hurt them.",
+          "primary": "PROTECTION",
+          "secondary": "HEALING",
+          "primary_points": 3,
+          "secondary_points": 1
+        },
+        {
+          "text": "Track the attacker and expose their weakness.",
+          "primary": "DISMEMBERMENT",
+          "secondary": "CURSE",
+          "primary_points": 3,
+          "secondary_points": 1
+        },
+        {
+          "text": "Make the attacker regret returning.",
+          "primary": "CURSE",
+          "secondary": "DESTRUCTION",
+          "primary_points": 3,
+          "secondary_points": 1
+        }
+      ]
+    },
+    {
+      "id": "q02",
+      "prompt": "A sealed passage blocks your way. You...",
+      "options": [
+        {
+          "text": "Grow something through the cracks.",
+          "primary": "MUSHROOM",
+          "secondary": "CURSE",
+          "primary_points": 3,
+          "secondary_points": 1
+        },
+        {
+          "text": "Find a shape that can squeeze inside.",
+          "primary": "REPTILE",
+          "secondary": "DISMEMBERMENT",
+          "primary_points": 3,
+          "secondary_points": 1
+        },
+        {
+          "text": "Break down the obstruction.",
+          "primary": "DESTRUCTION",
+          "secondary": "MUSHROOM",
+          "primary_points": 3,
+          "secondary_points": 1
+        },
+        {
+          "text": "Study how it might have opened before.",
+          "primary": "TIME",
+          "secondary": "PROTECTION",
+          "primary_points": 3,
+          "secondary_points": 1
+        }
+      ]
+    },
+    {
+      "id": "q03",
+      "prompt": "A creature lunges at your friend. You...",
+      "options": [
+        {
+          "text": "Create a barrier between them.",
+          "primary": "PROTECTION",
+          "secondary": "HEALING",
+          "primary_points": 3,
+          "secondary_points": 1
+        },
+        {
+          "text": "Punish it with a lasting affliction.",
+          "primary": "CURSE",
+          "secondary": "TIME",
+          "primary_points": 3,
+          "secondary_points": 1
+        },
+        {
+          "text": "Strike hard to end the threat quickly.",
+          "primary": "DESTRUCTION",
+          "secondary": "DISMEMBERMENT",
+          "primary_points": 3,
+          "secondary_points": 1
+        },
+        {
+          "text": "Disable its limbs with precision.",
+          "primary": "DISMEMBERMENT",
+          "secondary": "PROTECTION",
+          "primary_points": 3,
+          "secondary_points": 1
+        }
+      ]
+    },
+    {
+      "id": "q04",
+      "prompt": "You could undo one terrible event. You...",
+      "options": [
+        {
+          "text": "Heal those who still suffer.",
+          "primary": "HEALING",
+          "secondary": "PROTECTION",
+          "primary_points": 3,
+          "secondary_points": 1
+        },
+        {
+          "text": "Turn back the critical moment.",
+          "primary": "TIME",
+          "secondary": "CURSE",
+          "primary_points": 3,
+          "secondary_points": 1
+        },
+        {
+          "text": "Protect others from a repeat.",
+          "primary": "PROTECTION",
+          "secondary": "TIME",
+          "primary_points": 3,
+          "secondary_points": 1
+        },
+        {
+          "text": "Let new life reclaim what was lost.",
+          "primary": "MUSHROOM",
+          "secondary": "HEALING",
+          "primary_points": 3,
+          "secondary_points": 1
+        }
+      ]
+    },
+    {
+      "id": "q05",
+      "prompt": "You are trapped underground. You...",
+      "options": [
+        {
+          "text": "Adapt your body to find an escape route.",
+          "primary": "REPTILE",
+          "secondary": "PROTECTION",
+          "primary_points": 3,
+          "secondary_points": 1
+        },
+        {
+          "text": "Cultivate something that lights your path.",
+          "primary": "MUSHROOM",
+          "secondary": "HEALING",
+          "primary_points": 3,
+          "secondary_points": 1
+        },
+        {
+          "text": "Force open a new exit.",
+          "primary": "DESTRUCTION",
+          "secondary": "REPTILE",
+          "primary_points": 3,
+          "secondary_points": 1
+        },
+        {
+          "text": "Wait and study the rhythm of the tunnels.",
+          "primary": "TIME",
+          "secondary": "DISMEMBERMENT",
+          "primary_points": 3,
+          "secondary_points": 1
+        }
+      ]
+    },
+    {
+      "id": "q06",
+      "prompt": "In a dangerous fight, you trust...",
+      "options": [
+        {
+          "text": "Clean, exact strikes.",
+          "primary": "DISMEMBERMENT",
+          "secondary": "REPTILE",
+          "primary_points": 3,
+          "secondary_points": 1
+        },
+        {
+          "text": "Overwhelming pressure.",
+          "primary": "DESTRUCTION",
+          "secondary": "CURSE",
+          "primary_points": 3,
+          "secondary_points": 1
+        },
+        {
+          "text": "A consequence your enemy cannot ignore.",
+          "primary": "CURSE",
+          "secondary": "MUSHROOM",
+          "primary_points": 3,
+          "secondary_points": 1
+        },
+        {
+          "text": "Staying safe until a chance appears.",
+          "primary": "PROTECTION",
+          "secondary": "TIME",
+          "primary_points": 3,
+          "secondary_points": 1
+        }
+      ]
+    },
+    {
+      "id": "q07",
+      "prompt": "An unfamiliar sickness spreads. You...",
+      "options": [
+        {
+          "text": "Care for the sick and search for treatment.",
+          "primary": "HEALING",
+          "secondary": "MUSHROOM",
+          "primary_points": 3,
+          "secondary_points": 1
+        },
+        {
+          "text": "Study what is growing inside the victims.",
+          "primary": "MUSHROOM",
+          "secondary": "HEALING",
+          "primary_points": 3,
+          "secondary_points": 1
+        },
+        {
+          "text": "Trace the earliest cases and their timing.",
+          "primary": "TIME",
+          "secondary": "DISMEMBERMENT",
+          "primary_points": 3,
+          "secondary_points": 1
+        },
+        {
+          "text": "Find the source and seal it away.",
+          "primary": "CURSE",
+          "secondary": "PROTECTION",
+          "primary_points": 3,
+          "secondary_points": 1
+        }
+      ]
+    },
+    {
+      "id": "q08",
+      "prompt": "You are offered a new body. You...",
+      "options": [
+        {
+          "text": "Accept a stronger, stranger form.",
+          "primary": "REPTILE",
+          "secondary": "DESTRUCTION",
+          "primary_points": 3,
+          "secondary_points": 1
+        },
+        {
+          "text": "Choose precise control over every movement.",
+          "primary": "DISMEMBERMENT",
+          "secondary": "REPTILE",
+          "primary_points": 3,
+          "secondary_points": 1
+        },
+        {
+          "text": "Keep your body and gain a protective shell.",
+          "primary": "PROTECTION",
+          "secondary": "HEALING",
+          "primary_points": 3,
+          "secondary_points": 1
+        },
+        {
+          "text": "Restore your body to its healthiest state.",
+          "primary": "HEALING",
+          "secondary": "TIME",
+          "primary_points": 3,
+          "secondary_points": 1
+        }
+      ]
+    },
+    {
+      "id": "q09",
+      "prompt": "Black smoke gathers around your hands. You...",
+      "options": [
+        {
+          "text": "Shape it into something that can spread.",
+          "primary": "MUSHROOM",
+          "secondary": "CURSE",
+          "primary_points": 3,
+          "secondary_points": 1
+        },
+        {
+          "text": "Let it reshape you.",
+          "primary": "REPTILE",
+          "secondary": "HEALING",
+          "primary_points": 3,
+          "secondary_points": 1
+        },
+        {
+          "text": "Launch it forward as a weapon.",
+          "primary": "DESTRUCTION",
+          "secondary": "DISMEMBERMENT",
+          "primary_points": 3,
+          "secondary_points": 1
+        },
+        {
+          "text": "Try to suspend one moment within it.",
+          "primary": "TIME",
+          "secondary": "PROTECTION",
+          "primary_points": 3,
+          "secondary_points": 1
+        }
+      ]
+    },
+    {
+      "id": "q10",
+      "prompt": "Someone threatens the people you love. You...",
+      "options": [
+        {
+          "text": "Shield them, even if you must stand alone.",
+          "primary": "PROTECTION",
+          "secondary": "REPTILE",
+          "primary_points": 3,
+          "secondary_points": 1
+        },
+        {
+          "text": "Restore anyone who is hurt.",
+          "primary": "HEALING",
+          "secondary": "MUSHROOM",
+          "primary_points": 3,
+          "secondary_points": 1
+        },
+        {
+          "text": "Make the threat carry a terrible mark.",
+          "primary": "CURSE",
+          "secondary": "DESTRUCTION",
+          "primary_points": 3,
+          "secondary_points": 1
+        },
+        {
+          "text": "End the threat with exact force.",
+          "primary": "DISMEMBERMENT",
+          "secondary": "TIME",
+          "primary_points": 3,
+          "secondary_points": 1
+        }
+      ]
+    },
+    {
+      "id": "q11",
+      "prompt": "In an abandoned factory, you notice...",
+      "options": [
+        {
+          "text": "Fungi growing in the damp machinery.",
+          "primary": "MUSHROOM",
+          "secondary": "HEALING",
+          "primary_points": 3,
+          "secondary_points": 1
+        },
+        {
+          "text": "A machine that could change your body.",
+          "primary": "REPTILE",
+          "secondary": "DISMEMBERMENT",
+          "primary_points": 3,
+          "secondary_points": 1
+        },
+        {
+          "text": "The energy still trapped in its engines.",
+          "primary": "DESTRUCTION",
+          "secondary": "PROTECTION",
+          "primary_points": 3,
+          "secondary_points": 1
+        },
+        {
+          "text": "Clocks frozen at the same instant.",
+          "primary": "TIME",
+          "secondary": "CURSE",
+          "primary_points": 3,
+          "secondary_points": 1
+        }
+      ]
+    },
+    {
+      "id": "q12",
+      "prompt": "What kind of mastery appeals to you?",
+      "options": [
+        {
+          "text": "Understanding where to separate and repair.",
+          "primary": "DISMEMBERMENT",
+          "secondary": "HEALING",
+          "primary_points": 3,
+          "secondary_points": 1
+        },
+        {
+          "text": "The ability to rewrite a lasting consequence.",
+          "primary": "CURSE",
+          "secondary": "TIME",
+          "primary_points": 3,
+          "secondary_points": 1
+        },
+        {
+          "text": "The discipline to protect without retreat.",
+          "primary": "PROTECTION",
+          "secondary": "DESTRUCTION",
+          "primary_points": 3,
+          "secondary_points": 1
+        },
+        {
+          "text": "The power to heal what others cannot.",
+          "primary": "HEALING",
+          "secondary": "MUSHROOM",
+          "primary_points": 3,
+          "secondary_points": 1
+        }
+      ]
+    }
+  ],
+  "score": "3 points for chosen primary; 1 for chosen secondary; stable tie-break in MagicType order",
+  "modes": [
+    "recommended",
+    "choose",
+    "fate"
+  ],
+  "rarity_weights": {
+    "MUSHROOM": 3,
+    "REPTILE": 3,
+    "DISMEMBERMENT": 3,
+    "HEALING": 4,
+    "CURSE": 2,
+    "PROTECTION": 4,
+    "TIME": 1,
+    "DESTRUCTION": 4
+  }
+}

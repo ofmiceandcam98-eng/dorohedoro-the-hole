@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "S": {
+      "item": "dorohedoro:smoke_residue"
+    }
+  },
+  "pattern": [
+    "IRI",
+    "CSC",
+    "IRI"
+  ],
+  "result": {
+    "count": 1,
+    "id": "dorohedoro:smoke_condenser"
+  }
+}

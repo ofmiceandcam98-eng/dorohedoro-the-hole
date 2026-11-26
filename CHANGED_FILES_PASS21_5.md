@@ -1,0 +1,53 @@
+# Pass 21.5 — Modified existing PNG files
+
+- `src/main/resources/assets/dorohedoro/textures/item/antidote_poultice.png`
+- `src/main/resources/assets/dorohedoro/textures/item/bitumen.png`
+- `src/main/resources/assets/dorohedoro/textures/item/coagulated_tar.png`
+- `src/main/resources/assets/dorohedoro/textures/item/cooked_rat_meat.png`
+- `src/main/resources/assets/dorohedoro/textures/item/corrosive_gland.png`
+- `src/main/resources/assets/dorohedoro/textures/item/curse_smoke_flask.png`
+- `src/main/resources/assets/dorohedoro/textures/item/dense_hide.png`
+- `src/main/resources/assets/dorohedoro/textures/item/destruction_smoke_flask.png`
+- `src/main/resources/assets/dorohedoro/textures/item/dismemberment_smoke_flask.png`
+- `src/main/resources/assets/dorohedoro/textures/item/door_activation_tool.png`
+- `src/main/resources/assets/dorohedoro/textures/item/door_linking_key.png`
+- `src/main/resources/assets/dorohedoro/textures/item/fungal_membrane.png`
+- `src/main/resources/assets/dorohedoro/textures/item/glow_tonic.png`
+- `src/main/resources/assets/dorohedoro/textures/item/healing_smoke_flask.png`
+- `src/main/resources/assets/dorohedoro/textures/item/leech_mucus.png`
+- `src/main/resources/assets/dorohedoro/textures/item/leech_sucker.png`
+- `src/main/resources/assets/dorohedoro/textures/item/lime_powder.png`
+- `src/main/resources/assets/dorohedoro/textures/item/medical_salve.png`
+- `src/main/resources/assets/dorohedoro/textures/item/metallic_carapace.png`
+- `src/main/resources/assets/dorohedoro/textures/item/moth_silk.png`
+- `src/main/resources/assets/dorohedoro/textures/item/mushroom_smoke_flask.png`
+- `src/main/resources/assets/dorohedoro/textures/item/oil_shale_chunk.png`
+- `src/main/resources/assets/dorohedoro/textures/item/protection_smoke_flask.png`
+- `src/main/resources/assets/dorohedoro/textures/item/rat_fur.png`
+- `src/main/resources/assets/dorohedoro/textures/item/raw_rat_meat.png`
+- `src/main/resources/assets/dorohedoro/textures/item/raw_sulfur.png`
+- `src/main/resources/assets/dorohedoro/textures/item/raw_zinc.png`
+- `src/main/resources/assets/dorohedoro/textures/item/reinforced_chitin.png`
+- `src/main/resources/assets/dorohedoro/textures/item/reptile_smoke_flask.png`
+- `src/main/resources/assets/dorohedoro/textures/item/ritual_tool.png`
+- `src/main/resources/assets/dorohedoro/textures/item/roach_antenna.png`
+- `src/main/resources/assets/dorohedoro/textures/item/rock_salt.png`
+- `src/main/resources/assets/dorohedoro/textures/item/salted_rat_ration.png`
+- `src/main/resources/assets/dorohedoro/textures/item/scrap_metal.png`
+- `src/main/resources/assets/dorohedoro/textures/item/sewer_sealant.png`
+- `src/main/resources/assets/dorohedoro/textures/item/sludge_gland.png`
+- `src/main/resources/assets/dorohedoro/textures/item/smoke_residue.png`
+- `src/main/resources/assets/dorohedoro/textures/item/smoke_soaked_filter.png`
+- `src/main/resources/assets/dorohedoro/textures/item/spore_sac.png`
+- `src/main/resources/assets/dorohedoro/textures/item/time_smoke_flask.png`
+- `src/main/resources/assets/dorohedoro/textures/block/galvanized_plating.png`
+- `src/main/resources/assets/dorohedoro/textures/block/limestone.png`
+- `src/main/resources/assets/dorohedoro/textures/block/patchwork_masonry.png`
+- `src/main/resources/assets/dorohedoro/textures/block/rusted_plating.png`
+- `src/main/resources/assets/dorohedoro/textures/block/seepage_brick.png`
+- `src/main/resources/assets/dorohedoro/textures/block/sewer_brickwork.png`
+- `src/main/resources/assets/dorohedoro/textures/block/smoke_stained_concrete.png`
+- `src/main/resources/assets/dorohedoro/textures/block/soot_blackened_brick.png`
+- `src/main/resources/assets/dorohedoro/textures/block/water_damaged_plaster.png`
+
+New art scripts: `tools/art/refine_pass21_5.py`, `tools/art/refine_pass21_5b.py`. Added `ART_QA_PASS21_5.md` and `CHANGED_FILES_PASS21_5.md`. No Java/model/recipe changes.

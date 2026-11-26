@@ -1,0 +1,51 @@
+{
+  "carvers": {},
+  "downfall": 0.0,
+  "effects": {
+    "fog_color": 1446931,
+    "foliage_color": 2499102,
+    "grass_color": 3025446,
+    "mood_sound": {
+      "block_search_extent": 8,
+      "offset": 2.0,
+      "sound": "minecraft:ambient.cave",
+      "tick_delay": 6000
+    },
+    "sky_color": 789002,
+    "water_color": 1973276,
+    "water_fog_color": 526087
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "dorohedoro:hell_ore_coal",
+      "dorohedoro:hell_ore_iron",
+      "dorohedoro:hell_ore_copper",
+      "dorohedoro:hell_ore_gold",
+      "dorohedoro:hell_ore_redstone",
+      "dorohedoro:hell_ore_diamond"
+    ],
+    [],
+    [
+      "minecraft:spring_lava"
+    ]
+  ],
+  "has_precipitation": false,
+  "spawn_costs": {},
+  "spawners": {
+    "ambient": [],
+    "axolotls": [],
+    "creature": [],
+    "misc": [],
+    "monster": [],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": []
+  },
+  "temperature": 1.2
+}

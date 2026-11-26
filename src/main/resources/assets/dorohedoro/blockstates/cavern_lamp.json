@@ -1,0 +1,112 @@
+{
+  "variants": {
+    "wall=false,hanging=false,facing=north,waterlogged=false": {
+      "model": "dorohedoro:block/cavern_lamp_standing"
+    },
+    "wall=false,hanging=false,facing=north,waterlogged=true": {
+      "model": "dorohedoro:block/cavern_lamp_standing"
+    },
+    "wall=false,hanging=false,facing=east,waterlogged=false": {
+      "model": "dorohedoro:block/cavern_lamp_standing"
+    },
+    "wall=false,hanging=false,facing=east,waterlogged=true": {
+      "model": "dorohedoro:block/cavern_lamp_standing"
+    },
+    "wall=false,hanging=false,facing=south,waterlogged=false": {
+      "model": "dorohedoro:block/cavern_lamp_standing"
+    },
+    "wall=false,hanging=false,facing=south,waterlogged=true": {
+      "model": "dorohedoro:block/cavern_lamp_standing"
+    },
+    "wall=false,hanging=false,facing=west,waterlogged=false": {
+      "model": "dorohedoro:block/cavern_lamp_standing"
+    },
+    "wall=false,hanging=false,facing=west,waterlogged=true": {
+      "model": "dorohedoro:block/cavern_lamp_standing"
+    },
+    "wall=false,hanging=true,facing=north,waterlogged=false": {
+      "model": "dorohedoro:block/cavern_lamp_hanging"
+    },
+    "wall=false,hanging=true,facing=north,waterlogged=true": {
+      "model": "dorohedoro:block/cavern_lamp_hanging"
+    },
+    "wall=false,hanging=true,facing=east,waterlogged=false": {
+      "model": "dorohedoro:block/cavern_lamp_hanging"
+    },
+    "wall=false,hanging=true,facing=east,waterlogged=true": {
+      "model": "dorohedoro:block/cavern_lamp_hanging"
+    },
+    "wall=false,hanging=true,facing=south,waterlogged=false": {
+      "model": "dorohedoro:block/cavern_lamp_hanging"
+    },
+    "wall=false,hanging=true,facing=south,waterlogged=true": {
+      "model": "dorohedoro:block/cavern_lamp_hanging"
+    },
+    "wall=false,hanging=true,facing=west,waterlogged=false": {
+      "model": "dorohedoro:block/cavern_lamp_hanging"
+    },
+    "wall=false,hanging=true,facing=west,waterlogged=true": {
+      "model": "dorohedoro:block/cavern_lamp_hanging"
+    },
+    "wall=true,hanging=false,facing=north,waterlogged=false": {
+      "model": "dorohedoro:block/cavern_lamp_wall",
+      "y": 180
+    },
+    "wall=true,hanging=false,facing=north,waterlogged=true": {
+      "model": "dorohedoro:block/cavern_lamp_wall",
+      "y": 180
+    },
+    "wall=true,hanging=false,facing=east,waterlogged=false": {
+      "model": "dorohedoro:block/cavern_lamp_wall",
+      "y": 270
+    },
+    "wall=true,hanging=false,facing=east,waterlogged=true": {
+      "model": "dorohedoro:block/cavern_lamp_wall",
+      "y": 270
+    },
+    "wall=true,hanging=false,facing=south,waterlogged=false": {
+      "model": "dorohedoro:block/cavern_lamp_wall"
+    },
+    "wall=true,hanging=false,facing=south,waterlogged=true": {
+      "model": "dorohedoro:block/cavern_lamp_wall"
+    },
+    "wall=true,hanging=false,facing=west,waterlogged=false": {
+      "model": "dorohedoro:block/cavern_lamp_wall",
+      "y": 90
+    },
+    "wall=true,hanging=false,facing=west,waterlogged=true": {
+      "model": "dorohedoro:block/cavern_lamp_wall",
+      "y": 90
+    },
+    "wall=true,hanging=true,facing=north,waterlogged=false": {
+      "model": "dorohedoro:block/cavern_lamp_wall",
+      "y": 180
+    },
+    "wall=true,hanging=true,facing=north,waterlogged=true": {
+      "model": "dorohedoro:block/cavern_lamp_wall",
+      "y": 180
+    },
+    "wall=true,hanging=true,facing=east,waterlogged=false": {
+      "model": "dorohedoro:block/cavern_lamp_wall",
+      "y": 270
+    },
+    "wall=true,hanging=true,facing=east,waterlogged=true": {
+      "model": "dorohedoro:block/cavern_lamp_wall",
+      "y": 270
+    },
+    "wall=true,hanging=true,facing=south,waterlogged=false": {
+      "model": "dorohedoro:block/cavern_lamp_wall"
+    },
+    "wall=true,hanging=true,facing=south,waterlogged=true": {
+      "model": "dorohedoro:block/cavern_lamp_wall"
+    },
+    "wall=true,hanging=true,facing=west,waterlogged=false": {
+      "model": "dorohedoro:block/cavern_lamp_wall",
+      "y": 90
+    },
+    "wall=true,hanging=true,facing=west,waterlogged=true": {
+      "model": "dorohedoro:block/cavern_lamp_wall",
+      "y": 90
+    }
+  }
+}

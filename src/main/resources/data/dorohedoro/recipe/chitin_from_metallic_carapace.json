@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "dorohedoro:metallic_carapace"
+    },
+    {
+      "item": "dorohedoro:reinforced_chitin"
+    }
+  ],
+  "result": {
+    "id": "dorohedoro:reinforced_chitin",
+    "count": 3
+  }
+}

@@ -131,6 +131,22 @@
           ],
           "name": "minecraft:bucket",
           "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 2.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "dorohedoro:smoke_soaked_filter",
+          "weight": 2
         }
       ],
       "rolls": {

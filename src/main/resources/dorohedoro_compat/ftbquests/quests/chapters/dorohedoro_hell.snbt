@@ -1,0 +1,213 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "dorohedoro_hell"
+	group: "0D0E0B0E00000001"
+	icon: {
+		id: "dorohedoro:infernal_door_core"
+	}
+	id: "0D0E0B0E04000000"
+	order_index: 3
+	quest_links: [ ]
+	quests: [
+		{
+			id: "0D0E0B0E041E0000"
+			rewards: [
+				{
+					id: "0D0E0B0E041E2000"
+					item: {
+						count: 2
+						id: "minecraft:gold_ingot"
+					}
+					type: "item"
+				}
+			]
+			shape: "gear"
+			tasks: [
+				{
+					count: 2L
+					id: "0D0E0B0E041E1000"
+					item: {
+						count: 1
+						id: "dorohedoro:devil_sigil"
+					}
+					type: "item"
+				}
+			]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["0D0E0B0E041E0000"]
+			icon: {
+				id: "dorohedoro:etched_gate_stone"
+			}
+			id: "0D0E0B0E041F0000"
+			rewards: [
+				{
+					id: "0D0E0B0E041F2000"
+					type: "xp"
+					xp: 150
+				}
+			]
+			tasks: [
+				{
+					count: 15L
+					id: "0D0E0B0E041F1000"
+					item: {
+						count: 1
+						id: "dorohedoro:etched_gate_stone"
+					}
+					type: "item"
+				}
+				{
+					id: "0D0E0B0E041F1100"
+					item: {
+						count: 1
+						id: "dorohedoro:infernal_door_core"
+					}
+					type: "item"
+				}
+				{
+					id: "0D0E0B0E041F1200"
+					item: {
+						count: 1
+						id: "dorohedoro:ritual_tool"
+					}
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["0D0E0B0E041F0000"]
+			id: "0D0E0B0E04200000"
+			rewards: [
+				{
+					id: "0D0E0B0E04202000"
+					type: "xp_levels"
+					xp_levels: 3
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					advancement: "dorohedoro:doors/devil_gate_opened"
+					criterion: ""
+					id: "0D0E0B0E04201000"
+					type: "advancement"
+				}
+			]
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["0D0E0B0E04200000"]
+			icon: {
+				id: "dorohedoro:hell_rock"
+			}
+			id: "0D0E0B0E04210000"
+			rewards: [
+				{
+					id: "0D0E0B0E04212000"
+					item: {
+						count: 4
+						id: "minecraft:cooked_beef"
+					}
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					advancement: "dorohedoro:realms/entered_hell"
+					criterion: ""
+					id: "0D0E0B0E04211000"
+					type: "advancement"
+				}
+			]
+			x: 6.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["0D0E0B0E04210000"]
+			id: "0D0E0B0E04220000"
+			rewards: [
+				{
+					id: "0D0E0B0E04222000"
+					item: {
+						count: 2
+						id: "minecraft:iron_ingot"
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					count: 16L
+					id: "0D0E0B0E04221000"
+					item: {
+						count: 1
+						id: "dorohedoro:hell_rock"
+					}
+					type: "item"
+				}
+			]
+			x: 8.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["0D0E0B0E04210000"]
+			icon: {
+				id: "minecraft:bone"
+			}
+			id: "0D0E0B0E04230000"
+			rewards: [
+				{
+					id: "0D0E0B0E04232000"
+					type: "xp"
+					xp: 100
+				}
+			]
+			tasks: [
+				{
+					advancement: "dorohedoro:realms/hell_horns"
+					criterion: ""
+					id: "0D0E0B0E04231000"
+					type: "advancement"
+				}
+			]
+			x: 8.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"0D0E0B0E04220000"
+				"0D0E0B0E04230000"
+			]
+			icon: {
+				id: "dorohedoro:ritual_tool"
+			}
+			id: "0D0E0B0E04240000"
+			rewards: [
+				{
+					id: "0D0E0B0E04242000"
+					type: "xp_levels"
+					xp_levels: 5
+				}
+			]
+			shape: "hexagon"
+			tasks: [
+				{
+					advancement: "dorohedoro:realms/returned_from_hell"
+					criterion: ""
+					id: "0D0E0B0E04241000"
+					type: "advancement"
+				}
+			]
+			x: 10.0d
+			y: 0.0d
+		}
+	]
+}

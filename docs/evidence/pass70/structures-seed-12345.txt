@@ -1,0 +1,35 @@
+seed=12345 order=forward failures=3 chunks=441 ms/chunk=43.2
+  FAIL sewer_deep_chamber_carved: 83, -30, 60
+  FAIL sewer_branch_begins_lined: 90, -35, 47
+  FAIL sewer_selective_cave_destination: 90, -35, -4
+chunk_hashes: 441/441 identical
+chunk_hashes_y64_raw: 436/441 identical, differing e.g. 231,-185 237,-171 238,-171 245,-180 245,-179
+chunk_hashes_full: 395/441 identical, differing e.g. 231,-186 231,-185 232,-166 233,-186 234,-169 234,-168
+ERROR lines: 0 crash: 0
+stronghold           verified                     2384, 0, -3888     d=1833 mk=12 t=18ms
+ancient_city         verified                     4016, 0, -3024     d=253 mk=1 t=0ms
+trial_chambers       verified                     3312, 0, -3808     d=1138 mk=1 t=192ms
+mineshaft            verified                     3856, 0, -2928     d=113 mk=1 t=0ms
+monument             not found within 100 chunks                       t=707751ms
+shipwreck            found                        6384, 0, -1104     d=3040  t=226ms
+ocean_ruin_cold      found                        6512, 0, -1264     d=3063  t=192ms
+ocean_ruin_warm      not found within 100 chunks                       t=0ms
+desert_pyramid       not found within 100 chunks                       t=119336ms
+jungle_pyramid       not found within 100 chunks                       t=120605ms
+igloo                found                        2400, 0, -1776     d=1801  t=49ms
+trail_ruins          found                        2192, 0, -3952     d=2027  t=18ms
+mansion              found                        4064, 0, -5056     d=2248  t=55ms
+pillager_outpost     found                        4192, 0, -2752     d=327  t=0ms
+village_plains       found                        4064, 0, -2544     d=333  t=4ms
+village_desert       found                        3392, 0, -3728     d=1030  t=1ms
+village_savanna      found                        3840, 0, -3152     d=337  t=0ms
+village_snowy        found                        2240, 0, -2000     d=1823  t=147ms
+village_taiga        found                        2352, 0, -3648     d=1731  t=15ms
+ruined_portal        found                        3568, 0, -2848     d=304  t=9ms
+swamp_hut            found                        3744, 0, -1888     d=936  t=10ms
+buried_treasure      not found within 100 chunks                       t=823ms
+fortress             verified                     112, 0, 672        d=681 mk=1 t=183ms
+bastion_remnant      found                        192, 0, 320        d=373  t=0ms
+end_city             verified                     992, 0, 384        d=1063 mk=1 t=218ms
+end_dragon_fight_present true
+CACHE_RUN_DONE

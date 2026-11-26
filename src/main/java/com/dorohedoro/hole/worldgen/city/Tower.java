@@ -37,6 +37,15 @@ final class Tower {
     }
 
     static void build(Canvas c, Rect box, int floors, Style style, long hash, Roof roof, Furnisher furnisher) {
+        build(c, box, floors, style, hash, roof, furnisher, k -> true);
+    }
+
+    /**
+     * @param dressStoreys in v55 worlds, the storeys {@link RoomDressing71} furnishes. Homes dress every storey; shops
+     *                     only the flats above the shop; landmarks and clinics none, because they have their own.
+     */
+    static void build(Canvas c, Rect box, int floors, Style style, long hash, Roof roof, Furnisher furnisher,
+                      java.util.function.IntPredicate dressStoreys) {
         int top = STREET_Y + floors * STOREY;
         Rect interior = box.inset(1);
 
@@ -52,14 +61,32 @@ final class Tower {
             flight(c, interior, floorY, style.stairs());
             windows(c, box, floorY, k == 0, style, hash);
             furnisher.furnish(c, k, interior, floorY);
+            if (c.hasWorldDetail()) WorldDetail.roomDetails(c, interior, floorY, k, hash);
         }
         // The south door is cut last so nothing above can wall it back in.
         int doorX = box.centerX();
-        c.door(doorX, GROUND_Y, box.z1(), Direction.NORTH, style.door());
+        // Keep new-world entrances interactable without requiring a powered iron door.
+        Block entrance = c.hasWorldDetail() && style.door() == Blocks.IRON_DOOR
+                ? Blocks.SPRUCE_DOOR : style.door();
+        c.door(doorX, GROUND_Y, box.z1(), Direction.NORTH, entrance);
         c.clear(new Rect(doorX, box.z1() - 1, doorX, box.z1() - 1), GROUND_Y, GROUND_Y + 1);
 
         roofDetail(c, box, top, hash, roof);
         pipes(c, box, top, hash);
+        if (c.hasWorldDetail()) {
+            WorldDetail.tower(c, box, floors, style, hash, roof);
+            if (c.hasArchitectureVariation()) ArchitecturePass13.tower(c, box, floors, style, hash, roof);
+        }
+        if (c.hasIrregularCity()) StructuralVolumes14.tower(c, box, floors, style, hash, roof);
+        if (c.hasLoreArchitecture()) LoreArchitecture19.tower(c, box, floors, style, hash, roof);
+        if (c.hasUrbanFabric()) UrbanFabric25.roof(c, box, top, hash, roof);
+        if (c.hasOccupiedDetail39()) OccupiedRoofs39.decorate(c, box, floors, hash, roof);
+        if (c.hasSkyline40()) Skyline40.rooftop(c, box, floors, hash, roof);
+        if (c.hasRoomDressing71()) {
+            RoomDressing71.dress(c, box, interior, floors, hash, c.hasCuratedInteriors55() ? dressStoreys : k -> true);
+        }
+        // Last, so no decoration pass above can block a flight.
+        keepStairsWalkable(c, interior, floors, style.stairs());
     }
 
     private static void corners(Canvas c, Rect box, int top, Style style) {
@@ -78,8 +105,29 @@ final class Tower {
         for (int i = 0; i < STOREY; i++) {
             c.stair(x + i, floorY + 1 + i, z, Direction.EAST, stairs);
         }
-        // Headroom through the slab above: the last step sits in the slab, the two before it need it gone.
-        c.fill(x + STOREY - 3, floorY + STOREY, z, x + STOREY - 2, floorY + STOREY, z, Blocks.AIR);
+        // Headroom through the slab above: the last step sits in the slab, the three before it need it gone.
+        c.fill(x, floorY + STOREY, z, x + STOREY - 2, floorY + STOREY, z, Blocks.AIR);
+    }
+
+    /**
+     * Re-asserts every flight after all decoration. A player moving between steps is half a block up, with their
+     * head 2.3 blocks above the lower step while still overlapping its column. So each step needs three clear
+     * blocks above it, not two. Before this, the slab over the first step stopped players going up or down.
+     * The bottom approach and the top landing are kept clear too, so furniture can't plug either end.
+     */
+    private static void keepStairsWalkable(Canvas c, Rect interior, int floors, Block stairs) {
+        int x = interior.x0() + 1;
+        int z = interior.z0();
+        for (int k = 0; k < floors; k++) {
+            int floorY = STREET_Y + k * STOREY;
+            for (int i = 0; i < STOREY; i++) {
+                int step = floorY + 1 + i;
+                c.stair(x + i, step, z, Direction.EAST, stairs);
+                c.fill(x + i, step + 1, z, x + i, step + 3, z, Blocks.AIR);
+            }
+            c.fill(x - 1, floorY + 1, z, x - 1, floorY + 2, z, Blocks.AIR);
+            c.fill(x + STOREY, floorY + STOREY + 1, z, x + STOREY, floorY + STOREY + 2, z, Blocks.AIR);
+        }
     }
 
     private static void windows(Canvas c, Rect box, int floorY, boolean ground, Style style, long hash) {
@@ -197,6 +245,10 @@ final class Tower {
 
     /** Ceiling light for a room. */
     static void lamp(Canvas c, int x, int floorY, int z) {
-        c.set(x, floorY + STOREY - 1, z, Blocks.LANTERN.defaultBlockState().setValue(LanternBlock.HANGING, true));
+        if (c.hasAtmosphere28()) {
+            ResidentialAtmosphere28.hang(c, x, floorY, z, c.hash(x, floorY, z));
+        } else {
+            c.set(x, floorY + STOREY - 1, z, Blocks.LANTERN.defaultBlockState().setValue(LanternBlock.HANGING, true));
+        }
     }
 }

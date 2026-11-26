@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "dorohedoro:leech_sucker"
+    },
+    {
+      "item": "dorohedoro:leech_sucker"
+    },
+    {
+      "item": "dorohedoro:leech_mucus"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:slime_ball"
+  }
+}

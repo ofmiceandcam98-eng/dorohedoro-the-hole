@@ -3,6 +3,8 @@ package com.dorohedoro.hole.registry;
 import com.dorohedoro.hole.Dorohedoro;
 import com.dorohedoro.hole.worldgen.HoleBiomeSource;
 import com.dorohedoro.hole.worldgen.HoleChunkGenerator;
+import com.dorohedoro.hole.worldgen.SorcererBiomeSource;
+import com.dorohedoro.hole.worldgen.HellBiomeSource;
 import com.mojang.serialization.MapCodec;
 import java.util.function.Supplier;
 import net.minecraft.core.registries.Registries;
@@ -23,10 +25,21 @@ public final class ModWorldgen {
     public static final Supplier<MapCodec<HoleBiomeSource>> HOLE_BIOME_SOURCE =
             BIOME_SOURCES.register("hole_districts", () -> HoleBiomeSource.CODEC);
 
+    /** Both new realms use vanilla's noise chunk generator with independent terrain settings. */
+    public static final Supplier<MapCodec<SorcererBiomeSource>> SORCERER_LANDS =
+            BIOME_SOURCES.register("sorcerer_lands", () -> SorcererBiomeSource.CODEC);
+    /** New Sorcerers' World: vanilla overworld biomes behind a marker type (see SorcererVanillaBiomeSource). */
+    public static final Supplier<MapCodec<com.dorohedoro.hole.worldgen.SorcererVanillaBiomeSource>> SORCERER_VANILLA =
+            BIOME_SOURCES.register("sorcerer_vanilla", () -> com.dorohedoro.hole.worldgen.SorcererVanillaBiomeSource.CODEC);
+    public static final Supplier<MapCodec<HellBiomeSource>> HELL_REALMS =
+            BIOME_SOURCES.register("hell_realms", () -> HellBiomeSource.CODEC);
+
     private ModWorldgen() {}
 
     public static void register(IEventBus modBus) {
         CHUNK_GENERATORS.register(modBus);
         BIOME_SOURCES.register(modBus);
+        // Sorcerers' World cities, towns and hamlets.
+        com.dorohedoro.hole.worldgen.sorcerer.SorcererStructures.register(modBus);
     }
 }

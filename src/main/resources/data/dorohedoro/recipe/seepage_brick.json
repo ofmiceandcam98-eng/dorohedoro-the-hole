@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "minecraft:mud_bricks"
+    },
+    {
+      "item": "minecraft:mud_bricks"
+    },
+    {
+      "item": "minecraft:mud_bricks"
+    },
+    {
+      "item": "minecraft:mud_bricks"
+    },
+    {
+      "item": "minecraft:clay_ball"
+    }
+  ],
+  "result": {
+    "id": "dorohedoro:seepage_brick",
+    "count": 4
+  }
+}

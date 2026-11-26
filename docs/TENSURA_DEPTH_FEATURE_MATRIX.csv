@@ -1,0 +1,28 @@
+Area,Tensura benchmark,Dorohedoro target,Priority,Implementation status,Notes
+First join,Race/origin selection screen,"First entry Human/Sorcerer UI, persist choice",Mandatory,Not implemented,Architecture first; then onboarding
+Choice persistence,Race-specific stats / traits,"Per-UUID saved origin, server authority",Mandatory,Not implemented,No duplicate grant / migration
+Character progression,EP MP AP and growth,Doro rank + mastery + smoke/stamina,Mandatory,Not implemented,Do not replace vanilla XP
+Human progression,Non-magic combat specialization,"Brawler, blades, traps, medicine, craft",Mandatory,Not implemented,Endgame parity
+Sorcerer progression,Innate species-specific power,"One personal magic type, growth/control",Mandatory,Not implemented,No universal skills
+Ability UI,3-slot presets and filters,Keybound action bar + search/status,Mandatory,Not implemented,Separate client/server
+Ability acquisition,Learn points and mastery,Use/quests/learning + meaningful mastery,Mandatory,Not implemented,Anti-spam
+Combat,Dodging and distinct attacks,"Stamina dodge, timed attacks, counterplay",High,Not implemented,PvP configurable
+Progression gates,Awakenings and bosses,Lore appropriate major milestones/bosses,High,Not implemented,No generic demon lord copy
+Equipment,Gear tier evolution,Craft/repair/mastery/reinforcement,High,Not implemented,No duplication exploit
+Items,Hundreds of loot tools and items,Every material useful and recipes tested,High,Partly implemented; balance pending,Recipe audit retained
+World generation,Distinct structures and biomes,"Dense, lore-realistic 7 districts",Current gate,Pass19 source changes uncompiled,Visual acceptance required
+Functional interiors,Real settlements/structures,Purpose-driven accessible rooms,Current gate,Partial; needs more,Survival-relevant
+Creature ecology,Mobs and bosses,"Distinct AI, loot and visual fidelity",High,Partial; art revision pending,Model improvements
+Environmental hazard,Biome-dependent damage,"Ash-snow, sludge ice, antidotes",Deferred phase,Not implemented,After city approval
+Reputation,"Professions, response, prices","Residents, factions, consequences",Deferred phase,Not implemented,After architecture + hazard
+Trading economy,Profession-specific trades,"Emeralds retained, salvage trade",Deferred phase,Not implemented,No vanilla economy removal
+Multiple dimensions,Hell and labyrinth,"Hole, Sorcerers World, Hell portals",Current base,Partial; portal source exists,Old screenshot not current failure
+Persistence,Save/reconnect worlddata,"Server saved stats, migration",Mandatory,Not implemented,Integration tests
+Admin control,Gamerules and reset commands,Rank/PvP/respec/selection options,Mandatory,Not implemented,Operator controls
+Lore asset rights,Not applicable mechanically,Original/permissioned assets only,Release blocker,Unverified,Must audit before publish
+Multiplayer,Server gameplay,Server owned origin/progression/actions,Release blocker,Unverified,Dedicated server test
+Visual standard,Polished art / FX,Original high quality textures/geometry,Current gate,Pass19 in progress; unverified,All screenshots compared
+Species canon,Three Dorohedoro classifications,Human and Sorcerer starts; Devil exceptional ascension,Mandatory,Not implemented,Lore: community wiki Species and Devil Exam; locked Devil card
+Sorcerer innate magic,Distinct permanent abilities,One persistent innate magic type + internal mastery branches,Mandatory,Not implemented,No universal all-types spellbook
+Devil ascension,Late game transformations,Sorcerer-only multi-stage Devil Exam,Later,Not implemented,"Training armor, trials, smoke abstinence; non-OP multiplayer"
+Hybrid exceptions,Special transformations,Exceptional story-origin/curses separate from default race UI,Later,Not implemented,Do not add generic Caiman/Hole species options

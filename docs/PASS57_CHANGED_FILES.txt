@@ -1,0 +1,28 @@
+Pass 57 changed/added files relative to Pass 56
+HANDOFF.md
+README.md
+docs/PASS57_COHERENT_INDUSTRIAL_BELTS.md
+src/main/java/com/dorohedoro/hole/worldgen/city/CitySettings.java
+src/main/java/com/dorohedoro/hole/worldgen/city/IndustrialBelts57.java
+src/main/java/com/dorohedoro/hole/worldgen/city/LotChooser.java
+src/main/resources/data/minecraft/worldgen/world_preset/normal.json
+tools/fixtures/pass57/com/dorohedoro/hole/worldgen/city/IndustrialBeltsFixture57.java
+tools/fixtures/pass57/com/dorohedoro/hole/worldgen/city/UrbanPattern52.java
+tools/qa-pass43-source.py
+tools/qa-pass44-source.py
+tools/qa-pass45-source.py
+tools/qa-pass46-source.py
+tools/qa-pass47-source.py
+tools/qa-pass49-source.py
+tools/qa-pass50-source.py
+tools/qa-pass51-source.py
+tools/qa-pass52-source.py
+tools/qa-pass53-source.py
+tools/qa-pass54-source.py
+tools/qa-pass55-source.py
+tools/qa-pass56-source.py
+tools/qa-pass57-all.sh
+tools/qa-pass57-belts.sh
+tools/qa-pass57-source.py
+
+Previous QA version-assertion literals updated from upper bound 39 to 40; source gates for older saves remain intact.

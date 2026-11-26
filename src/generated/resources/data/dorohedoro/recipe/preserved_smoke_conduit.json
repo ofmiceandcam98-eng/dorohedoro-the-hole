@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "dorohedoro:smoke_conduit"
+    },
+    {
+      "item": "dorohedoro:smoke_residue"
+    },
+    {
+      "item": "minecraft:bone_meal"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "dorohedoro:preserved_smoke_conduit"
+  }
+}

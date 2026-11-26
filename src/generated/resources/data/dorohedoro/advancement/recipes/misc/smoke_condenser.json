@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_smoke": {
+      "conditions": {
+        "items": [
+          {
+            "items": "dorohedoro:smoke_residue"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "dorohedoro:smoke_condenser"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_smoke"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "dorohedoro:smoke_condenser"
+    ]
+  }
+}

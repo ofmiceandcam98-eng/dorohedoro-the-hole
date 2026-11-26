@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_rat_meat": {
+      "conditions": {
+        "items": [
+          {
+            "items": "dorohedoro:raw_rat_meat"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "dorohedoro:cooked_rat_meat"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_rat_meat"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "dorohedoro:cooked_rat_meat"
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.dorohedoro.hole.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "StructureCheckMixin",
+    "StructureMixin",
+    "SorcererWeatherMixin",
+    "SettlementFeatureGuardMixin",
+    "SorcererStructureFilterMixin",
+    "VillagerPricesMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

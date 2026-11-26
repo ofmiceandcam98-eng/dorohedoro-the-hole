@@ -1,0 +1,1105 @@
+{
+  "mob": "rust_eater_beetle",
+  "class": "RustEaterBeetle",
+  "texture_size": [
+    512,
+    256
+  ],
+  "groups": {
+    "body": [
+      {
+        "name": "thorax",
+        "xyz": [
+          -4.5,
+          -5,
+          -7
+        ],
+        "dim": [
+          9,
+          4,
+          5
+        ],
+        "material": "beetle_shell",
+        "uv": [
+          2,
+          2
+        ]
+      },
+      {
+        "name": "elytron_-1",
+        "xyz": [
+          -5.1,
+          -6,
+          -3
+        ],
+        "dim": [
+          5,
+          3,
+          11
+        ],
+        "material": "beetle_rust",
+        "uv": [
+          34,
+          2
+        ]
+      },
+      {
+        "name": "elytron_ridge_-1",
+        "xyz": [
+          -4.6,
+          -6.8,
+          -2
+        ],
+        "dim": [
+          0.9,
+          1,
+          9
+        ],
+        "material": "beetle_plate",
+        "uv": [
+          70,
+          2
+        ]
+      },
+      {
+        "name": "elytron_1",
+        "xyz": [
+          0.1,
+          -6,
+          -3
+        ],
+        "dim": [
+          5,
+          3,
+          11
+        ],
+        "material": "beetle_rust",
+        "uv": [
+          94,
+          2
+        ]
+      },
+      {
+        "name": "elytron_ridge_1",
+        "xyz": [
+          3.8000000000000003,
+          -6.8,
+          -2
+        ],
+        "dim": [
+          0.9,
+          1,
+          9
+        ],
+        "material": "beetle_plate",
+        "uv": [
+          130,
+          2
+        ]
+      },
+      {
+        "name": "rusty_scutum_0",
+        "xyz": [
+          -4.9,
+          -6.4,
+          -2.0
+        ],
+        "dim": [
+          9.8,
+          0.52,
+          1.65
+        ],
+        "material": "beetle_rust",
+        "uv": [
+          154,
+          2
+        ]
+      },
+      {
+        "name": "scutum_seam_0",
+        "xyz": [
+          -0.18,
+          -6.78,
+          -2.0
+        ],
+        "dim": [
+          0.36,
+          0.42,
+          1.75
+        ],
+        "material": "beetle_dark",
+        "uv": [
+          182,
+          2
+        ]
+      },
+      {
+        "name": "rusty_scutum_1",
+        "xyz": [
+          -4.9,
+          -6.4,
+          -0.2
+        ],
+        "dim": [
+          9.8,
+          0.52,
+          1.65
+        ],
+        "material": "beetle_plate",
+        "uv": [
+          192,
+          2
+        ]
+      },
+      {
+        "name": "scutum_seam_1",
+        "xyz": [
+          -0.18,
+          -6.78,
+          -0.2
+        ],
+        "dim": [
+          0.36,
+          0.42,
+          1.75
+        ],
+        "material": "beetle_dark",
+        "uv": [
+          220,
+          2
+        ]
+      },
+      {
+        "name": "rusty_scutum_2",
+        "xyz": [
+          -4.9,
+          -6.4,
+          1.6
+        ],
+        "dim": [
+          9.8,
+          0.52,
+          1.65
+        ],
+        "material": "beetle_rust",
+        "uv": [
+          230,
+          2
+        ]
+      },
+      {
+        "name": "scutum_seam_2",
+        "xyz": [
+          -0.18,
+          -6.78,
+          1.6
+        ],
+        "dim": [
+          0.36,
+          0.42,
+          1.75
+        ],
+        "material": "beetle_dark",
+        "uv": [
+          258,
+          2
+        ]
+      },
+      {
+        "name": "rusty_scutum_3",
+        "xyz": [
+          -4.9,
+          -6.4,
+          3.4
+        ],
+        "dim": [
+          9.8,
+          0.52,
+          1.65
+        ],
+        "material": "beetle_plate",
+        "uv": [
+          268,
+          2
+        ]
+      },
+      {
+        "name": "scutum_seam_3",
+        "xyz": [
+          -0.18,
+          -6.78,
+          3.4
+        ],
+        "dim": [
+          0.36,
+          0.42,
+          1.75
+        ],
+        "material": "beetle_dark",
+        "uv": [
+          296,
+          2
+        ]
+      },
+      {
+        "name": "rusty_scutum_4",
+        "xyz": [
+          -4.9,
+          -6.4,
+          5.2
+        ],
+        "dim": [
+          9.8,
+          0.52,
+          1.65
+        ],
+        "material": "beetle_rust",
+        "uv": [
+          306,
+          2
+        ]
+      },
+      {
+        "name": "scutum_seam_4",
+        "xyz": [
+          -0.18,
+          -6.78,
+          5.2
+        ],
+        "dim": [
+          0.36,
+          0.42,
+          1.75
+        ],
+        "material": "beetle_dark",
+        "uv": [
+          334,
+          2
+        ]
+      },
+      {
+        "name": "rusty_scutum_5",
+        "xyz": [
+          -4.9,
+          -6.4,
+          7.0
+        ],
+        "dim": [
+          9.8,
+          0.52,
+          1.65
+        ],
+        "material": "beetle_plate",
+        "uv": [
+          344,
+          2
+        ]
+      },
+      {
+        "name": "scutum_seam_5",
+        "xyz": [
+          -0.18,
+          -6.78,
+          7.0
+        ],
+        "dim": [
+          0.36,
+          0.42,
+          1.75
+        ],
+        "material": "beetle_dark",
+        "uv": [
+          372,
+          2
+        ]
+      },
+      {
+        "name": "cuticle_chassis_0",
+        "xyz": [
+          -4.0,
+          -3.8,
+          -5.0
+        ],
+        "dim": [
+          8.0,
+          4.3,
+          2.45
+        ],
+        "material": "beetle_shell",
+        "uv": [
+          382,
+          2
+        ]
+      },
+      {
+        "name": "cuticle_chassis_1",
+        "xyz": [
+          -4.25,
+          -3.8,
+          -2.9
+        ],
+        "dim": [
+          8.5,
+          4.3,
+          2.45
+        ],
+        "material": "beetle_dark",
+        "uv": [
+          408,
+          2
+        ]
+      },
+      {
+        "name": "cuticle_chassis_2",
+        "xyz": [
+          -4.433,
+          -3.8,
+          -0.8
+        ],
+        "dim": [
+          8.866,
+          4.3,
+          2.45
+        ],
+        "material": "beetle_shell",
+        "uv": [
+          436,
+          2
+        ]
+      },
+      {
+        "name": "cuticle_chassis_3",
+        "xyz": [
+          -4.5,
+          -3.8,
+          1.3
+        ],
+        "dim": [
+          9.0,
+          4.3,
+          2.45
+        ],
+        "material": "beetle_dark",
+        "uv": [
+          464,
+          2
+        ]
+      },
+      {
+        "name": "cuticle_chassis_4",
+        "xyz": [
+          -4.433,
+          -3.8,
+          3.4
+        ],
+        "dim": [
+          8.866,
+          4.3,
+          2.45
+        ],
+        "material": "beetle_shell",
+        "uv": [
+          2,
+          20
+        ]
+      },
+      {
+        "name": "cuticle_chassis_5",
+        "xyz": [
+          -4.25,
+          -3.8,
+          5.5
+        ],
+        "dim": [
+          8.5,
+          4.3,
+          2.45
+        ],
+        "material": "beetle_dark",
+        "uv": [
+          30,
+          20
+        ]
+      }
+    ],
+    "head": [
+      {
+        "name": "head",
+        "xyz": [
+          -3.2,
+          -4,
+          -4
+        ],
+        "dim": [
+          6.4,
+          4.5,
+          5.5
+        ],
+        "material": "beetle_dark",
+        "uv": [
+          58,
+          20
+        ]
+      },
+      {
+        "name": "eye_-1",
+        "xyz": [
+          -3.3,
+          -3,
+          -5
+        ],
+        "dim": [
+          1,
+          1.1,
+          1.1
+        ],
+        "material": "beetle_eye",
+        "uv": [
+          88,
+          20
+        ]
+      },
+      {
+        "name": "eye_1",
+        "xyz": [
+          2.3,
+          -3,
+          -5
+        ],
+        "dim": [
+          1,
+          1.1,
+          1.1
+        ],
+        "material": "beetle_eye",
+        "uv": [
+          98,
+          20
+        ]
+      }
+    ],
+    "leg_l_0": [
+      {
+        "name": "upper",
+        "xyz": [
+          -8,
+          -1.3,
+          -5
+        ],
+        "dim": [
+          4,
+          1.4,
+          1.6
+        ],
+        "material": "beetle_dark",
+        "uv": [
+          108,
+          20
+        ]
+      },
+      {
+        "name": "lower",
+        "xyz": [
+          -9,
+          0,
+          -5
+        ],
+        "dim": [
+          0.9,
+          3.4,
+          1.1
+        ],
+        "material": "beetle_rust",
+        "uv": [
+          124,
+          20
+        ]
+      },
+      {
+        "name": "leg_spur",
+        "xyz": [
+          -9.4,
+          1.9,
+          -5.5
+        ],
+        "dim": [
+          0.8,
+          0.65,
+          1.9
+        ],
+        "material": "beetle_plate",
+        "uv": [
+          134,
+          20
+        ]
+      }
+    ],
+    "leg_l_1": [
+      {
+        "name": "upper",
+        "xyz": [
+          -8,
+          -1.3,
+          0
+        ],
+        "dim": [
+          4,
+          1.4,
+          1.6
+        ],
+        "material": "beetle_dark",
+        "uv": [
+          144,
+          20
+        ]
+      },
+      {
+        "name": "lower",
+        "xyz": [
+          -9,
+          0,
+          0
+        ],
+        "dim": [
+          0.9,
+          3.4,
+          1.1
+        ],
+        "material": "beetle_rust",
+        "uv": [
+          160,
+          20
+        ]
+      },
+      {
+        "name": "leg_spur",
+        "xyz": [
+          -9.4,
+          1.9,
+          -0.5
+        ],
+        "dim": [
+          0.8,
+          0.65,
+          1.9
+        ],
+        "material": "beetle_plate",
+        "uv": [
+          170,
+          20
+        ]
+      }
+    ],
+    "leg_l_2": [
+      {
+        "name": "upper",
+        "xyz": [
+          -8,
+          -1.3,
+          5
+        ],
+        "dim": [
+          4,
+          1.4,
+          1.6
+        ],
+        "material": "beetle_dark",
+        "uv": [
+          180,
+          20
+        ]
+      },
+      {
+        "name": "lower",
+        "xyz": [
+          -9,
+          0,
+          5
+        ],
+        "dim": [
+          0.9,
+          3.4,
+          1.1
+        ],
+        "material": "beetle_rust",
+        "uv": [
+          196,
+          20
+        ]
+      },
+      {
+        "name": "leg_spur",
+        "xyz": [
+          -9.4,
+          1.9,
+          4.5
+        ],
+        "dim": [
+          0.8,
+          0.65,
+          1.9
+        ],
+        "material": "beetle_plate",
+        "uv": [
+          206,
+          20
+        ]
+      }
+    ],
+    "leg_r_0": [
+      {
+        "name": "upper",
+        "xyz": [
+          4,
+          -1.3,
+          -5
+        ],
+        "dim": [
+          4,
+          1.4,
+          1.6
+        ],
+        "material": "beetle_dark",
+        "uv": [
+          216,
+          20
+        ]
+      },
+      {
+        "name": "lower",
+        "xyz": [
+          7,
+          0,
+          -5
+        ],
+        "dim": [
+          0.9,
+          3.4,
+          1.1
+        ],
+        "material": "beetle_rust",
+        "uv": [
+          232,
+          20
+        ]
+      },
+      {
+        "name": "leg_spur",
+        "xyz": [
+          8.4,
+          1.9,
+          -5.5
+        ],
+        "dim": [
+          0.8,
+          0.65,
+          1.9
+        ],
+        "material": "beetle_plate",
+        "uv": [
+          242,
+          20
+        ]
+      }
+    ],
+    "leg_r_1": [
+      {
+        "name": "upper",
+        "xyz": [
+          4,
+          -1.3,
+          0
+        ],
+        "dim": [
+          4,
+          1.4,
+          1.6
+        ],
+        "material": "beetle_dark",
+        "uv": [
+          252,
+          20
+        ]
+      },
+      {
+        "name": "lower",
+        "xyz": [
+          7,
+          0,
+          0
+        ],
+        "dim": [
+          0.9,
+          3.4,
+          1.1
+        ],
+        "material": "beetle_rust",
+        "uv": [
+          268,
+          20
+        ]
+      },
+      {
+        "name": "leg_spur",
+        "xyz": [
+          8.4,
+          1.9,
+          -0.5
+        ],
+        "dim": [
+          0.8,
+          0.65,
+          1.9
+        ],
+        "material": "beetle_plate",
+        "uv": [
+          278,
+          20
+        ]
+      }
+    ],
+    "leg_r_2": [
+      {
+        "name": "upper",
+        "xyz": [
+          4,
+          -1.3,
+          5
+        ],
+        "dim": [
+          4,
+          1.4,
+          1.6
+        ],
+        "material": "beetle_dark",
+        "uv": [
+          288,
+          20
+        ]
+      },
+      {
+        "name": "lower",
+        "xyz": [
+          7,
+          0,
+          5
+        ],
+        "dim": [
+          0.9,
+          3.4,
+          1.1
+        ],
+        "material": "beetle_rust",
+        "uv": [
+          304,
+          20
+        ]
+      },
+      {
+        "name": "leg_spur",
+        "xyz": [
+          8.4,
+          1.9,
+          4.5
+        ],
+        "dim": [
+          0.8,
+          0.65,
+          1.9
+        ],
+        "material": "beetle_plate",
+        "uv": [
+          314,
+          20
+        ]
+      }
+    ],
+    "antenna_l": [
+      {
+        "name": "antenna_base_-1",
+        "xyz": [
+          -2.7,
+          -4.9,
+          -7.8
+        ],
+        "dim": [
+          0.55,
+          0.65,
+          3.5
+        ],
+        "material": "beetle_plate",
+        "uv": [
+          324,
+          20
+        ]
+      },
+      {
+        "name": "antenna_tip_-1_0",
+        "xyz": [
+          -3.7,
+          -5.1,
+          -9.0
+        ],
+        "dim": [
+          0.5,
+          0.45,
+          2.2
+        ],
+        "material": "beetle_rust",
+        "uv": [
+          338,
+          20
+        ]
+      },
+      {
+        "name": "antenna_tip_-1_1",
+        "xyz": [
+          -4.0,
+          -5.1,
+          -10.3
+        ],
+        "dim": [
+          0.5,
+          0.45,
+          2.2
+        ],
+        "material": "beetle_rust",
+        "uv": [
+          350,
+          20
+        ]
+      },
+      {
+        "name": "antenna_tip_-1_2",
+        "xyz": [
+          -4.3,
+          -5.1,
+          -11.6
+        ],
+        "dim": [
+          0.5,
+          0.45,
+          2.2
+        ],
+        "material": "beetle_rust",
+        "uv": [
+          362,
+          20
+        ]
+      }
+    ],
+    "mandible_l": [
+      {
+        "name": "mandible_-1",
+        "xyz": [
+          -3.6,
+          -1.1,
+          -7.5
+        ],
+        "dim": [
+          1.3,
+          2.4,
+          4.5
+        ],
+        "material": "beetle_plate",
+        "uv": [
+          374,
+          20
+        ]
+      }
+    ],
+    "antenna_r": [
+      {
+        "name": "antenna_base_1",
+        "xyz": [
+          2.1,
+          -4.9,
+          -7.8
+        ],
+        "dim": [
+          0.55,
+          0.65,
+          3.5
+        ],
+        "material": "beetle_plate",
+        "uv": [
+          392,
+          20
+        ]
+      },
+      {
+        "name": "antenna_tip_1_0",
+        "xyz": [
+          2.8,
+          -5.1,
+          -9.0
+        ],
+        "dim": [
+          0.5,
+          0.45,
+          2.2
+        ],
+        "material": "beetle_rust",
+        "uv": [
+          406,
+          20
+        ]
+      },
+      {
+        "name": "antenna_tip_1_1",
+        "xyz": [
+          3.1,
+          -5.1,
+          -10.3
+        ],
+        "dim": [
+          0.5,
+          0.45,
+          2.2
+        ],
+        "material": "beetle_rust",
+        "uv": [
+          418,
+          20
+        ]
+      },
+      {
+        "name": "antenna_tip_1_2",
+        "xyz": [
+          3.4,
+          -5.1,
+          -11.6
+        ],
+        "dim": [
+          0.5,
+          0.45,
+          2.2
+        ],
+        "material": "beetle_rust",
+        "uv": [
+          430,
+          20
+        ]
+      }
+    ],
+    "mandible_r": [
+      {
+        "name": "mandible_1",
+        "xyz": [
+          2.3,
+          -1.1,
+          -7.5
+        ],
+        "dim": [
+          1.3,
+          2.4,
+          4.5
+        ],
+        "material": "beetle_plate",
+        "uv": [
+          442,
+          20
+        ]
+      }
+    ]
+  },
+  "animations": {
+    "leg_l_0.zRot": "-1 * motion * Mth.sin(limbSwing * 2.76F + 0.0000F) * 0.49F",
+    "leg_l_0.xRot": "motion * Mth.cos(limbSwing * 2.76F + 0.0000F) * 0.30F",
+    "leg_l_0.y": "19.900F - motion * Math.max(0.0F, Mth.sin(limbSwing * 2.76F + 0.0000F)) * 1.10F",
+    "leg_l_0.yRot": "-1 * motion * Mth.cos(limbSwing * 2.76F + 0.0000F) * 0.09F",
+    "leg_l_1.zRot": "-1 * motion * Mth.sin(limbSwing * 2.76F + 3.1416F) * 0.49F",
+    "leg_l_1.xRot": "motion * Mth.cos(limbSwing * 2.76F + 3.1416F) * 0.30F",
+    "leg_l_1.y": "19.900F - motion * Math.max(0.0F, Mth.sin(limbSwing * 2.76F + 3.1416F)) * 1.10F",
+    "leg_l_1.yRot": "-1 * motion * Mth.cos(limbSwing * 2.76F + 3.1416F) * 0.09F",
+    "leg_l_2.zRot": "-1 * motion * Mth.sin(limbSwing * 2.76F + 0.0000F) * 0.49F",
+    "leg_l_2.xRot": "motion * Mth.cos(limbSwing * 2.76F + 0.0000F) * 0.30F",
+    "leg_l_2.y": "19.900F - motion * Math.max(0.0F, Mth.sin(limbSwing * 2.76F + 0.0000F)) * 1.10F",
+    "leg_l_2.yRot": "-1 * motion * Mth.cos(limbSwing * 2.76F + 0.0000F) * 0.09F",
+    "leg_r_0.zRot": "1 * motion * Mth.sin(limbSwing * 2.76F + 3.1416F) * 0.49F",
+    "leg_r_0.xRot": "motion * Mth.cos(limbSwing * 2.76F + 3.1416F) * 0.30F",
+    "leg_r_0.y": "19.900F - motion * Math.max(0.0F, Mth.sin(limbSwing * 2.76F + 3.1416F)) * 1.10F",
+    "leg_r_0.yRot": "1 * motion * Mth.cos(limbSwing * 2.76F + 3.1416F) * 0.09F",
+    "leg_r_1.zRot": "1 * motion * Mth.sin(limbSwing * 2.76F + 6.2832F) * 0.49F",
+    "leg_r_1.xRot": "motion * Mth.cos(limbSwing * 2.76F + 6.2832F) * 0.30F",
+    "leg_r_1.y": "19.900F - motion * Math.max(0.0F, Mth.sin(limbSwing * 2.76F + 6.2832F)) * 1.10F",
+    "leg_r_1.yRot": "1 * motion * Mth.cos(limbSwing * 2.76F + 6.2832F) * 0.09F",
+    "leg_r_2.zRot": "1 * motion * Mth.sin(limbSwing * 2.76F + 3.1416F) * 0.49F",
+    "leg_r_2.xRot": "motion * Mth.cos(limbSwing * 2.76F + 3.1416F) * 0.30F",
+    "leg_r_2.y": "19.900F - motion * Math.max(0.0F, Mth.sin(limbSwing * 2.76F + 3.1416F)) * 1.10F",
+    "leg_r_2.yRot": "1 * motion * Mth.cos(limbSwing * 2.76F + 3.1416F) * 0.09F",
+    "body.y": "17.850F + motion * (0.10F + 0.16F * Mth.cos(limbSwing * 5.52F))",
+    "body.zRot": "motion * Mth.sin(limbSwing * 2.76F) * 0.075F",
+    "body.xRot": "motion * Mth.cos(limbSwing * 5.52F) * 0.065F + recoil * 0.12F",
+    "head.xRot": "Mth.sin(ageInTicks * 0.23F) * 0.07F - attack * 0.30F + motion * Mth.sin(limbSwing * 2.76F + 0.4F) * 0.09F",
+    "head.yRot": "Mth.sin(ageInTicks * 0.18F) * 0.11F + motion * Mth.sin(limbSwing * 1.38F) * 0.05F",
+    "antenna_l.xRot": "Mth.sin(ageInTicks * 0.42F + 0.10F) * 0.18F + motion * Mth.sin(limbSwing * 2.76F - 0.70F) * 0.21F",
+    "antenna_l.yRot": "-1 * (0.10F + Mth.sin(ageInTicks * 0.32F + 0.50F) * 0.20F)",
+    "mandible_l.yRot": "-1 * (0.08F + attack * 0.32F + Mth.sin(ageInTicks * 0.82F) * 0.045F)",
+    "antenna_r.xRot": "Mth.sin(ageInTicks * 0.42F + 1.20F) * 0.18F + motion * Mth.sin(limbSwing * 2.76F - 1.60F) * 0.21F",
+    "antenna_r.yRot": "1 * (0.10F + Mth.sin(ageInTicks * 0.32F + 1.20F) * 0.20F)",
+    "mandible_r.yRot": "1 * (0.08F + attack * 0.32F + Mth.sin(ageInTicks * 0.82F) * 0.045F)"
+  },
+  "part_pivots": {
+    "body": [
+      0,
+      -3.15,
+      0.88
+    ],
+    "head": [
+      0,
+      -1.9,
+      1.0
+    ],
+    "leg_l_0": [
+      -4,
+      -1.1,
+      -4.45
+    ],
+    "leg_l_1": [
+      -4,
+      -1.1,
+      0.55
+    ],
+    "leg_l_2": [
+      -4,
+      -1.1,
+      5.55
+    ],
+    "leg_r_0": [
+      4,
+      -1.1,
+      -4.45
+    ],
+    "leg_r_1": [
+      4,
+      -1.1,
+      0.55
+    ],
+    "leg_r_2": [
+      4,
+      -1.1,
+      5.55
+    ],
+    "antenna_l": [
+      -2.4,
+      -4.7,
+      -7.3
+    ],
+    "mandible_l": [
+      -3.1,
+      -1.1,
+      -4.8
+    ],
+    "antenna_r": [
+      2.4,
+      -4.7,
+      -7.3
+    ],
+    "mandible_r": [
+      3.1,
+      -1.1,
+      -4.8
+    ]
+  }
+}

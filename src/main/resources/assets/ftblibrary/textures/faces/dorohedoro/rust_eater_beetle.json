@@ -1,0 +1,10 @@
+{
+  "default_enabled": false,
+  "use_mob_texture": true,
+  "slice": {
+    "x": 64,
+    "y": 26,
+    "width": 6,
+    "height": 5
+  }
+}

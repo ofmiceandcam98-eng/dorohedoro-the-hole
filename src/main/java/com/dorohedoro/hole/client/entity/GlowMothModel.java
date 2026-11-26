@@ -1,0 +1,362 @@
+package com.dorohedoro.hole.client.entity;
+
+import com.dorohedoro.hole.Dorohedoro;
+import com.dorohedoro.hole.entity.GlowMothEntity;
+import net.minecraft.client.model.HierarchicalModel;
+import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
+
+/** Approved Dorohedoro-inspired layered creature geometry. Generated from docs/model_geometry/glow_moth.json. */
+public final class GlowMothModel<T extends GlowMothEntity> extends HierarchicalModel<T> {
+    public static final ModelLayerLocation LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(Dorohedoro.MOD_ID, "glow_moth"), "main");
+    private final ModelPart root;
+    private final ModelPart body;
+    private final ModelPart head;
+    private final ModelPart left_hindwing;
+    private final ModelPart left_wing;
+    private final ModelPart right_hindwing;
+    private final ModelPart right_wing;
+    public GlowMothModel(ModelPart root) {
+        this.root = root;
+        this.body = root.getChild("body");
+        this.head = root.getChild("head");
+        this.left_hindwing = root.getChild("left_hindwing");
+        this.left_wing = root.getChild("left_wing");
+        this.right_hindwing = root.getChild("right_hindwing");
+        this.right_wing = root.getChild("right_wing");
+    }
+
+    public static LayerDefinition createBodyLayer() {
+        MeshDefinition mesh = new MeshDefinition();
+        PartDefinition root = mesh.getRoot();
+        root.addOrReplaceChild("body", CubeListBuilder.create()
+                .texOffs(2, 2).addBox(-1.7F, -2.26F, -5.1F, 3.4F, 4.5F, 10.0F)
+                .texOffs(34, 2).addBox(-1.9F, -2.46F, -3.1F, 3.8F, 1.0F, 1.4F)
+                .texOffs(50, 2).addBox(-1.9F, -2.46F, -1.1F, 3.8F, 1.0F, 1.4F)
+                .texOffs(66, 2).addBox(-1.9F, -2.46F, 0.9F, 3.8F, 1.0F, 1.4F)
+                .texOffs(82, 2).addBox(-1.9F, -2.46F, 2.9F, 3.8F, 1.0F, 1.4F)
+                .texOffs(98, 2).addBox(-3.0F, -3.16F, -8.1F, 6.0F, 6.2F, 6.0F)
+                .texOffs(126, 2).addBox(-2.7F, -4.26F, -7.1F, 5.4F, 1.3F, 1.4F)
+                .texOffs(146, 2).addBox(-2.7F, -4.26F, -5.5F, 5.4F, 1.3F, 1.4F)
+                .texOffs(166, 2).addBox(-2.7F, -4.26F, -3.9F, 5.4F, 1.3F, 1.4F)
+                .texOffs(186, 2).addBox(-3.7F, 2.04F, -7.1F, 0.9F, 3.0F, 1.0F)
+                .texOffs(194, 2).addBox(-3.7F, 2.04F, -4.9F, 0.9F, 3.0F, 1.0F)
+                .texOffs(202, 2).addBox(-3.7F, 2.04F, -2.7F, 0.9F, 3.0F, 1.0F)
+                .texOffs(210, 2).addBox(2.7F, 2.04F, -7.1F, 0.9F, 3.0F, 1.0F)
+                .texOffs(218, 2).addBox(2.7F, 2.04F, -4.9F, 0.9F, 3.0F, 1.0F)
+                .texOffs(226, 2).addBox(2.7F, 2.04F, -2.7F, 0.9F, 3.0F, 1.0F)
+                .texOffs(234, 2).addBox(-3.2F, -4.66F, -7.5F, 0.82F, 1.5F, 2.0F)
+                .texOffs(244, 2).addBox(-2.12F, -4.66F, -7.5F, 0.82F, 1.5F, 2.0F)
+                .texOffs(254, 2).addBox(-1.04F, -4.66F, -7.5F, 0.82F, 1.5F, 2.0F)
+                .texOffs(264, 2).addBox(0.04F, -4.66F, -7.5F, 0.82F, 1.5F, 2.0F)
+                .texOffs(274, 2).addBox(1.12F, -4.66F, -7.5F, 0.82F, 1.5F, 2.0F)
+                .texOffs(284, 2).addBox(2.2F, -4.66F, -7.5F, 0.82F, 1.5F, 2.0F)
+                .texOffs(294, 2).addBox(-3.3F, -4.16F, -6.0F, 0.95F, 1.95F, 1.55F)
+                .texOffs(304, 2).addBox(-1.9F, -4.16F, -6.3F, 0.95F, 1.95F, 1.55F)
+                .texOffs(314, 2).addBox(-0.5F, -4.16F, -6.0F, 0.95F, 1.95F, 1.55F)
+                .texOffs(324, 2).addBox(0.9F, -4.16F, -6.3F, 0.95F, 1.95F, 1.55F)
+                .texOffs(334, 2).addBox(2.3F, -4.16F, -6.0F, 0.95F, 1.95F, 1.55F)
+                .texOffs(344, 2).addBox(-3.45F, -4.58F, -8.1F, 6.9F, 2.05F, 5.7F)
+                .texOffs(374, 2).addBox(-2.65F, -0.96F, -9.1F, 5.3F, 3.85F, 4.0F)
+                .texOffs(398, 2).addBox(-1.58F, -1.66F, 3.7F, 3.16F, 3.1F, 3.9F)
+                .texOffs(418, 2).addBox(-0.95F, -0.96F, 6.8F, 1.9F, 1.85F, 2.3F)
+                .texOffs(432, 2).addBox(-3.8F, -4.8F, -8.35F, 0.9F, 1.4F, 1.05F)
+                .texOffs(442, 2).addBox(2.92F, -4.8F, -8.35F, 0.9F, 1.4F, 1.05F)
+                .texOffs(452, 2).addBox(-3.8F, -5.03F, -7.21F, 0.9F, 1.4F, 1.05F)
+                .texOffs(462, 2).addBox(2.92F, -5.03F, -7.21F, 0.9F, 1.4F, 1.05F)
+                .texOffs(472, 2).addBox(-3.8F, -4.8F, -6.07F, 0.9F, 1.4F, 1.05F)
+                .texOffs(482, 2).addBox(2.92F, -4.8F, -6.07F, 0.9F, 1.4F, 1.05F)
+                .texOffs(492, 2).addBox(-3.8F, -5.03F, -4.93F, 0.9F, 1.4F, 1.05F)
+                .texOffs(502, 2).addBox(2.92F, -5.03F, -4.93F, 0.9F, 1.4F, 1.05F)
+                .texOffs(2, 21).addBox(-3.8F, -4.8F, -3.79F, 0.9F, 1.4F, 1.05F)
+                .texOffs(12, 21).addBox(2.92F, -4.8F, -3.79F, 0.9F, 1.4F, 1.05F)
+                .texOffs(22, 21).addBox(-3.8F, -5.03F, -2.65F, 0.9F, 1.4F, 1.05F)
+                .texOffs(32, 21).addBox(2.92F, -5.03F, -2.65F, 0.9F, 1.4F, 1.05F)
+                .texOffs(42, 21).addBox(-1.975F, -2.92F, -4.0F, 3.95F, 0.79F, 1.0F)
+                .texOffs(56, 21).addBox(-1.805F, -2.75F, -2.58F, 3.61F, 0.79F, 1.0F)
+                .texOffs(70, 21).addBox(-1.635F, -2.58F, -1.16F, 3.27F, 0.79F, 1.0F)
+                .texOffs(84, 21).addBox(-1.465F, -2.41F, 0.26F, 2.93F, 0.79F, 1.0F)
+                .texOffs(96, 21).addBox(-1.295F, -2.24F, 1.68F, 2.59F, 0.79F, 1.0F)
+                .texOffs(108, 21).addBox(-1.125F, -2.07F, 3.1F, 2.25F, 0.79F, 1.0F)
+                .texOffs(120, 21).addBox(-0.955F, -1.9F, 4.52F, 1.91F, 0.79F, 1.0F)
+                .texOffs(130, 21).addBox(-3.25F, 1.14F, -7.4F, 0.75F, 3.9F, 0.8F)
+                .texOffs(138, 21).addBox(2.55F, 1.14F, -7.4F, 0.75F, 3.9F, 0.8F)
+                .texOffs(146, 21).addBox(-3.25F, 1.14F, -5.15F, 0.75F, 3.9F, 0.8F)
+                .texOffs(154, 21).addBox(2.55F, 1.14F, -5.15F, 0.75F, 3.9F, 0.8F)
+                .texOffs(162, 21).addBox(-3.25F, 1.14F, -2.9F, 0.75F, 3.9F, 0.8F)
+                .texOffs(170, 21).addBox(2.55F, 1.14F, -2.9F, 0.75F, 3.9F, 0.8F)
+                , PartPose.offset(0F, 16.96F, 4.1F));
+        root.addOrReplaceChild("head", CubeListBuilder.create()
+                .texOffs(178, 21).addBox(-2.7F, 0.33F, -4.3F, 5.4F, 4.8F, 4.8F)
+                .texOffs(204, 21).addBox(-2.9F, 2.33F, -4.4F, 1.0F, 0.95F, 1.3F)
+                .texOffs(214, 21).addBox(-1.9F, -2.67F, -5.3F, 1.1F, 3.1F, 1.1F)
+                .texOffs(226, 21).addBox(-3.0F, -2.37F, -5.9F, 1.8F, 0.65F, 0.7F)
+                .texOffs(236, 21).addBox(-3.0F, -2.87F, -6.4F, 1.8F, 0.65F, 0.7F)
+                .texOffs(246, 21).addBox(-3.0F, -3.37F, -6.9F, 1.8F, 0.65F, 0.7F)
+                .texOffs(256, 21).addBox(1.9F, 2.33F, -4.4F, 1.0F, 0.95F, 1.3F)
+                .texOffs(266, 21).addBox(1.0F, -2.67F, -5.3F, 1.1F, 3.1F, 1.1F)
+                .texOffs(278, 21).addBox(1.3F, -2.37F, -5.9F, 1.8F, 0.65F, 0.7F)
+                .texOffs(288, 21).addBox(1.3F, -2.87F, -6.4F, 1.8F, 0.65F, 0.7F)
+                .texOffs(298, 21).addBox(1.3F, -3.37F, -6.9F, 1.8F, 0.65F, 0.7F)
+                .texOffs(308, 21).addBox(-3.15F, -3.37F, -6.7F, 1.8F, 0.4F, 0.65F)
+                .texOffs(318, 21).addBox(-3.27F, -3.82F, -7.25F, 1.8F, 0.4F, 0.65F)
+                .texOffs(328, 21).addBox(-3.39F, -4.27F, -7.8F, 1.8F, 0.4F, 0.65F)
+                .texOffs(338, 21).addBox(-3.51F, -4.72F, -8.35F, 1.8F, 0.4F, 0.65F)
+                .texOffs(348, 21).addBox(-3.63F, -5.17F, -8.9F, 1.8F, 0.4F, 0.65F)
+                .texOffs(358, 21).addBox(-3.05F, 2.16F, -4.7F, 1.05F, 0.98F, 0.74F)
+                .texOffs(368, 21).addBox(1.55F, -3.37F, -6.7F, 1.8F, 0.4F, 0.65F)
+                .texOffs(378, 21).addBox(1.67F, -3.82F, -7.25F, 1.8F, 0.4F, 0.65F)
+                .texOffs(388, 21).addBox(1.79F, -4.27F, -7.8F, 1.8F, 0.4F, 0.65F)
+                .texOffs(398, 21).addBox(1.91F, -4.72F, -8.35F, 1.8F, 0.4F, 0.65F)
+                .texOffs(408, 21).addBox(2.03F, -5.17F, -8.9F, 1.8F, 0.4F, 0.65F)
+                .texOffs(418, 21).addBox(2.0F, 2.16F, -4.7F, 1.05F, 0.98F, 0.74F)
+                .texOffs(428, 21).addBox(-2.75F, -1.07F, -5.4F, 5.5F, 1.25F, 3.0F)
+                .texOffs(450, 21).addBox(-0.54F, 4.08F, -5.4F, 1.08F, 2.4F, 1.2F)
+                .texOffs(462, 21).addBox(-2.7F, 2.03F, -5.2F, 1.1F, 3.3F, 2.5F)
+                .texOffs(476, 21).addBox(-2.85F, 1.93F, -5.63F, 1.0F, 1.7F, 1.8F)
+                .texOffs(486, 21).addBox(-2.14F, -3.47F, -6.2F, 1.5F, 0.4F, 0.65F)
+                .texOffs(496, 21).addBox(-2.29F, -3.97F, -6.81F, 1.5F, 0.4F, 0.65F)
+                .texOffs(2, 35).addBox(-2.44F, -4.47F, -7.42F, 1.5F, 0.4F, 0.65F)
+                .texOffs(12, 35).addBox(-2.59F, -4.97F, -8.03F, 1.5F, 0.4F, 0.65F)
+                .texOffs(22, 35).addBox(-2.74F, -5.47F, -8.64F, 1.5F, 0.4F, 0.65F)
+                .texOffs(32, 35).addBox(-2.89F, -5.97F, -9.25F, 1.5F, 0.4F, 0.65F)
+                .texOffs(42, 35).addBox(-3.04F, -6.47F, -9.86F, 1.5F, 0.4F, 0.65F)
+                .texOffs(52, 35).addBox(1.72F, 2.03F, -5.2F, 1.1F, 3.3F, 2.5F)
+                .texOffs(66, 35).addBox(1.88F, 1.93F, -5.63F, 1.0F, 1.7F, 1.8F)
+                .texOffs(76, 35).addBox(1.55F, -3.47F, -6.2F, 1.5F, 0.4F, 0.65F)
+                .texOffs(86, 35).addBox(1.7F, -3.97F, -6.81F, 1.5F, 0.4F, 0.65F)
+                .texOffs(96, 35).addBox(1.85F, -4.47F, -7.42F, 1.5F, 0.4F, 0.65F)
+                .texOffs(106, 35).addBox(2.0F, -4.97F, -8.03F, 1.5F, 0.4F, 0.65F)
+                .texOffs(116, 35).addBox(2.15F, -5.47F, -8.64F, 1.5F, 0.4F, 0.65F)
+                .texOffs(126, 35).addBox(2.3F, -5.97F, -9.25F, 1.5F, 0.4F, 0.65F)
+                .texOffs(136, 35).addBox(2.45F, -6.47F, -9.86F, 1.5F, 0.4F, 0.65F)
+                .texOffs(146, 35).addBox(-1.72F, 3.11F, -7.15F, 3.44F, 2.2F, 2.23F)
+                .texOffs(164, 35).addBox(-3.24F, 1.69F, -6.27F, 1.22F, 3.5F, 2.2F)
+                .texOffs(178, 35).addBox(-3.14F, 3.96F, -6.36F, 0.56F, 0.42F, 0.68F)
+                .texOffs(186, 35).addBox(-3.14F, 4.33F, -6.79F, 0.56F, 0.42F, 0.68F)
+                .texOffs(194, 35).addBox(-3.14F, 4.7F, -7.22F, 0.56F, 0.42F, 0.68F)
+                .texOffs(202, 35).addBox(2.06F, 1.69F, -6.27F, 1.22F, 3.5F, 2.2F)
+                .texOffs(216, 35).addBox(1.96F, 3.96F, -6.36F, 0.56F, 0.42F, 0.68F)
+                .texOffs(224, 35).addBox(1.96F, 4.33F, -6.79F, 0.56F, 0.42F, 0.68F)
+                .texOffs(232, 35).addBox(1.96F, 4.7F, -7.22F, 0.56F, 0.42F, 0.68F)
+                .texOffs(240, 35).addBox(-2.4F, 1.43F, -7.42F, 0.95F, 1.45F, 0.65F)
+                .texOffs(248, 35).addBox(1.42F, 1.43F, -7.42F, 0.95F, 1.45F, 0.65F)
+                , PartPose.offset(0F, 14.17F, -1.2F));
+        root.addOrReplaceChild("left_wing", CubeListBuilder.create()
+                .texOffs(256, 35).addBox(-6.05F, -1.35F, -0.9F, 2.3F, 0.55F, 0.64F)
+                .texOffs(268, 35).addBox(-6.05F, -1.35F, 2.2F, 2.3F, 0.55F, 0.64F)
+                .texOffs(280, 35).addBox(-6.05F, -1.35F, -0.9F, 0.66F, 0.55F, 3.72F)
+                .texOffs(294, 35).addBox(-4.37F, -1.35F, -0.9F, 0.66F, 0.55F, 3.72F)
+                .texOffs(308, 35).addBox(-5.4F, -1.6F, 0.15F, 1.05F, 0.65F, 1.5F)
+                .texOffs(320, 35).addBox(-0.11F, -1.75F, -5.65F, 1.3F, 2.35F, 2.18F)
+                .texOffs(334, 35).addBox(-1.27F, -0.96F, -5.65F, 1.3F, 2.06F, 2.18F)
+                .texOffs(348, 35).addBox(-2.43F, -0.17F, -5.65F, 1.3F, 1.77F, 2.18F)
+                .texOffs(362, 35).addBox(-3.59F, 0.62F, -5.65F, 1.3F, 1.48F, 2.18F)
+                .texOffs(376, 35).addBox(-4.75F, 1.41F, -5.65F, 1.3F, 1.19F, 2.18F)
+                .texOffs(390, 35).addBox(-0.59F, -1.65F, -3.5F, 1.78F, 2.35F, 2.18F)
+                .texOffs(404, 35).addBox(-2.23F, -0.86F, -3.5F, 1.78F, 2.06F, 2.18F)
+                .texOffs(418, 35).addBox(-1.91F, -1.21F, -2.88F, 0.902F, 0.32F, 0.76F)
+                .texOffs(426, 35).addBox(-3.87F, -0.07F, -3.5F, 1.78F, 1.77F, 2.18F)
+                .texOffs(440, 35).addBox(-5.51F, 0.72F, -3.5F, 1.78F, 1.48F, 2.18F)
+                .texOffs(454, 35).addBox(-5.19F, 0.37F, -2.88F, 0.902F, 0.32F, 0.76F)
+                .texOffs(462, 35).addBox(-7.15F, 1.51F, -3.5F, 1.78F, 1.19F, 2.18F)
+                .texOffs(476, 35).addBox(-1.11F, -1.75F, -1.35F, 2.3F, 2.35F, 2.18F)
+                .texOffs(492, 35).addBox(-3.27F, -0.96F, -1.35F, 2.3F, 2.06F, 2.18F)
+                .texOffs(2, 46).addBox(-5.43F, -0.17F, -1.35F, 2.3F, 1.77F, 2.18F)
+                .texOffs(18, 46).addBox(-7.59F, 0.62F, -1.35F, 2.3F, 1.48F, 2.18F)
+                .texOffs(34, 46).addBox(-9.75F, 1.41F, -1.35F, 2.3F, 1.19F, 2.18F)
+                .texOffs(50, 46).addBox(-1.43F, -1.65F, 0.8F, 2.62F, 2.35F, 2.18F)
+                .texOffs(66, 46).addBox(-3.91F, -0.86F, 0.8F, 2.62F, 2.06F, 2.18F)
+                .texOffs(82, 46).addBox(-3.438F, -1.21F, 1.42F, 1.364F, 0.32F, 0.76F)
+                .texOffs(92, 46).addBox(-6.39F, -0.07F, 0.8F, 2.62F, 1.77F, 2.18F)
+                .texOffs(108, 46).addBox(-8.87F, 0.72F, 0.8F, 2.62F, 1.48F, 2.18F)
+                .texOffs(124, 46).addBox(-8.398F, 0.37F, 1.42F, 1.364F, 0.32F, 0.76F)
+                .texOffs(134, 46).addBox(-11.35F, 1.51F, 0.8F, 2.62F, 1.19F, 2.18F)
+                .texOffs(150, 46).addBox(-1.41F, -1.75F, 2.95F, 2.6F, 2.35F, 2.18F)
+                .texOffs(166, 46).addBox(-3.87F, -0.96F, 2.95F, 2.6F, 2.06F, 2.18F)
+                .texOffs(182, 46).addBox(-6.33F, -0.17F, 2.95F, 2.6F, 1.77F, 2.18F)
+                .texOffs(198, 46).addBox(-8.79F, 0.62F, 2.95F, 2.6F, 1.48F, 2.18F)
+                .texOffs(214, 46).addBox(-11.25F, 1.41F, 2.95F, 2.6F, 1.19F, 2.18F)
+                .texOffs(230, 46).addBox(-1.05F, -1.65F, 5.1F, 2.24F, 2.35F, 2.18F)
+                .texOffs(246, 46).addBox(-3.15F, -0.86F, 5.1F, 2.24F, 2.06F, 2.18F)
+                .texOffs(262, 46).addBox(-2.747F, -1.21F, 5.72F, 1.155F, 0.32F, 0.76F)
+                .texOffs(272, 46).addBox(-5.25F, -0.07F, 5.1F, 2.24F, 1.77F, 2.18F)
+                .texOffs(288, 46).addBox(-7.35F, 0.72F, 5.1F, 2.24F, 1.48F, 2.18F)
+                .texOffs(304, 46).addBox(-6.947F, 0.37F, 5.72F, 1.155F, 0.32F, 0.76F)
+                .texOffs(314, 46).addBox(-9.45F, 1.51F, 5.1F, 2.24F, 1.19F, 2.18F)
+                .texOffs(330, 46).addBox(-5.2F, 2.25F, -4.9F, 0.75F, 1.62F, 1.26F)
+                .texOffs(340, 46).addBox(-7.6F, 2.37F, -2.56F, 0.75F, 1.62F, 1.26F)
+                .texOffs(350, 46).addBox(-10.2F, 2.25F, -0.22F, 0.75F, 1.62F, 1.26F)
+                .texOffs(360, 46).addBox(-11.8F, 2.37F, 2.12F, 0.75F, 1.62F, 1.26F)
+                .texOffs(370, 46).addBox(-11.7F, 2.25F, 4.46F, 0.75F, 1.62F, 1.26F)
+                .texOffs(380, 46).addBox(0.05F, -2.21F, -4.9F, 1.06F, 0.55F, 1.0F)
+                .texOffs(390, 46).addBox(-2.45F, -1.52F, -4.9F, 1.06F, 0.55F, 1.0F)
+                .texOffs(400, 46).addBox(-4.95F, -0.83F, -4.9F, 1.06F, 0.55F, 1.0F)
+                .texOffs(410, 46).addBox(-7.45F, -0.14F, -4.9F, 1.06F, 0.55F, 1.0F)
+                .texOffs(420, 46).addBox(0.05F, -2.21F, -0.5F, 1.06F, 0.55F, 1.0F)
+                .texOffs(430, 46).addBox(-2.45F, -1.52F, -0.5F, 1.06F, 0.55F, 1.0F)
+                .texOffs(440, 46).addBox(-4.95F, -0.83F, -0.5F, 1.06F, 0.55F, 1.0F)
+                .texOffs(450, 46).addBox(-7.45F, -0.14F, -0.5F, 1.06F, 0.55F, 1.0F)
+                .texOffs(460, 46).addBox(0.05F, -2.21F, 3.9F, 1.06F, 0.55F, 1.0F)
+                .texOffs(470, 46).addBox(-2.45F, -1.52F, 3.9F, 1.06F, 0.55F, 1.0F)
+                .texOffs(480, 46).addBox(-4.95F, -0.83F, 3.9F, 1.06F, 0.55F, 1.0F)
+                .texOffs(490, 46).addBox(-7.45F, -0.14F, 3.9F, 1.06F, 0.55F, 1.0F)
+                , PartPose.offset(-3.05F, 12.75F, -1.8F));
+        root.addOrReplaceChild("right_wing", CubeListBuilder.create()
+                .texOffs(500, 46).addBox(4.25F, -1.35F, -0.9F, 2.3F, 0.55F, 0.64F)
+                .texOffs(2, 56).addBox(4.25F, -1.35F, 2.2F, 2.3F, 0.55F, 0.64F)
+                .texOffs(14, 56).addBox(4.25F, -1.35F, -0.9F, 0.66F, 0.55F, 3.72F)
+                .texOffs(28, 56).addBox(5.93F, -1.35F, -0.9F, 0.66F, 0.55F, 3.72F)
+                .texOffs(42, 56).addBox(4.9F, -1.6F, 0.15F, 1.05F, 0.65F, 1.5F)
+                .texOffs(54, 56).addBox(-1.05F, -1.75F, -5.65F, 1.3F, 2.35F, 2.18F)
+                .texOffs(68, 56).addBox(0.11F, -0.96F, -5.65F, 1.3F, 2.06F, 2.18F)
+                .texOffs(82, 56).addBox(1.27F, -0.17F, -5.65F, 1.3F, 1.77F, 2.18F)
+                .texOffs(96, 56).addBox(2.43F, 0.62F, -5.65F, 1.3F, 1.48F, 2.18F)
+                .texOffs(110, 56).addBox(3.59F, 1.41F, -5.65F, 1.3F, 1.19F, 2.18F)
+                .texOffs(124, 56).addBox(-1.05F, -1.65F, -3.5F, 1.78F, 2.35F, 2.18F)
+                .texOffs(138, 56).addBox(0.59F, -0.86F, -3.5F, 1.78F, 2.06F, 2.18F)
+                .texOffs(152, 56).addBox(0.91F, -1.21F, -2.88F, 0.902F, 0.32F, 0.76F)
+                .texOffs(160, 56).addBox(2.23F, -0.07F, -3.5F, 1.78F, 1.77F, 2.18F)
+                .texOffs(174, 56).addBox(3.87F, 0.72F, -3.5F, 1.78F, 1.48F, 2.18F)
+                .texOffs(188, 56).addBox(4.19F, 0.37F, -2.88F, 0.902F, 0.32F, 0.76F)
+                .texOffs(196, 56).addBox(5.51F, 1.51F, -3.5F, 1.78F, 1.19F, 2.18F)
+                .texOffs(210, 56).addBox(-1.05F, -1.75F, -1.35F, 2.3F, 2.35F, 2.18F)
+                .texOffs(226, 56).addBox(1.11F, -0.96F, -1.35F, 2.3F, 2.06F, 2.18F)
+                .texOffs(242, 56).addBox(3.27F, -0.17F, -1.35F, 2.3F, 1.77F, 2.18F)
+                .texOffs(258, 56).addBox(5.43F, 0.62F, -1.35F, 2.3F, 1.48F, 2.18F)
+                .texOffs(274, 56).addBox(7.59F, 1.41F, -1.35F, 2.3F, 1.19F, 2.18F)
+                .texOffs(290, 56).addBox(-1.05F, -1.65F, 0.8F, 2.62F, 2.35F, 2.18F)
+                .texOffs(306, 56).addBox(1.43F, -0.86F, 0.8F, 2.62F, 2.06F, 2.18F)
+                .texOffs(322, 56).addBox(1.902F, -1.21F, 1.42F, 1.364F, 0.32F, 0.76F)
+                .texOffs(332, 56).addBox(3.91F, -0.07F, 0.8F, 2.62F, 1.77F, 2.18F)
+                .texOffs(348, 56).addBox(6.39F, 0.72F, 0.8F, 2.62F, 1.48F, 2.18F)
+                .texOffs(364, 56).addBox(6.862F, 0.37F, 1.42F, 1.364F, 0.32F, 0.76F)
+                .texOffs(374, 56).addBox(8.87F, 1.51F, 0.8F, 2.62F, 1.19F, 2.18F)
+                .texOffs(390, 56).addBox(-1.05F, -1.75F, 2.95F, 2.6F, 2.35F, 2.18F)
+                .texOffs(406, 56).addBox(1.41F, -0.96F, 2.95F, 2.6F, 2.06F, 2.18F)
+                .texOffs(422, 56).addBox(3.87F, -0.17F, 2.95F, 2.6F, 1.77F, 2.18F)
+                .texOffs(438, 56).addBox(6.33F, 0.62F, 2.95F, 2.6F, 1.48F, 2.18F)
+                .texOffs(454, 56).addBox(8.79F, 1.41F, 2.95F, 2.6F, 1.19F, 2.18F)
+                .texOffs(470, 56).addBox(-1.05F, -1.65F, 5.1F, 2.24F, 2.35F, 2.18F)
+                .texOffs(486, 56).addBox(1.05F, -0.86F, 5.1F, 2.24F, 2.06F, 2.18F)
+                .texOffs(502, 56).addBox(1.453F, -1.21F, 5.72F, 1.155F, 0.32F, 0.76F)
+                .texOffs(2, 66).addBox(3.15F, -0.07F, 5.1F, 2.24F, 1.77F, 2.18F)
+                .texOffs(18, 66).addBox(5.25F, 0.72F, 5.1F, 2.24F, 1.48F, 2.18F)
+                .texOffs(34, 66).addBox(5.653F, 0.37F, 5.72F, 1.155F, 0.32F, 0.76F)
+                .texOffs(44, 66).addBox(7.35F, 1.51F, 5.1F, 2.24F, 1.19F, 2.18F)
+                .texOffs(60, 66).addBox(4.5F, 2.25F, -4.9F, 0.75F, 1.62F, 1.26F)
+                .texOffs(70, 66).addBox(6.9F, 2.37F, -2.56F, 0.75F, 1.62F, 1.26F)
+                .texOffs(80, 66).addBox(9.5F, 2.25F, -0.22F, 0.75F, 1.62F, 1.26F)
+                .texOffs(90, 66).addBox(11.1F, 2.37F, 2.12F, 0.75F, 1.62F, 1.26F)
+                .texOffs(100, 66).addBox(11.0F, 2.25F, 4.46F, 0.75F, 1.62F, 1.26F)
+                .texOffs(110, 66).addBox(-0.05F, -2.21F, -4.9F, 1.06F, 0.55F, 1.0F)
+                .texOffs(120, 66).addBox(2.45F, -1.52F, -4.9F, 1.06F, 0.55F, 1.0F)
+                .texOffs(130, 66).addBox(4.95F, -0.83F, -4.9F, 1.06F, 0.55F, 1.0F)
+                .texOffs(140, 66).addBox(7.45F, -0.14F, -4.9F, 1.06F, 0.55F, 1.0F)
+                .texOffs(150, 66).addBox(-0.05F, -2.21F, -0.5F, 1.06F, 0.55F, 1.0F)
+                .texOffs(160, 66).addBox(2.45F, -1.52F, -0.5F, 1.06F, 0.55F, 1.0F)
+                .texOffs(170, 66).addBox(4.95F, -0.83F, -0.5F, 1.06F, 0.55F, 1.0F)
+                .texOffs(180, 66).addBox(7.45F, -0.14F, -0.5F, 1.06F, 0.55F, 1.0F)
+                .texOffs(190, 66).addBox(-0.05F, -2.21F, 3.9F, 1.06F, 0.55F, 1.0F)
+                .texOffs(200, 66).addBox(2.45F, -1.52F, 3.9F, 1.06F, 0.55F, 1.0F)
+                .texOffs(210, 66).addBox(4.95F, -0.83F, 3.9F, 1.06F, 0.55F, 1.0F)
+                .texOffs(220, 66).addBox(7.45F, -0.14F, 3.9F, 1.06F, 0.55F, 1.0F)
+                , PartPose.offset(3.05F, 12.75F, -1.8F));
+        root.addOrReplaceChild("left_hindwing", CubeListBuilder.create()
+                .texOffs(230, 66).addBox(-1.03F, -2.4F, 0.75F, 1.82F, 2.021F, 2.18F)
+                .texOffs(244, 66).addBox(-2.71F, -1.61F, 0.75F, 1.82F, 1.772F, 2.18F)
+                .texOffs(258, 66).addBox(-4.39F, -0.82F, 0.75F, 1.82F, 1.522F, 2.18F)
+                .texOffs(272, 66).addBox(-6.07F, -0.03F, 0.75F, 1.82F, 1.273F, 2.18F)
+                .texOffs(286, 66).addBox(-7.75F, 0.76F, 0.75F, 1.82F, 1.023F, 2.18F)
+                .texOffs(300, 66).addBox(-0.47F, -2.3F, 2.9F, 1.26F, 2.021F, 2.18F)
+                .texOffs(314, 66).addBox(-1.59F, -1.51F, 2.9F, 1.26F, 1.772F, 2.18F)
+                .texOffs(328, 66).addBox(-2.71F, -0.72F, 2.9F, 1.26F, 1.522F, 2.18F)
+                .texOffs(342, 66).addBox(-3.83F, 0.07F, 2.9F, 1.26F, 1.273F, 2.18F)
+                .texOffs(356, 66).addBox(-4.95F, 0.86F, 2.9F, 1.26F, 1.023F, 2.18F)
+                .texOffs(370, 66).addBox(-10.3F, 1.27F, 0.3F, 0.75F, 1.62F, 1.26F)
+                .texOffs(380, 66).addBox(-8.2F, 1.15F, 2.64F, 0.75F, 1.62F, 1.26F)
+                .texOffs(390, 66).addBox(-8.6F, 1.87F, -1.2F, 9.7F, 1.75F, 2.32F)
+                .texOffs(420, 66).addBox(-7.78F, 1.87F, 1.0F, 8.88F, 1.75F, 2.32F)
+                .texOffs(448, 66).addBox(-6.96F, 1.87F, 3.2F, 8.06F, 1.75F, 2.32F)
+                .texOffs(476, 66).addBox(-6.14F, 1.87F, 5.4F, 7.24F, 1.75F, 2.32F)
+                .texOffs(502, 66).addBox(-0.35F, -3.31F, 1.8F, 1.06F, 0.55F, 1.0F)
+                .texOffs(2, 76).addBox(-2.85F, -2.62F, 1.8F, 1.06F, 0.55F, 1.0F)
+                .texOffs(12, 76).addBox(-5.35F, -1.93F, 1.8F, 1.06F, 0.55F, 1.0F)
+                .texOffs(22, 76).addBox(-7.85F, -1.24F, 1.8F, 1.06F, 0.55F, 1.0F)
+                .texOffs(32, 76).addBox(-8.5F, 0.63F, -0.75F, 8.7F, 1.48F, 1.5F)
+                .texOffs(58, 76).addBox(-7.9F, 0.46F, -0.35F, 0.92F, 0.58F, 0.72F)
+                .texOffs(66, 76).addBox(-7.65F, 0.73F, 0.91F, 7.85F, 1.48F, 1.5F)
+                .texOffs(90, 76).addBox(-7.05F, 0.56F, 1.31F, 0.92F, 0.58F, 0.72F)
+                .texOffs(98, 76).addBox(-6.8F, 0.83F, 2.57F, 7.0F, 1.48F, 1.5F)
+                .texOffs(120, 76).addBox(-6.2F, 0.66F, 2.97F, 0.92F, 0.58F, 0.72F)
+                .texOffs(128, 76).addBox(-5.95F, 0.93F, 4.23F, 6.15F, 1.48F, 1.5F)
+                .texOffs(150, 76).addBox(-5.35F, 0.76F, 4.63F, 0.92F, 0.58F, 0.72F)
+                .texOffs(158, 76).addBox(-5.1F, 1.03F, 5.89F, 5.3F, 1.48F, 1.5F)
+                .texOffs(178, 76).addBox(-4.5F, 0.86F, 6.29F, 0.92F, 0.58F, 0.72F)
+                , PartPose.offset(-2.65F, 14.85F, 4.7F));
+        root.addOrReplaceChild("right_hindwing", CubeListBuilder.create()
+                .texOffs(186, 76).addBox(-0.65F, -2.4F, 0.75F, 1.82F, 2.021F, 2.18F)
+                .texOffs(200, 76).addBox(1.03F, -1.61F, 0.75F, 1.82F, 1.772F, 2.18F)
+                .texOffs(214, 76).addBox(2.71F, -0.82F, 0.75F, 1.82F, 1.522F, 2.18F)
+                .texOffs(228, 76).addBox(4.39F, -0.03F, 0.75F, 1.82F, 1.273F, 2.18F)
+                .texOffs(242, 76).addBox(6.07F, 0.76F, 0.75F, 1.82F, 1.023F, 2.18F)
+                .texOffs(256, 76).addBox(-0.65F, -2.3F, 2.9F, 1.26F, 2.021F, 2.18F)
+                .texOffs(270, 76).addBox(0.47F, -1.51F, 2.9F, 1.26F, 1.772F, 2.18F)
+                .texOffs(284, 76).addBox(1.59F, -0.72F, 2.9F, 1.26F, 1.522F, 2.18F)
+                .texOffs(298, 76).addBox(2.71F, 0.07F, 2.9F, 1.26F, 1.273F, 2.18F)
+                .texOffs(312, 76).addBox(3.83F, 0.86F, 2.9F, 1.26F, 1.023F, 2.18F)
+                .texOffs(326, 76).addBox(9.6F, 1.27F, 0.3F, 0.75F, 1.62F, 1.26F)
+                .texOffs(336, 76).addBox(7.5F, 1.15F, 2.64F, 0.75F, 1.62F, 1.26F)
+                .texOffs(346, 76).addBox(-1.1F, 1.87F, -1.2F, 9.7F, 1.75F, 2.32F)
+                .texOffs(376, 76).addBox(-1.1F, 1.87F, 1.0F, 8.88F, 1.75F, 2.32F)
+                .texOffs(404, 76).addBox(-1.1F, 1.87F, 3.2F, 8.06F, 1.75F, 2.32F)
+                .texOffs(432, 76).addBox(-1.1F, 1.87F, 5.4F, 7.24F, 1.75F, 2.32F)
+                .texOffs(458, 76).addBox(0.35F, -3.31F, 1.8F, 1.06F, 0.55F, 1.0F)
+                .texOffs(468, 76).addBox(2.85F, -2.62F, 1.8F, 1.06F, 0.55F, 1.0F)
+                .texOffs(478, 76).addBox(5.35F, -1.93F, 1.8F, 1.06F, 0.55F, 1.0F)
+                .texOffs(488, 76).addBox(7.85F, -1.24F, 1.8F, 1.06F, 0.55F, 1.0F)
+                .texOffs(2, 86).addBox(-0.2F, 0.63F, -0.75F, 8.7F, 1.48F, 1.5F)
+                .texOffs(28, 86).addBox(6.95F, 0.46F, -0.35F, 0.92F, 0.58F, 0.72F)
+                .texOffs(36, 86).addBox(-0.2F, 0.73F, 0.91F, 7.85F, 1.48F, 1.5F)
+                .texOffs(60, 86).addBox(6.1F, 0.56F, 1.31F, 0.92F, 0.58F, 0.72F)
+                .texOffs(68, 86).addBox(-0.2F, 0.83F, 2.57F, 7.0F, 1.48F, 1.5F)
+                .texOffs(90, 86).addBox(5.25F, 0.66F, 2.97F, 0.92F, 0.58F, 0.72F)
+                .texOffs(98, 86).addBox(-0.2F, 0.93F, 4.23F, 6.15F, 1.48F, 1.5F)
+                .texOffs(120, 86).addBox(4.4F, 0.76F, 4.63F, 0.92F, 0.58F, 0.72F)
+                .texOffs(128, 86).addBox(-0.2F, 1.03F, 5.89F, 5.3F, 1.48F, 1.5F)
+                .texOffs(148, 86).addBox(3.55F, 0.86F, 6.29F, 0.92F, 0.58F, 0.72F)
+                , PartPose.offset(2.65F, 14.85F, 4.7F));
+        return LayerDefinition.create(mesh, 512, 256);
+    }
+
+    @Override public ModelPart root() { return root; }
+
+    @Override public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+        float motion = Mth.clamp(limbSwingAmount, 0.0F, 1.0F);
+        float attack = entity.swinging ? (0.5F + 0.5F * Mth.sin(ageInTicks * 1.1F)) : 0.0F;
+        float recoil = entity.hurtTime > 0 ? (entity.hurtTime / 10.0F) : 0.0F;
+        left_wing.zRot = entity.isResting() ? 1.04F : 0.44F + Mth.sin(ageInTicks * 1.25F) * 0.69F;
+        right_wing.zRot = entity.isResting() ? -1.04F : -0.44F - Mth.sin(ageInTicks * 1.25F) * 0.69F;
+        left_hindwing.zRot = entity.isResting() ? 0.88F : 0.38F + Mth.sin(ageInTicks * 1.25F - 0.34F) * 0.56F;
+        right_hindwing.zRot = entity.isResting() ? -0.88F : -0.38F - Mth.sin(ageInTicks * 1.25F - 0.34F) * 0.56F;
+        left_wing.yRot = entity.isResting() ? 0.03F : 0.05F + Mth.sin(ageInTicks * 1.25F) * 0.06F;
+        right_wing.yRot = entity.isResting() ? -0.03F : -0.05F - Mth.sin(ageInTicks * 1.25F) * 0.06F;
+        left_hindwing.yRot = entity.isResting() ? 0.03F : 0.03F + Mth.sin(ageInTicks * 1.25F - 0.34F) * 0.04F;
+        right_hindwing.yRot = entity.isResting() ? -0.03F : -0.03F - Mth.sin(ageInTicks * 1.25F - 0.34F) * 0.04F;
+        head.yRot = Mth.sin(ageInTicks * 0.08F) * 0.05F;
+        body.xRot = entity.isResting() ? 0.0F : Mth.sin(ageInTicks * 0.24F) * 0.025F;
+        left_wing.xRot = entity.isResting() ? 0.0F : Mth.sin(ageInTicks * 1.25F + 0F) * 0.08F + recoil * 0.22F;
+        right_wing.xRot = entity.isResting() ? 0.0F : Mth.sin(ageInTicks * 1.25F + 0F) * 0.08F + recoil * 0.22F;
+        left_hindwing.xRot = entity.isResting() ? 0.0F : Mth.sin(ageInTicks * 1.25F + -0.34F) * 0.08F + recoil * 0.22F;
+        right_hindwing.xRot = entity.isResting() ? 0.0F : Mth.sin(ageInTicks * 1.25F + -0.34F) * 0.08F + recoil * 0.22F;
+        head.xRot = Mth.clamp(headPitch, -30.0F, 30.0F) * 0.0174533F * 0.15F;
+        body.yRot = entity.isResting() ? 0.0F : Mth.sin(ageInTicks * 0.16F) * 0.055F;
+    }
+}

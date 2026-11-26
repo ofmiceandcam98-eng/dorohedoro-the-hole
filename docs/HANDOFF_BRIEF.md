@@ -1,172 +1,76 @@
-# Dorohedoro: The Hole — handoff
+# CURRENT HANDOFF — PASS 18 / DISTRICT VISUAL IDENTITY (2026-10-31)
 
-Handoff written 2026-10-31 by Claude Code for the next developer or AI assistant. Read this section fully, then use the rest of the file as reference. Everything after the brief is the complete source of the project at the time of writing.
+**Source checkpoint, NOT a verified playable release.** The user has approved continuing visual/world-generation work, but has **not approved** overall city quality. Fresh worlds use `world_detail_version: 7` with optional winter districts retained from Pass 17. Existing world versions 0–6 must remain backwards compatible; NEVER switch an existing save to version 7.
 
-**Do not trust a claim about this project unless it appears under "Verified" below or in `docs/TEST_RESULTS.md`.**
+## User's required development order
 
-## What this project is
+1. FIRST: visibly differentiate every Hole district via architecture, landmark forms, street layouts, materials and atmosphere; preserve playable rooms, terrain, survival resources, mine/sewer access and prior features. User will test after this quality phase is prepared.
+2. AFTER user is satisfied with districts: Ash-Snow, Sludge-Ice, toxic snowballs, environmental poisoning and Cross-Eye camps (all deferred; **not implemented**).
+3. LATER: faction, villager/citizen/profession/economy overhaul. Do not implement during this pass. Preserve emerald usefulness.
 
-A Minecraft Java total-conversion mod. The Overworld becomes the Hole, the endless polluted city from Dorohedoro by Q Hayashida, with the Sorcerers' World and Hell as further infinite dimensions. It is a **survival sandbox, not a story mod**. There are no mandatory quests. All of vanilla survival must keep working.
+## Pass 18 source changes
 
-- Minecraft 1.21.1, NeoForge 21.1.265, ModDevGradle 2.0.148, Gradle 9.2.1, Java 21, Parchment 2024.11.17. Mod ID `dorohedoro`, base package `com.dorohedoro.hole`.
-- Git branch `gate-0-1-hole-world`, branched from `main`. `main` holds only the unmodified template import.
-- No external mod dependencies yet. GeckoLib 4.9.3 is the planned choice when the first animated entity needs it.
-- The owner's account is on GitHub, but **nothing has been pushed**. The repo is local only.
+- `DistrictIdentity18.java` introduces seven seed-selected district signature landmarks plus district-specific ground/street/edge palettes. Landmark types: `COMMUNAL_COURT`, `BAZAAR`, `MACHINE_YARD`, `CANAL_DEPOT`, `RUIN_COURT`, `BURIAL_GROUND`, `FRINGE_YARD`.
+- `CityPlan.landmarkSite` keeps the existing hospital/department-store/manor/refuse rotation for most regions and selects a district-specific anchor in some regions. This does not change saved v0–v6 worlds.
+- `LotPainter`, `OpenLots`, `WorldDetail`, `LotType`, `Canvas`, `CityPopulator`, `CitySettings`, and default normal preset integrated for version 7; Bazaar uses existing villager behavior only (no overhaul).
+- See `docs/DISTRICT_IDENTITY_PASS18.md` and `docs/TEST_CHECKLIST_ACCUMULATED.md`.
 
-## Spec documents, in priority order
+## Tests actually executed in this source checkpoint
 
-1. `docs/spec/SANDBOX_DIRECTIVE.md`: current direction. Wins any conflict.
-2. `docs/spec/MAGIC_SYSTEM_DIRECTIVE.md`: queued, not started.
-3. `docs/spec/FTB_QUESTS_DIRECTIVE.md`: **deferred. The owner said not to start it until asked.**
-4. `docs/spec/CLAUDE_MASTER_PROMPT.md`: the original spec. Still applies where not contradicted. Its quest campaign is dropped.
-5. `docs/spec/*.csv`: seed data, explicitly not proof that anything exists.
+Offline static scripts passed: world detail 25/25, irregular city 54/54, interiors 23/23, derelict buildings 24/24. ZIP CRC/integrity check passed. These are SOURCE assertions, not runtime tests. **Full NeoForge `runData`, `build`, `runClient`, `runServer`, worldgen, FPS/TPS or multiplayer tests have NOT been run successfully here**. A previous checkpoint reported Gradle download unavailable. Claude must compile/build and fix blockers before promising an installable JAR.
 
-The first three are digests of longer prompts from the owner. They keep every concrete requirement, number and recipe, but ask the owner for the original text if wording matters.
+## Claude's immediate instructions
 
-## Status
-
-### Verified, with evidence
-
-Evidence is in `docs/TEST_RESULTS.md` and `docs/evidence/`. All of this ran on a real headless dedicated server.
-
-| Claim | Result |
-| --- | --- |
-| Project builds | `gradlew build`, `compileJava` and `runData` pass |
-| 10-seed world validation | **All 10 seeds pass all 26 checks** at commit `ca5eb9b` |
-| New world's `minecraft:overworld` uses `HoleChunkGenerator` | Passed on every seed |
-| Spawn on the plaza at 0, 65, 0, standable, open sky | Passed on every seed |
-| No vanilla surface biome near spawn | Passed on all 10 seeds |
-| Streets all reachable on foot from spawn | Passed on all 10 seeds |
-| Enclosed buildings enterable on foot | Passed on all 10 seeds |
-| All vanilla ores plus water, lava, clay, sand, gravel, dirt and sugar cane in a generated region | Passed |
-| No flowing water from y=46 to y=66 | Passed |
-| No ore or replaceable rock at street level or above | Passed |
-| City layer identical when chunks generate in opposite order | Seeds 1 and 555: 625 of 625 chunks. **Seed 8675309 is intermittent, see Known defects** |
-| Generation speed | About 33 to 57 ms per chunk on this machine, by wall clock on a blocking load. Not a tick-time measurement |
-
-### Implemented but NOT verified
-
-Do not describe these as working yet.
-
-- **`runClient` has never been launched.** No one has seen this world rendered. The Create World screen, the "The Hole" label, textures, lighting, fog and any visual result are unconfirmed.
-- The "no experimental settings warning" claim comes from reading the source, not from running the client.
-- No GameTests exist, and `runGameTestServer` has not been run.
-- Nobody has played a survival loop by hand. Sleeping, respawning, crafting, smelting, villager trading, breeding and redstone are vanilla and should work, but no test has shown it.
-- Stairs are confirmed only by the column flood fill. It proves a player can get inside a building at ground level, not that every stair flight is climbable.
-- Loot tables load in datagen, but no chest has been opened in game.
-- Villager, golem, animal, bee and cat population runs without log errors, but no one has checked that they behave.
-- Strongholds, mineshafts and trial chambers are wired through biome tags. No QA check locates them, and End access is untested.
-- Landmarks other than the Research Manor have not been inspected on a map. Hospital, Department Store and Lake of Refuse exist in code.
-
-### Known defects and gaps
-
-- **Open bug, cause unknown:** on seed 8675309, 1 to 2 of 625 chunks intermittently differ at y≥64 between runs, in 3 of 5 comparisons. The differing blocks have never been captured. Read the plan in `docs/TEST_RESULTS.md` under Determinism before relying on strict order independence.
-- The street layout is still fairly regular despite 32-block jitter. The owner explicitly said to avoid repetitive grids. Next idea: merge some superblocks or terminate some lines at T-junctions.
-- Buildings have no basements, and there are no elevated walkways, power lines, or pipe bridges. Reference art for the Hole is far denser.
-- `Tower.pipes` is a single chain. Facades are simple.
-- Hole rain has no effect yet, because sorcerers do not exist yet.
-- Wood sources from the spec (pallets, crates, scrap lumber) are not built. Wood currently comes from building materials, loot, junkyards, trees and saplings.
-- Vanilla decoration below y=64 is **not** order independent. Ore and cave decoration overlap across chunk borders exactly as in vanilla, so only 31 of 289 whole-chunk hashes matched in one early test. This comes from vanilla features, not the city painter. If the owner wants strict determinism underground, that needs separate work.
-- The first commit's `.gitignore` covers `run/` and `runs/`. Evidence worth keeping must be copied to `docs/evidence/`.
-
-## Installed on the owner's PC
-
-NeoForge 21.1.265 is installed in the normal `.minecraft`. The launcher has a **Dorohedoro** profile with game directory `C:\Users\Cam\Dorohedoro-Minecraft`, and the jar is in its `mods` folder. The backup of the launcher file is `.minecraft\launcher_profiles.json.before-dorohedoro`. Testers follow `docs/INSTALL_FOR_FRIENDS.md`. Rebuild with `./gradlew build` and copy `build/libs/dorohedoro-0.1.0.jar` to update it. Never run Gradle twice at once in this folder: two compiles corrupt class files.
-
-## How to run things
-
-From the repo root, in Git Bash on Windows:
-
-```bash
-./gradlew --no-daemon build
-./gradlew --no-daemon runData
-./gradlew --no-daemon runClient
-bash tools/qa-world.sh 12345 16 forward
-bash tools/qa-world.sh 12345 16 reverse
-node tools/qa-compare.mjs runs/qa/12345/forward/qa/report-forward.json runs/qa/12345/reverse/qa/report-reverse.json
-```
-
-`tools/qa-world.sh <seed> [radius] [forward|reverse]` starts a real dedicated server through the `qaServer` run, generates chunks, writes `qa/report-<order>.json` and `qa/map-<order>.png` under `runs/qa/<seed>/<order>/`, then stops. The owner approved `eula=true` for local test folders. `QA_DUMP="x,z;x,z"` also dumps blocks of those chunks for diffing.
-
-`tools/make-noise-settings.ps1` regenerates the Hole noise settings from the local client jar. `tools/make-textures.mjs` regenerates original textures. `tools/make-handoff.mjs` rebuilds this file.
-
-## Environment traps
-
-- **Windows commit charge.** LM Studio's `llama-server` once used enough commit to fail the JVM with error 1455 at 58.8 of 63.9 GB. Check free commit if builds die. `disable_recompilation=true` in `gradle.properties` skips the decompile. It is `false` now.
-- **Background shell exit codes lie** when a command ends in `| tail`. Read `BUILD SUCCESSFUL` in the log.
-- **Interrupted Gradle** can leave a corrupt `~/.gradle/caches/9.2.1/javaCompile/javaCompile.lock`. Delete just that file.
-- **Long paths.** The folder is deep inside the Claude app's scratch space. `core.longpaths=true` is set. Moving the repo to a short path is recommended.
-- **Large bash heredocs** with mixed quotes failed once. Put patch scripts in files.
-- `python.exe` is only the Windows Store stub. Use Node or PowerShell.
-- **Fandom blocks automated fetching with HTTP 402.** The lore wiki pages were not read. Do not assume their contents. See `docs/LORE_REFERENCE.md`.
-
-## Architecture
-
-The core idea: **the city is a pure function of seed and coordinates.**
-
-- `CityPlan` computes arterial `Line`s per axis from a hash of seed and index, so roads and canals cannot disagree across a chunk border. Lines cut the plane into `Superblock`s.
-- `Superblock` subdivides itself with a binary space partition. Every cut leaves a street, so every lot touches a street on all sides. Superblock (-1,-1) is always the starting quarter.
-- `District` comes from the seeded climate sampler, so the biome source and the planner agree without sharing state. `Climate.Sampler` instances differ per chunk because they wrap `NoiseChunk` caches, but their values do not.
-- `CityPainter.paint` runs at the surface step, inside `HoleChunkGenerator.buildSurface`: galleries, sewers, ground and roads, canals, lots, then shafts.
-- `Canvas` clips every write to the current chunk, so a structure drawn in absolute coordinates is correct however it splits across chunks. **Variation must come from `Canvas.hash` or the lot hash, never from a stateful random.**
-- `Tower` is the shared building skeleton: walls, floors, stair route, windows, door, roof. A `Furnisher` callback fills each storey.
-- `CityPopulator` adds residents once per lot, from the chunk holding the lot's center.
-- `HoleChunkGenerator extends NoiseBasedChunkGenerator`, which is non-final in NeoForge 21.1.265. Vanilla noise gives caves, aquifers, veins, bedrock and deepslate. `applyCarvers` is a no-op because carvers run after painting and would cut the city.
-- `data/minecraft/worldgen/world_preset/normal.json` is overridden, which covers both the Create World default and dedicated servers. The `normal` preset tag is replaced so only the Hole shows in the cycle. Other presets moved to `extended` (Alt-click).
-- `WorldGuard` sets the spawn through `LevelEvent.CreateSpawnPosition` and warns on worlds that are not the Hole. It never converts them.
-- `HoleQa` is the test harness and does nothing without `-Ddorohedoro.qa=true`.
-
-### Rules that must not be broken
-
-1. **At street level and above, never place stone, tuff, deepslate, andesite, granite or diorite.** Vanilla ore features replace them up to the build limit. This put coal ore in roads before it was fixed. Use polished or brick variants. QA enforces it.
-2. Vanilla feature order must be kept in biomes, or the feature sorter crashes. Follow `OverworldBiomes`.
-3. Do not add water springs to Hole biomes. They can flood basements.
-4. Water above an open room needs a solid block under it. See the beam in `Tower.garden`.
-5. Worldgen tuning belongs in the generator codec (`CitySettings`, saved in level.dat), not in a config file, or editing a config puts seams into existing worlds.
-6. GameTests run on a hard-coded flat world, so generator tests must use the plan directly or go through `qaServer`.
-7. Weather is shared across dimensions, so the Sorcerers' World stays dry only through `has_precipitation: false` on every biome.
-8. Any extra dimension is expected to make the world `Lifecycle.experimental` (`WorldDimensions.java:121,180`). Test the warning in a real client and decide whether to suppress it.
-
-## What to do next, in order
-
-1. If the owner has launched the client, read their feedback first. It outranks everything below.
-2. **Launch the client.** Add an automatic path that opens `CreateWorldScreen`, creates a default world, takes screenshots with `Screenshot.grab`, and quits, or use `--quickPlaySingleplayer`. Confirm the world really renders as the Hole. This is the largest unverified risk.
-3. Add GameTests. Purity of the plan, recipes, loot tables, door and bed placement.
-4. **Phase 3.** Apply the draft in `docs/handoff/phase3-draft/`. See below.
-5. **Phase 4, portals.** See below.
-6. Then Phases 5 to 8 in `docs/ROADMAP.md`.
-
-### Phase 3 draft, written but never compiled
-
-`docs/handoff/phase3-draft/` mirrors the repo layout. It holds `RealmBiomes`, `SorcererBiomeSource`, `HellBiomeSource`, `RealmBiomeData` and the dimension JSON. `tools/make-realm-settings.ps1` builds both noise settings and has not been run. To apply:
-
-1. Copy the draft's `src` tree into `src`.
-2. Add to `ModBlocks`: `HELL_ROCK` (stone-like, `requiresCorrectToolForDrops`, strength around 2/6) and `ASH_SOIL` (shovel, strength around 0.6). Both `dropSelf` in `ModLoot`, both in `HoleBlockTags` under `MINEABLE_WITH_PICKAXE` and `MINEABLE_WITH_SHOVEL`, both in `ModModels.Blocks`, both in `en_us.json`, and add textures to `tools/make-textures.mjs`.
-3. Register `SorcererBiomeSource.CODEC` as `sorcerer_lands` and `HellBiomeSource.CODEC` as `hell_realms` in `ModWorldgen`.
-4. In `ModDataGen`, extend the `RegistrySetBuilder` with `.add(Registries.CONFIGURED_FEATURE, RealmBiomeData::configuredFeatures)` and `.add(Registries.PLACED_FEATURE, RealmBiomeData::placedFeatures)`, and make the biome bootstrap call both `HoleBiomeData.bootstrap` and `RealmBiomeData.biomes`. Add `sw_*` biomes to `HAS_MINESHAFT`.
-5. Run the PowerShell script, `runData`, then extend `HoleQa` to generate and map those two dimensions.
-6. Expected problem areas: a feature order cycle in `RealmBiomeData`, the horn tuning constants, and the experimental warning. `ModBlocks.HELL_ROCK` is referenced by the features.
-
-Phase 3 limits to keep in mind: Hydra Forest uses vanilla dark forest trees for now, so custom tree species are still needed. City land in the Sorcerers' World is flat basin with no buildings yet. Cities belong to Phase 6. Hell has an empty mob table on purpose, because the spec bans reskinned zombies and Devils arrive in Phase 7.
-
-### Phase 4 design, not started
-
-- `PortalRecord`: UUID, type (`SMOKE_DOOR`, `ARTIFICIAL_DOOR`, `EN_FAMILY_DOOR`, `DEVIL_GATE`), owner or faction, source and destination `GlobalPos`, state, cost, expiry, access rules, linked return UUID, cooldown.
-- `PortalRegistry extends SavedData` on the overworld data store, codec-backed.
-- `DimensionTravelService`: server only. Force-load the destination chunk with a ticket, find a safe position one-to-one with the source, then call `entity.changeDimension(new DimensionTransition(level, pos, Vec3.ZERO, yaw, pitch, post))`. Per-player cooldown stops loops.
-- Blocks: `reinforced_door_frame`, `artificial_door_core` with a block entity holding the portal UUID, a non-solid door-surface block that triggers travel from `entityInside`, `etched_gate_stone`, `infernal_door_core`.
-- Items: `smoke_residue`, `smoke_condenser`, `smoke_conduit`, `preserved_smoke_conduit`, `door_activation_tool`, `door_linking_key`, `devil_sigil`, ritual tool.
-- Multiblock validation on both horizontal axes. Artificial Door frame 4 by 5 with a 2 by 3 opening. Devil Gate frame 5 by 5 with a 3 by 3 opening.
-- Create the paired exit in the destination on first use, and never duplicate it.
-- Recipes and sizes are in `docs/spec/SANDBOX_DIRECTIVE.md`.
-- The Artificial Door and Devil Gate need no magic, so build them first. The Smoke Door needs smoke data, so ship it with sorcerer biology on the same backend.
-
-## Honesty rules the owner requires
-
-Do not claim something works without evidence. Separate verified, implemented and planned. Do not invent API calls: check the 1.21.1 sources in `build/moddev/artifacts/neoforge-21.1.265-sources.jar`. Keep canon and gameplay adaptation labelled. Use original art only. After each work session report what was completed, files changed, build result, test results, blockers and the next smallest milestone.
-
-## Files still required by the specs
-
-`README.md` (real one, the template's is still present), `WORLD_GENERATION.md`, `PORTAL_SYSTEM.md`, `SURVIVAL_BALANCE.md`, `CRAFTING_RECIPES.md`, `VANILLA_COMPATIBILITY_MATRIX.csv` built from the real registry, and the magic documents once that work begins. `docs/LORE_REFERENCE.md`, `docs/ROADMAP.md`, `docs/IMPLEMENTATION_STATUS.md` and `docs/TEST_RESULTS.md` exist.
+1. Unzip full source; read this file and `docs/DISTRICT_IDENTITY_PASS18.md`, `docs/BIOMES_COLD_AND_DISTRICTS_PASS17.md`, `docs/INTERIOR_ARCHITECTURE_PASS15.md`.
+2. Install/use Java 21 and project's matching NeoForge dependencies; run `gradlew.bat runData` and `gradlew.bat build` on Windows; diagnose and repair compilation/registry/worldgen defects rather than hiding them.
+3. Run client and dedicated-server tests on multiple **NEW** worlds; compare districts at street level and rooftop level; verify all seven new landmarks, atmosphere, building entrances, stairs, shops, interiors, sewage, rivers/canals, rail crossing, ores, saplings, mob eggs, recipes, and legacy v0–v6 saves.
+4. Find and fix performance, water leaks, floating decor, inaccessible fences/structures, save compatibility, generation seams, chunk-order mismatch, and visual repetition. Do not alter live save generation version.
+5. Provide real game screenshots, a verified build output if successful, logs/results, and a change report. Keep deferred mechanics untouched until user approval.
 
 ---
+
+## PASS 17 CURRENT
+
+Cold biomes and dry highlands are new optional additions in `normal.json`/Sorcerer dimension JSON; complete integration instructions and test failures are in `docs/BIOMES_COLD_AND_DISTRICTS_PASS17.md`. Full compile still unavailable. Duplicated city method definitions removed. Do not mark new regions gameplay-proven until `runData`, `build`, new-world and old-world tests. Human/sorcerer faction and villager systems remain deferred.
+
+**Pass 16 — Scarce Hole vegetation (new-world v5):** The Hole is a polluted *surface* city, not underground. Outdoor canopy has been cut back to rare, stunted or dead trees; parks are mostly dirty vacant soil, not lush grass. Nursery saplings are sheltered behind glass, scavenged timber remains obtainable, and older saves retain vegetation rules. Source-integrated, needs full NeoForge build and client verification. See `docs/HOLE_SPARSE_TREES_PASS16.md`.
+
+# Current design approval gate — Interior/Architecture Pass 15
+
+User explicitly instructed: **Do not start the new exhaustive Dorohedoro lore, magic, named entity or boss phase until our existing world and building work meets their standards.** The focus is irregular streets, non-repetitive neighborhoods, distinctive buildings and ruins, usable room layouts and strong atmosphere. Fresh-world preset is now `world_detail_version: 4`. Pass 15 adds interior layouts and revises old QA scripts to accept version 4 while retaining legacy support. See `docs/INTERIOR_ARCHITECTURE_PASS15.md` and `docs/previews/interiors15/floorplan_review.png`. Source passes deterministic Java room sampling; full NeoForge compile and in-game visual approval are still pending.
+
+**Pass 14 — Irregular City / Structural Building Forms:** source-integrated, NOT NeoForge compiled or visually verified. New-world `world_detail_version=3` changes 120×120 square arterial pitch to 144×104, preserves canals/trams and starter infrastructure, adds gently bending avenues, connected offset local streets and true 45° cross-city boulevards with safe open-lot reservations. Building shells now include L-shaped recesses, inner courtyards, upper-floor terraces, independent factory service sheds and elevated offices. Old-world v0/v1/v2 behavior remains encoded; use a NEW world. Geometry/static tests pass; full build blocked by Gradle. See `docs/IRREGULAR_CITY_AND_BUILDING_FORMS_PASS14.md` and accumulated test checklist.
+
+**NEW ruined building variety:** Pass 12 now adds boarded stores, cracked/overgrown façades, exposed upper corners, small roof gaps, brownfields with standing wall remnants and district-dependent building decay. Derelict ~65% of eligible buildings abandoned/partly collapsed (seeded test). Entrances, stairs, farms and landmarks protected; closed shops skip regular village shopkeepers. **Not gameplay-verified.**
+
+**NEW: WHOLE WORLD DETAIL PASS 12.** City architecture, street surfaces, district lot silhouettes, hall exteriors, shops, yards, and interior fixtures now have a versioned procedural visual pass. `world_detail_version: 1` is in fresh-world normal preset; missing field = old world generation (0). Full NeoForge build not possible here; see `docs/WORLD_DETAIL_PASS12.md` and `tools/qa-world-detail-pass12.py`. This is source-integrated only.
+
+
+# Most recent checkpoint — Pass 11: Creature Spawn Eggs
+
+Registered eight test spawn eggs in `ModItems.java` using `DeferredSpawnEggItem` from NeoForge 1.21.1. Separate `The Hole: Creatures` creative tab, existing Hole tab, and vanilla Spawn Eggs tab; colored template models and lang translations included. See `docs/SPAWN_EGGS_PASS11.md` and the extended `docs/TEST_CHECKLIST_ACCUMULATED.md`. **Full client/build not verified.** No changes to spawn mechanics, animations, mob drops, sewers, or lore.
+
+# Latest update — Cavern Motion Pass 09 (2026-10-31)
+
+Cavern mob movement rates and their source model animation cycles were increased in tandem after the user reported they looked slow. Sludge Crawler speed 0.19→0.24, Rust-Eater Beetle 0.22→0.27, Cavern Burrower 0.17→0.23, Spore Crawler 0.25→0.30. A smoother 50-frame, exactly five-second preview is stored in `docs/previews/animation_pass09/`. Rust-Eater Beetles now spawn on the Hole **surface** (industrial weight 9, derelict 6, outskirts 3) as well as underground (weight 18), with biome- and elevation-validated server spawn placement. Added to the Java biome bootstrap and saved generated biome data. Source-only: live NeoForge build and in-game spawning/pathfinding are **not yet verified**. See `docs/CAVERN_MOTION_PASS09.md` and `tools/qa-cavern-motion09.py`. The approved moth animation and its moving light feature were not changed.
+
+## MOVEMENT PASS 08 — 5-second continuous motion previews + better gait
+
+Five-second previews of all eight mobs now reside in `docs/previews/animation_pass08/` with an exact 5000 ms timeline and `tools/render-movement-pass08.py` to regenerate them. Real source motion changes add swing-phase foot lifting for the Roach, Rat, Beetle, Burrower and Spore Crawler, plus a compressing/lifting longitudinal body wave for the Leech. No changes to the approved Glow Moth wing design or six-tooth Leech mouth; no changes to vanilla mining or portal content. All animation changes are mirrored in geometry JSON and regenerated native Minecraft Java model classes. Source/parser/previews offline checked; NO full NeoForge compilation or in-game approval. Start testing against the accumulated test checklist. See `docs/MOB_MOVEMENT_REFINEMENT_PASS08.md`.
+
+## LATEST ANIMATION PASS 07
+Eight mob movement rigs with true anatomical pivots, attack and injury reactions, plus Glow Moth temporary vanilla block light 12. Full procedure, cleanup caveats, performance tests, source preview animations: docs/MOB_ANIMATIONS_AND_LIGHT_PASS07.md and docs/previews/animation_pass07/. Full Gradle build not performed.
+
+# Latest creature visuals: Moth / Leech Pass 06 (review required)
+
+Per direct user feedback, **Sewer Leech now has just six teeth** (2 top, 2 bottom, 2 corner hooks, each with base+tip) and no dense rakers, tooth rows, or papillae. **Glow Moth now flaps from two shoulder-based forewing hinges and two hindwing hinges** with lagging hindwing motion; folds upward when resting. Both changes are in the actual generated Java LayerDefinitions and UV atlases, not just renders. See `docs/MOTH_LEECH_REFINEMENT_PASS06.md` and `docs/previews/glow_moth_pass06_flap.gif`.
+
+Static/animation source rendering and syntax passed, **but the NeoForge compilation and actual gameplay are still unverified**. Do not claim approval or continue adding new mobs until the user has reviewed the new moth/leech models.
+
+---
+
+**Pass 05 update (visual models, not Minecraft-verified):** Glow Moth and Sewer Leech source geometry, textures and Java `LayerDefinition` classes updated to respond to the user’s visual feedback. See `docs/MOTH_LEECH_REFINEMENT_PASS05.md` and `docs/previews/moth_leech_pass05_comparison.png`. No changes to mob drops, existing recipes or worldgen.
+
+# Latest checkpoint: Creature Fidelity Pass 04 — 2026-10-31
+
+Eight source-backed Minecraft mob models were refined toward the user-approved design sheet. See `docs/MOB_FIDELITY_PASS_04.md` and `docs/reference/approved_creatures.png`, plus the latest source-geometry renders. Models have new textured UV atlases, expanded model parts, and preserved animations. Four existing and four newer fauna species stay registered with their prior gameplay systems. Full Minecraft/NeoForge compilation remains **unverified** due to missing Gradle distribution. Next priority: runData/build/in-game geometry and AI, fix any missing parts or data, and do another direct reference-vs-game screenshot fidelity pass. Preserve Minecraft normal mining, 30% sewer cave paths, crafting and all test requirements. FTB Quests remains deferred.

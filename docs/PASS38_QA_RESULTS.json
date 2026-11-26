@@ -1,0 +1,15 @@
+{
+  "skills": 64,
+  "unique_icons": 64,
+  "total_visible_icon_pixels": 25196,
+  "hud_labels_removed": true,
+  "gameplay_uses_unlabeled_slender_bars": true,
+  "vanilla_survival_hearts_food_avoids_duplicates": true,
+  "small_screen_skill_pagination": true,
+  "icons_render_in_menu": true,
+  "modified_existing_block_textures": 4,
+  "modified_existing_item_textures": 8,
+  "full_client_compile": "NOT_RUN",
+  "in_game_test": "NOT_RUN",
+  "technique_crash_root_cause": "UNCONFIRMED"
+}

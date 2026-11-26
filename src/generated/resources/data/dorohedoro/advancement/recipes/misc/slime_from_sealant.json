@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_sealant": {
+      "conditions": {
+        "items": [
+          {
+            "items": "dorohedoro:sewer_sealant"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "dorohedoro:slime_from_sealant"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_sealant"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "dorohedoro:slime_from_sealant"
+    ]
+  }
+}

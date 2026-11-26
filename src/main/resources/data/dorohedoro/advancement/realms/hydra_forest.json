@@ -1,0 +1,30 @@
+{
+  "criteria": {
+    "visited": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biomes": [
+                  "dorohedoro:sw_hydra_forest",
+                  "minecraft:dark_forest"
+                ],
+                "dimension": "dorohedoro:sorcerers_world"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "visited"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

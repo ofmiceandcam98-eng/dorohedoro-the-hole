@@ -1,0 +1,120 @@
+# Pass 21.4 change manifest
+
+Changed existing files: 98; added: 8; removed: 0.
+
+## Modified original files
+
+- `src/main/resources/assets/dorohedoro/models/item/cooked_left_arm.json`
+- `src/main/resources/assets/dorohedoro/models/item/cooked_left_leg.json`
+- `src/main/resources/assets/dorohedoro/models/item/cooked_right_arm.json`
+- `src/main/resources/assets/dorohedoro/models/item/cooked_right_leg.json`
+- `src/main/resources/assets/dorohedoro/models/item/severed_left_arm.json`
+- `src/main/resources/assets/dorohedoro/models/item/severed_left_leg.json`
+- `src/main/resources/assets/dorohedoro/models/item/severed_right_arm.json`
+- `src/main/resources/assets/dorohedoro/models/item/severed_right_leg.json`
+- `src/main/resources/assets/dorohedoro/textures/block/artificial_door_core.png`
+- `src/main/resources/assets/dorohedoro/textures/block/ash_soil.png`
+- `src/main/resources/assets/dorohedoro/textures/block/cavern_lamp.png`
+- `src/main/resources/assets/dorohedoro/textures/block/cavern_lamp_frame.png`
+- `src/main/resources/assets/dorohedoro/textures/block/cavern_lamp_glow.png`
+- `src/main/resources/assets/dorohedoro/textures/block/chitin_plating.png`
+- `src/main/resources/assets/dorohedoro/textures/block/condensed_smoke_barrier.png`
+- `src/main/resources/assets/dorohedoro/textures/block/etched_gate_stone.png`
+- `src/main/resources/assets/dorohedoro/textures/block/galvanized_plating.png`
+- `src/main/resources/assets/dorohedoro/textures/block/generated_artificial_core.png`
+- `src/main/resources/assets/dorohedoro/textures/block/generated_door_frame.png`
+- `src/main/resources/assets/dorohedoro/textures/block/generated_gate_stone.png`
+- `src/main/resources/assets/dorohedoro/textures/block/generated_infernal_core.png`
+- `src/main/resources/assets/dorohedoro/textures/block/hell_rock.png`
+- `src/main/resources/assets/dorohedoro/textures/block/industrial_debris.png`
+- `src/main/resources/assets/dorohedoro/textures/block/infernal_door_core.png`
+- `src/main/resources/assets/dorohedoro/textures/block/limestone.png`
+- `src/main/resources/assets/dorohedoro/textures/block/oil_shale_ore.png`
+- `src/main/resources/assets/dorohedoro/textures/block/patchwork_masonry.png`
+- `src/main/resources/assets/dorohedoro/textures/block/portal_surface.png`
+- `src/main/resources/assets/dorohedoro/textures/block/reinforced_door_frame.png`
+- `src/main/resources/assets/dorohedoro/textures/block/rock_salt_ore.png`
+- `src/main/resources/assets/dorohedoro/textures/block/rusted_industrial_sheet.png`
+- `src/main/resources/assets/dorohedoro/textures/block/rusted_plating.png`
+- `src/main/resources/assets/dorohedoro/textures/block/seepage_brick.png`
+- `src/main/resources/assets/dorohedoro/textures/block/sewer_brickwork.png`
+- `src/main/resources/assets/dorohedoro/textures/block/smoke_stained_concrete.png`
+- `src/main/resources/assets/dorohedoro/textures/block/soot_blackened_brick.png`
+- `src/main/resources/assets/dorohedoro/textures/block/sulfur_ore.png`
+- `src/main/resources/assets/dorohedoro/textures/block/water_damaged_plaster.png`
+- `src/main/resources/assets/dorohedoro/textures/block/zinc_ore.png`
+- `src/main/resources/assets/dorohedoro/textures/item/antidote_poultice.png`
+- `src/main/resources/assets/dorohedoro/textures/item/bitumen.png`
+- `src/main/resources/assets/dorohedoro/textures/item/brass_ingot.png`
+- `src/main/resources/assets/dorohedoro/textures/item/burrower_claw.png`
+- `src/main/resources/assets/dorohedoro/textures/item/coagulated_tar.png`
+- `src/main/resources/assets/dorohedoro/textures/item/cooked_left_arm.png`
+- `src/main/resources/assets/dorohedoro/textures/item/cooked_left_leg.png`
+- `src/main/resources/assets/dorohedoro/textures/item/cooked_rat_meat.png`
+- `src/main/resources/assets/dorohedoro/textures/item/cooked_right_arm.png`
+- `src/main/resources/assets/dorohedoro/textures/item/cooked_right_leg.png`
+- `src/main/resources/assets/dorohedoro/textures/item/corrosive_gland.png`
+- `src/main/resources/assets/dorohedoro/textures/item/curse_smoke_flask.png`
+- `src/main/resources/assets/dorohedoro/textures/item/dense_hide.png`
+- `src/main/resources/assets/dorohedoro/textures/item/destruction_smoke_flask.png`
+- `src/main/resources/assets/dorohedoro/textures/item/devil_sigil.png`
+- `src/main/resources/assets/dorohedoro/textures/item/dismemberment_smoke_flask.png`
+- `src/main/resources/assets/dorohedoro/textures/item/door_activation_tool.png`
+- `src/main/resources/assets/dorohedoro/textures/item/door_linking_key.png`
+- `src/main/resources/assets/dorohedoro/textures/item/empty_smoke_flask.png`
+- `src/main/resources/assets/dorohedoro/textures/item/fungal_membrane.png`
+- `src/main/resources/assets/dorohedoro/textures/item/glow_tonic.png`
+- `src/main/resources/assets/dorohedoro/textures/item/healing_smoke_flask.png`
+- `src/main/resources/assets/dorohedoro/textures/item/leech_mucus.png`
+- `src/main/resources/assets/dorohedoro/textures/item/leech_sucker.png`
+- `src/main/resources/assets/dorohedoro/textures/item/lime_powder.png`
+- `src/main/resources/assets/dorohedoro/textures/item/luminous_scale.png`
+- `src/main/resources/assets/dorohedoro/textures/item/medical_salve.png`
+- `src/main/resources/assets/dorohedoro/textures/item/metallic_carapace.png`
+- `src/main/resources/assets/dorohedoro/textures/item/moth_silk.png`
+- `src/main/resources/assets/dorohedoro/textures/item/mushroom_smoke_flask.png`
+- `src/main/resources/assets/dorohedoro/textures/item/oil_shale_chunk.png`
+- `src/main/resources/assets/dorohedoro/textures/item/preserved_smoke_conduit.png`
+- `src/main/resources/assets/dorohedoro/textures/item/protection_smoke_flask.png`
+- `src/main/resources/assets/dorohedoro/textures/item/rat_fur.png`
+- `src/main/resources/assets/dorohedoro/textures/item/raw_rat_meat.png`
+- `src/main/resources/assets/dorohedoro/textures/item/raw_sulfur.png`
+- `src/main/resources/assets/dorohedoro/textures/item/raw_zinc.png`
+- `src/main/resources/assets/dorohedoro/textures/item/reinforced_chitin.png`
+- `src/main/resources/assets/dorohedoro/textures/item/reptile_smoke_flask.png`
+- `src/main/resources/assets/dorohedoro/textures/item/ritual_tool.png`
+- `src/main/resources/assets/dorohedoro/textures/item/roach_antenna.png`
+- `src/main/resources/assets/dorohedoro/textures/item/rock_salt.png`
+- `src/main/resources/assets/dorohedoro/textures/item/salted_rat_ration.png`
+- `src/main/resources/assets/dorohedoro/textures/item/scrap_metal.png`
+- `src/main/resources/assets/dorohedoro/textures/item/severed_left_arm.png`
+- `src/main/resources/assets/dorohedoro/textures/item/severed_left_leg.png`
+- `src/main/resources/assets/dorohedoro/textures/item/severed_right_arm.png`
+- `src/main/resources/assets/dorohedoro/textures/item/severed_right_leg.png`
+- `src/main/resources/assets/dorohedoro/textures/item/sewer_echo_probe.png`
+- `src/main/resources/assets/dorohedoro/textures/item/sewer_sealant.png`
+- `src/main/resources/assets/dorohedoro/textures/item/sludge_gland.png`
+- `src/main/resources/assets/dorohedoro/textures/item/smoke_condenser.png`
+- `src/main/resources/assets/dorohedoro/textures/item/smoke_conduit.png`
+- `src/main/resources/assets/dorohedoro/textures/item/smoke_residue.png`
+- `src/main/resources/assets/dorohedoro/textures/item/smoke_soaked_filter.png`
+- `src/main/resources/assets/dorohedoro/textures/item/spore_sac.png`
+- `src/main/resources/assets/dorohedoro/textures/item/surgical_reattachment_kit.png`
+- `src/main/resources/assets/dorohedoro/textures/item/time_smoke_flask.png`
+- `src/main/resources/assets/dorohedoro/textures/item/zinc_ingot.png`
+
+## New files
+- `CHANGED_FILES_PASS21_4.md`
+- `STATIC_QA_PASS21_4.md`
+- `ART_DIRECTION_PASS21_4.md`
+- `SOURCE_STATUS_PASS21_4.md`
+- `tools/art/qa_pass21_4.py`
+- `tools/art/regenerate_pass21_4_blocks.py`
+- `tools/art/regenerate_pass21_4_items.py`
+- `tools/art/regenerate_pass21_4_models.py`
+
+## Removed
+
+None
+
+**No Java files changed. No removed files. Not compiled / not tested in Minecraft.**

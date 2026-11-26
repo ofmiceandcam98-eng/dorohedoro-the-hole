@@ -1,0 +1,43 @@
+# Pass 70 changes compared to Pass 69
+
+- `HANDOFF.md`
+- `Pass70_Claude_Wednesday_Handoff.md`
+- `README.md`
+- `docs/PASS70_CONNECTED_STORM_DRAINS_CAVE_TRANSITIONS.md`
+- `src/main/java/com/dorohedoro/hole/worldgen/city/CityPainter.java`
+- `src/main/java/com/dorohedoro/hole/worldgen/city/CitySettings.java`
+- `src/main/java/com/dorohedoro/hole/worldgen/city/SewerCaveBranches.java`
+- `src/main/java/com/dorohedoro/hole/worldgen/city/SewerCaveTransitions70.java`
+- `src/main/java/com/dorohedoro/hole/worldgen/city/SewerVaultVariants70.java`
+- `src/main/java/com/dorohedoro/hole/worldgen/city/StormDrainBypasses70.java`
+- `src/main/resources/data/minecraft/worldgen/world_preset/normal.json`
+- `tools/qa-pass43-source.py`
+- `tools/qa-pass44-source.py`
+- `tools/qa-pass45-source.py`
+- `tools/qa-pass46-source.py`
+- `tools/qa-pass47-source.py`
+- `tools/qa-pass49-source.py`
+- `tools/qa-pass50-source.py`
+- `tools/qa-pass51-source.py`
+- `tools/qa-pass52-source.py`
+- `tools/qa-pass53-source.py`
+- `tools/qa-pass54-source.py`
+- `tools/qa-pass55-source.py`
+- `tools/qa-pass56-source.py`
+- `tools/qa-pass57-source.py`
+- `tools/qa-pass58-source.py`
+- `tools/qa-pass59-source.py`
+- `tools/qa-pass60-source.py`
+- `tools/qa-pass61-source.py`
+- `tools/qa-pass63-source.py`
+- `tools/qa-pass64-source.py`
+- `tools/qa-pass65-source.py`
+- `tools/qa-pass66-source.py`
+- `tools/qa-pass67-source.py`
+- `tools/qa-pass68-source.py`
+- `tools/qa-pass69-source.py`
+- `tools/qa-pass70-all.sh`
+- `tools/qa-pass70-sewer-architecture.sh`
+- `tools/qa-pass70-source.py`
+
+No source paths removed.

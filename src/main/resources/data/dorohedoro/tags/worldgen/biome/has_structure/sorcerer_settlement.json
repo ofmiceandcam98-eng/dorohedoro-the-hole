@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:plains",
+    "minecraft:sunflower_plains",
+    "minecraft:meadow",
+    "minecraft:savanna",
+    "minecraft:forest",
+    "minecraft:flower_forest",
+    "minecraft:birch_forest",
+    "minecraft:old_growth_birch_forest",
+    "minecraft:dark_forest",
+    "minecraft:taiga",
+    "minecraft:cherry_grove",
+    "minecraft:snowy_plains",
+    "dorohedoro:sw_city",
+    "dorohedoro:sw_city_edge",
+    "dorohedoro:sw_farmland",
+    "dorohedoro:sw_woodland"
+  ]
+}

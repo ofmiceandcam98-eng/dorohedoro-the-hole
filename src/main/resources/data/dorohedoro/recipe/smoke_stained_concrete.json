@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "minecraft:gray_concrete"
+    },
+    {
+      "item": "minecraft:gray_concrete"
+    },
+    {
+      "item": "minecraft:gray_concrete"
+    },
+    {
+      "item": "minecraft:gray_concrete"
+    },
+    {
+      "item": "minecraft:charcoal"
+    }
+  ],
+  "result": {
+    "id": "dorohedoro:smoke_stained_concrete",
+    "count": 4
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_medical_salve": {
+      "conditions": {
+        "items": [
+          {
+            "items": "dorohedoro:medical_salve"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "dorohedoro:surgical_reattachment_kit"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_medical_salve"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "dorohedoro:surgical_reattachment_kit"
+    ]
+  }
+}

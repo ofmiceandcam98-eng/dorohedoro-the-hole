@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "dorohedoro:item/destruction_smoke_flask"
+  }
+}

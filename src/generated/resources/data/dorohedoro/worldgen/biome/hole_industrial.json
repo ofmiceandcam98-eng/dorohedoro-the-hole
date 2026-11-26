@@ -2,7 +2,7 @@
   "carvers": {},
   "downfall": 0.6,
   "effects": {
-    "fog_color": 5001029,
+    "fog_color": 7501676,
     "foliage_color": 5263408,
     "grass_color": 6250298,
     "mood_sound": {
@@ -17,7 +17,7 @@
       },
       "probability": 0.007
     },
-    "sky_color": 3816758,
+    "sky_color": 9410959,
     "water_color": 4869948,
     "water_fog_color": 1842710
   },
@@ -60,7 +60,12 @@
       "minecraft:ore_lapis_buried",
       "minecraft:ore_copper",
       "minecraft:underwater_magma",
-      "minecraft:ore_emerald"
+      "minecraft:ore_emerald",
+      "dorohedoro:sulfur_veins",
+      "dorohedoro:rock_salt_veins",
+      "dorohedoro:limestone_pockets",
+      "dorohedoro:zinc_veins",
+      "dorohedoro:oil_shale_veins"
     ],
     [
       "minecraft:ore_infested"
@@ -84,10 +89,29 @@
         "maxCount": 8,
         "minCount": 8,
         "weight": 10
+      },
+      {
+        "type": "dorohedoro:scrap_rat",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 19
+      },
+      {
+        "type": "dorohedoro:glow_moth",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 4
       }
     ],
     "axolotls": [],
-    "creature": [],
+    "creature": [
+      {
+        "type": "dorohedoro:rust_eater_beetle",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 9
+      }
+    ],
     "misc": [],
     "monster": [
       {
@@ -139,10 +163,40 @@
         "weight": 5
       },
       {
+        "type": "dorohedoro:sewer_roach",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 17
+      },
+      {
+        "type": "dorohedoro:sludge_crawler",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 7
+      },
+      {
         "type": "minecraft:silverfish",
         "maxCount": 3,
         "minCount": 1,
         "weight": 12
+      },
+      {
+        "type": "dorohedoro:sewer_leech",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 7
+      },
+      {
+        "type": "dorohedoro:cavern_burrower",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 4
+      },
+      {
+        "type": "dorohedoro:spore_crawler",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 7
       }
     ],
     "underground_water_creature": [
@@ -153,7 +207,14 @@
         "weight": 10
       }
     ],
-    "water_ambient": [],
+    "water_ambient": [
+      {
+        "type": "minecraft:salmon",
+        "maxCount": 3,
+        "minCount": 2,
+        "weight": 12
+      }
+    ],
     "water_creature": []
   },
   "temperature": 0.7

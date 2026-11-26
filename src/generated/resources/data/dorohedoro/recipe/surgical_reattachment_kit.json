@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "item": "minecraft:iron_nugget"
+    },
+    "M": {
+      "item": "dorohedoro:medical_salve"
+    },
+    "S": {
+      "item": "minecraft:string"
+    }
+  },
+  "pattern": [
+    "ISI",
+    "SMS",
+    "ISI"
+  ],
+  "result": {
+    "count": 1,
+    "id": "dorohedoro:surgical_reattachment_kit"
+  }
+}

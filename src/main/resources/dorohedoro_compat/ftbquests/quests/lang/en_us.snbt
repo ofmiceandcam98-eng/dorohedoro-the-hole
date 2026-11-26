@@ -1,0 +1,181 @@
+{
+	chapter.0D0E0B0E01000000.title: "Welcome to the Hole"
+	chapter.0D0E0B0E02000000.title: "Under the Streets"
+	chapter.0D0E0B0E03000000.title: "Doors Between Worlds"
+	chapter.0D0E0B0E04000000.title: "Hell"
+	chapter_group.0D0E0B0E00000001.title: "Dorohedoro: The Hole"
+	quest.0D0E0B0E01010000.quest_desc: [
+		"The first time you join, the mod asks who you are: a human, or a sorcerer with one innate smoke magic."
+		""
+		"Humans can make everything a sorcerer can travel with, including the Artificial Door. Nothing in this book is locked to one origin."
+		""
+		"This book is a guide only. You can ignore it completely."
+	]
+	quest.0D0E0B0E01010000.quest_subtitle: "Human or sorcerer, you start here"
+	quest.0D0E0B0E01010000.title: "Born in the Hole"
+	quest.0D0E0B0E01020000.quest_desc: [
+		"Heaps of Industrial Debris lie in yards and alleys across the city. Mine them with a pickaxe for Scrap Metal and the odd iron nugget."
+		""
+		"Scrap smelts into iron nuggets. Four Scrap in a square make two Rusted Plating, a building block that every Reinforced Door Frame needs."
+	]
+	quest.0D0E0B0E01020000.quest_subtitle: "Industrial Debris is the Hole's first metal"
+	quest.0D0E0B0E01020000.title: "Scrap Is Currency"
+	quest.0D0E0B0E01040000.quest_desc: [
+		"Sulfur Ore and Rock Salt Ore are in the stone below the city, with deepslate versions further down."
+		""
+		"Sulfur goes into gunpowder; salt preserves food."
+	]
+	quest.0D0E0B0E01040000.quest_subtitle: "Minerals under the streets"
+	quest.0D0E0B0E01040000.title: "Salt and Sulfur"
+	quest.0D0E0B0E01050000.quest_desc: ["Scrap Rats run from you, but their meat cooks like any other. Cooked Rat Meat, Rock Salt and Bread make a Salted Rat Ration, one of the most filling foods in the Hole."]
+	quest.0D0E0B0E01050000.quest_subtitle: "Food that keeps"
+	quest.0D0E0B0E01050000.title: "Salted Rations"
+	quest.0D0E0B0E01060000.quest_desc: [
+		"Smelt Raw Zinc from Zinc Ore into Zinc Ingots. One Zinc Ingot and one Copper Ingot make two Brass Ingots."
+		""
+		"Brass goes into Cavern Lamps."
+	]
+	quest.0D0E0B0E01060000.quest_subtitle: "The city's working metals"
+	quest.0D0E0B0E01060000.title: "Zinc and Brass"
+	quest.0D0E0B0E01070000.quest_desc: [
+		"A Cavern Lamp needs Brass, Glass Panes, an Iron Ingot, Redstone and two Luminous Scales from a Glow Moth."
+		""
+		"It gives steady light for streets, sewers and homes."
+	]
+	quest.0D0E0B0E01070000.quest_subtitle: "A lamp that never needs fuel"
+	quest.0D0E0B0E01070000.title: "Light in the Smog"
+	quest.0D0E0B0E01080000.quest_desc: [
+		"If you are a sorcerer, equip a technique in your character record (press B) and cast it with Z, X or C."
+		""
+		"Humans can skip this one. Bottled smoke in Smoke Flasks lets anyone use a sorcerer's magic."
+	]
+	quest.0D0E0B0E01080000.quest_subtitle: "Optional: for sorcerers"
+	quest.0D0E0B0E01080000.title: "First Technique"
+	quest.0D0E0B0E020A0000.quest_desc: [
+		"Storm drains and sewer grates lead down into brick tunnels, and some long branches open into caverns."
+		""
+		"Reach the undercity below the streets. Bring torches and food."
+	]
+	quest.0D0E0B0E020A0000.quest_subtitle: "The sewers run under every district"
+	quest.0D0E0B0E020A0000.title: "Into the Undercity"
+	quest.0D0E0B0E020B0000.quest_desc: ["Sewer Roaches pounce from the dark, and they alert each other when hurt. Their antennae and chitin are useful."]
+	quest.0D0E0B0E020B0000.quest_subtitle: "Sewer Roaches bite"
+	quest.0D0E0B0E020B0000.title: "Pest Control"
+	quest.0D0E0B0E020C0000.quest_desc: ["A Sewer Echo Probe uses Roach Antennae, Redstone, Copper and Iron to sense the sewer around you."]
+	quest.0D0E0B0E020C0000.quest_subtitle: "Find your way underground"
+	quest.0D0E0B0E020C0000.title: "Echoes in the Pipes"
+	quest.0D0E0B0E020D0000.quest_desc: ["Glow Moths drift through dark places and light the air around them. Use shears on one for Luminous Scales; it grows them back."]
+	quest.0D0E0B0E020D0000.quest_subtitle: "Shear a Glow Moth"
+	quest.0D0E0B0E020D0000.title: "Moth Light"
+	quest.0D0E0B0E020E0000.quest_desc: ["Sewer Leeches live in the water. Their mucus, with Paper and a Honey Bottle, makes a Medical Salve."]
+	quest.0D0E0B0E020E0000.quest_subtitle: "Leech mucus heals"
+	quest.0D0E0B0E020E0000.title: "Patch Yourself Up"
+	quest.0D0E0B0E020F0000.quest_desc: ["Spore Crawlers poison what they hit. A Spore Sac, Leech Mucus and a Fungal Membrane make two Antidote Poultices, which cure poison."]
+	quest.0D0E0B0E020F0000.quest_subtitle: "Spores, slime and poison"
+	quest.0D0E0B0E020F0000.title: "Antidote"
+	quest.0D0E0B0E02100000.quest_desc: [
+		"Creature parts brew from an Awkward Potion: a Spore Sac makes Poison, a Sludge Gland makes Slowness, a Burrower Claw makes Strength, and more."
+		""
+		"Brew any potion to finish this quest."
+	]
+	quest.0D0E0B0E02100000.quest_subtitle: "Creature parts in the brewing stand"
+	quest.0D0E0B0E02100000.title: "Hole Brewing"
+	quest.0D0E0B0E02110000.quest_desc: [
+		"Dismemberment magic can take a limb. A Surgical Reattachment Kit, or a Healing sorcerer, puts the matching uncooked limb back."
+		""
+		"The patient crouches to agree. You can do this for a friend or have one do it for you."
+	]
+	quest.0D0E0B0E02110000.quest_subtitle: "Optional: reattach a severed limb"
+	quest.0D0E0B0E02110000.title: "Back in One Piece"
+	quest.0D0E0B0E03140000.quest_desc: [
+		"Mining Industrial Debris sometimes turns up a Smoke-Soaked Filter. They are also in apartment, factory and laboratory chests."
+		""
+		"This is where a human's road to the Sorcerers' World starts."
+	]
+	quest.0D0E0B0E03140000.quest_subtitle: "Old smoke in old machines"
+	quest.0D0E0B0E03140000.title: "Smoke-Soaked Filter"
+	quest.0D0E0B0E03150000.quest_desc: ["Smelting a Smoke-Soaked Filter leaves Smoke Residue, the magical condensate every door machine needs."]
+	quest.0D0E0B0E03150000.quest_subtitle: "Smelt the filter"
+	quest.0D0E0B0E03150000.title: "Smoke Residue"
+	quest.0D0E0B0E03160000.quest_desc: ["The Smoke Condenser captures and holds smoke. It is the heart of an Artificial Door Core."]
+	quest.0D0E0B0E03160000.quest_subtitle: "Iron, copper, redstone and residue"
+	quest.0D0E0B0E03160000.title: "Smoke Condenser"
+	quest.0D0E0B0E03170000.quest_desc: ["Craft Smoke Conduits from Copper, Glass, Iron and Redstone, then treat one with Smoke Residue and Bone Meal to make a Preserved Smoke Conduit."]
+	quest.0D0E0B0E03170000.quest_subtitle: "A pipe that keeps smoke stable"
+	quest.0D0E0B0E03170000.title: "Preserved Conduit"
+	quest.0D0E0B0E03180000.quest_desc: [
+		"Bone Blocks, a Smoke Condenser, Iron, a Preserved Smoke Conduit and a Redstone Block make the core."
+		""
+		"You also need 13 Reinforced Door Frames: Iron Ingots, Rusted Plating and Stone Bricks make four at a time."
+	]
+	quest.0D0E0B0E03180000.quest_subtitle: "A door any human can build"
+	quest.0D0E0B0E03180000.title: "Artificial Door Core"
+	quest.0D0E0B0E03190000.quest_desc: [
+		"Build a frame 4 blocks wide and 5 tall with a clear 2x3 opening. The core goes in the bottom row, second from the left."
+		""
+		"Right-click the core with the Door Activation Tool. Smoke fills the doorway and a matching door forms in the Sorcerers' World."
+		""
+		"Only a real, working door counts. Holding a core does not."
+	]
+	quest.0D0E0B0E03190000.quest_subtitle: "Build it, then wake it"
+	quest.0D0E0B0E03190000.title: "Open the Door"
+	quest.0D0E0B0E031A0000.quest_desc: [
+		"Step through. The Sorcerers' World has its own cities, farmland, woods and mountains, and no rain."
+		""
+		"Your door's far end waits for you; walk back through it to return to the Hole."
+	]
+	quest.0D0E0B0E031A0000.quest_subtitle: "It never rains here"
+	quest.0D0E0B0E031A0000.title: "The Sorcerers' World"
+	quest.0D0E0B0E031B0000.quest_desc: ["Unlike the Hole, the Sorcerers' World has full forests. Find the dense Hydra Forest and bring back wood and saplings for a tree farm at home."]
+	quest.0D0E0B0E031B0000.quest_subtitle: "Real timber at last"
+	quest.0D0E0B0E031B0000.title: "Hydra Forest"
+	quest.0D0E0B0E041E0000.quest_desc: [
+		"A Devil Sigil takes Obsidian, Gold, Smoke Residue, a Bone Block and an Emerald. Rare sigils also turn up in laboratory and crypt loot."
+		""
+		"Everything for your first gate can be found before you ever reach Hell."
+	]
+	quest.0D0E0B0E041E0000.quest_subtitle: "Expensive, but no devil needed"
+	quest.0D0E0B0E041E0000.title: "Devil Sigil"
+	quest.0D0E0B0E041F0000.quest_desc: [
+		"Etched Gate Stone comes four at a time from Bone Blocks, Stone Bricks and a Redstone Block."
+		""
+		"The Infernal Door Core takes two Devil Sigils, Bone Blocks, two Etched Gate Stones and a Preserved Smoke Conduit. Craft a Ritual Tool to wake it."
+	]
+	quest.0D0E0B0E041F0000.quest_subtitle: "Fifteen stones, one core"
+	quest.0D0E0B0E041F0000.title: "Gate Stones and Core"
+	quest.0D0E0B0E04200000.quest_desc: [
+		"Build a 5x5 ring of Etched Gate Stone with a clear 3x3 middle. The Infernal Door Core sits at the center of the bottom row."
+		""
+		"Right-click the core with the Ritual Tool."
+	]
+	quest.0D0E0B0E04200000.quest_subtitle: "Five by five"
+	quest.0D0E0B0E04200000.title: "Open the Devil Gate"
+	quest.0D0E0B0E04210000.quest_desc: [
+		"Hell is barren: ash wastes, horn-shaped mountains, soul flats and deep caverns. Nothing grows there."
+		""
+		"Your gate's return end stands where you arrive. Remember where it is."
+	]
+	quest.0D0E0B0E04210000.quest_subtitle: "Not the Nether"
+	quest.0D0E0B0E04210000.title: "Into Hell"
+	quest.0D0E0B0E04220000.quest_desc: ["Hell Rock is a dark, hard stone that makes a good building block. Ash Soil covers the wastes."]
+	quest.0D0E0B0E04220000.quest_subtitle: "Building stone from the wastes"
+	quest.0D0E0B0E04220000.title: "Hell Rock"
+	quest.0D0E0B0E04230000.quest_desc: ["Find the horn-shaped peaks of Hell."]
+	quest.0D0E0B0E04230000.quest_subtitle: "Mountains like devil horns"
+	quest.0D0E0B0E04230000.title: "The Horns"
+	quest.0D0E0B0E04240000.quest_desc: ["Travel back to the Hole through a Devil Gate. Dying and respawning does not count."]
+	quest.0D0E0B0E04240000.quest_subtitle: "Walk back through your gate alive"
+	quest.0D0E0B0E04240000.title: "Safe Return"
+	task.0D0E0B0E01011000.title: "Choose your origin"
+	task.0D0E0B0E01081000.title: "Cast a technique"
+	task.0D0E0B0E020A1000.title: "Reach the undercity"
+	task.0D0E0B0E02101000.title: "Brew a potion"
+	task.0D0E0B0E02111000.title: "Reattach a limb"
+	task.0D0E0B0E03191000.title: "Activate an Artificial Door"
+	task.0D0E0B0E031A1000.title: "Enter the Sorcerers' World"
+	task.0D0E0B0E031B1000.title: "Visit the Hydra Forest"
+	task.0D0E0B0E04201000.title: "Activate a Devil Gate"
+	task.0D0E0B0E04211000.title: "Enter Hell"
+	task.0D0E0B0E04231000.title: "Reach the Horns"
+	task.0D0E0B0E04241000.title: "Return from Hell through a gate"
+}

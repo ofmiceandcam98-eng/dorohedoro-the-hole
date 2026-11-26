@@ -16,8 +16,9 @@ online-mode=false
 spawn-protection=0
 view-distance=6
 simulation-distance=4
+max-tick-time=-1
 EOF
-./gradlew --no-daemon runQaServer -Pqa_dir="$dir" -Pqa_radius="$radius" -Pqa_order="$order" -Pqa_dump="${QA_DUMP:-}" > "$dir/gradle.log" 2>&1
+./gradlew --no-daemon runQaServer -Pqa_dir="$dir" -Pqa_radius="$radius" -Pqa_order="$order" -Pqa_dump="${QA_DUMP:-}" -Pqa_structures="${QA_STRUCTURES:-false}" > "$dir/gradle.log" 2>&1
 rc=$?
 report="$dir/qa/report-$order.json"
 if [ ! -f "$report" ]; then

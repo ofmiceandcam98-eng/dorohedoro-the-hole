@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "dorohedoro:spore_sac"
+    },
+    {
+      "item": "dorohedoro:leech_mucus"
+    },
+    {
+      "item": "dorohedoro:fungal_membrane"
+    },
+    {
+      "item": "minecraft:bowl"
+    }
+  ],
+  "result": {
+    "id": "dorohedoro:antidote_poultice",
+    "count": 2
+  }
+}

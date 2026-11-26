@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smoking",
+  "category": "food",
+  "cookingtime": 100,
+  "experience": 0.35,
+  "ingredient": {
+    "item": "dorohedoro:severed_right_arm"
+  },
+  "result": {
+    "id": "dorohedoro:cooked_right_arm"
+  }
+}

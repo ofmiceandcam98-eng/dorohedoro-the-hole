@@ -1,0 +1,13 @@
+10:00:13 CLIENTQA smoke storm: sent 8 magic types in one frame
+10:00:13 Smoke mesh render failed for spore_puff: cue discarded
+java.lang.IllegalStateException: Not building!
+10:00:13 Smoke mesh render failed for severing_touch: cue discarded
+java.lang.IllegalStateException: Not building!
+10:00:13 Smoke mesh render failed for mend_flesh: cue discarded
+java.lang.IllegalStateException: Not building!
+10:00:13 Smoke mesh render failed for curse_mark: cue discarded
+java.lang.IllegalStateException: Not building!
+10:00:13 Smoke mesh render failed for smoke_ward: cue discarded
+java.lang.IllegalStateException: Not building!
+10:00:13 Smoke mesh render failed for smoke_shot: cue discarded
+java.lang.IllegalStateException: Not building!

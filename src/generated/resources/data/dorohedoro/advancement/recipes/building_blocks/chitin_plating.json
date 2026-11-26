@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_chitin": {
+      "conditions": {
+        "items": [
+          {
+            "items": "dorohedoro:reinforced_chitin"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "dorohedoro:chitin_plating"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_chitin"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "dorohedoro:chitin_plating"
+    ]
+  }
+}

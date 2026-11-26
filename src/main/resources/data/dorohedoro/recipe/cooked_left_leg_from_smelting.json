@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smelting",
+  "category": "food",
+  "cookingtime": 200,
+  "experience": 0.35,
+  "ingredient": {
+    "item": "dorohedoro:severed_left_leg"
+  },
+  "result": {
+    "id": "dorohedoro:cooked_left_leg"
+  }
+}

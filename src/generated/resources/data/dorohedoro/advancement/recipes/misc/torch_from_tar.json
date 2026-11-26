@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_tar": {
+      "conditions": {
+        "items": [
+          {
+            "items": "dorohedoro:coagulated_tar"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "dorohedoro:torch_from_tar"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_tar"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "dorohedoro:torch_from_tar"
+    ]
+  }
+}
