@@ -30,6 +30,17 @@ settlement structure. Test status: see `SORCERERS_WORLD_TEST_REPORT.md`.
 | `courtyard` | middle | 9 x 8 | 8 | 4 | 3 | walled garden | Stone walls, paths, an oak, flower beds, benches, a lamp post | none | none |
 | `herb_garden` | middle and outer, hamlets | 8 x 7 | 5 | 3 | 3 | fenced plot | Watered farmland with ripe wheat, carrots, potatoes and beetroot, a composter, a scarecrow and a lantern | none | farmer |
 
+## Community builds (converted templates)
+
+| ID | Source | Footprint (w x d) | Height | Door x | Where | Interior (added in the mod) | Loot | Villagers |
+|---|---|---|---|---|---|---|---|---|
+| `victorian_exchange` | "Victorian Town Building" by **Frit**, free to use and modify (see the asset manifest) | 26 x 20 (irregular chamfered plan inside) | 30 (turret spire) | 10 (porch stair, entered from the west through an opening in the railing) | Landmark: at most one per city or capital, placed first, within 60% of the radius | **Ground floor (market hall):** smoke stall (still, jars), mask stall, produce stall, benches, back storage. **New staircase** to the upper floor. **Upper floor:** office and library, apartment with two beds. Lanterns throughout | smoke_parlor, mask_shop, market, pantry, study, house | cleric, leatherworker, butcher, librarian, 1 resident |
+
+**Palette:** the Exchange comes in two variants, chosen per city: Frit's original bright Victorian colours, or soot-dark.
+The dark variant swaps yellow and orange terracotta for grey and brown, end stone for tuff, and clay for packed mud.
+The template is placed through the painter, so it rotates to face its street and clips to the chunk like every other
+building.
+
 Every settlement also has:
 
 | Part | Where | What |

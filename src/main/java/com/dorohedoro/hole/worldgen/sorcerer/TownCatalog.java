@@ -41,10 +41,15 @@ public final class TownCatalog {
             new Spec("mushroom_villa", Category.WEALTHY, 11, 11, 5, 20, 5, new int[]{0, 1, 1}, new int[]{0, 0, 0}, false),
             new Spec("shanty", Category.POOR, 6, 7, 2, 8, 6, new int[]{0, 0, 4}, new int[]{0, 6, 6}, false),
             new Spec("clinic", Category.CIVIC, 10, 10, 4, 17, 5, new int[]{2, 1, 0}, new int[]{1, 0, 0}, true),
+            // Community build (Frit), a landmark: one per city or capital, in the core.
+            new Spec("victorian_exchange", Category.COMMERCIAL, 26, 20, 10, 30, 4, new int[]{6, 0, 0}, new int[]{0, 0, 0}, false),
             // Open lots. The "door" is the gap in the front railing.
             new Spec("market_stalls", Category.OPEN, 11, 7, 5, 6, 3, new int[]{3, 1, 0}, new int[]{1, 0, 0}, false),
             new Spec("courtyard", Category.OPEN, 9, 8, 4, 8, 3, new int[]{1, 2, 1}, new int[]{0, 1, 1}, false),
             new Spec("herb_garden", Category.OPEN, 8, 7, 3, 5, 3, new int[]{0, 1, 2}, new int[]{1, 2, 2}, false));
+
+    /** Landmarks appear at most once per settlement, and only in cities and capitals. */
+    public static final java.util.Set<String> LANDMARKS = java.util.Set.of("victorian_exchange");
 
     public static Spec spec(String id) {
         for (Spec spec : SPECS) if (spec.id.equals(id)) return spec;

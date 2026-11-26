@@ -1,5 +1,24 @@
 # Sorcerers' World: changelog
 
+## 2026-11-26 (later): community builds, the Exchange, capitals
+
+Added:
+- **Community build pipeline** (`tools/community/`):
+  - `nbt.mjs`: a dependency-free NBT reader and writer.
+  - `schem.mjs`: info, layer plans and conversion for Sponge `.schem` files.
+  - `compat-1.21.1.mjs`: remaps blocks from newer versions to 1.21.1.
+  - `convert-builds.mjs`: checks each original's SHA-256, converts it and validates every block.
+- `TemplateLibrary` and `Painter.template(...)`: converted templates are placed through the painter, so they rotate and
+  clip like the other buildings. Palette variants are supported.
+- **The Exchange (`victorian_exchange`):** Frit's "Victorian Town Building", free to use and modify. Converted from
+  DataVersion 4671 to 1.21.1 and fitted out as a market hall with offices and an apartment, a new staircase, and a dark
+  palette variant. It is placed first, as a landmark, in cities and capitals.
+- **Capital kind:** radius 100 to 108, a denser street network, 34 or more buildings. About 40 on average in the
+  fixture. Rare (12% of grassland sites), with a fallback to a city.
+- Basic services are reserved in every city before the residential fill: all 5 present in 229/231 fixture cities, up
+  from about 70%.
+- A licence audit of 70+ Planet Minecraft builds. See the asset manifest.
+
 ## 2026-11-26: settlements, first building library (branch `sorcerers-world/towns`)
 
 Added:

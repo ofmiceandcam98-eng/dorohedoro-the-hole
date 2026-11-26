@@ -76,7 +76,8 @@ public final class SorcererTownStructure extends Structure {
         double roll = new TownRandom(seed ^ 0x70C4L).nextDouble();
         // Open grassland carries the cities; woods and hills towns and hamlets; snowfields only hamlets.
         if (biome.is(Biomes.PLAINS) || biome.is(Biomes.SUNFLOWER_PLAINS) || biome.is(Biomes.MEADOW) || biome.is(Biomes.SAVANNA)) {
-            return roll < 0.4 ? TownPlanner.Kind.CITY : roll < 0.8 ? TownPlanner.Kind.TOWN : TownPlanner.Kind.HAMLET;
+            return roll < 0.12 ? TownPlanner.Kind.CAPITAL : roll < 0.45 ? TownPlanner.Kind.CITY
+                    : roll < 0.8 ? TownPlanner.Kind.TOWN : TownPlanner.Kind.HAMLET;
         }
         if (biome.is(Biomes.SNOWY_PLAINS)) return TownPlanner.Kind.HAMLET;
         return roll < 0.35 ? TownPlanner.Kind.TOWN : TownPlanner.Kind.HAMLET;

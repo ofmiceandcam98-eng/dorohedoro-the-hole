@@ -60,6 +60,7 @@ public final class SorcererBuildings {
             case "market_stalls" -> market(p);
             case "courtyard" -> courtyard(p);
             case "herb_garden" -> herbGarden(p);
+            case "victorian_exchange" -> exchange(p);
             default -> throw new IllegalArgumentException(id);
         }
     }
@@ -777,6 +778,96 @@ public final class SorcererBuildings {
             p.probe("room", 2, 0, 3);
             p.villager(2, 0, 3, VillagerProfession.NONE);
         }
+    }
+
+    // ------------------------------------------------------------ community builds
+
+    /**
+     * The Exchange: "Victorian Town Building" by Frit (free to use and modify; see the asset manifest), converted to
+     * 1.21.1 and fitted out here. Ground floor: a smoke and mask market hall with three stalls and back storage. A new
+     * staircase (the original shell had none) leads to offices and a resident's apartment. The shell's plinth is
+     * filled under the floor, and the plot is founded to natural ground like every other building.
+     */
+    static void exchange(Painter p) {
+        TownRandom r = p.rng;
+        int w = p.w(), d = p.d();
+        for (int z = 0; z < d; z++) for (int x = 0; x < w; x++) p.foundation(x, z, -1, Blocks.STONE_BRICKS.defaultBlockState());
+        p.fill(0, -1, 0, w - 1, -1, d - 1, Blocks.STONE_BRICKS);
+        p.air(0, 0, 0, w - 1, 29, d - 1);
+        for (int z = 0; z < d; z++) for (int x = 0; x < w; x++) p.clearTrees(x, z, 30, 44);
+        // Half of the Exchanges keep Frit's bright Victorian colours; the rest are soot-dark, like the Gothic city.
+        if (r.chance(0.5)) {
+            p.template("victorian_exchange", java.util.Map.of(
+                    Blocks.YELLOW_TERRACOTTA, Blocks.LIGHT_GRAY_TERRACOTTA,
+                    Blocks.ORANGE_TERRACOTTA, Blocks.BROWN_TERRACOTTA,
+                    Blocks.END_STONE, Blocks.TUFF,
+                    Blocks.END_STONE_BRICK_WALL, Blocks.TUFF_BRICK_WALL,
+                    Blocks.END_STONE_BRICK_STAIRS, Blocks.TUFF_BRICK_STAIRS,
+                    Blocks.END_STONE_BRICK_SLAB, Blocks.TUFF_BRICK_SLAB,
+                    Blocks.CLAY, Blocks.PACKED_MUD));
+        } else {
+            p.template("victorian_exchange");
+        }
+        // Solid ground under the hall floor, inside the plinth ring.
+        boolean[][] floor = new boolean[w][d], low = new boolean[w * d][3];
+        for (TemplateLibrary.Block b : TemplateLibrary.get("victorian_exchange").blocks()) {
+            if (b.y() == 3) floor[b.x()][b.z()] = true;
+            if (b.y() < 3) low[b.x() * d + b.z()][b.y()] = true;
+        }
+        for (int x = 0; x < w; x++) for (int z = 0; z < d; z++) {
+            if (!floor[x][z]) continue;
+            for (int y = 0; y < 3; y++) if (!low[x * d + z][y]) p.set(x, y, z, Blocks.STONE_BRICKS);
+        }
+
+        // Staircase to the upper floor along the front wall, with a railing round the well.
+        flight(p, 3, 7, 4, E, 8, Blocks.SPRUCE_STAIRS, Blocks.SPRUCE_PLANKS.defaultBlockState(), Blocks.SPRUCE_FENCE, S);
+
+        // Ground floor: three stalls with their keepers, benches by the door, storage at the back.
+        for (int x = 4; x <= 19; x++) {
+            if (x == 8 || x == 9 || x == 10 || x == 15) continue;
+            p.set(x, 4, 11, Painter.slab(Blocks.SPRUCE_SLAB, true));
+        }
+        p.set(4, 5, 11, Blocks.TINTED_GLASS);
+        p.set(5, 5, 11, Blocks.BREWING_STAND);
+        p.set(6, 5, 11, Blocks.DECORATED_POT);
+        p.set(7, 5, 11, Blocks.GLASS);
+        for (int x = 11; x <= 14; x++) p.set(x, 5, 11, mask(r, N));
+        p.set(16, 5, 11, Blocks.MELON);
+        p.set(17, 5, 11, Blocks.HAY_BLOCK);
+        p.set(18, 5, 11, Blocks.PUMPKIN);
+        p.set(19, 5, 11, Painter.facing(Blocks.COMPOSTER, N));
+        p.set(13, 4, 12, Blocks.CAULDRON);
+        p.set(12, 4, 12, Painter.facing(Blocks.LOOM, N));
+        p.set(17, 4, 12, Painter.facing(Blocks.SMOKER, N));
+        p.villager(5, 4, 12, VillagerProfession.CLERIC);
+        p.villager(14, 4, 12, VillagerProfession.LEATHERWORKER);
+        p.villager(18, 4, 12, VillagerProfession.BUTCHER);
+        for (int x = 18; x <= 20; x++) chair(p, x, 4, 7, Blocks.SPRUCE_STAIRS, N);
+        p.barrel(11, 4, 14, N, TownLoot.SMOKE_PARLOR);
+        p.barrel(12, 4, 14, N, TownLoot.MASK_SHOP);
+        p.chest(17, 4, 14, N, TownLoot.MARKET);
+        p.barrel(18, 4, 14, N, TownLoot.PANTRY);
+        p.set(14, 4, 14, Blocks.BARREL);
+        for (int[] l : new int[][]{{6, 9}, {10, 9}, {14, 9}, {18, 9}, {10, 13}, {14, 13}, {18, 13}}) hangingLantern(p, l[0], 9, l[1]);
+        p.probe("room", 12, 4, 9);
+        p.probe("room", 15, 4, 13);
+
+        // Upper floor: an office and library at the front, an apartment at the back.
+        for (int x = 13; x <= 19; x++) shelves(p, x, 12, 6, x, 6);
+        p.set(16, 12, 8, Painter.facing(Blocks.LECTERN, S));
+        table(p, 14, 12, 9, Blocks.SPRUCE_FENCE, Blocks.SPRUCE_PRESSURE_PLATE);
+        chair(p, 14, 12, 10, Blocks.SPRUCE_STAIRS, S);
+        p.chest(19, 12, 8, W, TownLoot.STUDY);
+        p.bed(11, 12, 13, S, bed(r));
+        p.bed(13, 12, 13, S, bed(r));
+        p.chest(12, 12, 14, N, TownLoot.HOUSE);
+        p.barrel(15, 12, 14, N, TownLoot.HOUSE);
+        rug(p, 11, 12, 11, 15, 12, carpet(r));
+        for (int[] l : new int[][]{{6, 10}, {14, 9}, {14, 13}, {19, 11}}) hangingLantern(p, l[0], 18, l[1]);
+        p.villager(16, 12, 9, VillagerProfession.LIBRARIAN);
+        p.villager(15, 12, 11, VillagerProfession.NONE);
+        p.probe("room", 15, 12, 10);
+        p.probe("room", 13, 12, 11);
     }
 
     // ------------------------------------------------------------ open lots

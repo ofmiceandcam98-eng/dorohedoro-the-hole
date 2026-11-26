@@ -91,11 +91,11 @@ public final class TownBuildingPiece extends StructurePiece {
         }
         rel[walk] = delta;
         BlockState paving = switch (TownPlanner.Kind.values()[kind]) {
-            case CITY -> Blocks.STONE_BRICKS.defaultBlockState();
+            case CITY, CAPITAL -> Blocks.STONE_BRICKS.defaultBlockState();
             case TOWN -> Blocks.COBBLESTONE.defaultBlockState();
             case HAMLET -> Blocks.PACKED_MUD.defaultBlockState();
         };
-        BlockState stairs = (kind == TownPlanner.Kind.CITY.ordinal() ? Blocks.STONE_BRICK_STAIRS : Blocks.COBBLESTONE_STAIRS)
+        BlockState stairs = (TownPlanner.Kind.values()[kind].urban() ? Blocks.STONE_BRICK_STAIRS : Blocks.COBBLESTONE_STAIRS)
                 .defaultBlockState();
         for (int k = 0; k < walk; k++) {
             int z = -1 - k, y = rel[k];

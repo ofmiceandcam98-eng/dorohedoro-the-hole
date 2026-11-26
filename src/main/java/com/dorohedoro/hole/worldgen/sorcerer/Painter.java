@@ -241,6 +241,24 @@ public final class Painter {
         sink.probe(kind, pos(x, y, z));
     }
 
+    /** Places a converted community template, its local frame matching this painter's (see {@link TemplateLibrary}). */
+    public void template(String id) {
+        template(id, java.util.Map.of());
+    }
+
+    /**
+     * Places a template with some blocks swapped for others (a palette variant). Shape, facing and connections carry
+     * over, since only blocks that share their properties are swapped.
+     */
+    public void template(String id, java.util.Map<Block, Block> swap) {
+        for (TemplateLibrary.Block b : TemplateLibrary.get(id).blocks()) {
+            BlockState state = b.state();
+            Block to = swap.get(state.getBlock());
+            if (to != null) state = to.withPropertiesOf(state);
+            set(b.x(), b.y(), b.z(), state);
+        }
+    }
+
     /** Runs {@code body} once per storey with the storey's base y. */
     public void storeys(int count, int height, Consumer<Integer> body) {
         for (int i = 0; i < count; i++) body.accept(i * height);

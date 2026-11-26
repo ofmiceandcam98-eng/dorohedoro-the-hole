@@ -200,7 +200,7 @@ public final class TownRoadsPiece extends StructurePiece {
                     }
                 }
                 if (bridge && hit.dist() > RoadNet.RADIUS[hit.cls()] - 0.75 && level.getBlockState(new BlockPos(x, y, z)).isAir()) {
-                    set(level, clip, x, y, z, (k == TownPlanner.Kind.CITY ? Blocks.STONE_BRICK_WALL : Blocks.SPRUCE_FENCE).defaultBlockState());
+                    set(level, clip, x, y, z, (k.urban() ? Blocks.STONE_BRICK_WALL : Blocks.SPRUCE_FENCE).defaultBlockState());
                 }
             }
         } else {
@@ -228,7 +228,7 @@ public final class TownRoadsPiece extends StructurePiece {
         }
         boolean kerb = hit.cls() == RoadNet.MAIN && hit.dist() > RoadNet.RADIUS[RoadNet.MAIN] - 0.6;
         return switch (k) {
-            case CITY -> switch (hit.cls()) {
+            case CITY, CAPITAL -> switch (hit.cls()) {
                 case RoadNet.MAIN -> kerb ? Blocks.SMOOTH_STONE.defaultBlockState()
                         : (roll < 5 ? Blocks.POLISHED_ANDESITE : roll < 8 ? Blocks.ANDESITE : Blocks.STONE).defaultBlockState();
                 case RoadNet.STREET -> (roll < 6 ? Blocks.STONE_BRICKS : roll < 8 ? Blocks.CRACKED_STONE_BRICKS : Blocks.MOSSY_STONE_BRICKS).defaultBlockState();
@@ -244,7 +244,7 @@ public final class TownRoadsPiece extends StructurePiece {
     }
 
     private static BlockState deck(TownPlanner.Kind k) {
-        return (k == TownPlanner.Kind.CITY ? Blocks.STONE_BRICKS : Blocks.SPRUCE_PLANKS).defaultBlockState();
+        return (k.urban() ? Blocks.STONE_BRICKS : Blocks.SPRUCE_PLANKS).defaultBlockState();
     }
 
     private static BlockState fill(TownPlanner.Kind k, int yy, int roadY) {
@@ -273,11 +273,11 @@ public final class TownRoadsPiece extends StructurePiece {
         for (int yy = y - 1; yy >= ground && yy >= y - 8; yy--) set(level, clip, x, yy, z, Blocks.COBBLESTONE.defaultBlockState());
         TownPlanner.Kind k = kind();
         BlockState post = switch (k) {
-            case CITY -> Blocks.POLISHED_BLACKSTONE_WALL.defaultBlockState();
+            case CITY, CAPITAL -> Blocks.POLISHED_BLACKSTONE_WALL.defaultBlockState();
             case TOWN -> Blocks.SPRUCE_FENCE.defaultBlockState();
             case HAMLET -> Blocks.OAK_FENCE.defaultBlockState();
         };
-        int height = k == TownPlanner.Kind.CITY ? 3 : 2;
+        int height = k.urban() ? 3 : 2;
         for (int i = 0; i < height; i++) set(level, clip, x, y + i, z, post);
         set(level, clip, x, y + height, z, Blocks.LANTERN.defaultBlockState().setValue(LanternBlock.HANGING, false));
     }

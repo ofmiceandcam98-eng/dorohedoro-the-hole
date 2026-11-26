@@ -97,3 +97,25 @@ generation order in vanilla too.
 - **Old saves:** upgrading a pre-update world. The assumption is that saved worlds keep their stored Sorcerers' World
   generator; test on a backup.
 - **Performance** on the target mid-range PC. Only ms per chunk on this machine was measured.
+
+## Later run, 2026-11-26: the Exchange and capitals
+
+- **Planner fixture** (30 seeds per case, the Capital kind included): 876,737 checks, 3 failures, all the known rare 2-block
+  road steps.
+  - All 5 basic services in 229 of 231 cities.
+  - The Exchange placed in 210 cities and capitals.
+  - Capitals average about 40 buildings.
+- **Server QA, seed 12345, both orders, with the Exchange's two palettes:** every settlement check passes.
+  - The city has 38 buildings, 80 rooms, 43 villagers and 84 loot containers; every door reaches a road and every room
+    is reachable, lit and roofed.
+  - Determinism: 369/371 settlement chunks.
+- **Server QA, seed 8675309** (before the palette variant): the city has 23 buildings, including the Exchange. All
+  settlement checks pass. Determinism: 394/395.
+- **Muted client, seed 12345:**
+  - The Exchange's market hall: stalls, the butcher and leatherworker at work.
+  - The office upstairs: bookshelves, the librarian.
+  - The city overview, with the Exchange at its core.
+  - In `docs/evidence/sorcerers-world/`.
+  - The client had been reopening a stale save in `runs/qaclient/saves`; it now has to be deleted before visit runs.
+- **No Capital** appeared in either survey area. They are rare and mostly downgraded to cities on uneven ground, so a
+  capital has been exercised only in the fixture so far.

@@ -27,9 +27,16 @@ public final class TownPlanner {
     public enum Kind {
         CITY(80, 92, 44, 7),
         TOWN(56, 68, 18, 6),
-        HAMLET(32, 42, 8, 4);
+        HAMLET(32, 42, 8, 4),
+        /** A rare Gothic capital: the largest a single settlement can be (8-chunk structure reach) and densely built. */
+        CAPITAL(100, 108, 80, 9);
 
         public final int minRadius, maxRadius, maxRoads, plaza;
+
+        /** Cities and capitals share paving, lamps and the larger buildings. */
+        public boolean urban() {
+            return this == CITY || this == CAPITAL;
+        }
 
         Kind(int minRadius, int maxRadius, int maxRoads, int plaza) {
             this.minRadius = minRadius;
@@ -101,6 +108,7 @@ public final class TownPlanner {
             case CITY -> 14;
             case TOWN -> 7;
             case HAMLET -> 3;
+            case CAPITAL -> 34;
         };
     }
 
@@ -109,9 +117,11 @@ public final class TownPlanner {
      * Returns null when not even a hamlet fits: the site stays countryside.
      */
     public static Layout planViable(long seed, int cx, int cz, Kind kind, Terrain terrain) {
-        for (int k = kind.ordinal(); k < Kind.values().length; k++) {
-            Kind tryKind = Kind.values()[k];
-            Layout layout = plan(seed + k, cx, cz, tryKind, terrain);
+        Kind[] order = {Kind.CAPITAL, Kind.CITY, Kind.TOWN, Kind.HAMLET};
+        int start = java.util.Arrays.asList(order).indexOf(kind);
+        for (int k = start; k < order.length; k++) {
+            Kind tryKind = order[k];
+            Layout layout = plan(seed + tryKind.ordinal(), cx, cz, tryKind, terrain);
             if (layout.plots().size() >= minimumPlots(tryKind)) return layout;
         }
         return null;
@@ -121,10 +131,11 @@ public final class TownPlanner {
         double a0 = rng.nextDouble() * Math.PI * 2;
         grow(RoadNet.MAIN, cx, cz, cy, a0, radius - 6, -1);
         grow(RoadNet.MAIN, cx, cz, cy, a0 + Math.PI + (rng.nextDouble() - 0.5) * 0.8, radius - 6, -1);
-        if (kind != Kind.HAMLET && (kind == Kind.CITY || rng.chance(0.45))) {
+        boolean big = kind == Kind.CITY || kind == Kind.CAPITAL;
+        if (kind != Kind.HAMLET && (big || rng.chance(0.45))) {
             double cross = a0 + Math.PI / 2 + (rng.nextDouble() - 0.5) * 0.8;
             grow(RoadNet.MAIN, cx, cz, cy, cross, radius - 10, -1);
-            if (kind == Kind.CITY) {
+            if (big) {
                 grow(RoadNet.MAIN, cx, cz, cy, cross + Math.PI + (rng.nextDouble() - 0.5) * 0.6, radius - 10, -1);
             }
         }
@@ -154,13 +165,14 @@ public final class TownPlanner {
                     double angle = Math.atan2(at[3], at[2]) + side * (Math.PI / 2 + (rng.nextDouble() - 0.5) * 0.9);
                     int len = child == RoadNet.STREET ? rng.range(36, 80) : rng.range(14, 34);
                     grow(child, at[0], at[1], (int) Math.floor(at[4] + 0.5), angle, len, ri);
-                    if (rng.chance(kind == Kind.CITY ? 0.45 : 0.25)) {
+                    if (rng.chance(kind == Kind.CAPITAL ? 0.6 : kind == Kind.CITY ? 0.45 : 0.25)) {
                         double[] off = along(road, Math.min(total, arc + 4));
                         grow(child, off[0], off[1], (int) Math.floor(off[4] + 0.5), angle + side * Math.PI,
                                 child == RoadNet.STREET ? rng.range(30, 60) : rng.range(12, 26), ri);
                     }
                 }
-                arc += kind == Kind.CITY ? (road.cls() == RoadNet.MAIN ? rng.range(13, 20) : rng.range(12, 18))
+                arc += kind == Kind.CAPITAL ? (road.cls() == RoadNet.MAIN ? rng.range(10, 15) : rng.range(10, 14))
+                        : kind == Kind.CITY ? (road.cls() == RoadNet.MAIN ? rng.range(13, 20) : rng.range(12, 18))
                         : road.cls() == RoadNet.MAIN ? rng.range(16, 26) : rng.range(14, 24);
             }
         }
@@ -380,9 +392,40 @@ public final class TownPlanner {
     private List<Plot> placePlots() {
         List<Plot> plots = new ArrayList<>();
         int[] counts = new int[TownCatalog.SPECS.size()];
-        // First pass lines every road; the second fills the gaps a bend or a big building left behind.
+        // Landmarks first, while the core is still open; then every road is lined, then the gaps are filled.
+        if (kind.urban()) {
+            placeFirst(plots, counts, TownCatalog.LANDMARKS, 0.6);
+            // Every city gets its basic services before the residential fill.
+            List<String> services = new ArrayList<>();
+            for (TownCatalog.Spec s : TownCatalog.SPECS) if (s.required()) services.add(s.id());
+            placeFirst(plots, counts, services, 0.75);
+        }
         for (int pass = 0; pass < 2; pass++) placePlots(plots, counts, pass);
         return plots;
+    }
+
+    /** Tries each of {@code ids} along the roads near the plaza, both sides, every few blocks, until one fits. */
+    private void placeFirst(List<Plot> plots, int[] counts, java.util.Collection<String> ids, double reach) {
+        for (String id : ids) {
+            TownCatalog.Spec spec = TownCatalog.spec(id);
+            Plot placed = null;
+            for (Road road : roads) {
+                double total = length(road);
+                for (double arc = 4; arc < total - 4 && placed == null; arc += 3) {
+                    double[] at = along(road, arc);
+                    if (Math.hypot(at[0] - cx, at[1] - cz) > radius * reach) continue;
+                    for (int side = 1; side >= -1 && placed == null; side -= 2) {
+                        double nx = -at[3] * side, nz = at[2] * side;
+                        placed = fitAnySetback(spec, road, at, nx, nz, cardinal(-nx, -nz));
+                    }
+                }
+                if (placed != null) break;
+            }
+            if (placed != null) {
+                plots.add(placed);
+                counts[TownCatalog.SPECS.indexOf(spec)]++;
+            }
+        }
     }
 
     private void placePlots(List<Plot> plots, int[] counts, int pass) {
@@ -431,6 +474,12 @@ public final class TownPlanner {
             TownCatalog.Spec spec = TownCatalog.SPECS.get(i);
             double w = kind == Kind.HAMLET ? spec.hamlet()[ring] : spec.ward()[ring];
             if (kind == Kind.TOWN && spec.category() == TownCatalog.Category.APARTMENT) w *= 0.4;
+            if (TownCatalog.LANDMARKS.contains(spec.id()) && (counts[i] > 0 || (kind != Kind.CITY && kind != Kind.CAPITAL))) w = 0;
+            // The capital is a dense Gothic city: more tenements, townhouses and shops, fewer gardens and shacks.
+            if (kind == Kind.CAPITAL) {
+                if (spec.category() == TownCatalog.Category.APARTMENT || spec.category() == TownCatalog.Category.COMMERCIAL) w *= 1.6;
+                if (spec.category() == TownCatalog.Category.OPEN || spec.category() == TownCatalog.Category.POOR) w *= 0.5;
+            }
             if (w > 0 && spec.required() && counts[i] == 0 && kind != Kind.HAMLET) w *= 6;
             if (spec.id().equals(last)) w *= 0.15;
             else if (spec.id().equals(beforeLast)) w *= 0.4;
