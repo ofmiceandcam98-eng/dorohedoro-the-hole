@@ -125,6 +125,10 @@ public final class ClientQa {
             CrossEyesClientQa.script(mc, t);
             return;
         }
+        if ("realms".equals(MODE)) {
+            RealmsClientQa.script(mc, t);
+            return;
+        }
         if ("doors".equals(MODE)) {
             DoorsClientQa.script(mc, t);
             return;
