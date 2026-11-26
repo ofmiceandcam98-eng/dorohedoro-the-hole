@@ -25,6 +25,8 @@ public final class SmokeClient {
     private static final KeyMapping LEDGER=new KeyMapping("key.dorohedoro.smoke_ledger",InputConstants.Type.KEYSYM,GLFW.GLFW_KEY_B,CATEGORY);
     private static final int[] DEFAULT={GLFW.GLFW_KEY_Z,GLFW.GLFW_KEY_X,GLFW.GLFW_KEY_C};
     private static final KeyMapping CYCLE=new KeyMapping("key.dorohedoro.smoke_cycle",InputConstants.Type.KEYSYM,GLFW.GLFW_KEY_R,CATEGORY);
+    /** Sorcerers open a Smoke Door on the ground they are looking at. */
+    private static final KeyMapping DOOR=new KeyMapping("key.dorohedoro.smoke_door",InputConstants.Type.KEYSYM,GLFW.GLFW_KEY_V,CATEGORY);
     private static final KeyMapping[] KEYS=new KeyMapping[3];
     private static final int[] COOLDOWNS=new int[3];
     private static final String[] EQUIPPED=new String[27];
@@ -41,7 +43,7 @@ public final class SmokeClient {
         NeoForge.EVENT_BUS.addListener(SmokeClient::onTick);
         NeoForge.EVENT_BUS.addListener(SmokeClient::onVanillaHudLayer);
     }
-    private static void registerKeys(RegisterKeyMappingsEvent event){event.register(LEDGER);event.register(CYCLE);for(KeyMapping k:KEYS)event.register(k);}
+    private static void registerKeys(RegisterKeyMappingsEvent event){event.register(LEDGER);event.register(CYCLE);event.register(DOOR);for(KeyMapping k:KEYS)event.register(k);}
     private static void registerHud(RegisterGuiLayersEvent event){
         event.registerAbove(VanillaGuiLayers.HOTBAR,net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(com.dorohedoro.hole.Dorohedoro.MOD_ID,"smoke_hud"),(graphics,delta)->renderHud(graphics));
     }
@@ -83,6 +85,8 @@ public final class SmokeClient {
             if(mc.screen==null){request("status","");mc.setScreen(new SmokeLedgerScreen());}
         }
         if(mc.screen!=null)return;
+        // The server checks origin, rank, smoke and the ground, and explains any refusal.
+        while(DOOR.consumeClick()) request("door","");
         while(CYCLE.consumeClick()) {
             if("none".equals(innate)) continue;
             boolean backward=InputConstants.isKeyDown(mc.getWindow().getWindow(),GLFW.GLFW_KEY_LEFT_SHIFT)

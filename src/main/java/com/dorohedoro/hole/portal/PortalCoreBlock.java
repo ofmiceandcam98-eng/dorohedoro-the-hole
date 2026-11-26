@@ -60,10 +60,17 @@ public final class PortalCoreBlock extends BaseEntityBlock {
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level,
             BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (stack.is(ModItems.DOOR_LINKING_KEY.get())) {
-            if (!level.isClientSide && level.getBlockEntity(pos) instanceof PortalCoreBlockEntity core) {
-                player.displayClientMessage(Component.literal(core.active()
-                        ? "Linked to " + core.destination() + " at " + core.destinationCore().toShortString()
-                        : "This door has not been linked."), true);
+            if (!level.isClientSide && level instanceof ServerLevel serverLevel
+                    && level.getBlockEntity(pos) instanceof PortalCoreBlockEntity core
+                    && player instanceof net.minecraft.server.level.ServerPlayer serverPlayer) {
+                if (core.active()) {
+                    player.displayClientMessage(Component.literal("Linked to " + core.destination() + " at "
+                            + core.destinationCore().toShortString()), true);
+                } else if (state.is(kind.generatedCore())) {
+                    player.displayClientMessage(Component.literal("This return endpoint is automatically linked; activate the original frame."), true);
+                } else {
+                    PortalService.useLinkingKey(serverLevel, pos, kind, stack, serverPlayer);
+                }
             }
             return ItemInteractionResult.SUCCESS;
         }

@@ -70,6 +70,11 @@ public final class SmokeEngine {
         if(s.smoke()<s.capacity())update(p,s.withSmoke(s.smoke()+regen));
         else SmokeNetwork.sync(p); // Keep HUD cooldowns accurate even at full Smoke.
     }
+    /** Spends smoke for an ability outside the technique slots (a Smoke Door). The caller checks the amount first. */
+    public static void spend(ServerPlayer p,int amount){
+        SmokeState s=state(p);
+        update(p,s.withSmoke(s.smoke()-amount));
+    }
     public static int remaining(ServerPlayer p,String id){
         long until=state(p).cooldowns().getOrDefault(id,0L);
         return (int)Math.min(Integer.MAX_VALUE,Math.max(0L,until-p.level().getGameTime()));

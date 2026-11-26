@@ -25,8 +25,9 @@ import net.minecraft.world.phys.Vec3;
 
 /** Shared, server-only one-to-one travel path. A source frame creates a matching, linked exit in the destination. */
 public final class PortalService {
-    private static final Map<UUID, Long> TRAVEL_COOLDOWNS = new HashMap<>();
-    private static final int COOLDOWN_TICKS = 80;
+    /** Shared with Smoke Doors, so stepping out of one door never bounces a player straight back. */
+    static final Map<UUID, Long> TRAVEL_COOLDOWNS = new HashMap<>();
+    static final int COOLDOWN_TICKS = 80;
     private static final int HEIGHT = 5;
     /** How far from the matching spot the far end may stand, and the spacing of the columns tried. */
     private static final int SEARCH_RADIUS = 32;
@@ -111,6 +112,14 @@ public final class PortalService {
     /** Set when the last site search turned down a clear site only because the builder may not build there. */
     private static final ThreadLocal<Boolean> CLAIM_BLOCKED = ThreadLocal.withInitial(() -> false);
 
+    /**
+     * First free height of a column, loading (and if needed generating) its chunk first. {@code Level.getHeight} answers
+     * the bottom of the world for a chunk that is not loaded, which made every far-end search in unvisited land fail.
+     */
+    static int surfaceY(ServerLevel level, Heightmap.Types type, int x, int z) {
+        return level.getChunk(x >> 4, z >> 4).getHeight(type, x & 15, z & 15) + 1;
+    }
+
     /** Set when the last search fell back to a platform in open air. */
     private static final ThreadLocal<Boolean> PLATFORM_SITE = ThreadLocal.withInitial(() -> false);
 
@@ -128,7 +137,7 @@ public final class PortalService {
             for (int dx = -r; dx <= r; dx += SEARCH_STEP) for (int dz = -r; dz <= r; dz += SEARCH_STEP) {
                 if (Math.max(Math.abs(dx), Math.abs(dz)) != r) continue;
                 int x = near.getX() + dx, z = near.getZ() + dz;
-                int y = level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, x, z);
+                int y = surfaceY(level, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, x, z);
                 if (y < level.getMinBuildHeight() + 4 || y > level.getMaxBuildHeight() - HEIGHT - 3) continue;
                 Frame test = new Frame(new BlockPos(x, y, z), axis, kind, true);
                 if (!safeSite(level, test)) continue;
@@ -141,7 +150,7 @@ public final class PortalService {
         Frame probe = new Frame(near, axis, kind, true);
         for (int x = -1; x <= kind.width; x++) for (int side = -1; side <= 1; side++) {
             BlockPos column = probe.at(x, 0).offset(probe.stand(side).subtract(near));
-            top = Math.max(top, level.getHeight(Heightmap.Types.MOTION_BLOCKING, column.getX(), column.getZ()));
+            top = Math.max(top, surfaceY(level, Heightmap.Types.MOTION_BLOCKING, column.getX(), column.getZ()));
         }
         int y = Math.max(top + 1, level.getSeaLevel() + 1);
         if (y > level.getMaxBuildHeight() - HEIGHT - 3) return null;
@@ -156,7 +165,7 @@ public final class PortalService {
      * Natural ground cover the far end may clear: air, plants, grass, single snow layers and leaves that grew naturally.
      * Never fluids, never anything with a block entity, never player-placed leaves.
      */
-    private static boolean clearable(ServerLevel level, BlockPos pos) {
+    static boolean clearable(ServerLevel level, BlockPos pos) {
         BlockState state = level.getBlockState(pos);
         if (state.isAir()) return true;
         if (!level.getFluidState(pos).isEmpty() || state.hasBlockEntity()) return false;
@@ -221,7 +230,7 @@ public final class PortalService {
                 && level.getBlockState(below).isFaceSturdy(level, below, Direction.UP);
     }
 
-    private static boolean open(ServerLevel level, BlockPos pos) {
+    static boolean open(ServerLevel level, BlockPos pos) {
         return level.getFluidState(pos).isEmpty() && level.getBlockState(pos).getCollisionShape(level, pos).isEmpty();
     }
 
@@ -250,6 +259,7 @@ public final class PortalService {
     public static void enter(ServerLevel source, BlockPos surface, Direction.Axis axis, ServerPlayer player) {
         long tick = source.getServer().getTickCount();
         if (TRAVEL_COOLDOWNS.getOrDefault(player.getUUID(), 0L) > tick) return;
+        if (SmokeDoors.enter(source, surface, player)) return;
         // Only bottom-row cores of an intact frame can authorize a teleport.
         for (int height = 1; height < HEIGHT - 1; height++) for (int offset = -3; offset <= 3; offset++) {
             BlockPos candidate = axis == Direction.Axis.X ? surface.offset(offset, -height, 0) : surface.offset(0, -height, offset);
@@ -270,24 +280,97 @@ public final class PortalService {
             // Force destination chunk availability before any entity crosses dimensions.
             destLevel.getChunkAt(core.destinationCore());
             BlockEntity otherBE = destLevel.getBlockEntity(core.destinationCore());
-            if (!(otherBE instanceof PortalCoreBlockEntity other) || !other.active() || !other.id().equals(core.linkedId())
-                    || !core.id().equals(other.linkedId()) || !source.dimension().location().equals(other.destination())
-                    || !candidate.equals(other.destinationCore())) continue;
-            Frame returnFrame = findFrame(destLevel, core.destinationCore(), kind);
-            if (returnFrame == null || returnFrame.axis != frame.axis) continue;
+            boolean linked = otherBE instanceof PortalCoreBlockEntity other && other.active() && other.id().equals(core.linkedId())
+                    && core.id().equals(other.linkedId()) && source.dimension().location().equals(other.destination())
+                    && candidate.equals(other.destinationCore());
+            Frame returnFrame = linked ? findFrame(destLevel, core.destinationCore(), kind) : null;
+            if (returnFrame == null || returnFrame.axis != frame.axis) {
+                // The far end was broken or griefed. A door the player built opens a fresh far end, so nobody is ever
+                // cut off by losing the other side; a generated far end only closes.
+                if (!frame.generated()) reopen(source, candidate, kind, core, player);
+                return;
+            }
             BlockPos landing = validLanding(destLevel, returnFrame.stand(1)) ? returnFrame.stand(1)
                     : validLanding(destLevel, returnFrame.stand(-1)) ? returnFrame.stand(-1) : null;
             if (landing == null) { notify(player, "Return doorway obstructed; travel prevented."); return; }
             TRAVEL_COOLDOWNS.put(player.getUUID(), tick + COOLDOWN_TICKS);
             Vec3 spawn = new Vec3(landing.getX() + 0.5D, landing.getY(), landing.getZ() + 0.5D);
             boolean leavingHell = kind == PortalKind.DEVIL && !source.dimension().equals(Level.OVERWORLD);
-            player.changeDimension(new DimensionTransition(destLevel, spawn, Vec3.ZERO, player.getYRot(), player.getXRot(),
-                    DimensionTransition.PLAY_PORTAL_SOUND));
+            player.changeDimension(new DimensionTransition(destLevel, spawn, Vec3.ZERO,
+                    facingAway(returnFrame.core(), landing), 0.0F, DimensionTransition.PLAY_PORTAL_SOUND));
             com.dorohedoro.hole.progress.HoleAdvancements.award(player, com.dorohedoro.hole.progress.HoleAdvancements.TRAVELED_BY_DOOR);
             if (leavingHell && player.isAlive()) com.dorohedoro.hole.progress.HoleAdvancements.award(player,
                     com.dorohedoro.hole.progress.HoleAdvancements.RETURNED_FROM_HELL);
             return;
         }
+    }
+
+    /**
+     * The Door Linking Key joins two doors the player built themselves, one in the Hole and one in the realm, instead of
+     * letting activation generate a far end. The first unlinked door it touches is remembered on the key; the second, in
+     * the other world and of the same kind, is linked to it. Both frames must be complete, and the second door must be
+     * somewhere the player may build. Touching the remembered door again makes the key forget it.
+     */
+    static void useLinkingKey(ServerLevel level, BlockPos corePos, PortalKind kind, net.minecraft.world.item.ItemStack key,
+            ServerPlayer player) {
+        var data = key.get(net.minecraft.core.component.DataComponents.CUSTOM_DATA);
+        net.minecraft.nbt.CompoundTag tag = data == null ? null : data.copyTag();
+        if (tag == null || !tag.contains("DoorDimension")) {
+            if (findFrame(level, corePos, kind) == null) { keyMessage(player, "incomplete"); return; }
+            net.minecraft.nbt.CompoundTag remembered = new net.minecraft.nbt.CompoundTag();
+            remembered.putString("DoorDimension", level.dimension().location().toString());
+            remembered.putLong("DoorCore", corePos.asLong());
+            remembered.putString("DoorKind", kind.name());
+            key.set(net.minecraft.core.component.DataComponents.CUSTOM_DATA, net.minecraft.world.item.component.CustomData.of(remembered));
+            keyMessage(player, "remembered");
+            return;
+        }
+        ResourceKey<Level> otherKey = ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(tag.getString("DoorDimension")));
+        BlockPos otherPos = BlockPos.of(tag.getLong("DoorCore"));
+        if (otherKey.equals(level.dimension()) && otherPos.equals(corePos)) {
+            key.remove(net.minecraft.core.component.DataComponents.CUSTOM_DATA);
+            keyMessage(player, "forgot");
+            return;
+        }
+        if (!otherKey.equals(kind.target(level))) { keyMessage(player, "same_world"); return; }
+        if (!kind.name().equals(tag.getString("DoorKind"))) { keyMessage(player, "wrong_kind"); return; }
+        ServerLevel other = level.getServer().getLevel(otherKey);
+        if (other == null) { keyMessage(player, "gone"); return; }
+        other.getChunkAt(otherPos);
+        if (!(other.getBlockEntity(otherPos) instanceof PortalCoreBlockEntity otherCore) || !other.getBlockState(otherPos).is(kind.core())) {
+            key.remove(net.minecraft.core.component.DataComponents.CUSTOM_DATA);
+            keyMessage(player, "gone");
+            return;
+        }
+        if (otherCore.active()) { keyMessage(player, "already_linked"); return; }
+        Frame here = findFrame(level, corePos, kind), there = findFrame(other, otherPos, kind);
+        if (here == null || there == null || here.generated() || there.generated()) { keyMessage(player, "incomplete"); return; }
+        if (!(level.getBlockEntity(corePos) instanceof PortalCoreBlockEntity core)) return;
+        core.linkTo(otherCore, other.dimension().location());
+        otherCore.linkTo(core, level.dimension().location());
+        fillInterior(level, here);
+        fillInterior(other, there);
+        key.remove(net.minecraft.core.component.DataComponents.CUSTOM_DATA);
+        keyMessage(player, "linked");
+        com.dorohedoro.hole.progress.HoleAdvancements.award(player, com.dorohedoro.hole.progress.HoleAdvancements.DOORS_LINKED);
+    }
+
+    private static void keyMessage(ServerPlayer player, String key) {
+        player.displayClientMessage(Component.translatable("message.dorohedoro.door_key." + key), true);
+    }
+
+    /** Yaw that faces from a door's core out through the landing cell, so a player steps out looking away from it. */
+    static float facingAway(BlockPos core, BlockPos landing) {
+        int dx = Integer.signum(landing.getX() - core.getX()), dz = Integer.signum(landing.getZ() - core.getZ());
+        return (float) Math.toDegrees(Math.atan2(-dx, dz));
+    }
+
+    /** Forgets a dead link and opens the door again, building a new far end near the old one. */
+    private static void reopen(ServerLevel source, BlockPos corePos, PortalKind kind, PortalCoreBlockEntity core, ServerPlayer player) {
+        // Retire whatever is left of the old far end (a generated frame is removed), then open again.
+        closeLinkedDoors(source, corePos, core);
+        notify(player, "The far side of this door was gone. It reaches for a new one.");
+        activate(source, corePos, kind, player);
     }
 
     /** When a core is broken, retire the paired door and remove its active smoke panels. */
@@ -342,7 +425,7 @@ public final class PortalService {
         }
     }
 
-    private static void notify(Player player, String message) {
+    static void notify(Player player, String message) {
         player.displayClientMessage(Component.literal(message), true);
     }
 }

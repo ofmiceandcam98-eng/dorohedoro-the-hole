@@ -39,6 +39,7 @@ public final class Dorohedoro {
         com.dorohedoro.hole.hazard.ModEffects.register(modBus);
         com.dorohedoro.hole.hazard.ToxinExposure.register(modBus);
         com.dorohedoro.hole.faction.FactionStanding.register(modBus);
+        com.dorohedoro.hole.portal.SmokeDoors.register();
         if (FMLEnvironment.dist == Dist.CLIENT) {
             com.dorohedoro.hole.client.HoleAtmosphere.register(modBus);
             com.dorohedoro.hole.client.HazardColors.register(modBus);
