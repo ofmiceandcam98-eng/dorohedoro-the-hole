@@ -87,7 +87,12 @@ public final class ModDataGen {
                     ModBlocks.DEEPSLATE_ZINC_ORE.get(), ModBlocks.DEEPSLATE_OIL_SHALE_ORE.get(),
                     ModBlocks.GALVANIZED_PLATING.get(), ModBlocks.CAVERN_LAMP.get(),
                     ModBlocks.SMOKE_STAINED_CONCRETE.get(), ModBlocks.WATER_DAMAGED_PLASTER.get(), ModBlocks.SOOT_BLACKENED_BRICK.get(), ModBlocks.PATCHWORK_MASONRY.get(), ModBlocks.RUSTED_INDUSTRIAL_SHEET.get(), ModBlocks.SEEPAGE_BRICK.get());
-            tag(BlockTags.MINEABLE_WITH_SHOVEL).add(ModBlocks.ASH_SOIL.get());
+            tag(BlockTags.MINEABLE_WITH_SHOVEL).add(ModBlocks.ASH_SOIL.get(), ModBlocks.ASH_SNOW.get(), ModBlocks.ASH_SNOW_BLOCK.get());
+            tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.SLUDGE_ICE.get());
+            // Like vanilla ice, snow cannot settle on Sludge-Ice, so the floes stay visible in snowy districts.
+            tag(BlockTags.SNOW_LAYER_CANNOT_SURVIVE_ON).add(ModBlocks.SLUDGE_ICE.get());
+            // Walking through Ash-Snow layers sounds like walking through snow.
+            tag(BlockTags.INSIDE_STEP_SOUND_BLOCKS).add(ModBlocks.ASH_SNOW.get());
 
             // Convention ore tags. FTB Ultimine treats everything under c:ores/* as one vein by default, so a vein that
             // crosses from stone into deepslate is mined in one go, and other mods (JEI, EMI, ore finders) see these

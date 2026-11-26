@@ -22,6 +22,7 @@ public final class HoleEntityRenderers {
         event.registerEntityRenderer(ModEntities.RUST_EATER_BEETLE.get(), RustEaterBeetleRenderer::new);
         event.registerEntityRenderer(ModEntities.CAVERN_BURROWER.get(), CavernBurrowerRenderer::new);
         event.registerEntityRenderer(ModEntities.SPORE_CRAWLER.get(), SporeCrawlerRenderer::new);
+        event.registerEntityRenderer(ModEntities.ASH_SNOWBALL.get(), net.minecraft.client.renderer.entity.ThrownItemRenderer::new);
     }
 
     private static void layers(EntityRenderersEvent.RegisterLayerDefinitions event) {

@@ -10,6 +10,9 @@ import java.util.function.Supplier;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.IceBlock;
+import net.minecraft.world.level.block.SnowLayerBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
@@ -100,6 +103,18 @@ public final class ModBlocks {
     public static final DeferredBlock<Block> SEEPAGE_BRICK = register("seepage_brick", () -> new Block(
             BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_BROWN).strength(1.8F, 4.0F)
                     .sound(SoundType.STONE).requiresCorrectToolForDrops()));
+
+    /**
+     * Pass 78 hazards. Ash-Snow is snow that fell through factory smoke: it behaves exactly like vanilla snow layers
+     * (stacking, melting under bright light, shovel drops), and touching it barefoot builds Hole Toxin exposure.
+     */
+    public static final DeferredBlock<SnowLayerBlock> ASH_SNOW = register("ash_snow", () -> new SnowLayerBlock(
+            BlockBehaviour.Properties.ofFullCopy(Blocks.SNOW).mapColor(MapColor.COLOR_LIGHT_GRAY)));
+    public static final DeferredBlock<Block> ASH_SNOW_BLOCK = register("ash_snow_block", () -> new Block(
+            BlockBehaviour.Properties.ofFullCopy(Blocks.SNOW_BLOCK).mapColor(MapColor.COLOR_LIGHT_GRAY)));
+    /** Canal sludge frozen solid. Slippery like ice and melts back into water like ice; toxic to stand on barefoot. */
+    public static final DeferredBlock<IceBlock> SLUDGE_ICE = register("sludge_ice", () -> new IceBlock(
+            BlockBehaviour.Properties.ofFullCopy(Blocks.ICE).mapColor(MapColor.TERRACOTTA_GREEN)));
 
     /** Permanent light uses a renewable moth resource and ordinary glass/iron. */
     public static final DeferredBlock<Block> CAVERN_LAMP = register("cavern_lamp", () -> new CavernLampBlock(

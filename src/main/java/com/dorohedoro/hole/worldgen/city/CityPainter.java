@@ -133,6 +133,7 @@ public final class CityPainter {
             WaterwaySewerEntrances23.paint(canvas, plan);
         }
         WinterPavement17.paint(canvas, plan);
+        ColdHazards56.paint(canvas, plan);
     }
 
     /** Which arterial band, if any, holds a coordinate. */

@@ -77,6 +77,7 @@ final class ModLoot {
             add(ModBlocks.DEEPSLATE_OIL_SHALE_ORE.get(), createOreDrop(ModBlocks.DEEPSLATE_OIL_SHALE_ORE.get(), ModItems.OIL_SHALE_CHUNK.get()));
             add(ModBlocks.DEEPSLATE_SULFUR_ORE.get(), createOreDrop(ModBlocks.DEEPSLATE_SULFUR_ORE.get(), ModItems.RAW_SULFUR.get()));
             add(ModBlocks.DEEPSLATE_ROCK_SALT_ORE.get(), createOreDrop(ModBlocks.DEEPSLATE_ROCK_SALT_ORE.get(), ModItems.ROCK_SALT.get()));
+            hazards();
             dropSelf(ModBlocks.REINFORCED_DOOR_FRAME.get());
             dropSelf(ModBlocks.ETCHED_GATE_STONE.get());
             dropSelf(ModBlocks.ARTIFICIAL_DOOR_CORE.get());
@@ -86,6 +87,40 @@ final class ModLoot {
                     .withPool(LootPool.lootPool().when(LootItemRandomChanceCondition.randomChance(0.25F)).add(item(Items.IRON_NUGGET, 1, 2)))
                     .withPool(LootPool.lootPool().when(LootItemRandomChanceCondition.randomChance(0.16F))
                             .add(item(ModItems.SMOKE_SOAKED_FILTER.get(), 1, 1))));
+        }
+
+        /**
+         * Ash-Snow drops like vanilla snow: one ash snowball per layer, or the layers themselves with Silk Touch (the
+         * full block at eight). The Ash-Snow block drops four snowballs; Sludge-Ice, like ice, only drops with Silk
+         * Touch and otherwise melts into water.
+         */
+        private void hazards() {
+            Block ash = ModBlocks.ASH_SNOW.get();
+            add(ash, LootTable.lootTable().withPool(LootPool.lootPool()
+                    .when(net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition.entityPresent(
+                            net.minecraft.world.level.storage.loot.LootContext.EntityTarget.THIS))
+                    .add(net.minecraft.world.level.storage.loot.entries.AlternativesEntry.alternatives(
+                            net.minecraft.world.level.storage.loot.entries.AlternativesEntry.alternatives(
+                                    net.minecraft.world.level.block.SnowLayerBlock.LAYERS.getPossibleValues(), layers ->
+                                            LootItem.lootTableItem(ModItems.ASH_SNOWBALL.get())
+                                                    .when(layersAre(ash, layers))
+                                                    .apply(SetItemCountFunction.setCount(net.minecraft.world.level.storage.loot.providers.number.ConstantValue.exactly(layers))))
+                                    .when(doesNotHaveSilkTouch()),
+                            net.minecraft.world.level.storage.loot.entries.AlternativesEntry.alternatives(
+                                    net.minecraft.world.level.block.SnowLayerBlock.LAYERS.getPossibleValues(), layers -> layers == 8
+                                            ? LootItem.lootTableItem(ModBlocks.ASH_SNOW_BLOCK.get())
+                                            : LootItem.lootTableItem(ash)
+                                                    .apply(SetItemCountFunction.setCount(net.minecraft.world.level.storage.loot.providers.number.ConstantValue.exactly(layers)))
+                                                    .when(layersAre(ash, layers)))))));
+            add(ModBlocks.ASH_SNOW_BLOCK.get(), block -> createSingleItemTableWithSilkTouch(block, ModItems.ASH_SNOWBALL.get(),
+                    net.minecraft.world.level.storage.loot.providers.number.ConstantValue.exactly(4.0F)));
+            dropWhenSilkTouch(ModBlocks.SLUDGE_ICE.get());
+        }
+
+        private static net.minecraft.world.level.storage.loot.predicates.LootItemCondition.Builder layersAre(Block block, int layers) {
+            return net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
+                    .setProperties(net.minecraft.advancements.critereon.StatePropertiesPredicate.Builder.properties()
+                            .hasProperty(net.minecraft.world.level.block.SnowLayerBlock.LAYERS, layers));
         }
 
         @Override

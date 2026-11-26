@@ -40,7 +40,7 @@ public final class ClientQa {
     /** Ticks to let a screen or HUD change settle. */
     private static final int UI_WAIT = 40;
 
-    /** Which script to run: the default city tour, or {@code ftb} for FtbClientQa. */
+    /** Which script to run ({@code -Pqa_mode}): the default city tour, or one of the named scripts dispatched below. */
     static final String MODE = System.getProperty("dorohedoro.clientqa.mode", "tour");
 
     private static int stage;
@@ -115,6 +115,10 @@ public final class ClientQa {
         int t = ticks;
         if ("ftb".equals(MODE)) {
             FtbClientQa.script(mc, t);
+            return;
+        }
+        if ("hazards".equals(MODE)) {
+            HazardClientQa.script(mc, t);
             return;
         }
         if (VISITS.length > 0) {

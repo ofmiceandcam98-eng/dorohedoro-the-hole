@@ -84,6 +84,8 @@ neoForge {
             systemProperty 'dorohedoro.clientqa', 'true'
             systemProperty 'dorohedoro.clientqa.seed', project.findProperty('qa_seed') ?: '8675309'
             systemProperty 'dorohedoro.clientqa.visit', project.findProperty('qa_visit') ?: ''
+            // -Pqa_mode=hazards (or another ClientQa mode) runs that script instead of the city tour.
+            systemProperty 'dorohedoro.clientqa.mode', project.findProperty('qa_mode') ?: 'tour'
             // A 1600x900 window gives GUI scale 3, close to what players see, so HUD screenshots are representative.
             programArguments.addAll('--width', '1600', '--height', '900')
         }

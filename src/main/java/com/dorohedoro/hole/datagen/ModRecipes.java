@@ -43,6 +43,17 @@ final class ModRecipes extends RecipeProvider {
                 .save(output, id("iron_nugget_from_smelting_scrap"));
         // Recover old magical smoke from contaminated filters found in the Hole.
         // This consumes a salvaged material: coal alone never manufactures sorcerer smoke.
+        // Ash-Snow, like vanilla snow: four balls make a block, three blocks make six layers.
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.ASH_SNOW_BLOCK.get())
+                .pattern("##").pattern("##").define('#', ModItems.ASH_SNOWBALL.get())
+                .unlockedBy("has_ash_snowball", has(ModItems.ASH_SNOWBALL.get())).save(output, id("ash_snow_block"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.ASH_SNOW.get(), 6)
+                .pattern("###").define('#', ModBlocks.ASH_SNOW_BLOCK.get())
+                .unlockedBy("has_ash_snow_block", has(ModBlocks.ASH_SNOW_BLOCK.get())).save(output, id("ash_snow"));
+        // Sludge-Ice cooks down into the tar it froze from: fuel, and torches.
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.SLUDGE_ICE.get()), RecipeCategory.MISC,
+                        ModItems.COAGULATED_TAR.get(), 0.1F, 200)
+                .unlockedBy("has_sludge_ice", has(ModBlocks.SLUDGE_ICE.get())).save(output, id("coagulated_tar_from_sludge_ice"));
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.SMOKE_SOAKED_FILTER.get()),
                 RecipeCategory.MISC, ModItems.SMOKE_RESIDUE.get(), 0.35F, 200)
                 .unlockedBy("has_smoke_filter", has(ModItems.SMOKE_SOAKED_FILTER.get()))

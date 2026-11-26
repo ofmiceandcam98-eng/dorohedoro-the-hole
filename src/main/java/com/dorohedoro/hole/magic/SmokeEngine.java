@@ -65,6 +65,8 @@ public final class SmokeEngine {
         if (innate(p) == MagicType.REPTILE) OtherMagicMechanics.reptileRegrowthTick(p);
         SmokeState s=state(p);
         int regen=2+Math.max(0,s.rank()-1)/8;
+        // Hole Toxin clogs the smoke veins: each level of it costs one point of regeneration.
+        regen=Math.max(0,regen-com.dorohedoro.hole.hazard.ToxinExposure.tier(p));
         if(s.smoke()<s.capacity())update(p,s.withSmoke(s.smoke()+regen));
         else SmokeNetwork.sync(p); // Keep HUD cooldowns accurate even at full Smoke.
     }

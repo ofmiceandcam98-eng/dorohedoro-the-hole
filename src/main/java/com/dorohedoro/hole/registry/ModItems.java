@@ -66,6 +66,9 @@ public final class ModItems {
             () -> new com.dorohedoro.hole.item.AntidotePoulticeItem(new Item.Properties().stacksTo(16)
                     .food(new FoodProperties.Builder().nutrition(0).saturationModifier(0.0F).alwaysEdible().build())));
     public static final DeferredItem<Item> SEWER_SEALANT = ITEMS.registerSimpleItem("sewer_sealant");
+    /** Thrown like a snowball: slows what it hits and carries Hole Toxin. Four make an Ash-Snow block. */
+    public static final DeferredItem<com.dorohedoro.hole.hazard.AshSnowball.ItemType> ASH_SNOWBALL = ITEMS.register("ash_snowball",
+            () -> new com.dorohedoro.hole.hazard.AshSnowball.ItemType(new Item.Properties().stacksTo(16)));
     public static final DeferredItem<SewerEchoProbeItem> SEWER_ECHO_PROBE = ITEMS.register("sewer_echo_probe",
             () -> new SewerEchoProbeItem(new Item.Properties().stacksTo(1).durability(64)));
     /** Recovered from smoke-stained machinery and abandoned laboratories; furnace processing yields usable residue. */

@@ -62,6 +62,10 @@ public final class ModEntities {
             "spore_crawler", () -> EntityType.Builder.of(SporeCrawlerEntity::new, MobCategory.MONSTER)
                     .sized(0.83F, 0.55F).clientTrackingRange(8).build("dorohedoro:spore_crawler"));
 
+    public static final DeferredHolder<EntityType<?>, EntityType<com.dorohedoro.hole.hazard.AshSnowball>> ASH_SNOWBALL = ENTITIES.register(
+            "ash_snowball", () -> EntityType.Builder.<com.dorohedoro.hole.hazard.AshSnowball>of(com.dorohedoro.hole.hazard.AshSnowball::new, MobCategory.MISC)
+                    .sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build("dorohedoro:ash_snowball"));
+
     private ModEntities() {}
 
     public static void register(IEventBus modBus) {
